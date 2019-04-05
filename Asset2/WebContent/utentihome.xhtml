@@ -8,15 +8,12 @@
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
 
-
-
-			<h1>Gestione utenti</h1>
 			<h:form id="form">
 
 				<p:growl id="msgs" showDetail="true" />
 
 				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel id="basic" header="Basic" 
+					<p:panel id="basic" header="Gestione utenti"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" value="#{managedUtentiBean.allUtenti}"
 							var="c" selection="#{dtSelectionView.selectedUser}"
@@ -24,10 +21,10 @@
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
-															<p:ajax event="rowSelect"
-																listener="#{dtSelectionView.onRowSelect}" update=":form:msgs" />
-															<p:ajax event="rowUnselect"
-																listener="#{dtSelectionView.onRowUnselect}" update=":form:msgs" />
+							<p:ajax event="rowSelect"
+								listener="#{dtSelectionView.onRowSelect}" update=":form:msgs" />
+							<p:ajax event="rowUnselect"
+								listener="#{dtSelectionView.onRowUnselect}" update=":form:msgs" />
 
 							<p:column selectionMode="single"
 								style="width:16px;text-align:center" />
@@ -47,8 +44,11 @@
 
 							<f:facet name="footer">
 								<p:commandButton process="radioDT" update=":form:carDetail"
-									icon="pi pi-search" value="View"
-									 />
+									icon="pi pi-search" value="View" />
+								<p:commandButton process="radioDT" update=":form:carDetail"
+									icon="pi pi-search" value="Nuovo" />
+								<p:commandButton process="radioDT" update=":form:carDetail"
+									icon="pi pi-search" value="Modifica" />
 							</f:facet>
 						</p:dataTable>
 					</p:panel>

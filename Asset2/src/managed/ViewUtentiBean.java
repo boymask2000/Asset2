@@ -20,7 +20,7 @@ public class ViewUtentiBean implements Serializable{
 	
 	private static final long serialVersionUID = -1060598718658473231L;
 	
-	private Utente selectedUser ;
+	private Utente selectedUser =new Utente();
 
 	public Utente getSelectedUser() {
 		return selectedUser;

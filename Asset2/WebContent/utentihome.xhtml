@@ -16,7 +16,7 @@
 					<p:panel id="basic" header="Gestione utenti"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" value="#{managedUtentiBean.allUtenti}"
-							var="c" selection="#{dtSelectionView.selectedUser}"
+							var="c" selection="#{managedUtentiBean.selectedUser}"
 							rowKey="#{c.username}" paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
@@ -45,8 +45,9 @@
 							<f:facet name="footer">
 								<p:commandButton process="radioDT" update=":form:carDetail"
 									icon="pi pi-search" value="View" />
-								<p:commandButton process="radioDT" update=":form:carDetail"
-									icon="pi pi-search" value="Nuovo" />
+								<p:commandButton action="/nuovoUtente.xhtml?faces-redirect=true"
+									value="Nuovo" process="@this" />
+
 								<p:commandButton process="radioDT" update=":form:carDetail"
 									icon="pi pi-search" value="Modifica" />
 							</f:facet>
@@ -61,22 +62,22 @@
 						<tr>
 							<td><h:outputText value="Username:" /></td>
 							<td style="font-weight: bold"><h:outputText
-									value="#{dtSelectionView.selectedUser.username}" /></td>
+									value="#{managedUtentiBean.selectedUser.username}" /></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Tipo" /></td>
 							<td><h:outputText
-									value="#{dtSelectionView.selectedUser.tipo}" /></td>
+									value="#{managedUtentiBean.selectedUser.tipo}" /></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Email" /></td>
 							<td><h:outputText
-									value="#{dtSelectionView.selectedUser.email}" /></td>
+									value="#{managedUtentiBean.selectedUser.email}" /></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Descrizione:" /></td>
 							<td><h:outputText
-									value="#{dtSelectionView.selectedUser.descrizione}" /></td>
+									value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
 						</tr>
 					</table>
 

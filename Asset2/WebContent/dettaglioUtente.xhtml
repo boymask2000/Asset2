@@ -1,0 +1,30 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<p:dialog header="Info Utente" widgetVar="utenteDialog" modal="true"
+	showEffect="fade" hideEffect="fade" resizable="false">
+	
+		<p:growl id="msgs" showDetail="true" />
+		<h:outputText value="Username:" />
+		<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
+		<p></p>
+		<h:outputText value="Tipo" />
+		<h:inputText value="#{managedUtentiBean.selectedUser.tipo}" />
+		<p></p>
+		<h:outputText value="Email" />
+		<h:inputText value="#{managedUtentiBean.selectedUser.email}" />
+		<p></p>
+		<h:outputText value="Descrizione:" />
+		<h:inputText value="#{managedUtentiBean.selectedUser.descrizione}" />
+
+
+	
+</p:dialog>
+
+</html>

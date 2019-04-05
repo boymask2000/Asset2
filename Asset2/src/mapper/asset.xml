@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.asset">
+
+ <resultMap id="result" type="beans.Asset">
+        <result property="code" column="code"/>
+        <result property="description" column="description"/>   
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM test1.asset;
+    </select>
+    
+</mapper>

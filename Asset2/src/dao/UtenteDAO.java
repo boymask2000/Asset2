@@ -33,11 +33,28 @@ public class UtenteDAO {
 		return list;
 
 	}
-
+	public void updatePassword(Utente u) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			session.update("updatePassword",u);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
 	public void update(Utente u) {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			session.update("update",u);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
+	public void insert(Utente u) {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			session.insert("insert",u);
 			session.commit();
 		} finally {
 			session.close();

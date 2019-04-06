@@ -15,20 +15,15 @@
 				<h:panelGrid columns="1" cellpadding="100">
 					<p:panel id="basic" header="Gestione utenti"
 						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" value="#{managedUtentiBean.allUtenti}"
-							var="c" selection="#{managedUtentiBean.selectedUser}"
+						<p:dataTable id="radioDT" selectionMode="single"
+							value="#{managedUtentiBean.allUtenti}" var="c"
+							selection="#{managedUtentiBean.selectedUser}"
 							rowKey="#{c.username}" paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
 							<p:ajax event="rowSelect"
-								listener="#{dtSelectionView.onRowSelect}" update=":form:msgs" />
-							<p:ajax event="rowUnselect"
-								listener="#{dtSelectionView.onRowUnselect}" update=":form:msgs" />
-
-							<p:column selectionMode="single"
-								style="width:16px;text-align:center" />
-
+								listener="#{managedUtentiBean.onRowSelect}" update=":form:msgs" />
 
 							<p:column headerText="Username">
 								<h:outputText value="#{c.username}" />
@@ -43,47 +38,64 @@
 							</p:column>
 
 							<f:facet name="footer">
-								<p:commandButton process="radioDT" update=":form:carDetail"
-									icon="pi pi-search" value="View" />
-								<p:commandButton action="/nuovoUtente.xhtml?faces-redirect=true"
-									value="Nuovo" process="@this" />
+<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
+<!-- 									icon="pi pi-search" value="View" /> -->
 
-								<p:commandButton process="radioDT" update=":form:carDetail"
-									icon="pi pi-search" value="Modifica" />
+								<h:commandButton action="#{managedUtentiBean.goToDetail}"
+									value="NuovoH" process="@this">
+									<f:param name="op" value="NEW" />
+								</h:commandButton>
+								<h:commandButton action="#{managedUtentiBean.goToDetail}"
+									value="UpdateH" process="@this">
+									<f:param name="op" value="UPD" />
+								</h:commandButton>
+								<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
+								<!-- 									icon="pi pi-search" value="Modifica" /> -->
+								<p:commandButton value="Set password" type="button"
+									onclick="PF('dlg3').show();" />
+
 							</f:facet>
 						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
+				<p:dialog header="Set password" widgetVar="dlg3"
+					showEffect="explode" hideEffect="bounce" height="100">
+					<h:outputText value="Inserisci password per " />
+					<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
+					<h:inputText value="#{managedUtentiBean.selectedUser.password}" />
+					<p:commandButton value="ok" id="ajasx0"
+						actionListener="#{managedUtentiBean.updatePassword}" update="msgs"
+						styleClass="ui-priority-primary" />
+				</p:dialog>
+
+<!-- 				<p:panel id="carDetail" style="text-align:left;"> -->
+
+<!-- 					<table> -->
+<!-- 						<tr> -->
+<!-- 							<td><h:outputText value="Username:" /></td> -->
+<!-- 							<td style="font-weight: bold"><h:outputText -->
+<!-- 									value="#{managedUtentiBean.selectedUser.username}" /></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h:outputText value="Tipo" /></td> -->
+<!-- 							<td><h:outputText -->
+<!-- 									value="#{managedUtentiBean.selectedUser.tipo}" /></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h:outputText value="Email" /></td> -->
+<!-- 							<td><h:outputText -->
+<!-- 									value="#{managedUtentiBean.selectedUser.email}" /></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h:outputText value="Descrizione:" /></td> -->
+<!-- 							<td><h:outputText -->
+<!-- 									value="#{managedUtentiBean.selectedUser.descrizione}" /></td> -->
+<!-- 						</tr> -->
+<!-- 					</table> -->
 
 
-				<p:panel id="carDetail" style="text-align:left;">
 
-					<table>
-						<tr>
-							<td><h:outputText value="Username:" /></td>
-							<td style="font-weight: bold"><h:outputText
-									value="#{managedUtentiBean.selectedUser.username}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Tipo" /></td>
-							<td><h:outputText
-									value="#{managedUtentiBean.selectedUser.tipo}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Email" /></td>
-							<td><h:outputText
-									value="#{managedUtentiBean.selectedUser.email}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Descrizione:" /></td>
-							<td><h:outputText
-									value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
-						</tr>
-					</table>
-
-
-
-				</p:panel>
+<!-- 				</p:panel> -->
 
 			</h:form>
 

@@ -15,10 +15,26 @@
 	</select>
 	<update id="update" parameterType="beans.Utente">
 		UPDATE test1.utenti SET
-		tipo = #{tipo},
+		tipo =
+		#{tipo},
 		descrizione = #{descrizione},
 		email = #{email}
-		WHERE username = #{username};
+		WHERE username =
+		#{username};
 	</update>
+	<update id="updatePassword" parameterType="beans.Utente">
+		UPDATE test1.utenti SET
+		password =
+		#{password},
+
+		WHERE username =
+		#{username};
+	</update>
+	<insert id="insert">
+		insert into test1.utenti (USERNAME, TIPO,
+		DESCRIZIONE, EMAIL, PASSWORD)
+		values
+		(#{username},#{tipo},#{descrizione},#{email},#{password})
+	</insert>
 
 </mapper>

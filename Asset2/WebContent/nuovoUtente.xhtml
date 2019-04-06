@@ -10,14 +10,47 @@
 
 <p:growl id="growl1" life="2000" />
 <h:form>
-	<ui:include src="dettaglioUtente.xhtml" />
+	<p:dialog header="Nuovo Utente" widgetVar="utenteDialog" modal="true"
+		showEffect="fade" hideEffect="fade" resizable="false">
 
-	<p:commandButton action="/utentiHome.xhtml?faces-redirect=true"
-		value="Esci" process="@this" />
+		<p:growl id="msgs" showDetail="true" />
+		<table>
+			<tr>
+				<td><h:outputText value="Username:" /></td>
+				<td><h:inputText
+						value="#{managedUtentiBean.selectedUser.username}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputText value="Tipo" /></td>
+				<td><h:inputText value="#{managedUtentiBean.selectedUser.tipo}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputText value="Email" /></td>
+				<td><h:inputText
+						value="#{managedUtentiBean.selectedUser.email}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputText value="Descrizione:" /></td>
+				<td><h:inputText
+						value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
+			</tr>
+			<tr>
+				<td><h:outputText value="Password" /></td>
+				<td><h:inputText
+						value="#{managedUtentiBean.selectedUser.password}" /></td>
+			</tr>
+
+		</table>
+
+
+	</p:dialog>
+
+	<h:commandButton action="#{managedUtentiBean.goToUtentiHome}"
+									value="Esci" process="@this"/>
 
 
 	<h:panelGroup id="postPanel2">
-		<p:commandButton value="ok" id="ajasx" 
+		<p:commandButton value="ok" id="ajasx"
 			actionListener="#{managedUtentiBean.insertUtente}" update="growl1"
 			styleClass="ui-priority-primary" />
 	</h:panelGroup>

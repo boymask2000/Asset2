@@ -5,69 +5,57 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<style type="text/css">
-.value {
-	font-weight: bold;
-}
-
-.ui-datatable {
-	margin-bottom: 25px
-}
-
-.ui-datatable .ui-datatable-footer {
-	text-align: left;
-}
-
-.ui-datalist ul {
-	padding: 0 0 0 10px;
-	margin: 5px 0;
-}
-
-.ui-datatable .ui-button-icon-only .ui-button-text {
-	padding: 0;
-	line-height: 1.2;
-}
-</style>
-<h1>Gestione utenti</h1>
-<h:form id="form">
-	<p:growl id="msgs" showDetail="true" />
-	<p:outputLabel value="Gestione utenti"></p:outputLabel>
+<h:body>
 
 
-
-	<p:panel id="basic" header="Basic" footer="Details"
-		style="margin-bottom:20px">
-	
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" />
 
 
-
-			<p:dialog header="Info Utente" widgetVar="utenteDialog" modal="true"
-				showEffect="fade" hideEffect="fade" resizable="false"
-				>
-				<h:form>
-					<p:growl id="msgs" showDetail="true" />
-					<h:outputText value="Username:" />
-					<h:outputText value="#{dtSelectionView.selectedUser.username}" />
-					<p></p>
-					<h:outputText value="Tipo" />
-					<h:inputText value="#{dtSelectionView.selectedUser.tipo}" />
-					<p></p>
-					<h:outputText value="Email" />
-					<h:inputText value="#{dtSelectionView.selectedUser.email}" />
-					<p></p>
-					<h:outputText value="Descrizione:" />
-					<h:inputText value="#{dtSelectionView.selectedUser.descrizione}" />
-
-					<p:commandButton value="Update" id="update" update="msgs"
-						action="#{managedUtentiBean.update(dtSelectionView.selectedUser)}"
-						style="margin-right:20px;" styleClass="ui-priority-primary" />
-
-				</h:form>
-			</p:dialog>
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" style="margin-bottom:20px">
 
 
-	
-	</p:panel>
-</h:form>
+						<p:dialog widgetVar="utenteDialog" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
+
+
+							<table>
+								<tr>
+									<td><h:outputText value="Username:" /></td>
+									<td><h:outputText
+											value="#{managedUtentiBean.selectedUser.username}" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Tipo" /></td>
+									<td><h:inputText
+											value="#{managedUtentiBean.selectedUser.tipo}" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Email" /></td>
+									<td><h:inputText
+											value="#{managedUtentiBean.selectedUser.email}" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Descrizione:" /></td>
+									<td><h:inputText
+											value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
+								</tr>
+
+
+							</table>
+
+						</p:dialog>
+
+						<h:commandButton action="#{managedUtentiBean.goToUtentiHome}"
+							value="Esci" process="@this" />
+
+						<p:commandButton value="ok" id="ajasx0"
+							actionListener="#{managedUtentiBean.updateUtente}" update="msgs"
+							styleClass="ui-priority-primary" />
+					</p:panel>
+				</h:panelGrid>
+			</h:form>
+
+</h:body>
 </html>

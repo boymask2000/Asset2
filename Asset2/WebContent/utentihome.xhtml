@@ -38,8 +38,8 @@
 							</p:column>
 
 							<f:facet name="footer">
-<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
-<!-- 									icon="pi pi-search" value="View" /> -->
+								<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
+								<!-- 									icon="pi pi-search" value="View" /> -->
 
 								<h:commandButton action="#{managedUtentiBean.goToDetail}"
 									value="NuovoH" process="@this">
@@ -51,51 +51,55 @@
 								</h:commandButton>
 								<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
 								<!-- 									icon="pi pi-search" value="Modifica" /> -->
-								<p:commandButton value="Set password" type="button"
-									onclick="PF('dlg3').show();" />
+
+								<!-- 								<p:commandButton value="Delete" type="button" -->
+								<!-- 									onclick="PF('delete').show();" /> -->
+
+								<p:commandButton process="radioDT" update=":form:panSetPass"
+									icon="pi pi-search" value="Set password"
+									oncomplete="PF('setPassDialog').show()" />
+
+								<p:commandButton process="radioDT" update=":form:panDeleteUser"
+									icon="pi pi-search" value="Delete"
+									oncomplete="PF('deleteUserDialog').show()" />
+
 
 							</f:facet>
 						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
-				<p:dialog header="Set password" widgetVar="dlg3"
-					showEffect="explode" hideEffect="bounce" height="100">
-					<h:outputText value="Inserisci password per " />
-					<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
-					<h:inputText value="#{managedUtentiBean.selectedUser.password}" />
-					<p:commandButton value="ok" id="ajasx0"
-						actionListener="#{managedUtentiBean.updatePassword}" update="msgs"
-						styleClass="ui-priority-primary" />
+				<p:dialog header="Set Password" widgetVar="setPassDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					>
+					<p:outputPanel id="panSetPass" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Inserisci password per " />
+							<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
+							<h:inputText value="#{managedUtentiBean.selectedUser.password}" />
+							<p:commandButton value="ok" id="ajasx00"
+								actionListener="#{managedUtentiBean.updatePassword}"
+								update="msgs" styleClass="ui-priority-primary"
+								oncomplete="PF('setPassDialog').hide();" />
+						</p:panelGrid>
+					</p:outputPanel>
 				</p:dialog>
 
-<!-- 				<p:panel id="carDetail" style="text-align:left;"> -->
+				<p:dialog header="Delete User" widgetVar="deleteUserDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					oncomplete="deleteUserDialog.hide();">
+					<p:outputPanel id="panDeleteUser" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Conferma la cancellazione dell'utente " />
+							<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
 
-<!-- 					<table> -->
-<!-- 						<tr> -->
-<!-- 							<td><h:outputText value="Username:" /></td> -->
-<!-- 							<td style="font-weight: bold"><h:outputText -->
-<!-- 									value="#{managedUtentiBean.selectedUser.username}" /></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h:outputText value="Tipo" /></td> -->
-<!-- 							<td><h:outputText -->
-<!-- 									value="#{managedUtentiBean.selectedUser.tipo}" /></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h:outputText value="Email" /></td> -->
-<!-- 							<td><h:outputText -->
-<!-- 									value="#{managedUtentiBean.selectedUser.email}" /></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h:outputText value="Descrizione:" /></td> -->
-<!-- 							<td><h:outputText -->
-<!-- 									value="#{managedUtentiBean.selectedUser.descrizione}" /></td> -->
-<!-- 						</tr> -->
-<!-- 					</table> -->
+							<p:commandButton value="ok" id="ajasx1"
+								actionListener="#{managedUtentiBean.updatePassword}"
+								update="msgs" styleClass="ui-priority-primary"
+								oncomplete="PF('deleteUserDialog').hide();" />
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
 
-
-
-<!-- 				</p:panel> -->
 
 			</h:form>
 

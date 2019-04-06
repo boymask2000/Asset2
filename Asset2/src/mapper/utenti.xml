@@ -25,7 +25,7 @@
 	<update id="updatePassword" parameterType="beans.Utente">
 		UPDATE test1.utenti SET
 		password =
-		#{password},
+		#{password}
 
 		WHERE username =
 		#{username};

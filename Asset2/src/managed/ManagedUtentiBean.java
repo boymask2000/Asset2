@@ -24,7 +24,7 @@ public class ManagedUtentiBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Utente> myList;
 	//
-	@ManagedProperty(value = "selectedUser")
+//	@ManagedProperty(value = "selectedUser")
 	private Utente selectedUser = new Utente();
 	private String op;
 

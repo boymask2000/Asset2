@@ -36,13 +36,13 @@
 							<p:column headerText="Descrizione">
 								<h:outputText value="#{c.descrizione}" />
 							</p:column>
-							
+
 							<p:column headerText="Email">
 								<h:outputText value="#{c.email}" />
 							</p:column>
 
 							<f:facet name="footer">
-				
+
 								<h:commandButton action="#{managedUtentiBean.goToDetail}"
 									value="NuovoH" process="@this">
 									<f:param name="op" value="NEW" />
@@ -51,7 +51,7 @@
 									value="UpdateH" process="@this">
 									<f:param name="op" value="UPD" />
 								</h:commandButton>
-	
+
 								<p:commandButton process="radioDT" update=":form:panSetPass"
 									icon="pi pi-search" value="Set password"
 									oncomplete="PF('setPassDialog').show()" />
@@ -66,8 +66,7 @@
 					</p:panel>
 				</h:panelGrid>
 				<p:dialog header="Set Password" widgetVar="setPassDialog"
-					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-					>
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 					<p:outputPanel id="panSetPass" style="text-align:center;">
 						<p:panelGrid columns="2" columnClasses="label,value">
 							<h:outputText value="Inserisci password per " />
@@ -90,13 +89,14 @@
 							<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
 
 							<p:commandButton value="ok" id="ajasx1"
-								actionListener="#{managedUtentiBean.delete}"
-								update="msgs" styleClass="ui-priority-primary"
+								actionListener="#{managedUtentiBean.delete}" update="msgs"
+								styleClass="ui-priority-primary"
 								oncomplete="PF('deleteUserDialog').hide();" />
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>
-
+<p:commandButton process="@this" icon="pi pi-search"
+							value="Home" action="adminHome"/>
 
 			</h:form>
 

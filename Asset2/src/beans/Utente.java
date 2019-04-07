@@ -81,14 +81,14 @@ public class Utente implements Serializable {
 		return tipo.equalsIgnoreCase("A");
 	}
 
-	public void logout() {
+	public String logout() {
 		username = null;
 		password = null;
-		//return "login";
+		return "login";
 	}
 	public void clean() {
-		username = "";
-		password = "";
+		username = null;
+		password = null;
 		tipo = "";
 		descrizione = "";
 		email = "";

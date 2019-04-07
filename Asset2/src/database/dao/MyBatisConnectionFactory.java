@@ -8,16 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import database.mapper.BiochemicalDataMapper;
-import database.mapper.GeneticDataMapper;
-import database.mapper.HematologicDataMapper;
-import database.mapper.IndirectTestsMapper;
-import database.mapper.IronBalanceMapper;
-import database.mapper.OtherInfoMapper;
-import database.mapper.PersonalDataMapper;
-import database.mapper.QueryMapper;
-import database.mapper.SessionMapper;
-import database.mapper.SurgicalInterventionMapper;
+
 import database.mapper.UtentiMapper;
 
 

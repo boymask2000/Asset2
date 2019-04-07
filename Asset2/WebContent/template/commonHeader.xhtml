@@ -12,7 +12,9 @@
 			<tr>
 				<td><img src="images/alca.gif" /></td>
 
-				<td><h:outputText value="Utente: #{utente.username}"/></td>
+				<td><h:outputText 
+					style="font-size:26px;line-height:28px;"
+				value="Utente: #{utente.username}" rendered="#{utente.username!=null}"/></td>
 				
 			</tr>
 		</table>

@@ -8,7 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-
 	<f:event type="preRenderView" listener="#{utente.logout}" />
 </f:metadata>
 
@@ -16,32 +15,34 @@
 <h:outputStylesheet name="css/login.css" />
 </head>
 
-<h:body >
+<h:body>
 
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-		
-<h:panelGrid style="border:0px !important; background:none;margin:0 auto">
-	<h:panelGrid columns="1">
-		<p:outputLabel
-			style="font-size:36px;line-height:48px;background-color:navy;color:white"
-			value="Asset monitor" />
+
+			<h:panelGrid
+				style="border:0px !important; background:none;margin:0 auto">
+				<h:panelGrid columns="1">
+					<p:outputLabel
+						style="font-size:36px;line-height:48px;background-color:navy;color:white"
+						value="Asset monitor" />
 
 
 
-	</h:panelGrid>
-	<h:form>
-		<h:panelGrid columns="2" >
-			<h:outputText value="Utente"></h:outputText>
-			<h:inputText value="#{utente.username}"></h:inputText>
+				</h:panelGrid>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText value="Utente" />
+						<h:inputText value="#{utente.username}" required="true" />
 
-			<h:outputText value="Password"></h:outputText>
-			<p:password value="#{utente.password}" required="true" />
-		</h:panelGrid>
-		<h:commandButton value="Login" action="#{utente.login}"></h:commandButton>
-	</h:form>
-</h:panelGrid>
-</ui:define></ui:composition>
+						<h:outputText value="Password"/>
+						<p:password value="#{utente.password}" required="true" />
+					</h:panelGrid>
+					<h:commandButton value="Login" action="#{utente.login}"/>
+				</h:form>
+			</h:panelGrid>
+		</ui:define>
+	</ui:composition>
 </h:body>
 
 </html>

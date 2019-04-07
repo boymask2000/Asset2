@@ -2,6 +2,8 @@ package beans;
 
 import java.io.Serializable;
 
+import database.dao.UtenteDAO;
+
 public class Utente implements Serializable {
 	/**
 	 * 
@@ -9,9 +11,10 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = -4225392853135092868L;
 	private String username;
 	private String password;
-	private String tipo;
+	private String tipo="U";
 	private String descrizione;
 	private String email;
+	private String message;
 
 	public String getUsername() {
 		return username;
@@ -56,7 +59,33 @@ public class Utente implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public String login() {
+		UtenteDAO dao = new UtenteDAO();
+		Utente u = dao.search(this);
 
+		if (u != null) {
+
+			message = "Successfully logged-in.";
+			if (u == null || !u.isAdmin())
+				return "home";
+			else
+				return "admin";
+		} else {
+			username = null;
+			message = "Wrong credentials.";
+			return "login";
+		}
+	}
+	private boolean isAdmin() {
+		
+		return tipo.equalsIgnoreCase("A");
+	}
+
+	public void logout() {
+		username = null;
+		password = null;
+		//return "login";
+	}
 	public void clean() {
 		username = "";
 		password = "";

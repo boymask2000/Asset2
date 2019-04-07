@@ -1,0 +1,22 @@
+.firstColumn {
+	width: 30%;
+	line-height: 48px;
+	font-size: 36px;
+	background-color: navy;
+	color: white;
+}
+
+.secondColumn {
+	width: 30%;
+}
+
+.thirdColumn {
+	width: 20%;
+}
+.forthColumn {
+	width: 20%;
+}
+.ui-dialog
+{
+     position: absolute !important;
+}

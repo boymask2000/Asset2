@@ -36,11 +36,13 @@
 							<p:column headerText="Descrizione">
 								<h:outputText value="#{c.descrizione}" />
 							</p:column>
+							
+							<p:column headerText="Email">
+								<h:outputText value="#{c.email}" />
+							</p:column>
 
 							<f:facet name="footer">
-								<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
-								<!-- 									icon="pi pi-search" value="View" /> -->
-
+				
 								<h:commandButton action="#{managedUtentiBean.goToDetail}"
 									value="NuovoH" process="@this">
 									<f:param name="op" value="NEW" />
@@ -49,12 +51,7 @@
 									value="UpdateH" process="@this">
 									<f:param name="op" value="UPD" />
 								</h:commandButton>
-								<!-- 								<p:commandButton process="radioDT" update=":form:carDetail" -->
-								<!-- 									icon="pi pi-search" value="Modifica" /> -->
-
-								<!-- 								<p:commandButton value="Delete" type="button" -->
-								<!-- 									onclick="PF('delete').show();" /> -->
-
+	
 								<p:commandButton process="radioDT" update=":form:panSetPass"
 									icon="pi pi-search" value="Set password"
 									oncomplete="PF('setPassDialog').show()" />
@@ -93,7 +90,7 @@
 							<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
 
 							<p:commandButton value="ok" id="ajasx1"
-								actionListener="#{managedUtentiBean.updatePassword}"
+								actionListener="#{managedUtentiBean.delete}"
 								update="msgs" styleClass="ui-priority-primary"
 								oncomplete="PF('deleteUserDialog').hide();" />
 						</p:panelGrid>

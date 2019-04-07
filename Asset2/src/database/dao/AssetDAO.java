@@ -1,4 +1,4 @@
-package dao;
+package database.dao;
 
 import java.util.List;
 
@@ -10,9 +10,7 @@ import beans.Asset;
 public class AssetDAO {
 	   private SqlSessionFactory sqlSessionFactory = null;
 	   
-	    public AssetDAO(SqlSessionFactory sqlSessionFactory){
-	        this.sqlSessionFactory = sqlSessionFactory;
-	    }
+
 	 
 	    /**
 	     * Returns the list of all Person instances from the database.
@@ -21,14 +19,7 @@ public class AssetDAO {
 	  
 	    public  List<Asset> selectAll(){
 	        List<Asset> list = null;
-	        SqlSession session = sqlSessionFactory.openSession();
-	 
-	        try {
-	            list = session.selectList("mapper.asset.selectAll");
-	        } finally {
-	            session.close();
-	        }
-	    
+	
 	        return list;
 	 
 	    }

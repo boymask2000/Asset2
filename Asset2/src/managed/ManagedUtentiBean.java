@@ -14,8 +14,8 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Utente;
 import common.Log;
-import common.MyBatisConnectionFactory;
-import dao.UtenteDAO;
+
+import database.dao.UtenteDAO;
 
 public class ManagedUtentiBean implements Serializable {
 	/**
@@ -39,25 +39,30 @@ public class ManagedUtentiBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		UtenteDAO dao = new UtenteDAO();
 		myList = dao.selectAll();
 	}
 
 	public void update(Utente u) {
 		System.out.println("Update");
-		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		UtenteDAO dao = new UtenteDAO();
 		dao.update(u);
 	}
 
 	public void updateUtente() {
 		System.out.println("UpdateUtente");
-		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		UtenteDAO dao = new UtenteDAO();
 		dao.update(selectedUser);
+	}
+	public void delete() {
+		System.out.println("delete");
+		UtenteDAO dao = new UtenteDAO();
+		dao.delete(selectedUser);
 	}
 
 	public void updatePassword() {
 		System.out.println("UpdateUtente");
-		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		UtenteDAO dao = new UtenteDAO();
 		dao.updatePassword(selectedUser);
 	}
 
@@ -82,7 +87,7 @@ public class ManagedUtentiBean implements Serializable {
 	public void insertUtente() {
 		System.out.println("insert");
 
-		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		UtenteDAO dao = new UtenteDAO();
 
 		try {
 			dao.insert(selectedUser);

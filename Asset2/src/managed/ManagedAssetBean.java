@@ -6,15 +6,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import beans.Asset;
-import common.MyBatisConnectionFactory;
-import dao.AssetDAO;
+
+import database.dao.AssetDAO;
 
 @ManagedBean
 @SessionScoped
 public class ManagedAssetBean {
 
 	public List<Asset> getAllAssets() {
-		AssetDAO assetDAO = new AssetDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+		AssetDAO assetDAO = new AssetDAO();
 		return assetDAO.selectAll();
 	}
 }

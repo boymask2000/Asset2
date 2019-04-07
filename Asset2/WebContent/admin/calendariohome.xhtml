@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" header="Gestione calendario"
+						style="margin-bottom:20px">
+						<p:dataTable id="radioDT" editable="true"
+							value="#{managedCalendarioBean.allDates}" var="c"
+							selection="#{managedCalendarioBean.selectedData}"
+							paginator="true" rows="10"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							
+							<p:ajax event="rowEdit"
+								listener="#{managedCalendarioBean.onRowEdit}"
+								update=":form:msgs" />
+								
+							<p:ajax event="rowEditCancel"
+								listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+								
+							<p:column headerText="Data">
+								<h:outputText value="#{c.data}" />
+							</p:column>
+
+				
+							<p:column headerText="Lavorativo">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{c.lavorativo}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:selectOneMenu value="#{c.lavorativo}" style="width:100%">
+											<f:selectItems value="#{managedCalendarioBean.lavorativi}"
+												var="lavorativo" itemLabel="#{lavorativo}" itemValue="#{lavorativo}" />
+										</h:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column style="width:35px">
+								<p:rowEditor />
+							</p:column>
+							<f:facet name="footer">
+
+
+
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+				</h:panelGrid>
+
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="adminHome" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

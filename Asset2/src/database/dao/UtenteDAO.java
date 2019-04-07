@@ -3,10 +3,8 @@ package database.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import beans.Utente;
-
 import database.mapper.UtentiMapper;
 
 public class UtenteDAO {

@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Update;
 
 import beans.Calendario;
 
-
 public interface CalendarioMapper {
 	final String TABELLA = "test1.calendario";
 
@@ -18,20 +17,24 @@ public interface CalendarioMapper {
 
 	final String DELETE = "DELETE FROM " + TABELLA + " WHERE data = #{data}";
 
-	final String UPDATE = "UPDATE " + TABELLA + " SET"
-			+ " interventi = #{interventi}"
-			+ " WHERE data = #{data}";
+	final String UPDATE = "UPDATE " + TABELLA + " SET" + " interventi = #{interventi}," + " anno = #{anno},"
+			+ " mese = #{mese}," + " giorno = #{giorno}," + " lavorativo = #{lavorativo}," + " WHERE data = #{data}";
 
 	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " data = #{data}";
 
-	final String INSERT = "INSERT INTO " + TABELLA + "  (data ," + " interventi "
-
-			+ " ) " + "" + "VALUES (#{data}, #{interventi} )";
+	final String INSERT = "INSERT INTO " + TABELLA + "  (data ," + " interventi, " //
+			+ " lavorativo, anno, mese, giorno) " + "" + "VALUES (#{data}, #{interventi}, "
+			+ "#{lavorativo}, #{anno}, #{mese}, #{giorno} )";
 
 	@Select(SELECT_ALL)
 	@Results(value = {
 
-			@Result(property = "data", column = "data"), @Result(property = "interventi", column = "interventi"),
+			@Result(property = "data", column = "data"), 
+			@Result(property = "interventi", column = "interventi"),
+			@Result(property = "lavorativo", column = "lavorativo"),
+			@Result(property = "anno", column = "anno"),
+			@Result(property = "mese", column = "mese"),
+			@Result(property = "giorno", column = "giorno"),
 
 	})
 	public List<Calendario> selectAll();

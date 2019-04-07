@@ -8,7 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-
+import database.mapper.CalendarioMapper;
 import database.mapper.UtentiMapper;
 
 
@@ -32,6 +32,7 @@ public class MyBatisConnectionFactory {
 
 	
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(CalendarioMapper.class);
 	
 			}
 			

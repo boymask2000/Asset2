@@ -15,21 +15,18 @@
 				<h:panelGrid columns="1" cellpadding="100">
 					<p:panel id="basic" style="margin-bottom:20px">
 
-
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Gestione utenti" action="utentiHome" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Gestione calendario" />
-
+							value="Gestione calendario" update="msgs"
+							actionListener="#{managedCalendarioBean.initCalendario}" styleClass="ui-priority-primary"/>
 
 					</p:panel>
 				</h:panelGrid>
 
-
 				<p:commandButton process="@this" icon="pi pi-search" value="Esci"
 					action="#{utente.logout}" />
-
 
 			</h:form>
 

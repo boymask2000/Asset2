@@ -2,14 +2,10 @@ package database.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
 import beans.Asset;
 
 public class AssetDAO {
-	   private SqlSessionFactory sqlSessionFactory = null;
-	   
+
 
 	 
 	    /**

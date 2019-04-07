@@ -10,9 +10,7 @@ import beans.Utente;
 import database.mapper.UtentiMapper;
 
 public class UtenteDAO {
-	private SqlSessionFactory sqlSessionFactory = null;
 
-	
 	/**
 	 * Returns the list of all Person instances from the database.
 	 * 

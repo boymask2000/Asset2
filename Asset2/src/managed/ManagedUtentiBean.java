@@ -1,12 +1,10 @@
 package managed;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -14,7 +12,6 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Utente;
 import common.Log;
-
 import database.dao.UtenteDAO;
 
 public class ManagedUtentiBean implements Serializable {

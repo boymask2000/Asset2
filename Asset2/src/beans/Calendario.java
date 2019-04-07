@@ -4,6 +4,11 @@ public class Calendario {
 	private String data;
 	private int interventi;
 
+	public Calendario(String d) {
+		data = d;
+		interventi = 0;
+	}
+
 	public String getData() {
 		return data;
 	}

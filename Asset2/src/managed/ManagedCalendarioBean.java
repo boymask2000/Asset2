@@ -39,6 +39,10 @@ public class ManagedCalendarioBean implements Serializable {
 		myList = dao.selectAll();
 	}
 
+	public boolean isVuoto() {
+		return myList.size() == 0;
+	}
+
 	public void update(Calendario u) {
 		System.out.println("Update");
 		CalendarioDAO dao = new CalendarioDAO();
@@ -74,13 +78,25 @@ public class ManagedCalendarioBean implements Serializable {
 
 	public void initCalendario() {
 		Calendar calendar = new GregorianCalendar();
-		Date trialTime = new Date();
-		calendar.setTime(trialTime);
-		System.out.println("YEAR: " + calendar.get(Calendar.YEAR));
-		calendar.set(Calendar.DAY_OF_MONTH, 1);
-		calendar.set(Calendar.MONTH, 0);
 
-		for (int i = 0; i < 1000; i++) {
+		CalendarioDAO dao = new CalendarioDAO();
+		String maxData = dao.getMaxData();
+		if (maxData == null) {
+			Date trialTime = new Date();
+			calendar.setTime(trialTime);
+		} else {
+			int anno = Integer.parseInt(maxData.substring(0, 4));
+			int mese = Integer.parseInt(maxData.substring(4, 6));
+			int gg = Integer.parseInt(maxData.substring(6, 8));
+			calendar.set(Calendar.DAY_OF_MONTH, gg);
+			calendar.set(Calendar.MONTH, mese - 1);
+			calendar.set(Calendar.YEAR, anno);
+			
+
+		}
+
+
+		for (int i = 0; i < 365; i++) {
 			boolean work = true;
 			calendar.add(Calendar.DAY_OF_YEAR, 1);
 			if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
@@ -94,7 +110,7 @@ public class ManagedCalendarioBean implements Serializable {
 			System.out.println(calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-"
 					+ calendar.get(Calendar.YEAR) + " --- " + calendar.get(Calendar.DAY_OF_WEEK) + " ||| " + sDate);
 
-			CalendarioDAO dao = new CalendarioDAO();
+			//CalendarioDAO dao = new CalendarioDAO();
 
 			Calendario c = new Calendario(sDate);
 			c.setLavorativo(work ? "Y" : "N");
@@ -115,4 +131,17 @@ public class ManagedCalendarioBean implements Serializable {
 	public void setSelectedData(Calendario selectedData) {
 		this.selectedData = selectedData;
 	}
+
+	public String getMinData() {
+		CalendarioDAO dao = new CalendarioDAO();
+		String c = dao.getMinData();
+		return c;
+	}
+
+	public String getMaxData() {
+		CalendarioDAO dao = new CalendarioDAO();
+		String c = dao.getMaxData();
+		return c;
+	}
+
 }

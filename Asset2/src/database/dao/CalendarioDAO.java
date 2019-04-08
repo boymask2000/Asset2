@@ -38,7 +38,10 @@ public class CalendarioDAO {
 
 			mapper.update(u);
 			session.commit();
-		} finally {
+		}catch( Exception e ) {
+			e.printStackTrace();
+		}
+		finally {
 			session.close();
 		}
 	}
@@ -63,7 +66,6 @@ public class CalendarioDAO {
 			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
 			u = mapper.search(contact);
 
-			session.commit();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		} finally {
@@ -83,6 +85,41 @@ public class CalendarioDAO {
 			session.close();
 		}
 
+	}
+
+	public String getMinData() {
+		String u = null;
+	
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+
+			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
+			u = mapper.getMinData();
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return u;
+		
+	}
+
+	public String getMaxData() {
+		String u = null;
+	
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+
+			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
+			u = mapper.getMaxData();
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return u;
 	}
 
 

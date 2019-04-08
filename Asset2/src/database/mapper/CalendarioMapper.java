@@ -12,13 +12,21 @@ import beans.Calendario;
 
 public interface CalendarioMapper {
 	final String TABELLA = "test1.calendario";
+	
+	final String SELECT_MIN_DATA="SELECT MIN(data) from "+TABELLA;
+	final String SELECT_MAX_DATA="SELECT MAX(data) from "+TABELLA;
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
 	final String DELETE = "DELETE FROM " + TABELLA + " WHERE data = #{data}";
 
-	final String UPDATE = "UPDATE " + TABELLA + " SET" + " interventi = #{interventi}," + " anno = #{anno},"
-			+ " mese = #{mese}," + " giorno = #{giorno}," + " lavorativo = #{lavorativo}," + " WHERE data = #{data}";
+	final String UPDATE = "UPDATE " + TABELLA + " SET" + //
+			" interventi = #{interventi}," + //
+			" anno = #{anno}," + //
+			" mese = #{mese}," + //
+			" giorno = #{giorno}," + //
+			" lavorativo = #{lavorativo}" + //
+			" WHERE data = #{data}";
 
 	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " data = #{data}";
 
@@ -29,12 +37,9 @@ public interface CalendarioMapper {
 	@Select(SELECT_ALL)
 	@Results(value = {
 
-			@Result(property = "data", column = "data"), 
-			@Result(property = "interventi", column = "interventi"),
-			@Result(property = "lavorativo", column = "lavorativo"),
-			@Result(property = "anno", column = "anno"),
-			@Result(property = "mese", column = "mese"),
-			@Result(property = "giorno", column = "giorno"),
+			@Result(property = "data", column = "data"), @Result(property = "interventi", column = "interventi"),
+			@Result(property = "lavorativo", column = "lavorativo"), @Result(property = "anno", column = "anno"),
+			@Result(property = "mese", column = "mese"), @Result(property = "giorno", column = "giorno"),
 
 	})
 	public List<Calendario> selectAll();
@@ -50,5 +55,11 @@ public interface CalendarioMapper {
 
 	@Select(DELETE)
 	public void delete(Calendario contact);
+
+	@Select(SELECT_MIN_DATA)
+	public String getMinData();
+	
+	@Select(SELECT_MAX_DATA)
+	public String getMaxData();
 
 }

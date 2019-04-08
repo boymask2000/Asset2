@@ -21,19 +21,28 @@
 							paginator="true" rows="10"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
-							
+
 							<p:ajax event="rowEdit"
 								listener="#{managedCalendarioBean.onRowEdit}"
 								update=":form:msgs" />
-								
+
 							<p:ajax event="rowEditCancel"
 								listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-								
+
 							<p:column headerText="Data">
 								<h:outputText value="#{c.data}" />
 							</p:column>
+							<p:column headerText="Anno">
+								<h:outputText value="#{c.anno}" />
+							</p:column>
+							<p:column headerText="Mese">
+								<h:outputText value="#{c.meseStr}" />
+							</p:column>
+							<p:column headerText="Giorno">
+								<h:outputText value="#{c.giorno}" />
+							</p:column>
 
-				
+
 							<p:column headerText="Lavorativo">
 								<p:cellEditor>
 									<f:facet name="output">
@@ -42,7 +51,8 @@
 									<f:facet name="input">
 										<h:selectOneMenu value="#{c.lavorativo}" style="width:100%">
 											<f:selectItems value="#{managedCalendarioBean.lavorativi}"
-												var="lavorativo" itemLabel="#{lavorativo}" itemValue="#{lavorativo}" />
+												var="lavorativo" itemLabel="#{lavorativo}"
+												itemValue="#{lavorativo}" />
 										</h:selectOneMenu>
 									</f:facet>
 								</p:cellEditor>
@@ -58,6 +68,29 @@
 						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
+
+				<p:panel id="basi" header="Calendario definito"
+					rendered="#{managedCalendarioBean.vuoto}">
+
+				</p:panel>
+				<p:panel id="basi1" header="Calendario definito"
+					rendered="#{!managedCalendarioBean.vuoto}">
+					<table>
+						<tr>
+							<td><h:outputText value="Da:" /></td>
+							<td><h:outputText value="#{managedCalendarioBean.minData}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="A:" /></td>
+							<td><h:outputText value="#{managedCalendarioBean.maxData}" /></td>
+						</tr>
+					</table>
+					
+						<p:commandButton process="@this" icon="pi pi-search" rendered="false"
+							value="Gen" actionListener="#{managedCalendarioBean.initCalendario}" update="basi1"/>
+				</p:panel>
+
+
 
 				<p:commandButton process="@this" icon="pi pi-search" value="Home"
 					action="adminHome" />

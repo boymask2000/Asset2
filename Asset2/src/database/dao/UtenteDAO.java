@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import beans.Utente;
+import database.MyBatisConnectionFactory;
 import database.mapper.UtentiMapper;
 
 public class UtenteDAO {

@@ -16,6 +16,13 @@
 		<managed-bean-class>managed.ManagedUtentiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>fileUploadView</managed-bean-name>
+		<managed-bean-class>managed.FileUploadView</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 	<managed-bean>
 		<managed-bean-name>selectedUser</managed-bean-name>
 		<managed-bean-class>beans.Utente</managed-bean-class>
@@ -55,6 +62,16 @@
 
 			<from-outcome>modificautente</from-outcome>
 			<to-view-id>/admin/modificaUtente.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>loadAsset</from-outcome>
+			<to-view-id>/admin/loadAsset.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>

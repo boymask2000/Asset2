@@ -6,11 +6,13 @@ public class Calendario {
 	private String lavorativo = "Y";
 	private String anno;
 	private String mese;
-	private String meseStr;
+
 	private String giorno;
+
 	public Calendario() {
-		
+
 	}
+
 	public Calendario(String d) {
 		setData(d);
 		interventi = 0;
@@ -22,15 +24,12 @@ public class Calendario {
 
 	public void setData(String data) { // AAAAMMGG
 		this.data = data;
-		if(data==null||data.length()!=8)return;
+		if (data == null || data.length() != 8)
+			return;
 		anno = data.substring(0, 4);
 		mese = data.substring(4, 6);
 		giorno = data.substring(6, 8);
 	}
-
-//	public boolean isLavorativo() {
-//		return lavorativo.equalsIgnoreCase("Y");
-//	}
 
 	public int getInterventi() {
 		return interventi;
@@ -71,24 +70,35 @@ public class Calendario {
 	public void setGiorno(String giorno) {
 		this.giorno = giorno;
 	}
+
 	public String getMeseStr() {
-		switch(mese) {
-		case "01":return "Gen";
-		case "02":return "Feb";
-		case "03":return "Mar";
-		case "04":return "Apr";
-		case "05":return "Mag";
-		case "06":return "Giu";
-		case "07":return "Lug";
-		case "08":return "Ago";
-		case "09":return "Set";
-		case "10":return "Ott";
-		case "11":return "Nov";
-		case "12":return "Dic";
+		switch (mese) {
+		case "01":
+			return "Gen";
+		case "02":
+			return "Feb";
+		case "03":
+			return "Mar";
+		case "04":
+			return "Apr";
+		case "05":
+			return "Mag";
+		case "06":
+			return "Giu";
+		case "07":
+			return "Lug";
+		case "08":
+			return "Ago";
+		case "09":
+			return "Set";
+		case "10":
+			return "Ott";
+		case "11":
+			return "Nov";
+		case "12":
+			return "Dic";
 		}
 		return "--";
 	}
-	public void setMeseStr(String meseStr) {
-		this.meseStr = meseStr;
-	}
+
 }

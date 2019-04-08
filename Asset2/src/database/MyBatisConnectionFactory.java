@@ -1,4 +1,4 @@
-package database.dao;
+package database;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import database.mapper.AssetMapper;
 import database.mapper.CalendarioMapper;
 import database.mapper.UtentiMapper;
 
@@ -33,6 +34,8 @@ public class MyBatisConnectionFactory {
 	
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(CalendarioMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(AssetMapper.class);
+				
 	
 			}
 			

@@ -24,5 +24,5 @@ public interface ManualiMapper {
 	public void insert(Manuale contact);
 
 	@Select(SELECT_MANUALI_PER_ASSET)
-	public List<Manuale> selectForAsset(int assetId);
+	public List<Manuale> selectForAsset(long assetId);
 }

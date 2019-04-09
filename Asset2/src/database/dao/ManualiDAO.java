@@ -35,7 +35,7 @@ public class ManualiDAO {
 			session.close();
 		}
 	}
-	public List<Manuale> selectForAsset(int assetId) {
+	public List<Manuale> getManualiForAsset(long assetId) {
 		List<Manuale> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 

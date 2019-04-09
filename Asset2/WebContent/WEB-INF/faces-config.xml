@@ -10,6 +10,12 @@
 		<managed-bean-class>managed.ManagedCalendarioBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>managedManualiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedManualiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>managedUtentiBean</managed-bean-name>
@@ -27,6 +33,12 @@
 		<managed-bean-name>managedBatch</managed-bean-name>
 		<managed-bean-class>managed.ManagedBatch</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>manualeUpload</managed-bean-name>
+		<managed-bean-class>managed.ManualeUpload</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>

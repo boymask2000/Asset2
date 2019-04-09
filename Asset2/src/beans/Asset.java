@@ -28,6 +28,8 @@ public class Asset {
 	private String warrantyExpDate;
 	private String statusDate;
 	private String installationDate;
+	
+	private int lastStatus;
 
 	public long getId() {
 		return id;
@@ -257,6 +259,14 @@ public class Asset {
 				+ contractNumber + ", taskDelivOrderNum=" + taskDelivOrderNum + ", drawingRefId=" + drawingRefId
 				+ ", warrantyExpDate=" + warrantyExpDate + ", statusDate=" + statusDate + ", installationDate="
 				+ installationDate + "]";
+	}
+
+	public int getLastStatus() {
+		return lastStatus;
+	}
+
+	public void setLastStatus(int lastStatus) {
+		this.lastStatus = lastStatus;
 	}
 
 }

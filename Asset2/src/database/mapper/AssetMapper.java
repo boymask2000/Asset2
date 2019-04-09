@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import beans.Asset;
 
@@ -38,7 +39,8 @@ public interface AssetMapper {
 			"drawingRefId," + //
 			"warrantyExpDate," + //
 			"statusDate," + //
-			"installationDate)" + //
+			"installationDate," + //
+			"lastStatus)" + //
 			"VALUES (" + //
 			"#{family}," + //
 			"#{assetNum}," + //
@@ -65,15 +67,46 @@ public interface AssetMapper {
 			"#{drawingRefId}," + //
 			"#{warrantyExpDate}," + //
 			"#{statusDate}," + //
-			"#{installationDate} )";
+			"#{installationDate}," + //
+			"#{lastStatus} )";
 
-	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " data = #{data}";
+	final String UPDATE = "UPDATE " + TABELLA + "  SET " + //
+			"family = #{family}," + //
+			"assetNum = #{assetNum}," + //
+			"changedDate = #{changedDate}," + //
+			"description = #{description}," + //
+			"longDescription = #{longDescription}," + //
+			"masterSystem = #{masterSystem}," + //
+			"system = #{system}," + //
+			"subSystem = #{subSystem}," + //
+			"location = #{location}," + //
+			"siteId = #{siteId}," + //
+			"workCenter = #{workCenter}," + //
+			"assetType = #{assetType}," + //
+			"assetQuantity = #{assetQuantity}," + //
+			"unitOfMeasure = #{unitOfMeasure}," + //
+			"inventoryCategory = #{inventoryCategory}," + //
+			"purchasePrice = #{purchasePrice}," + //
+			"budgetedCost = #{budgetedCost}," + //
+			"replacementCost = #replacementCost}," + //
+			"meterGroup = #{meterGroup}," + //
+			"belongsTo = #{belongsTo}," + //
+			"contractNumber = #{contractNumber}," + //
+			"taskDelivOrderNum = #{taskDelivOrderNum}," + //
+			"drawingRefId = #{drawingRefId}," + //
+			"warrantyExpDate = #{warrantyExpDate}," + //
+			"statusDate = #{statusDate}," + //
+			"installationDate = #{installationDate}," + //
+			"lastStatus = #{lastStatus}" + //
+			" WHERE id=#{id}";
+
+	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " id=#{id}";
 
 	@Select(SELECT_ALL)
 	public List<Asset> selectAll();
 
-//	@Update(UPDATE)
-//	public void update(Asset contact);
+	@Update(UPDATE)
+	public void update(Asset contact);
 
 	@Insert(INSERT)
 	public void insert(Asset contact);

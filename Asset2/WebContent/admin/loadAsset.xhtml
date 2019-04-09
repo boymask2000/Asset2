@@ -7,20 +7,24 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+			<h:panelGrid columns="1" cellpadding="100">
+				<p:panel id="basic"  style="margin-bottom:20px">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="messages" showDetail="true" />
 
-			<h:form enctype="multipart/form-data">
-				<p:growl id="messages" showDetail="true" />
+						<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+							skinSimple="true" />
 
-				<p:fileUpload value="#{fileUploadView.file}" mode="simple"
-					skinSimple="true" />
+						<br />
+						<br />
 
-				<br />
-				<br />
-
-				<p:commandButton value="Submit" ajax="false"
-					action="#{fileUploadView.upload}"  />
-			</h:form>
-
+						<p:commandButton value="Load" ajax="false"
+							action="#{fileUploadView.upload}" />
+					</h:form>
+				</p:panel>
+			</h:panelGrid>
+			<p:commandButton process="@this" icon="pi pi-search" value="Home"
+				action="adminHome" />
 		</ui:define>
 	</ui:composition>
 </h:body>

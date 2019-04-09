@@ -1,11 +1,14 @@
 package managed;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
+import java.util.concurrent.Callable;
 
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -13,12 +16,13 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import beans.Asset;
-import beans.Calendario;
+import beans.Batch;
 import database.dao.AssetDAO;
 
 public class FileUploadView {
 
 	private UploadedFile file;
+	private InputStream inputStream;
 
 	public UploadedFile getFile() {
 		return file;
@@ -26,42 +30,64 @@ public class FileUploadView {
 
 	public void setFile(UploadedFile file) {
 		this.file = file;
+		System.out.println("fleName: "+file.getFileName());
+		try {
+			inputStream = file.getInputstream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void readFile() {
-		try (XSSFWorkbook workbook = new XSSFWorkbook(file.getInputstream());) {
 
-			XSSFSheet sheet = workbook.getSheetAt(0);
+		Callable<Integer> callable = new Callable<Integer>() {
 
-			// we iterate on rows
-			Iterator<Row> rowIt = sheet.iterator();
-			rowIt.next();
-			int count = 0;
-			while (rowIt.hasNext()) {
+			public Integer call() throws Exception {
+				int count = 0;
+				try (XSSFWorkbook workbook = new XSSFWorkbook(inputStream);) {
 
-				Row row = rowIt.next();
+					XSSFSheet sheet = workbook.getSheetAt(0);
 
-				String location = row.getCell(7).toString();
+					// we iterate on rows
+					Iterator<Row> rowIt = sheet.iterator();
+					rowIt.next();
+					
+					while (rowIt.hasNext()) {
 
-				if (location == null || location.trim().length() == 0)
-					continue;
+						Row row = rowIt.next();
 
-				Asset asset = buildAsset(row);
-				AssetDAO dao = new AssetDAO();
-				try {
-					dao.insert(asset);
-					count++;
+						String location = row.getCell(7).toString();
+
+						if (location == null || location.trim().length() == 0)
+							continue;
+
+						Asset asset = buildAsset(row);
+						AssetDAO dao = new AssetDAO();
+						try {
+							dao.insert(asset);
+							count++;
+						} catch (Throwable t) {
+							t.printStackTrace();
+							System.out.println(asset.toString());
+						}
+					}
+
 				} catch (Throwable t) {
 					t.printStackTrace();
-					System.out.println(asset.toString());
+				}finally {
+					inputStream.close();
 				}
+				return count;
 			}
-			FacesMessage msg = new FacesMessage("Caricati " + count + " asset");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
+		};
+		Batch b = new Batch();
+		b.setDescription("Caricamento massivo Asset");
+		b.setCallable(callable);
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application application = context.getApplication();
+		ManagedBatch profileBean = application.evaluateExpressionGet(context, "#{managedBatch}", ManagedBatch.class);
+		profileBean.addBatch(b);
 	}
 
 	private Asset buildAsset(Row row) {
@@ -96,7 +122,7 @@ public class FileUploadView {
 	}
 
 	public void upload() {
-		System.out.println("upload");
+		System.out.println("upload file="+file);
 		if (file != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);

@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" header="Lavori batch"
+						style="margin-bottom:20px">
+						<p:dataTable id="radioDT" 
+							value="#{managedBatch.elencoBatch}" var="c"
+							
+							paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+
+							<p:column headerText="Descrizione">
+								<h:outputText value="#{c.description}" />
+							</p:column>
+
+							<p:column headerText="Start Time">
+								<h:outputText value="#{c.startTime}" />
+							</p:column>
+							<p:column headerText="End Time">
+								<h:outputText value="#{c.endTime}" />
+							</p:column>
+
+							<p:column headerText="Status">
+								<h:outputText value="#{c.status}" />
+							</p:column>
+
+
+						</p:dataTable>
+					</p:panel>
+				</h:panelGrid>
+
+
+
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="adminHome" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

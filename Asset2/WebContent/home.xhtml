@@ -5,20 +5,195 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<p:outputLabel value="JournalDev - JSF2/Primefaces Tutorial"></p:outputLabel>
-<p:dataTable value="#{managedAssetBean.allAssets}" var="employee">
-	<p:column>
-		<f:facet name="header">
-			<h:outputText value="Code"></h:outputText>
-			
-		</f:facet>
-		<h:outputText value="#{employee.code}"></h:outputText>
-	</p:column>
-	<p:column>
-		<f:facet name="header">
-			<h:outputText value="Description"></h:outputText>
-		</f:facet>
-		<h:outputText value="#{employee.description}"></h:outputText>
-	</p:column>
-</p:dataTable>
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" header="Gestione Asset">
+						<table style="width: 100%">
+							<tr>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+								<td width="100"></td>
+							</tr>
+							<tr>
+								<td height="40px" bgcolor="#548235"></td>
+								<td height="40px" bgcolor="#A9D08E"></td>
+								<td height="40px" bgcolor="#E2EFDA"></td>
+								<td height="40px" bgcolor="#BF8F00"></td>
+								<td height="40px" bgcolor="#FFD966"></td>
+								<td height="40px" bgcolor="#FFF2CC"></td>
+								<td height="40px" bgcolor="#EB0000"></td>
+								<td height="40px" bgcolor="#FF4F4F"></td>
+								<td height="40px" bgcolor="#FFC1C1"></td>
+								<td height="40px" bgcolor="#FFFFFF"></td>
+							</tr>
+							<tr>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(1).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(2).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(3).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(4).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(5).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(6).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(7).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(8).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(9).size()}" /></td>
+								<td align="center"><h:outputText
+										value="#{managedAssetBean.getAssetsWithStatus(0).size()}" /></td>
+							</tr>
+							<tr>
+								<td height="70px" align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="1"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="2"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="3"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td> 
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="4"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td> 
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="5"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="6"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="7"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="8"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="9"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+								<td align="center"><p:commandButton
+										update=":form:carDetail" oncomplete="PF('carDialog').show()"
+										title="View Detail">
+										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+										<f:setPropertyActionListener value="0"
+											target="#{managedAssetBean.selectedSeverity}" />
+									</p:commandButton></td>
+							</tr>
+
+						</table>
+					</p:panel>
+
+					<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="carDetail" style="text-align:center;">
+							<h:panelGrid columns="1" cellpadding="10">
+								<p:panel id="basi0c" header="Gestione Asset"
+									style="margin-bottom:10px">
+									<p:dataTable id="radioDT" selectionMode="single"
+										value="#{managedAssetBean.allAssetsWithSeverity}" var="c"
+										selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
+										paginator="true" rows="10"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:ajax event="rowSelect"
+											listener="#{managedAssetBean.onRowSelect}"
+											update=":form:msgs" />
+
+										<p:column headerText="MasterSystem">
+											<h:outputText value="#{c.masterSystem}" />
+										</p:column>
+
+										<p:column headerText="Descrizione">
+											<h:outputText value="#{c.description}" />
+										</p:column>
+
+										<p:column headerText="Location">
+											<h:outputText value="#{c.location}" />
+										</p:column>
+
+										<p:column headerText="LastStatus">
+											<h:outputText value="#{c.lastStatus}" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<h:commandButton action="#{managedUtentiBean.goToDetail}"
+												value="NuovoH" process="@this">
+												<f:param name="op" value="NEW" />
+											</h:commandButton>
+
+
+
+										</f:facet>
+									</p:dataTable>
+								</p:panel>
+							</h:panelGrid>
+
+						</p:outputPanel>
+					</p:dialog>
+				</h:panelGrid>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+
 </html>

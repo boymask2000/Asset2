@@ -11,7 +11,9 @@ import beans.Asset;
 public interface AssetMapper {
 	final String TABELLA = "test1.asset";
 
-	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
+	final String SELECT_ALL = "SELECT * FROM " + TABELLA +" ORDER BY masterSystem, location";
+	
+	final String SELECT_WITH_STATUS = "SELECT * FROM " + TABELLA +" WHERE lastStatus = #{lastStatus} ORDER BY masterSystem, location";
 
 	final String INSERT = "INSERT INTO " + TABELLA + "  (" + //
 			"family," + //
@@ -113,6 +115,9 @@ public interface AssetMapper {
 
 	@Select(SEARCH)
 	public Asset search(Asset contact);
+
+	@Select(SELECT_WITH_STATUS)
+	public List<Asset> selectAssetsWithStatus(Asset contact);
 
 //	@Select(DELETE)
 //	public void delete(Asset contact);

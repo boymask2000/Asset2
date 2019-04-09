@@ -1,0 +1,114 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="1" >
+					<h:panelGrid columns="2" cellpadding="1">
+
+						<h:outputText value="masterSystem" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.masterSystem}"
+							required="true" />
+						<h:outputText value="assetNum" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.assetNum}" />
+						<h:outputText value="changedDate" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.changedDate}" />
+						<h:outputText value="description" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.description}" />
+						<h:outputText value="longDescription" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.longDescription}" />
+						<h:outputText value="system" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.system}" />
+						<h:outputText value="subSystem" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.subSystem}" />
+						<h:outputText value="location" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.location}" />
+
+						<h:outputText value="workCenter" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.workCenter}" />
+						<h:outputText value="assetType" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.assetType}" />
+						<h:outputText value="assetQuantity" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.assetQuantity}" />
+						<h:outputText value="unitOfMeasure" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.unitOfMeasure}" />
+						<h:outputText value="inventoryCategory" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.inventoryCategory}" />
+						<h:outputText value="purchasePrice" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.purchasePrice}" />
+						<h:outputText value="budgetedCost" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.budgetedCost}" />
+						<h:outputText value="replacementCost" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.replacementCost}" />
+						<h:outputText value="meterGroup" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.meterGroup}" />
+						<h:outputText value="belongsTo" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.belongsTo}" />
+						<h:outputText value="contractNumber" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.contractNumber}" />
+						<h:outputText value="taskDelivOrderNum" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.taskDelivOrderNum}" />
+						<h:outputText value="drawingRefId" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.drawingRefId}" />
+						<h:outputText value="warrantyExpDate" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.warrantyExpDate}" />
+						<h:outputText value="statusDate" />
+						<h:inputText value="#{managedAssetBean.selectedAsset.statusDate}" />
+						<h:outputText value="installationDate" />
+						<h:inputText
+							value="#{managedAssetBean.selectedAsset.installationDate}" />
+
+					</h:panelGrid>
+					<p:panel id="basic" header="Manuali">
+					<h:panelGrid columns="2" cellpadding="1">
+					
+					</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="Gestione utenti" action="utentiHome" />
+
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="Gestione calendario" action="calHome" />
+
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="Gestione asset" action="gestioneAsset" />
+
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="Caricamento massivo asset" action="loadAsset" />
+
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="Lavori batch" action="batchHome" />
+
+
+
+
+				<p:commandButton process="@this" icon="pi pi-search" value="Esci"
+					action="#{utente.logout}" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

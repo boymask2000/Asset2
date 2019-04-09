@@ -9,42 +9,51 @@
 		<ui:define name="content">
 
 			<h:form id="form">
-				<p:poll update=":form" interval="5" />
-				<h:panelGrid columns="1" cellpadding="10">
-					<h:outputText value="#{timeUtil.time}" />
-				</h:panelGrid>
+
 				<p:growl id="msgs" showDetail="true" />
 
 				<h:panelGrid columns="1" cellpadding="100">
-
-					<p:panel id="basic" header="Lavori batch"
+					<p:panel id="basic" header="Gestione Asset"
 						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" value="#{managedBatch.elencoBatch}"
-							var="c" paginator="true" rows="5"
+						<p:dataTable id="radioDT" selectionMode="single"
+							value="#{managedAssetBean.allAssets}" var="c"
+							selection="#{managedAssetBean.selectedAsset}"
+							rowKey="#{c.id}" paginator="true" rows="10"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
+							<p:ajax event="rowSelect"
+								listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
+
+							<p:column headerText="MasterSystem">
+								<h:outputText value="#{c.masterSystem}" />
+							</p:column>
 
 							<p:column headerText="Descrizione">
 								<h:outputText value="#{c.description}" />
 							</p:column>
 
-							<p:column headerText="Start Time">
-								<h:outputText value="#{c.startTime}" />
-							</p:column>
-							<p:column headerText="End Time">
-								<h:outputText value="#{c.endTime}" />
+							<p:column headerText="Location">
+								<h:outputText value="#{c.location}" />
 							</p:column>
 
-							<p:column headerText="Status">
-								<h:outputText value="#{c.status}" />
+							<p:column headerText="LastStatus">
+								<h:outputText value="#{c.lastStatus}" />
 							</p:column>
 
+							<f:facet name="footer">
 
+								<h:commandButton action="goToDetailAsset"
+									value="NuovoH" process="@this">
+									<f:param name="op" value="NEW" />
+								</h:commandButton>
+
+
+
+							</f:facet>
 						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
-
 
 
 				<p:commandButton process="@this" icon="pi pi-search" value="Home"

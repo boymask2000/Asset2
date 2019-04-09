@@ -18,6 +18,12 @@
 	</managed-bean>
 	
 	<managed-bean>
+		<managed-bean-name>managedAssetBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedAssetBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
 		<managed-bean-name>managedBatch</managed-bean-name>
 		<managed-bean-class>managed.ManagedBatch</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
@@ -40,6 +46,14 @@
 		<managed-bean-class>beans.Utente</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>timeUtil</managed-bean-name>
+		<managed-bean-class>common.TimeUtil</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -51,6 +65,29 @@
 		</navigation-case>
 
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>goToDetailAsset</from-outcome>
+			<to-view-id>/admin/dettaglioAsset.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>gestioneAsset</from-outcome>
+			<to-view-id>/admin/gestioneAsset.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

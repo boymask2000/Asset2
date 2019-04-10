@@ -1,10 +1,12 @@
 package managed;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -12,6 +14,7 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Manuale;
 import beans.Utente;
+import common.ApplicationConfig;
 import common.Log;
 import database.dao.ManualiDAO;
 import database.dao.UtenteDAO;
@@ -31,7 +34,7 @@ public class ManagedManualiBean implements Serializable {
 		myList = dao.selectAll();
 		return myList;
 	}
-	
+
 	public List<Manuale> getManualiForAsset(int assetId) {
 		ManualiDAO dao = new ManualiDAO();
 		myList = dao.getManualiForAsset(assetId);
@@ -58,13 +61,33 @@ public class ManagedManualiBean implements Serializable {
 		}
 	}
 
-
 	public Manuale getSelectedManuale() {
-		if( selectedManuale==null)selectedManuale = new Manuale();
+		if (selectedManuale == null)
+			selectedManuale = new Manuale();
 		return selectedManuale;
 	}
 
 	public void setSelectedManuale(Manuale selectedManuale) {
 		this.selectedManuale = selectedManuale;
+	}
+
+	public String setupViewFile(String nome) {
+		System.out.println("setup");
+		BasicDocumentViewController c = getDocController();
+		c.setPdf(new File(getFullPath(nome)));
+		return "viewFile";
+	}
+	private String getFullPath(String nome) {
+		String dir = ApplicationConfig.getDocumentdir();
+		if( !dir.endsWith(File.separator))dir+=File.separator;
+		return dir+nome;
+	}
+
+	private BasicDocumentViewController getDocController() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application application = context.getApplication();
+		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
+				"#{basicDocumentViewController}", BasicDocumentViewController.class);
+		return assetBean;
 	}
 }

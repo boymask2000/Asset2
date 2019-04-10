@@ -16,8 +16,7 @@
 
 						<h:outputText value="masterSystem" />
 						<h:inputText
-							value="#{managedAssetBean.selectedAsset.masterSystem}"
-							required="true" />
+							value="#{managedAssetBean.selectedAsset.masterSystem}" />
 						<h:outputText value="assetNum" />
 						<h:inputText value="#{managedAssetBean.selectedAsset.assetNum}" />
 						<h:outputText value="changedDate" />
@@ -99,6 +98,12 @@
 							<p:column headerText="File">
 								<h:outputText value="#{c.nomefile}" />
 							</p:column>
+							<p:column>
+								<h:commandButton rendered="#{c.pdf}"
+									action="#{managedManualiBean.setupViewFile(c.nomefile)}"
+									value="View" />
+							</p:column>
+
 							<f:facet name="footer">
 
 								<p:commandButton process="radioDT" update=":panSetPass0"
@@ -119,29 +124,22 @@
 							<h:form enctype="multipart/form-data">
 								<p:growl id="messages" showDetail="true" />
 								<h:outputText value="Descrizione manuale " />
-								<h:inputText value="#{manualeUpload.currentManuale.descrizione}" />
-								<p:fileUpload value="#{manualeUpload.file}" mode="simple"
-									skinSimple="true"
+								<h:inputText value="#{manualeUpload.currentManuale.descrizione}" required="true" />
+								<p:fileUpload value="#{manualeUpload.file}" mode="advanced"
+									allowTypes="/(\.|\/)(pdf)$/" update=":form"
 									fileUploadListener="#{manualeUpload.handleFileUpload}">
 									<f:attribute name="assetId"
 										value="#{managedAssetBean.selectedAsset.id}" />
 								</p:fileUpload>
 
-								<p:commandButton value="Load" ajax="false"
-									action="#{manualeUpload.upload}" />
 							</h:form>
 						</p:panel>
 					</p:panelGrid>
 				</p:outputPanel>
 			</p:dialog>
 
-
-
-
-<p:commandButton process="@this" icon="pi pi-search"
-							value="Home" action="adminHome"/> 
-
-
+			<p:commandButton process="@this" icon="pi pi-search" value="Home"
+				action="adminHome" />
 
 		</ui:define>
 	</ui:composition>

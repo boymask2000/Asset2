@@ -1,6 +1,7 @@
 package managed;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,40 +29,50 @@ public class ManualeUpload {
 	public void setFile(UploadedFile file) {
 		this.file = file;
 		String fileName = file.getFileName();
-		String ext = "";
-		int pos = fileName.lastIndexOf(".");
-		if (pos != -1)
-			ext = fileName.substring(pos);
 
 		System.out.println("fleName: " + file.getFileName());
 		try (InputStream inputStream = file.getInputstream();) {
 
-			String dir = ApplicationConfig.getDocumentdir();
-			File tmpFile = File.createTempFile("man_", ext, new File(dir));
-			loadFile(inputStream, tmpFile);
-			
-			currentManuale.setNomefile(tmpFile.getName());
+			loadFile(fileName, inputStream);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void loadFile(InputStream is, File tmpFile) {
+	private String getExt(String fileName) {
+		String ext = "";
+		int pos = fileName.lastIndexOf(".");
+		if (pos != -1)
+			ext = fileName.substring(pos);
+		return ext;
+	}
+
+	private void loadFile(String fileName, InputStream is) {
 		byte buffer[] = new byte[1024];
-		try (FileOutputStream os = new FileOutputStream(tmpFile);) {
-			int count = 0;
-			while ((count = is.read(buffer)) != -1) {
-				os.write(buffer, 0, count);
+		ManagedAssetBean assetBean = getManagedAssetBean();
+		long assetId = assetBean.getSelectedAsset().getId();
+		String ext = getExt(fileName);
+
+		String dir = ApplicationConfig.getDocumentdir();
+		try {
+			File tmpFile = File.createTempFile("man_" + assetId + "_", ext, new File(dir));
+
+			try (FileOutputStream os = new FileOutputStream(tmpFile);) {
+				int count = 0;
+				while ((count = is.read(buffer)) != -1) {
+					os.write(buffer, 0, count);
+				}
+				os.flush();
+
+				currentManuale.setNomefile(tmpFile.getName());
+				currentManuale.setExt(ext);
+
 			}
-			os.flush();
-
-		} catch (IOException e1) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
-
 	}
 
 	public void upload() {
@@ -69,29 +80,64 @@ public class ManualeUpload {
 		if (file != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-			
-			FacesContext context = FacesContext.getCurrentInstance();
-			Application application = context.getApplication();
-			ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}", ManagedAssetBean.class);
-		
+
+			ManagedAssetBean assetBean = getManagedAssetBean();
+
 			System.out.println(currentManuale.getDescrizione());
 			System.out.println(currentManuale.getNomefile());
-			
+
 			long assetId = assetBean.getSelectedAsset().getId();
 			currentManuale.setAssetId(assetId);
 			System.out.println(assetId);
-			
-			ManualiDAO manualiDAO =new ManualiDAO();
+
+			ManualiDAO manualiDAO = new ManualiDAO();
 			manualiDAO.insert(currentManuale);
 		}
 	}
 
+	private ManagedAssetBean getManagedAssetBean() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application application = context.getApplication();
+		ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
+				ManagedAssetBean.class);
+		return assetBean;
+	}
+
 	public void handleFileUpload(FileUploadEvent event) {
-		System.out.println("handleFileUpload");
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		String foo = (String) event.getComponent().getAttributes().get("assetId");
-		System.out.println("foo:"+foo);
+		String fileName = event.getFile().getFileName();
+	//	fileName = getFullPath(fileName);
+
+		System.out.println("fleName: " + fileName);
+		try (InputStream inputStream = event.getFile().getInputstream();) {
+
+			loadFile(fileName, inputStream);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		FacesMessage message = new FacesMessage("Succesful", fileName + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+
+		ManagedAssetBean assetBean = getManagedAssetBean();
+
+		System.out.println(currentManuale.getDescrizione());
+		System.out.println(currentManuale.getNomefile());
+
+		long assetId = assetBean.getSelectedAsset().getId();
+		currentManuale.setAssetId(assetId);
+		System.out.println(assetId);
+
+		ManualiDAO manualiDAO = new ManualiDAO();
+		manualiDAO.insert(currentManuale);
+
+	}
+
+	private String getFullPath(String nome) {
+		String dir = ApplicationConfig.getDocumentdir();
+		if (!dir.endsWith(File.separator))
+			dir += File.separator;
+		return dir + nome;
 	}
 
 	public Manuale getCurrentManuale() {

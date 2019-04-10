@@ -42,6 +42,18 @@ public class AssetDAO {
 			session.close();
 		}
 	}
+	public void update(Asset u) {
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+			AssetMapper mapper = session.getMapper(AssetMapper.class);
+			mapper.update(u);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+	}
 
 	public List<Asset> selectAssetsWithStatus(int status) {
 		List<Asset> list = null;

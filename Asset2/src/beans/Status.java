@@ -5,6 +5,8 @@ public class Status {
 	private String color;
 	private int total;
 	
+	
+	
 	public Status(int sev) {
 		severity=sev;
 		switch (severity) {
@@ -24,6 +26,26 @@ public class Status {
 			break;
 		}
 	}
+	public static String getColor(int stat) {
+		String color="#FFFFFF";
+		switch (stat) {
+		
+		case 1:color="#548235";break;
+		case 2:color="#A9D08E";break;
+		case 3:color="#E2EFDA";break;
+		case 4:color="#BF8F00";break;
+		case 5:color="#FFD966";break;
+		case 6:color="#FFF2CC";break;
+		case 7:color="#EB0000";break;
+		case 8:color="#FF4F4F";break;
+		case 9:color="#FFC1C1";break;
+		case 0:color="#FFFFFF";break;
+
+		default:
+			break;
+		}
+		return color;
+	}
 	
 	public String getColor() {
 		return color;
@@ -39,8 +61,8 @@ public class Status {
 	}
 	public int getSeverity() {
 		return severity;
-	}
-	public void setSeverity(int severity) {
+		}
+		public void setSeverity(int severity) {
 		this.severity = severity;
 	}
 }

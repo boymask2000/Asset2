@@ -90,7 +90,7 @@ public interface AssetMapper {
 			"inventoryCategory = #{inventoryCategory}," + //
 			"purchasePrice = #{purchasePrice}," + //
 			"budgetedCost = #{budgetedCost}," + //
-			"replacementCost = #replacementCost}," + //
+			"replacementCost = #{replacementCost}," + //
 			"meterGroup = #{meterGroup}," + //
 			"belongsTo = #{belongsTo}," + //
 			"contractNumber = #{contractNumber}," + //

@@ -25,10 +25,19 @@ public class ManagedAssetBean {
 		AssetDAO assetDAO = new AssetDAO();
 		return assetDAO.selectAssetsWithStatus(selectedSeverity);
 	}
+	
+	public String getColor() {
+		return Status.getColor(selectedAsset.getLastStatus());
+	}
 
 	public List<Asset> getAllAssets() {
 		AssetDAO assetDAO = new AssetDAO();
 		return assetDAO.selectAll();
+	}
+	
+	public void updateAsset() {
+		AssetDAO assetDAO = new AssetDAO();
+		assetDAO.update(selectedAsset);
 	}
 	
 	public List<Asset> getAssetsWithStatus(int status) {

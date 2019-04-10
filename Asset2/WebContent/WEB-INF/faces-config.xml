@@ -70,6 +70,17 @@
 		<managed-bean-class>managed.BasicDocumentViewController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedInterventiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedInterventiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>managedDocInterventiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedDocInterventiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

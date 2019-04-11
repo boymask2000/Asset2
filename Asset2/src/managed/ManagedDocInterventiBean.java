@@ -44,7 +44,7 @@ public class ManagedDocInterventiBean implements Serializable {
 
 	public void onRowSelect(SelectEvent event) {
 		FacesMessage msg = new FacesMessage(" Selected", ""+((Intervento) event.getObject()).getId());
-		selectedIntevento = (DocIntervento) event.getObject();
+		selectedDocIntervento = (DocIntervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
 

@@ -85,6 +85,7 @@ public class ManagedAssetBean {
 	}
 
 	public void setSelectedSeverity(int selectedSeverity) {
+	
 		this.selectedSeverity = selectedSeverity;
 	}
 }

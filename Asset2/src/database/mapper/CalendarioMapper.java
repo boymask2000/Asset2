@@ -27,6 +27,10 @@ public interface CalendarioMapper {
 			" giorno = #{giorno}," + //
 			" lavorativo = #{lavorativo}" + //
 			" WHERE data = #{data}";
+	
+	final String INC_INTERVENTI = "UPDATE " + TABELLA + " SET" + //
+			" interventi = interventi + 1" + //
+			" WHERE data = #{data}";
 
 	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " data = #{data}";
 
@@ -46,6 +50,9 @@ public interface CalendarioMapper {
 
 	@Update(UPDATE)
 	public void update(Calendario contact);
+	
+	@Update(INC_INTERVENTI)
+	public void incInterventi(Calendario contact);
 
 	@Insert(INSERT)
 	public void insert(Calendario contact);

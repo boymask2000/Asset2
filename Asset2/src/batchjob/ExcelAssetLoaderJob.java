@@ -1,51 +1,20 @@
-package managed;
+package batchjob;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.concurrent.Callable;
 
-import javax.faces.application.Application;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
-import batchjob.ExcelAssetLoaderJob;
 import beans.Asset;
-import beans.Batch;
 import database.dao.AssetDAO;
 
-public class FileUploadView {
-
-	private UploadedFile file;
+public class ExcelAssetLoaderJob extends GenericJob{
 	private InputStream inputStream;
-
-	public UploadedFile getFile() {
-		return file;
-	}
-
-	public void setFile(UploadedFile file) {
-		this.file = file;
-		System.out.println("fleName: "+file.getFileName());
-		try {
-			inputStream = file.getInputstream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	private void readFile() {
-		ExcelAssetLoaderJob job = new ExcelAssetLoaderJob();
-		job.setInputStream(inputStream);
-		job.go();
-	}
-	private void readFile2() {
-
+	@Override
+	public void go() {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
@@ -72,6 +41,7 @@ public class FileUploadView {
 						try {
 							dao.insert(asset);
 							count++;
+							queue.put(""+count);
 						} catch (Throwable t) {
 							t.printStackTrace();
 							System.out.println(asset.toString());
@@ -86,15 +56,17 @@ public class FileUploadView {
 				return count;
 			}
 		};
-		Batch b = new Batch();
-		b.setDescription("Caricamento massivo Asset");
-		b.setCallable(callable);
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		ManagedBatch profileBean = application.evaluateExpressionGet(context, "#{managedBatch}", ManagedBatch.class);
-		profileBean.addBatch(b);
+		submit(callable, "Caricamento massivo Asset");
+//		Batch b = new Batch();
+//		b.setDescription("Caricamento massivo Asset");
+//		b.setCallable(callable);
+//		b.setJob(this);
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Application application = context.getApplication();
+//		ManagedBatch profileBean = application.evaluateExpressionGet(context, "#{managedBatch}", ManagedBatch.class);
+//		profileBean.addBatch(b);
+		
 	}
-
 	private Asset buildAsset(Row row) {
 
 		Asset asset = new Asset();
@@ -125,20 +97,7 @@ public class FileUploadView {
 		asset.setInstallationDate(row.getCell(24).toString());
 		return asset;
 	}
-
-	public void upload() {
-		System.out.println("upload file="+file);
-		if (file != null) {
-			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-
-			readFile();
-		}
-	}
-
-	public void handleFileUpload(FileUploadEvent event) {
-		System.out.println("handleFileUpload");
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 }

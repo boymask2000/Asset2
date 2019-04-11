@@ -3,6 +3,7 @@ package beans;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
+import batchjob.GenericJob;
 import common.TimeUtil;
 
 public class Batch {
@@ -12,6 +13,7 @@ public class Batch {
 	private String endTime;
 	private Future<Integer> future;
 	private String status;
+	private GenericJob job;
 
 	public String getDescription() {
 		return description;
@@ -81,5 +83,13 @@ public class Batch {
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public GenericJob getJob() {
+		return job;
+	}
+
+	public void setJob(GenericJob job) {
+		this.job = job;
 	}
 }

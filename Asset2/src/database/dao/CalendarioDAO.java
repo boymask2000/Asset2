@@ -39,10 +39,9 @@ public class CalendarioDAO {
 
 			mapper.update(u);
 			session.commit();
-		}catch( Exception e ) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -56,6 +55,22 @@ public class CalendarioDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	public void incInterventi(Calendario theDate) {
+
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+
+			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
+			mapper.incInterventi(theDate);
+			session.commit();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		} finally {
+			session.close();
+		}
+		// return u;
 	}
 
 	public Calendario search(Calendario contact) {
@@ -90,7 +105,7 @@ public class CalendarioDAO {
 
 	public String getMinData() {
 		String u = null;
-	
+
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
 
@@ -103,12 +118,12 @@ public class CalendarioDAO {
 			session.close();
 		}
 		return u;
-		
+
 	}
 
 	public String getMaxData() {
 		String u = null;
-	
+
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
 
@@ -122,6 +137,5 @@ public class CalendarioDAO {
 		}
 		return u;
 	}
-
 
 }

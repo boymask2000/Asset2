@@ -36,6 +36,10 @@
 								<h:outputText value="#{c.endTime}" />
 							</p:column>
 
+							<p:column headerText="Progress">
+								<h:outputText value="#{c.job.partialResult}" />
+							</p:column>
+							
 							<p:column headerText="Status">
 								<h:outputText value="#{c.status}" />
 							</p:column>

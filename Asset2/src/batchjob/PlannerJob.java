@@ -9,9 +9,11 @@ import java.util.concurrent.Callable;
 
 import beans.Asset;
 import beans.Calendario;
+import beans.Intervento;
 import common.TipoSchedulazione;
 import database.dao.AssetDAO;
 import database.dao.CalendarioDAO;
+import database.dao.InterventiDAO;
 
 
 public class PlannerJob extends GenericJob {
@@ -64,6 +66,8 @@ public class PlannerJob extends GenericJob {
 			//	System.out.println(data + " --> " + goodDate);
 
 				incInter(goodDate);
+				
+				createIntervento(assetId, data, goodDate);
 
 				// dump(lista);
 
@@ -72,6 +76,16 @@ public class PlannerJob extends GenericJob {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
+	}
+	private void createIntervento(long assetId, String data, String goodDate) {
+		Intervento u = new Intervento();
+		u.setAssetId(assetId);
+		u.setData_pianificata(goodDate);
+		u.setData_teorica(data);
+		
+		InterventiDAO dao = new InterventiDAO();
+		dao.insert(u);
+		
 	}
 	private List<Item> order(Calendar cal, int r) {
 

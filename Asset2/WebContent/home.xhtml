@@ -84,14 +84,14 @@
 										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
 										<f:setPropertyActionListener value="3"
 											target="#{managedAssetBean.selectedSeverity}" />
-									</p:commandButton></td> 
+									</p:commandButton></td>
 								<td align="center"><p:commandButton
 										update=":form:carDetail" oncomplete="PF('carDialog').show()"
 										title="View Detail">
 										<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
 										<f:setPropertyActionListener value="4"
 											target="#{managedAssetBean.selectedSeverity}" />
-									</p:commandButton></td> 
+									</p:commandButton></td>
 								<td align="center"><p:commandButton
 										update=":form:carDetail" oncomplete="PF('carDialog').show()"
 										title="View Detail">
@@ -137,8 +137,12 @@
 							</tr>
 
 						</table>
-					</p:panel>
 
+					</p:panel>
+					<p:panel>
+						<p:commandButton value="New intervento"
+							action="insertIntervento.xhtml"></p:commandButton>
+					</p:panel>
 					<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
 						showEffect="fade" hideEffect="fade" resizable="false">
 						<p:outputPanel id="carDetail" style="text-align:center;">
@@ -173,9 +177,9 @@
 										</p:column>
 
 										<f:facet name="footer">
-<h:commandButton action="goToDetailAsset"
-									value="Detail" process="@this">
-					
+											<h:commandButton action="goToDetailAsset" value="Detail"
+												process="@this">
+
 											</h:commandButton>
 
 
@@ -183,6 +187,7 @@
 										</f:facet>
 									</p:dataTable>
 								</p:panel>
+
 							</h:panelGrid>
 
 						</p:outputPanel>

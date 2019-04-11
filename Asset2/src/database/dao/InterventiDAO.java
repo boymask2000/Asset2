@@ -35,19 +35,23 @@ public class InterventiDAO {
 		}
 		return list;
 	}
-	public List<Intervento> getInterventiForAsset(long assetId) {
+
+	public List<Intervento> getInterventiForAsset(long assetId, boolean done) {
 		List<Intervento> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 
 		try {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
-			
-			list = mapper.selectForAsset(assetId);
+			if (done)
+				list = mapper.selectForAssetDone(assetId);
+			else
+				list = mapper.selectForAssetUndone(assetId);
 		} finally {
 			session.close();
 		}
 		return list;
 	}
+
 	public void insert(Intervento u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -58,6 +62,7 @@ public class InterventiDAO {
 			session.close();
 		}
 	}
+
 	public void update(Intervento u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -66,7 +71,7 @@ public class InterventiDAO {
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 	}

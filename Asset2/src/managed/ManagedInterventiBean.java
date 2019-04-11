@@ -34,9 +34,9 @@ public class ManagedInterventiBean implements Serializable {
 		dao.update(u);
 	}
 
-	public List<Intervento> getInterventiForAsset(int assetId) {
+	public List<Intervento> getInterventiForAsset(int assetId, boolean done) {
 		InterventiDAO dao = new InterventiDAO();
-		myList = dao.getInterventiForAsset(assetId);
+		myList = dao.getInterventiForAsset(assetId,done);
 		return myList;
 	}
 

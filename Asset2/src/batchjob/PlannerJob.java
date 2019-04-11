@@ -21,6 +21,8 @@ public class PlannerJob extends GenericJob {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
+				cleanInterventiCalendario();
+				
 				int count = 0;
 				AssetDAO assetDao = new AssetDAO();
 				List<Asset> allAssets = assetDao.selectAll();
@@ -94,6 +96,10 @@ public class PlannerJob extends GenericJob {
 		}
 		return out;
 
+	}
+	private void cleanInterventiCalendario() {
+		CalendarioDAO dao = new CalendarioDAO();
+		dao.cleanInterventi();
 	}
 	private Integer getNumFromCale(String dat) {
 		CalendarioDAO dao = new CalendarioDAO();

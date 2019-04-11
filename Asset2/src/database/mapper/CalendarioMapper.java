@@ -12,9 +12,9 @@ import beans.Calendario;
 
 public interface CalendarioMapper {
 	final String TABELLA = "test1.calendario";
-	
-	final String SELECT_MIN_DATA="SELECT MIN(data) from "+TABELLA;
-	final String SELECT_MAX_DATA="SELECT MAX(data) from "+TABELLA;
+
+	final String SELECT_MIN_DATA = "SELECT MIN(data) from " + TABELLA;
+	final String SELECT_MAX_DATA = "SELECT MAX(data) from " + TABELLA;
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
@@ -27,7 +27,9 @@ public interface CalendarioMapper {
 			" giorno = #{giorno}," + //
 			" lavorativo = #{lavorativo}" + //
 			" WHERE data = #{data}";
-	
+
+	final String CLEAN_INTERVENTI = "UPDATE " + TABELLA + " SET interventi = 0";
+
 	final String INC_INTERVENTI = "UPDATE " + TABELLA + " SET" + //
 			" interventi = interventi + 1" + //
 			" WHERE data = #{data}";
@@ -50,7 +52,7 @@ public interface CalendarioMapper {
 
 	@Update(UPDATE)
 	public void update(Calendario contact);
-	
+
 	@Update(INC_INTERVENTI)
 	public void incInterventi(Calendario contact);
 
@@ -65,8 +67,11 @@ public interface CalendarioMapper {
 
 	@Select(SELECT_MIN_DATA)
 	public String getMinData();
-	
+
 	@Select(SELECT_MAX_DATA)
 	public String getMaxData();
+
+	@Select(CLEAN_INTERVENTI)
+	public void cleanInterventi();
 
 }

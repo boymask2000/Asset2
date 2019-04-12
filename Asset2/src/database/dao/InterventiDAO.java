@@ -69,4 +69,23 @@ public class InterventiDAO {
 			session.close();
 		}
 	}
+
+	public boolean isLastIntervento(String data) {
+		System.out.println("isLastIntervento data= "+data);
+		boolean out = true;
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+
+			List<Intervento> l = mapper.getInterventiFattiDopo(data);
+			if (l.size() > 0)
+				out = false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		System.out.println("out = "+out);
+		return out;
+	}
 }

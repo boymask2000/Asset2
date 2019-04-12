@@ -14,9 +14,8 @@
 				<h:panelGrid columns="2" cellpadding="1">
 					<p:panel id="baic">
 						<h:panelGrid columns="2" cellpadding="1">
-<h:outputText value="ID" />
-							<h:outputText
-								value="#{managedAssetBean.selectedAsset.id}" />
+							<h:outputText value="ID" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
 							<h:outputText value="masterSystem" />
 							<h:inputText
 								value="#{managedAssetBean.selectedAsset.masterSystem}" />
@@ -96,8 +95,54 @@
 								</tr>
 							</table>
 						</p:panel>
-						<p:panel id="bajsic" header="Manuali">
+						<p:panel header="Interventi Eseguiti">
+							<p:dataTable id="radiopDT" selectionMode="single"
+								value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
+								var="c" selection="#{managedInterventiBean.selectedIntevento}"
+								rowKey="#{c.id}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+								<p:ajax event="rowSelect"
+									listener="#{managedInterventiBean.onRowSelect}"
+									update=":form:msgs" />
+								<p:column headerText="Data Prevista">
+									<h:outputText value="#{c.data_pianificata}" />
+								</p:column>
+								<p:column headerText="Data Effettiva">
+									<h:outputText value="#{c.data_effettiva}" />
+								</p:column>
+								<p:column headerText="Esito" styleClass="{'background':'yellow'}">
+<!-- 									<h:outputText value="#{c.esito}" /> -->
+									<table ><tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}"><td></td></tr></table>
+								</p:column>
+								<f:facet name="footer">
+									<h:commandButton action="goInsertIntervento" value="Detail">
+									</h:commandButton>
+								</f:facet>
+							</p:dataTable>
+						</p:panel>
+						<p:panel header="Interventi Pianificati">
+							<p:dataTable id="radio0DT" selectionMode="single"
+								value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,false)}"
+								var="c" selection="#{managedInterventiBean.selectedIntevento}"
+								rowKey="#{c.id}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+								<p:ajax event="rowSelect"
+									listener="#{managedInterventiBean.onRowSelect}"
+									update=":form:msgs" />
+								<p:column headerText="Data Prevista">
+									<h:outputText value="#{c.data_pianificata}" />
+								</p:column>
 
+								<f:facet name="footer">
+									<h:commandButton action="goInsertIntervento" value="Detail">
+									</h:commandButton>
+								</f:facet>
+							</p:dataTable>
+						</p:panel>
+						
+				<p:panel id="bajsic" header="Manuali">
 
 							<p:dataTable id="radioDT" selectionMode="single"
 								value="#{managedManualiBean.getManualiForAsset(managedAssetBean.selectedAsset.id)}"
@@ -132,47 +177,6 @@
 								</f:facet>
 							</p:dataTable>
 
-						</p:panel>
-						<p:panel header="Interventi Pianificati">
-							<p:dataTable id="radio0DT" selectionMode="single"
-								value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,false)}"
-								var="c" selection="#{managedInterventiBean.selectedIntevento}"
-								rowKey="#{c.id}" paginator="true" rows="5"
-								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15">
-
-								<p:column headerText="Data Prevista">
-									<h:outputText value="#{c.data_pianificata}" />
-								</p:column>
-
-								<f:facet name="footer">
-									<h:commandButton action="goInsertIntervento" value="Detail">
-									</h:commandButton>
-								</f:facet>
-							</p:dataTable>
-						</p:panel>
-						<p:panel header="Interventi Eseguiti">
-							<p:dataTable id="radiopDT" selectionMode="single"
-								value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
-								var="c" selection="#{managedInterventiBean.selectedIntevento}"
-								rowKey="#{c.id}" paginator="true" rows="5"
-								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15">
-
-								<p:column headerText="Data Prevista">
-									<h:outputText value="#{c.data_pianificata}" />
-								</p:column>
-								<p:column headerText="Data Effettiva">
-									<h:outputText value="#{c.data_effettiva}" />
-								</p:column>
-								<p:column headerText="Esito">
-									<h:outputText value="#{c.esito}" />
-								</p:column>
-<f:facet name="footer">
-									<h:commandButton action="goInsertIntervento" value="Detail">
-									</h:commandButton>
-								</f:facet>
-							</p:dataTable>
 						</p:panel>
 					</p:panel>
 				</h:panelGrid>

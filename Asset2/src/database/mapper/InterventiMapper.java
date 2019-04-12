@@ -15,7 +15,7 @@ public interface InterventiMapper {
 	final String SELECT_INTERVENTI_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}";
 
 	final String SELECT_INTERVENTI_PER_ASSET_DONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
-			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA ASC";
+			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA DESC";
 
 	final String SELECT_INTERVENTI_PER_ASSET_UNDONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC";
@@ -31,6 +31,12 @@ public interface InterventiMapper {
 			"data_effettiva = #{data_effettiva}," + //
 			"esito = #{esito}" + //
 			" WHERE id=#{id}";
+	
+	final String CHECK_LAST_DATE="SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"+
+	" AND data_effettiva > #{data} AND esito!=0";
+	
+	@Select(CHECK_LAST_DATE)
+	public List<Intervento> getInterventiFattiDopo(String data);
 
 	@Update(UPDATE)
 	public void update(Intervento contact);

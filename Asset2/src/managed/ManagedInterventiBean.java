@@ -13,6 +13,7 @@ import org.primefaces.event.SelectEvent;
 import beans.Intervento;
 import common.Log;
 import common.TimeUtil;
+import database.dao.AssetDAO;
 import database.dao.InterventiDAO;
 
 public class ManagedInterventiBean implements Serializable {
@@ -49,6 +50,7 @@ public class ManagedInterventiBean implements Serializable {
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
+		System.out.println("row select id="+selectedIntevento.getId());
 
 	}
 
@@ -78,7 +80,6 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public Intervento getSelectedIntevento() {
-		System.out.println("get " + selectedIntevento);
 
 		return selectedIntevento;
 	}
@@ -112,7 +113,16 @@ public class ManagedInterventiBean implements Serializable {
 		try {
 			dao.update(selectedIntevento);
 		} catch (Throwable e) {
-			System.out.println("lllllllllllllllllllllllll");
+			e.printStackTrace();
+		}
+		if (dao.isLastIntervento(selectedIntevento.getData_effettiva())) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			Application application = context.getApplication();
+			ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
+					ManagedAssetBean.class);
+			assetBean.getSelectedAsset().setLastStatus(esito);
+			AssetDAO assetDao = new AssetDAO();
+			assetDao.update(assetBean.getSelectedAsset());
 		}
 	}
 

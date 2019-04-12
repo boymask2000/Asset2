@@ -3,16 +3,17 @@ package managed;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import beans.Asset;
+import beans.Intervento;
 import beans.Status;
 import common.Log;
 import database.dao.AssetDAO;
+import database.dao.InterventiDAO;
 
 public class ManagedAssetBean {
 	
@@ -28,7 +29,13 @@ private Status status = new Status(0);
 	}
 	
 	public String getColor() {
-		return Status.getColor(selectedAsset.getLastStatus());
+		int col=0;
+	//	return Status.getColor(selectedAsset.getLastStatus());
+		InterventiDAO intDao = new InterventiDAO();
+		Intervento inte = intDao.getUltimoInterventoFatto(selectedAsset.getId());
+		if( inte==null) col=0;
+		else col=inte.getEsito();
+		return Status.getColor(col);
 	}
 
 	public List<Asset> getAllAssets() {

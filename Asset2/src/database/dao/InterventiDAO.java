@@ -46,6 +46,22 @@ public class InterventiDAO {
 		return list;
 	}
 
+	public Intervento getUltimoInterventoFatto(long assetId) {
+		Intervento inte = null;
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+
+		try {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+
+			List<Intervento> list = mapper.selectForAssetDone(assetId);
+			if (list != null && list.size() > 0)
+				inte = list.get(0);
+		} finally {
+			session.close();
+		}
+		return inte;
+	}
+
 	public void insert(Intervento u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -71,7 +87,7 @@ public class InterventiDAO {
 	}
 
 	public boolean isLastIntervento(String data) {
-		System.out.println("isLastIntervento data= "+data);
+		System.out.println("isLastIntervento data= " + data);
 		boolean out = true;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -85,7 +101,7 @@ public class InterventiDAO {
 		} finally {
 			session.close();
 		}
-		System.out.println("out = "+out);
+		System.out.println("out = " + out);
 		return out;
 	}
 }

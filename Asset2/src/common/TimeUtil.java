@@ -1,10 +1,12 @@
 package common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
+	private static final SimpleDateFormat sdfShort = new SimpleDateFormat("yyyyMMdd");
 	private String time;
 
 	public static String getTimestamp() {
@@ -20,20 +22,31 @@ public class TimeUtil {
 		time = sdf.format(date.getTime());
 		return time;
 	}
-	
+
 	public static String getCurrentDate() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 
-		String		time = df.format(date.getTime());
+		String time = sdfShort.format(date.getTime());
 		return time;
 	}
-	public static String getCurrentDate(Date date) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-	
 
-		String		time = df.format(date.getTime());
+	public static String getCurrentDate(Date date) {
+
+		String time = sdfShort.format(date.getTime());
 		return time;
+	}
+
+	public static Date getCurrentStringDate(String date) {
+if(date==null)return null;
+		Date date1=null;
+		try {
+			date1 = sdfShort.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return date1;
 	}
 
 }

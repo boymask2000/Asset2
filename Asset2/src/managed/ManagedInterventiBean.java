@@ -90,6 +90,8 @@ public class ManagedInterventiBean implements Serializable {
 		System.out.println("setSelectedIntevento idInter= " + s.getId());
 		esito = s.getEsito();
 		this.selectedIntevento = s;
+		
+		date_data_effettiva=TimeUtil.getCurrentStringDate(s.getData_effettiva());
 	}
 
 	public Date getDate_data_effettiva() {

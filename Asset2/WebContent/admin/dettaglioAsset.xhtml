@@ -14,7 +14,9 @@
 				<h:panelGrid columns="2" cellpadding="1">
 					<p:panel id="baic">
 						<h:panelGrid columns="2" cellpadding="1">
-
+<h:outputText value="ID" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.id}" />
 							<h:outputText value="masterSystem" />
 							<h:inputText
 								value="#{managedAssetBean.selectedAsset.masterSystem}" />
@@ -166,7 +168,10 @@
 								<p:column headerText="Esito">
 									<h:outputText value="#{c.esito}" />
 								</p:column>
-
+<f:facet name="footer">
+									<h:commandButton action="goInsertIntervento" value="Detail">
+									</h:commandButton>
+								</f:facet>
 							</p:dataTable>
 						</p:panel>
 					</p:panel>

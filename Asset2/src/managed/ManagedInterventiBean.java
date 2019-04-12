@@ -86,7 +86,8 @@ public class ManagedInterventiBean implements Serializable {
 	public void setSelectedIntevento(Intervento s) {
 		if (s == null)
 			return;
-		System.out.println("sss " + s);
+		System.out.println("setSelectedIntevento idInter= " + s.getId());
+		esito = s.getEsito();
 		this.selectedIntevento = s;
 	}
 
@@ -103,7 +104,7 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void setEsito(int esito) {
-		this.esito=esito;
+		this.esito = esito;
 		System.out.println("esito :" + esito);
 		selectedIntevento.setEsito(esito);
 		InterventiDAO dao = new InterventiDAO();

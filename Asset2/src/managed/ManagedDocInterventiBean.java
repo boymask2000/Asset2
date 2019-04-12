@@ -38,6 +38,7 @@ public class ManagedDocInterventiBean implements Serializable {
 	}
 
 	public List<DocIntervento> getDocsForIntervento(int interId) {
+		System.out.println("getDocsForIntervento interId= "+interId);
 		DocInterventiDAO dao = new DocInterventiDAO();
 		myList = dao.getDocForIntervento(interId);
 		return myList;

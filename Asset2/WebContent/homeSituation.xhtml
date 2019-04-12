@@ -1,0 +1,46 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<p:panel id="bahsic" header="Interventi ">
+	<p:growl id="msgs0" showDetail="true" />
+	<p:calendar id="popup"
+		value="#{managedInterventiBean.selectedDataForSituation}"
+		update=":form" onSelectUpdate="radi00DT" pattern="yyyyMMdd">
+		<f:ajax event="dateSelect"
+			listener="#{managedInterventiBean.onDateSelect}" update="msgs0"  render="radi00DT" /> 
+	</p:calendar>
+
+	<p:dataTable id="radi00DT" selectionMode="single"
+		value="#{managedInterventiBean.getInterventiInData(managedInterventiBean.selectedDataForSituation)}"
+		var="c" selection="#{managedInterventiBean.selectedIntevento}"
+		rowKey="#{c.id}" paginator="true" rows="5"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15">
+		<p:ajax event="rowSelect"
+			listener="#{managedInterventiBean.onRowSelect}" update="radi00DT" />
+
+		<p:column headerText="Data prevista">
+			<h:outputText value="#{c.data_pianificata}" />
+		</p:column>
+		<p:column headerText="Data effettiva">
+			<h:outputText value="#{c.data_effettiva}" />
+		</p:column>
+		<p:column headerText="Esito">
+			<table>
+				<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
+					<td></td>
+				</tr>
+			</table>
+		</p:column>
+	</p:dataTable>
+
+</p:panel>
+
+
+</html>

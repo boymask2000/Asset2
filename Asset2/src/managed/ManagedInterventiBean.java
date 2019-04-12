@@ -1,6 +1,7 @@
 package managed;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +25,29 @@ public class ManagedInterventiBean implements Serializable {
 	private List<Intervento> myList;
 	//
 	private Date date_data_effettiva;
-	
+
 	private Date dataNuovoIntervento;
 
 	private Intervento selectedIntevento = new Intervento();
 	private int esito;
 
+	private String selectedDataForSituation;
+
+	public List<Intervento> getInterventiInData(String data) {
+		System.out.println("getInterventiInData "+data);
+		if (data == null || data.trim().equalsIgnoreCase(""))
+			data = TimeUtil.getCurrentDate(new Date());
+		InterventiDAO dao = new InterventiDAO();
+		List<Intervento> ll = dao.getInterventiInData(data);
+		return ll;
+	}
+	public void onDateSelect(SelectEvent event) {
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+	    String dd = format.format(event.getObject());
+	    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+	    setSelectedDataForSituation(dd);
+	}
 	public List<Intervento> getAllInterventi() {
 		InterventiDAO dao = new InterventiDAO();
 		myList = dao.selectAll();
@@ -52,7 +70,7 @@ public class ManagedInterventiBean implements Serializable {
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
-		System.out.println("row select id="+selectedIntevento.getId());
+		System.out.println("row select id=" + selectedIntevento.getId());
 
 	}
 
@@ -67,11 +85,6 @@ public class ManagedInterventiBean implements Serializable {
 			System.out.println("lllllllllllllllllllllllll");
 		}
 	}
-
-//public String goInsertIntervento() {
-//	System.out.println("goInsertIntervento");
-//	return "goInsertIntervento";
-//}
 
 	private BasicDocumentViewController getDocController() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -92,13 +105,14 @@ public class ManagedInterventiBean implements Serializable {
 		System.out.println("setSelectedIntevento idInter= " + s.getId());
 		esito = s.getEsito();
 		this.selectedIntevento = s;
-		
-		date_data_effettiva=TimeUtil.getCurrentStringDate(s.getData_effettiva());
+
+		date_data_effettiva = TimeUtil.getCurrentStringDate(s.getData_effettiva());
 	}
 
 	public Date getDate_data_effettiva() {
 		return date_data_effettiva;
 	}
+
 	public void nuovoIntervento() {
 		System.out.println("niovooo");
 		InterventiDAO dao = new InterventiDAO();
@@ -106,20 +120,21 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void setDate_data_effettiva(Date d) {
-		System.out.println("set data: "+d);
+		System.out.println("set data: " + d);
 		if (d == null)
 			d = new Date();
 		this.date_data_effettiva = d;
 
 		selectedIntevento.setData_effettiva(TimeUtil.getCurrentDate(d));
 	}
+
 	public Date getDataNuovoIntervento() {
 		return dataNuovoIntervento;
 	}
 
 	public void setDataNuovoIntervento(Date d) {
-		
-		System.out.println("set data: "+d);
+
+		System.out.println("set data: " + d);
 		if (d == null)
 			d = new Date();
 		this.dataNuovoIntervento = d;
@@ -128,7 +143,7 @@ public class ManagedInterventiBean implements Serializable {
 		selectedIntevento.setData_effettiva(null);
 		selectedIntevento.setEsito(0);
 	}
-	
+
 	public void setEsito(int esito) {
 		this.esito = esito;
 		System.out.println("esito :" + esito);
@@ -155,5 +170,13 @@ public class ManagedInterventiBean implements Serializable {
 		return esito;
 	}
 
+	public String getSelectedDataForSituation() {
+		return selectedDataForSituation;
+	}
+
+	public void setSelectedDataForSituation(String s) {
+		System.out.println(s);
+		this.selectedDataForSituation = s;
+	}
 
 }

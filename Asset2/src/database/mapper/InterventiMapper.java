@@ -31,9 +31,17 @@ public interface InterventiMapper {
 			"data_effettiva = #{data_effettiva}," + //
 			"esito = #{esito}" + //
 			" WHERE id=#{id}";
-	
-	final String CHECK_LAST_DATE="SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"+
-	" AND data_effettiva > #{data} AND esito!=0";
+
+	final String CHECK_LAST_DATE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
+			+ " AND data_effettiva > #{data} AND esito!=0";
+
+	final String SITUATION = "SELECT * FROM " + TABELLA + " WHERE " + //
+			"( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
+			" (data_effettiva =#{data} ) ";
+
+	@Select(SITUATION)
+	public List<Intervento> getInterventiInData(String data);
+
 	
 	@Select(CHECK_LAST_DATE)
 	public List<Intervento> getInterventiFattiDopo(String data);

@@ -140,6 +140,9 @@
 
 					</p:panel>
 					<p:panel>
+						<ui:include src="homeSituation.xhtml"></ui:include>
+					</p:panel>
+					<p:panel>
 						<p:commandButton value="New intervento"
 							action="elencoAssetPerIntervento.xhtml"></p:commandButton>
 					</p:panel>
@@ -189,7 +192,7 @@
 						</p:outputPanel>
 					</p:dialog>
 				</h:panelGrid>
-
+<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 			</h:form>
 		</ui:define>
 	</ui:composition>

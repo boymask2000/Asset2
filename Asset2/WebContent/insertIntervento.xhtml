@@ -14,9 +14,8 @@
 				<h:panelGrid columns="2" cellpadding="1">
 					<p:panel id="baic">
 						<h:panelGrid columns="2" cellpadding="1">
-<h:outputText value="ID" />
-							<h:outputText
-								value="#{managedAssetBean.selectedAsset.id}" />
+							<h:outputText value="ID" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
 							<h:outputText value="masterSystem" />
 							<h:outputText
 								value="#{managedAssetBean.selectedAsset.masterSystem}" />
@@ -89,7 +88,7 @@
 					</p:panel>
 					<p:panel id="bc0">
 						<h:panelGrid columns="2" cellpadding="1">
-						<h:outputText value="ID intervento" />
+							<h:outputText value="ID intervento" />
 							<h:outputText
 								value="#{managedInterventiBean.selectedIntevento.id}" />
 							<h:outputText value="Data pianificata" />
@@ -126,7 +125,7 @@
 									<h:outputText value="#{c.filename}" />
 								</p:column>
 								<p:column>
-									<h:commandButton 
+									<h:commandButton
 										action="#{managedDocInterventiBean.setupViewFile(c.filename)}"
 										value="View" />
 								</p:column>
@@ -142,15 +141,33 @@
 
 						</p:panel>
 
-
-						<p:commandButton value="Aggiungi intervento" />
+						<p:commandButton process="radioDT" update="panIntPass0"
+							icon="pi pi-search" value="Aggiungi intervento"
+							oncomplete="PF('setIntDialog0').show()" />
 
 					</p:panel>
 				</h:panelGrid>
 			</h:form>
 
+			<p:dialog header="Nuovo Intervento" widgetVar="setIntDialog0"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="panIntPass0" style="text-align:center;">
+					<h:outputText value="Descrizione documento " />
+					<h:form>
+						<p:calendar id="popup"
+							value="#{managedInterventiBean.dataNuovoIntervento}"
+							pattern="yyyyMMdd" />
+
+						<p:commandButton update=":form" icon="pi pi-search"
+							value="Aggiungi intervento"
+							action="#{managedInterventiBean.nuovoIntervento}" oncomplete="PF('setIntDialog0').hide();" />
+					</h:form>
+				</p:outputPanel>
+			</p:dialog>
+
 
 			<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+
 			<p:dialog header="Nuovo documento" widgetVar="setPassDialog0"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="panSetPass0" style="text-align:center;">
@@ -159,10 +176,11 @@
 							<h:form enctype="multipart/form-data">
 								<p:growl id="messages" showDetail="true" />
 								<h:outputText value="Descrizione documento " />
-								<h:inputText value="#{docInterventoUpload.currentDoc.descrizione}"
+								<h:inputText
+									value="#{docInterventoUpload.currentDoc.descrizione}"
 									required="true" />
-								<p:fileUpload value="#{docInterventoUpload.file}" mode="advanced"
-									allowTypes="/(\.|\/)(pdf)$/" update=":form"
+								<p:fileUpload value="#{docInterventoUpload.file}"
+									mode="advanced" allowTypes="/(\.|\/)(pdf)$/" update=":form"
 									fileUploadListener="#{docInterventoUpload.handleFileUpload}">
 									<f:attribute name="intId" update=":form"
 										value="#{managedInterventiBean.selectedIntevento.id}" />

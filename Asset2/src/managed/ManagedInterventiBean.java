@@ -24,6 +24,8 @@ public class ManagedInterventiBean implements Serializable {
 	private List<Intervento> myList;
 	//
 	private Date date_data_effettiva;
+	
+	private Date dataNuovoIntervento;
 
 	private Intervento selectedIntevento = new Intervento();
 	private int esito;
@@ -97,15 +99,36 @@ public class ManagedInterventiBean implements Serializable {
 	public Date getDate_data_effettiva() {
 		return date_data_effettiva;
 	}
-
-	public void setDate_data_effettiva(Date date_data_effettiva) {
-		if (date_data_effettiva == null)
-			date_data_effettiva = new Date();
-		this.date_data_effettiva = date_data_effettiva;
-
-		selectedIntevento.setData_effettiva(TimeUtil.getCurrentDate(date_data_effettiva));
+	public void nuovoIntervento() {
+		System.out.println("niovooo");
+		InterventiDAO dao = new InterventiDAO();
+		dao.insert(selectedIntevento);
 	}
 
+	public void setDate_data_effettiva(Date d) {
+		System.out.println("set data: "+d);
+		if (d == null)
+			d = new Date();
+		this.date_data_effettiva = d;
+
+		selectedIntevento.setData_effettiva(TimeUtil.getCurrentDate(d));
+	}
+	public Date getDataNuovoIntervento() {
+		return dataNuovoIntervento;
+	}
+
+	public void setDataNuovoIntervento(Date d) {
+		
+		System.out.println("set data: "+d);
+		if (d == null)
+			d = new Date();
+		this.dataNuovoIntervento = d;
+
+		selectedIntevento.setData_pianificata(TimeUtil.getCurrentDate(d));
+		selectedIntevento.setData_effettiva(null);
+		selectedIntevento.setEsito(0);
+	}
+	
 	public void setEsito(int esito) {
 		this.esito = esito;
 		System.out.println("esito :" + esito);
@@ -131,4 +154,6 @@ public class ManagedInterventiBean implements Serializable {
 	public int getEsito() {
 		return esito;
 	}
+
+
 }

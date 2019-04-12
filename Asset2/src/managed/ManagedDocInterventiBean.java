@@ -1,5 +1,6 @@
 package managed;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,9 +12,9 @@ import org.primefaces.event.SelectEvent;
 
 import beans.DocIntervento;
 import beans.Intervento;
+import common.ApplicationConfig;
 import common.Log;
 import database.dao.DocInterventiDAO;
-import database.dao.InterventiDAO;
 
 public class ManagedDocInterventiBean implements Serializable {
 	/**
@@ -41,7 +42,17 @@ public class ManagedDocInterventiBean implements Serializable {
 		myList = dao.getDocForIntervento(interId);
 		return myList;
 	}
-
+	public String setupViewFile(String nome) {
+		System.out.println("setup");
+		BasicDocumentViewController c = getDocController();
+		c.setPdf(new File(getFullPath(nome)));
+		return "viewFile";
+	}
+	private String getFullPath(String nome) {
+		String dir = ApplicationConfig.getDocumentdir();
+		if( !dir.endsWith(File.separator))dir+=File.separator;
+		return dir+nome;
+	}
 	public void onRowSelect(SelectEvent event) {
 		FacesMessage msg = new FacesMessage(" Selected", ""+((Intervento) event.getObject()).getId());
 		selectedDocIntervento = (DocIntervento) event.getObject();

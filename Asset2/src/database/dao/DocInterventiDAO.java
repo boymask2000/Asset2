@@ -4,17 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import beans.Asset;
-import beans.Calendario;
 import beans.DocIntervento;
-import beans.Intervento;
-import beans.Manuale;
 import database.MyBatisConnectionFactory;
-import database.mapper.AssetMapper;
-import database.mapper.CalendarioMapper;
 import database.mapper.DocInterventiMapper;
-import database.mapper.InterventiMapper;
-import database.mapper.ManualiMapper;
 
 public class DocInterventiDAO {
 

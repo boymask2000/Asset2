@@ -20,5 +20,20 @@ public class TimeUtil {
 		time = sdf.format(date.getTime());
 		return time;
 	}
+	
+	public static String getCurrentDate() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+
+		String		time = df.format(date.getTime());
+		return time;
+	}
+	public static String getCurrentDate(Date date) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+	
+
+		String		time = df.format(date.getTime());
+		return time;
+	}
 
 }

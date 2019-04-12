@@ -1,0 +1,108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<p:panel id="basic" header="Selezionare esito">
+	<table style="width: 100%">
+		<tr>
+			<td width="100"></td>
+			<td width="100"></td>
+			<td width="100"></td>
+			<td width="100"></td>
+			<td width="100"></td>
+			<td width="100"></td>
+
+			<td width="100"></td>
+			<td width="100"></td>
+			<td width="100"></td>
+		</tr>
+		<tr>
+			<td height="40px" bgcolor="#548235"></td>
+			<td height="40px" bgcolor="#A9D08E"></td>
+			<td height="40px" bgcolor="#E2EFDA"></td>
+			<td height="40px" bgcolor="#BF8F00"></td>
+			<td height="40px" bgcolor="#FFD966"></td>
+			<td height="40px" bgcolor="#FFF2CC"></td>
+			<td height="40px" bgcolor="#EB0000"></td>
+			<td height="40px" bgcolor="#FF4F4F"></td>
+			<td height="40px" bgcolor="#FFC1C1"></td>
+
+		</tr>
+
+		<tr>
+			<td height="70px" align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="1"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="2"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="3"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="4"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="5"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="6"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="7"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="8" 
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+			<td align="center"><p:commandButton title="Select" update=":form">
+					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" />
+					<f:setPropertyActionListener value="9"
+						target="#{managedInterventiBean.esito}" />
+				</p:commandButton></td>
+
+		</tr>
+
+	</table>
+	<table style="width: 100%">
+		<tr>
+			<td width="100"></td>
+		</tr>
+		<tr>
+			<td height="40px" bgcolor="#{managedAssetBean.status.getColor(managedInterventiBean.esito)}"></td>
+		</tr>
+<!-- 		<tr> -->
+<!-- 			<td height="70px" align="center"><p:commandButton title="Select"> -->
+<!-- 					<h:outputText styleClass="pi pi-search" style="margin:0 auto;" /> -->
+<!-- 					<f:setPropertyActionListener value="1" -->
+<!-- 						target="#{managedAssetBean.selectedSeverity}" /> -->
+<!-- 				</p:commandButton></td> -->
+
+<!-- 		</tr> -->
+
+	</table>
+</p:panel>
+
+
+</html>

@@ -11,55 +11,163 @@
 			<h:form id="form">
 
 				<p:growl id="msgs" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="1">
+					<p:panel id="baic">
+						<h:panelGrid columns="2" cellpadding="1">
 
-				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel id="basic" header="Gestione Asset"
-						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedAssetBean.allAssets}" var="c"
-							selection="#{managedAssetBean.selectedAsset}"
-							rowKey="#{c.id}" paginator="true" rows="10"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+							<h:outputText value="masterSystem" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.masterSystem}" />
+							<h:outputText value="assetNum" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.assetNum}" />
+							<h:outputText value="changedDate" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.changedDate}" />
+							<h:outputText value="description" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.description}" />
+							<h:outputText value="longDescription" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.longDescription}" />
+							<h:outputText value="system" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.system}" />
+							<h:outputText value="subSystem" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.subSystem}" />
+							<h:outputText value="location" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.location}" />
 
-							<p:ajax event="rowSelect"
-								listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
+							<h:outputText value="workCenter" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.workCenter}" />
+							<h:outputText value="assetType" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.assetType}" />
+							<h:outputText value="assetQuantity" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.assetQuantity}" />
+							<h:outputText value="unitOfMeasure" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.unitOfMeasure}" />
+							<h:outputText value="inventoryCategory" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.inventoryCategory}" />
+							<h:outputText value="purchasePrice" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.purchasePrice}" />
+							<h:outputText value="budgetedCost" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.budgetedCost}" />
+							<h:outputText value="replacementCost" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.replacementCost}" />
+							<h:outputText value="meterGroup" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.meterGroup}" />
+							<h:outputText value="belongsTo" />
+							<h:outputText value="#{managedAssetBean.selectedAsset.belongsTo}" />
+							<h:outputText value="contractNumber" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.contractNumber}" />
+							<h:outputText value="taskDelivOrderNum" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.taskDelivOrderNum}" />
+							<h:outputText value="drawingRefId" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.drawingRefId}" />
+							<h:outputText value="warrantyExpDate" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.warrantyExpDate}" />
+							<h:outputText value="statusDate" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.statusDate}" />
+							<h:outputText value="installationDate" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.installationDate}" />
+						</h:panelGrid>
 
-							<p:column filterBy="#{c.masterSystem}" headerText="MasterSystem">
-								<h:outputText value="#{c.masterSystem}" />
-							</p:column>
+					</p:panel>
+					<p:panel id="bc0">
+						<h:panelGrid columns="2" cellpadding="1">
+							<h:outputText value="Data pianificata" />
+							<h:outputText
+								value="#{managedInterventiBean.selectedIntevento.data_pianificata}" />
+							<h:outputText value="Data effettiva" />
+							<p:calendar id="popup"
+								value="#{managedInterventiBean.date_data_effettiva}"
+								pattern="yyyyMMdd" />
 
-							<p:column filterBy="#{c.description}" headerText="Descrizione">
-								<h:outputText value="#{c.description}" />
-							</p:column>
+						</h:panelGrid>
 
-							<p:column filterBy="#{c.location}" headerText="Location">
-								<h:outputText value="#{c.location}" />
-							</p:column>
+						<ui:include src="tabellaEsiti.xhtml"></ui:include>
 
-							<p:column headerText="LastStatus">
-								<h:outputText value="#{c.lastStatus}" />
-							</p:column>
+						<p:panel id="bajsic" header="Documenti">
 
-							<f:facet name="footer">
+							<p:dataTable id="radioDT" selectionMode="single"
+								value="#{managedDocInterventiBean.getDocsForIntervento(managedInterventiBean.selectedIntevento.id)}"
+								var="c"
+								selection="#{managedDocInterventiBean.selectedDocIntervento}"
+								rowKey="#{c.id}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
 
-								<h:commandButton action="goToDetailAsset"
-									value="Detail" process="@this">
-									<f:param name="op" value="NEW" />
-								</h:commandButton>
+								<p:ajax event="rowSelect"
+									listener="#{managedDocInterventiBean.onRowSelect}"
+									update=":form:msgs" />
+
+								<p:column headerText="Descrizione">
+									<h:outputText value="#{c.descrizione}" />
+								</p:column>
+
+								<p:column headerText="File">
+									<h:outputText value="#{c.filename}" />
+								</p:column>
+								<p:column>
+									<h:commandButton 
+										action="#{managedDocInterventiBean.setupViewFile(c.filename)}"
+										value="View" />
+								</p:column>
+
+								<f:facet name="footer">
+
+									<p:commandButton process="radioDT" update=":panSetPass0"
+										icon="pi pi-search" value="Aggiungi documento"
+										oncomplete="PF('setPassDialog0').show()" />
+
+								</f:facet>
+							</p:dataTable>
+
+						</p:panel>
 
 
+						<p:commandButton value="Aggiungi intervento" />
 
-							</f:facet>
-						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
-
-
-				<p:commandButton process="@this" icon="pi pi-search" value="Home"
-					action="adminHome" />
-
 			</h:form>
+
+
+			<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+			<p:dialog header="Nuovo documento" widgetVar="setPassDialog0"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="panSetPass0" style="text-align:center;">
+					<p:panelGrid columns="2" columnClasses="label,value">
+						<p:panel id="basic11" style="margin-bottom:20px">
+							<h:form enctype="multipart/form-data">
+								<p:growl id="messages" showDetail="true" />
+								<h:outputText value="Descrizione documento " />
+								<h:inputText value="#{docInterventoUpload.currentDoc.descrizione}"
+									required="true" />
+								<p:fileUpload value="#{docInterventoUpload.file}" mode="advanced"
+									allowTypes="/(\.|\/)(pdf)$/" update=":form"
+									fileUploadListener="#{docInterventoUpload.handleFileUpload}">
+									<f:attribute name="intId" update=":form"
+										value="#{managedInterventiBean.selectedIntevento.id}" />
+								</p:fileUpload>
+
+							</h:form>
+						</p:panel>
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
 
 		</ui:define>
 	</ui:composition>

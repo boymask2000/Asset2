@@ -1,6 +1,7 @@
 package managed;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.Application;
@@ -11,6 +12,7 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Intervento;
 import common.Log;
+import common.TimeUtil;
 import database.dao.InterventiDAO;
 
 public class ManagedInterventiBean implements Serializable {
@@ -20,49 +22,52 @@ public class ManagedInterventiBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Intervento> myList;
 	//
+	private Date date_data_effettiva;
 
 	private Intervento selectedIntevento = new Intervento();
+	private int esito;
 
 	public List<Intervento> getAllInterventi() {
 		InterventiDAO dao = new InterventiDAO();
 		myList = dao.selectAll();
 		return myList;
 	}
-	
-	public void update(Intervento u ) {
+
+	public void update(Intervento u) {
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(u);
 	}
 
 	public List<Intervento> getInterventiForAsset(int assetId, boolean done) {
 		InterventiDAO dao = new InterventiDAO();
-		myList = dao.getInterventiForAsset(assetId,done);
+		myList = dao.getInterventiForAsset(assetId, done);
 		return myList;
 	}
 
 	public void onRowSelect(SelectEvent event) {
-		FacesMessage msg = new FacesMessage(" Selected", ""+((Intervento) event.getObject()).getId());
+		FacesMessage msg = new FacesMessage(" Selected", "" + ((Intervento) event.getObject()).getId());
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
 
 	}
 
-	public void insertManuale(Intervento manuale) {
+	public void insertManuale(Intervento in) {
 		System.out.println("insert");
 
 		InterventiDAO dao = new InterventiDAO();
 
 		try {
-			dao.insert(manuale);
+			dao.insert(in);
 		} catch (Throwable e) {
 			System.out.println("lllllllllllllllllllllllll");
 		}
 	}
 
-	
-
-
+//public String goInsertIntervento() {
+//	System.out.println("goInsertIntervento");
+//	return "goInsertIntervento";
+//}
 
 	private BasicDocumentViewController getDocController() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -73,10 +78,44 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public Intervento getSelectedIntevento() {
+		System.out.println("get " + selectedIntevento);
+
 		return selectedIntevento;
 	}
 
-	public void setSelectedIntevento(Intervento selectedIntevento) {
-		this.selectedIntevento = selectedIntevento;
+	public void setSelectedIntevento(Intervento s) {
+		if (s == null)
+			return;
+		System.out.println("sss " + s);
+		this.selectedIntevento = s;
+	}
+
+	public Date getDate_data_effettiva() {
+		return date_data_effettiva;
+	}
+
+	public void setDate_data_effettiva(Date date_data_effettiva) {
+		if (date_data_effettiva == null)
+			date_data_effettiva = new Date();
+		this.date_data_effettiva = date_data_effettiva;
+
+		selectedIntevento.setData_effettiva(TimeUtil.getCurrentDate(date_data_effettiva));
+	}
+
+	public void setEsito(int esito) {
+		this.esito=esito;
+		System.out.println("esito :" + esito);
+		selectedIntevento.setEsito(esito);
+		InterventiDAO dao = new InterventiDAO();
+
+		try {
+			dao.update(selectedIntevento);
+		} catch (Throwable e) {
+			System.out.println("lllllllllllllllllllllllll");
+		}
+	}
+
+	public int getEsito() {
+		return esito;
 	}
 }

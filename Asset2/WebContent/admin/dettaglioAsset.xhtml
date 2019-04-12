@@ -138,11 +138,15 @@
 								rowKey="#{c.id}" paginator="true" rows="5"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
-								
+
 								<p:column headerText="Data Prevista">
 									<h:outputText value="#{c.data_pianificata}" />
 								</p:column>
-								
+
+								<f:facet name="footer">
+									<h:commandButton action="goInsertIntervento" value="Detail">
+									</h:commandButton>
+								</f:facet>
 							</p:dataTable>
 						</p:panel>
 						<p:panel header="Interventi Eseguiti">
@@ -152,7 +156,7 @@
 								rowKey="#{c.id}" paginator="true" rows="5"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								rowsPerPageTemplate="5,10,15">
-								
+
 								<p:column headerText="Data Prevista">
 									<h:outputText value="#{c.data_pianificata}" />
 								</p:column>
@@ -162,7 +166,7 @@
 								<p:column headerText="Esito">
 									<h:outputText value="#{c.esito}" />
 								</p:column>
-								
+
 							</p:dataTable>
 						</p:panel>
 					</p:panel>

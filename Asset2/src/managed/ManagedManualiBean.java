@@ -3,9 +3,7 @@ package managed;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,7 +15,6 @@ import beans.Utente;
 import common.ApplicationConfig;
 import common.Log;
 import database.dao.ManualiDAO;
-import database.dao.UtenteDAO;
 
 public class ManagedManualiBean implements Serializable {
 	/**

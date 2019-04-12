@@ -40,6 +40,11 @@
 		<managed-bean-class>managed.ManualeUpload</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>docInterventoUpload</managed-bean-name>
+		<managed-bean-class>managed.DocInterventoUpload</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<managed-bean>
 		<managed-bean-name>fileUploadView</managed-bean-name>
@@ -88,6 +93,16 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>goInsertIntervento</from-outcome>
+			<to-view-id>/insertIntervento.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

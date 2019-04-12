@@ -2,7 +2,7 @@ package beans;
 
 public class DocIntervento {
 	private long id;
-	private long assetId;
+	private long interventoId;
 	private String filename;
 	private String descrizione;
 	private String ext;
@@ -12,12 +12,7 @@ public class DocIntervento {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getAssetId() {
-		return assetId;
-	}
-	public void setAssetId(long assetId) {
-		this.assetId = assetId;
-	}
+
 	public String getFilename() {
 		return filename;
 	}
@@ -35,5 +30,11 @@ public class DocIntervento {
 	}
 	public void setExt(String ext) {
 		this.ext = ext;
+	}
+	public long getInterventoId() {
+		return interventoId;
+	}
+	public void setInterventoId(long interventoId) {
+		this.interventoId = interventoId;
 	}
 }

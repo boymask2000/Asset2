@@ -3,6 +3,7 @@ package managed;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -18,7 +19,7 @@ public class ManagedAssetBean {
 	private int selectedSeverity=0;
 
 	private List<Status> allStatus = new ArrayList<Status>();
-
+private Status status = new Status(0);
 	private Asset selectedAsset;
 	
 	public List<Asset> getAllAssetsWithSeverity() {
@@ -87,5 +88,17 @@ public class ManagedAssetBean {
 	public void setSelectedSeverity(int selectedSeverity) {
 	
 		this.selectedSeverity = selectedSeverity;
+		
+		System.out.println("selectedSeverity= " +selectedSeverity);
+		
+
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 }

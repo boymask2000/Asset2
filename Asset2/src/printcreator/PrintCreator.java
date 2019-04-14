@@ -33,8 +33,6 @@ import common.TempFileFactory;
 import common.TimeUtil;
 import managed.BasicDocumentViewController;
 
-
-
 public class PrintCreator {
 	private StringBuffer buffer = new StringBuffer();
 	public static PageFormat PORTRAT = new PageFormat("PORTRAT");
@@ -113,6 +111,18 @@ public class PrintCreator {
 
 	}
 
+	public void addImage(String url) {
+
+		String s = "<fo:external-graphic  width=\"auto\" content-height=\"auto\""
+				+ " content-width=\"auto\"  src=\"url('" + url + "')\"/>";
+		System.out.println(s);
+		buffer.append("<fo:static-content flow-name=\"xsl-region-before\">");
+		buffer.append("<fo:block >");
+		buffer.append(s);
+		buffer.append("</fo:block>");
+		buffer.append("</fo:static-content>");
+	}
+
 	public void addImage(byte[] photo) {
 		try {
 			File temp = File.createTempFile("img", ".jpg");
@@ -165,7 +175,6 @@ public class PrintCreator {
 		prt.dump();
 	}
 
-
 	public void convertToPDFNEW(InputStream is) throws IOException, FOPException, TransformerException {
 		// the XSL FO file
 
@@ -175,7 +184,7 @@ public class PrintCreator {
 		FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
 		// Setup output
 		OutputStream out;
-		File tempPdf=TempFileFactory.getTempFile(".pdf");
+		File tempPdf = TempFileFactory.getTempFile(".pdf");
 		out = new java.io.FileOutputStream(tempPdf);
 
 		try {
@@ -199,7 +208,7 @@ public class PrintCreator {
 		}
 		BasicDocumentViewController view = (BasicDocumentViewController) JsfUtil.getBean("basicDocumentViewController");
 		view.setPdf(tempPdf);
-	//	TempFileFactory.clean();
+		// TempFileFactory.clean();
 	}
 
 	public List<Pair> caricaCampi(Object bean) {
@@ -219,9 +228,9 @@ public class PrintCreator {
 
 				String methodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
 				Method meth = bean.getClass().getDeclaredMethod(methodName, null);
-			
+
 				Object val = meth.invoke(bean, null);
-				
+
 				if (val == null)
 					val = "";
 				if (val instanceof Date)

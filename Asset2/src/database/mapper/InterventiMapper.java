@@ -12,7 +12,7 @@ public interface InterventiMapper {
 	final String TABELLA = "test1.interventi";
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
-	final String SELECT_INTERVENTI_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}";
+	final String SELECT_INTERVENTI_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId} order by data_pianificata";
 
 	final String SELECT_INTERVENTI_PER_ASSET_DONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA DESC";

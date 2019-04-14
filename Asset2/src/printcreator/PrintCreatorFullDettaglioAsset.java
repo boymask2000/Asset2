@@ -1,19 +1,18 @@
 package printcreator;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.faces.application.Application;
-import javax.faces.context.FacesContext;
-
 import beans.Asset;
+import beans.Intervento;
 import common.JsfUtil;
 import common.Pair;
-import managed.BasicDocumentViewController;
+import database.dao.InterventiDAO;
 import managed.ManagedAssetBean;
 
 public class PrintCreatorFullDettaglioAsset extends PrintCreator {
+
+
 
 	public String printFullAsset() {
 
@@ -24,11 +23,23 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		PrintCreator prt = new PrintCreator();
 		prt.insertStartDoc();
 		prt.insertPageFormats();
-
+		
 		// ********************************PersonalData
+	//	prt.addImage("resources/images/alca.gif");
 		prt.startPageSequence(null);
-		prt.addBlock("Personal Data", "30pt");
+		prt.addBlock("Info asset", "20pt");
 		stampaMainData(prt, db);
+		
+		prt.endPageSequence();
+		// ********************************
+		prt.startPageSequence(null);
+		prt.addBlock("Ultimo aggiornamento", "20pt");
+		stampaUltimoIntervento(prt,db);
+		prt.endPageSequence();
+		// ********************************
+		prt.startPageSequence(null);
+		prt.addBlock("Interventi", "20pt");
+		stampaInterventi(prt, db);
 		prt.endPageSequence();
 		// ********************************
 
@@ -44,6 +55,46 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 	//	JsfUtil.goTo("stampa");
 
 		return "viewFile";
+	}
+
+	private void stampaUltimoIntervento(PrintCreator prt, ManagedAssetBean db) {
+		Asset asset = db.getSelectedAsset();
+		InterventiDAO dao = new InterventiDAO();
+		Intervento lastInter = dao.getUltimoInterventoFatto(asset.getId());
+		Table t = new Table();
+		t.setHeader(false);
+		t.addColumnDefinition(new Column("", "6cm"));
+		t.addColumnDefinition(new Column("", "4cm"));
+		t.startRow();
+		t.addDataCol("Data ultimo intervento:");
+		t.addDataCol("" + lastInter.getData_effettiva());
+		t.startRow();
+		t.addDataCol("Esito:");
+		t.addDataCol("" + lastInter.getEsito());
+		
+		prt.addtable(t);
+	}
+
+	private void stampaInterventi(PrintCreator prt, ManagedAssetBean db) {
+
+		Asset asset = db.getSelectedAsset();
+		InterventiDAO dao = new InterventiDAO();
+		List<Intervento> li = dao.getInterventiForAsset(asset.getId());
+		for( Intervento inter: li) {
+			Table t = new Table();
+			t.setHeader(false);
+			t.addColumnDefinition(new Column("", "6cm"));
+			t.addColumnDefinition(new Column("", "4cm"));
+			
+			List<Pair> lista = caricaCampi(inter);
+			for (Pair p : lista) {
+				t.startRow();
+				t.addDataCol(p.getName() + ":");
+				t.addDataCol("" + p.getVal());
+			}
+			prt.addtable(t);
+		}
+		
 	}
 
 	private void stampaMainData(PrintCreator prt, ManagedAssetBean bean) {

@@ -64,6 +64,9 @@ public class Utente implements Serializable {
 		Utente u = dao.search(this);
 
 		if (u != null) {
+			
+			tipo=u.getTipo();
+			email=u.getEmail();
 
 			message = "Successfully logged-in.";
 			if (u == null || !u.isAdmin())

@@ -43,14 +43,12 @@
 
 							<f:facet name="footer">
 
-								<h:commandButton action="#{managedUtentiBean.goToDetail}"
-									value="NuovoH" process="@this">
-									<f:param name="op" value="NEW" />
-								</h:commandButton>
-								<h:commandButton action="#{managedUtentiBean.goToDetail}"
-									value="UpdateH" process="@this">
-									<f:param name="op" value="UPD" />
-								</h:commandButton>
+								<p:commandButton action="nuovoUtente" value="Nuovo Utente"
+									process="@this" />
+
+								<p:commandButton action="modificaUtente" value="Modifica Utente"
+
+									process="@this" />
 
 								<p:commandButton process="radioDT" update=":form:panSetPass"
 									icon="pi pi-search" value="Set password"
@@ -95,8 +93,8 @@
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>
-<p:commandButton process="@this" icon="pi pi-search"
-							value="Home" action="adminHome"/>
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="adminHome" />
 
 			</h:form>
 

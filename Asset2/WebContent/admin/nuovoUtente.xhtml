@@ -7,53 +7,68 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<p:panel>
+				<h:form>
+					<p:growl id="growl1" life="2000" />
 
-<p:growl id="growl1" life="2000" />
-<h:form>
-	<p:dialog header="Nuovo Utente" widgetVar="utenteDialog" modal="true"
-		showEffect="fade" hideEffect="fade" resizable="false">
+		
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+							<tr>
+								<td><h:outputText value="Username:" /></td>
+								<td><h:inputText required="true"
+										value="#{managedUtentiBean.selectedUser.username}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Tipo" /></td>
+								<td>
+								 <p:selectOneMenu id="console" value="#{managedUtentiBean.selectedUser.tipo}" style="width:125px">
+          
+            <f:selectItem itemLabel="Amministratore" itemValue="A" />
+            <f:selectItem itemLabel="Utente" itemValue="U" />
+ 
+        </p:selectOneMenu>
+								
+								
+										
+										</td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Email" /></td>
+								<td><h:inputText
+										value="#{managedUtentiBean.selectedUser.email}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Descrizione:" /></td>
+								<td><h:inputText
+										value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Password" /></td>
+								<td><h:inputText required="true"
+										value="#{managedUtentiBean.selectedUser.password}" /></td>
+							</tr>
 
-		<p:growl id="msgs" showDetail="true" />
-		<table>
-			<tr>
-				<td><h:outputText value="Username:" /></td>
-				<td><h:inputText
-						value="#{managedUtentiBean.selectedUser.username}" /></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="Tipo" /></td>
-				<td><h:inputText value="#{managedUtentiBean.selectedUser.tipo}" /></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="Email" /></td>
-				<td><h:inputText
-						value="#{managedUtentiBean.selectedUser.email}" /></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="Descrizione:" /></td>
-				<td><h:inputText
-						value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="Password" /></td>
-				<td><h:inputText
-						value="#{managedUtentiBean.selectedUser.password}" /></td>
-			</tr>
-
-		</table>
+						</table>
 
 
-	</p:dialog>
+			
 
-	<h:commandButton action="#{managedUtentiBean.goToUtentiHome}"
-									value="Esci" process="@this"/>
+					<p:commandButton action="#{managedUtentiBean.goToUtentiHome}"
+						value="Esci" process="@this" />
 
 
-	<h:panelGroup id="postPanel2">
-		<p:commandButton value="ok" id="ajasx"
-			actionListener="#{managedUtentiBean.insertUtente}" update="growl1"
-			styleClass="ui-priority-primary" />
-	</h:panelGroup>
-</h:form>
-
+					<h:panelGroup id="postPanel2">
+						<p:commandButton value="ok" id="ajasx"
+							actionListener="#{managedUtentiBean.insertUtente}"
+							update="growl1" styleClass="ui-priority-primary" />
+					</h:panelGroup>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
 </html>

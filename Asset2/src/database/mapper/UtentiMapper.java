@@ -48,15 +48,6 @@ public interface UtentiMapper {
 	" #{descrizione}, #{tipo} )";
 	
 	@Select(SELECT_ALL)
-	@Results(value = {
-
-		@Result(property="username", column="username"),
-		@Result(property="password", column="password"),
-		@Result(property="email", column="email"),
-		@Result(property="tipo", column="tipo"),
-		@Result(property="descrizione", column="descrizione"),
-
-	})
 	public List<Utente> selectAll();
 	
 	@Update(UPDATE)

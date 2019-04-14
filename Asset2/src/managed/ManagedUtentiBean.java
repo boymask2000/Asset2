@@ -31,14 +31,12 @@ public class ManagedUtentiBean implements Serializable {
 //	}
 	public List<Utente> getAllUtenti() {
 		Log.getLogger().debug("Ciao");
+		UtenteDAO dao = new UtenteDAO();
+		myList = dao.selectAll();
 		return myList;
 	}
 
-	@PostConstruct
-	public void init() {
-		UtenteDAO dao = new UtenteDAO();
-		myList = dao.selectAll();
-	}
+
 
 	public void update(Utente u) {
 		System.out.println("Update");
@@ -89,7 +87,7 @@ public class ManagedUtentiBean implements Serializable {
 		try {
 			dao.insert(selectedUser);
 		} catch (Throwable e) {
-			System.out.println("lllllllllllllllllllllllll");
+			e.printStackTrace();
 		}
 	}
 
@@ -97,26 +95,15 @@ public class ManagedUtentiBean implements Serializable {
 		return selectedUser;
 	}
 
-	public void setSelectedUser(Utente selectedUser) {
-		System.out.println("setSelectedUser username=" + selectedUser.getUsername());
-		this.selectedUser = selectedUser;
+	public void setSelectedUser(Utente s) {
+		if(s==null)return;
+		System.out.println("setSelectedUser username=" + s.getUsername());
+		this.selectedUser = s;
 	}
 
 	public String goToUtentiHome() {
 		return "utentiHome";
 	}
 
-	public String goToDetail() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		op = params.get("op");
-		System.out.println("Op = " + op);
-		if (op.equals("NEW")) {
-			// selectedUser.clean();
-			return "nuovoUtente";
-		}
-		if (op.equals("UPD"))
-			return "modificaUtente";
-		return "";
-	}
+
 }

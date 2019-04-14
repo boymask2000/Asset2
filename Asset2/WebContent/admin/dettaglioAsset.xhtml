@@ -9,7 +9,7 @@
 		<ui:define name="content">
 
 			<h:form id="form">
-
+<p:panel>
 				<p:growl id="msgs" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="1">
 					<p:panel id="baic">
@@ -180,6 +180,9 @@
 						</p:panel>
 					</p:panel>
 				</h:panelGrid>
+	
+				<h:commandButton value="Stampa" action="#{printCreatorFullDettaglioAsset.printFullAsset}"/>
+				</p:panel>
 			</h:form>
 			<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">

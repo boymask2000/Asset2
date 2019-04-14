@@ -92,6 +92,11 @@
 		<managed-bean-class>batchjob.PlannerJob</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>printCreatorFullDettaglioAsset</managed-bean-name>
+		<managed-bean-class>printcreator.PrintCreatorFullDettaglioAsset</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

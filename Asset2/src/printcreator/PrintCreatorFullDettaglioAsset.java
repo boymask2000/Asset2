@@ -25,8 +25,10 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		prt.insertPageFormats();
 		
 		// ********************************PersonalData
-	//	prt.addImage("resources/images/alca.gif");
 		prt.startPageSequence(null);
+		prt.addImage("resources/images/alca.gif");
+	prt.dump();
+	
 		prt.addBlock("Info asset", "20pt");
 		stampaMainData(prt, db);
 		

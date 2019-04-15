@@ -57,15 +57,6 @@ public class ExcelAssetLoaderJob extends GenericJob{
 			}
 		};
 		submit(callable, "Caricamento massivo Asset");
-//		Batch b = new Batch();
-//		b.setDescription("Caricamento massivo Asset");
-//		b.setCallable(callable);
-//		b.setJob(this);
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Application application = context.getApplication();
-//		ManagedBatch profileBean = application.evaluateExpressionGet(context, "#{managedBatch}", ManagedBatch.class);
-//		profileBean.addBatch(b);
-		
 	}
 	private Asset buildAsset(Row row) {
 

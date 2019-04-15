@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -45,13 +47,6 @@ public class PrintCreator {
 		LANDSCAPE.setOrientation("90");
 		pageFormats.add(LANDSCAPE);
 	}
-//
-//	public void build() {
-//		insertStartDoc();
-//		insertPageFormats();
-//
-//		insertFineDoc();
-//	}
 
 	public void insertPageFormats() {
 		buffer.append("<fo:layout-master-set>");
@@ -67,6 +62,17 @@ public class PrintCreator {
 			pf = PORTRAT;
 
 		buffer.append("<fo:page-sequence master-reference=\"" + pf.getName() + "\">");
+		
+		
+//		buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
+//		buffer.append("   <fo:block text-align=\"center\">");
+//				buffer.append("      Page <fo:page-number/>");
+//						buffer.append("     </fo:block>");
+//								buffer.append("   </fo:static-content>");
+//		
+//		
+//		
+		
 		buffer.append("<fo:flow flow-name=\"xsl-region-body\">");
 		startedPageSequence = true;
 	}
@@ -76,6 +82,7 @@ public class PrintCreator {
 			return;
 		startedPageSequence = false;
 		buffer.append("</fo:flow>");
+		
 		buffer.append("</fo:page-sequence>");
 
 	}
@@ -105,22 +112,30 @@ public class PrintCreator {
 		return new ByteArrayInputStream(buffer.toString().getBytes());
 	}
 
-	private void dump() {
-
-		System.out.println(buffer.toString());
-
-	}
-
 	public void addImage(String url) {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String urls = request.getRequestURL().toString();
+		String baseURL = urls.substring(0, urls.length() - request.getRequestURI().length()) + request.getContextPath()
+				+ "/";
+		String full = baseURL + url;
 
-		String s = "<fo:external-graphic  width=\"auto\" content-height=\"auto\""
-				+ " content-width=\"auto\"  src=\"url('" + url + "')\"/>";
-		System.out.println(s);
-		buffer.append("<fo:static-content flow-name=\"xsl-region-before\">");
+
+		String s = "<fo:external-graphic  width=\"80pt\" content-height=\"80pt\""
+				+ " content-width=\"80pt\"  src=\"url('" + full + "')\"/>";
+
 		buffer.append("<fo:block >");
 		buffer.append(s);
 		buffer.append("</fo:block>");
-		buffer.append("</fo:static-content>");
+		
+		buffer.append("<fo:block text-align=\"right\">");
+		buffer.append(TimeUtil.getTimestamp());
+		buffer.append("</fo:block>");
+
+	}
+
+	public void dump() {
+		System.out.println(buffer.toString());
 	}
 
 	public void addImage(byte[] photo) {
@@ -135,18 +150,11 @@ public class PrintCreator {
 
 			buffer.append("<fo:block >");
 			buffer.append("<fo:external-graphic src=\"" + url.toString() + "\"/>");
-			// buffer.append("<fo:external-graphic
-			// src=\"url('data:image/jpeg;base64,"+url.toString()+"')/>");
+
 			buffer.append("</fo:block>");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// buffer.append("<fo:block >");
-		// buffer.append("<fo:external-graphic
-		// src=\"url('data:image/jpeg;base64,"+AmbUtils.convertToBase64(photo)+"')/>");
-		// buffer.append("</fo:block>");
 
 	}
 

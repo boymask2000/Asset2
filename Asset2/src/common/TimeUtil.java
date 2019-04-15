@@ -30,6 +30,13 @@ public class TimeUtil {
 		String time = sdfShort.format(date.getTime());
 		return time;
 	}
+	public static String getCurrentTimeShort() {
+		SimpleDateFormat df = new SimpleDateFormat("HHmmss");
+		Date date = new Date();
+
+		String time = df.format(date.getTime());
+		return time;
+	}
 
 	public static String getCurrentDate(Date date) {
 

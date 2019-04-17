@@ -10,6 +10,8 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import batchjob.GenericJob;
 import beans.Batch;
+import common.Log;
+import common.TimeUtil;
 
 public abstract class SystemJob extends GenericJob {
 	private static final long MILLI_ORA = 60 * 60 * 1000;
@@ -28,7 +30,7 @@ public abstract class SystemJob extends GenericJob {
 		this.desc = desc;
 
 		if (this.startTime == null)
-			this.startTime = "113000";
+			this.startTime = "163000";
 	}
 
 	public void setPeriodo(long per) {
@@ -42,20 +44,39 @@ public abstract class SystemJob extends GenericJob {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
+				attendiOraPartenza();
+				
 				while (true) {
-					attendiOraPartenza();
+					attendiPeriodo();
 
+					Log.getLogger().info("System job "+desc+" started at "+(new Date()));
+					
 					int count = makeJob();
+					
+					Log.getLogger().info("System job "+desc+" completed at "+(new Date()));
+					
 					lastStart = (new Date()).getTime();
 					// return count;
 				}
 			}
+
+		
 		};
 		submit(callable, desc);
 
 	}
-
 	private void attendiOraPartenza() {
+		while( TimeUtil.getCurrentTimeShort().compareTo(startTime)<0) {
+			System.out.println("Attesa ora partenza " + startTime);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	private void attendiPeriodo() {
 
 		while ((new Date()).getTime() - lastStart < periodo) {
 

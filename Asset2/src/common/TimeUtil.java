@@ -24,12 +24,12 @@ public class TimeUtil {
 	}
 
 	public static String getCurrentDate() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 
 		String time = sdfShort.format(date.getTime());
 		return time;
 	}
+
 	public static String getCurrentTimeShort() {
 		SimpleDateFormat df = new SimpleDateFormat("HHmmss");
 		Date date = new Date();
@@ -45,8 +45,9 @@ public class TimeUtil {
 	}
 
 	public static Date getCurrentStringDate(String date) {
-if(date==null)return null;
-		Date date1=null;
+		if (date == null)
+			return null;
+		Date date1 = null;
 		try {
 			date1 = sdfShort.parse(date);
 		} catch (ParseException e) {

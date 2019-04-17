@@ -20,7 +20,7 @@
             <AppenderRef ref="FILE" />
         </Logger>
         <Root level="debug">
-            <AppenderRef ref="STDOUT" />
+<!--             <AppenderRef ref="STDOUT" /> -->
         </Root>
     </Loggers>
 </Configuration>

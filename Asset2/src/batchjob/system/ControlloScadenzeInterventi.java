@@ -3,7 +3,7 @@ package batchjob.system;
 public class ControlloScadenzeInterventi extends SystemJob {
 
 	public ControlloScadenzeInterventi() {
-		super("batchjob.system.ControlloScadenzeInterventi", null, "sss");
+		super("batchjob.system.ControlloScadenzeInterventi", null, "ControlloScadenzeInterventi");
 
 	}
 

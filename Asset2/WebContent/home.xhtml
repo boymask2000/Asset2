@@ -154,7 +154,7 @@
 												<td height="40px" bgcolor="#EB0000"></td>
 												<td height="40px" bgcolor="#FF4F4F"></td>
 												<td height="40px" bgcolor="#FFC1C1"></td>
-												
+
 											</tr>
 											<tr>
 
@@ -164,7 +164,7 @@
 														value="#{managedAssetBean.getAssetsWithStatus(8).size()}" /></td>
 												<td align="center"><h:outputText
 														value="#{managedAssetBean.getAssetsWithStatus(9).size()}" /></td>
-												
+
 											</tr>
 											<tr>
 
@@ -192,7 +192,7 @@
 														<f:setPropertyActionListener value="9"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												
+
 											</tr>
 											<tr>
 
@@ -202,44 +202,33 @@
 											</tr>
 										</table>
 									</p:panel></td>
-<td>
-<table style="width: 100%">
-											<tr>
-												<td width="100"></td>
-												
-
-											</tr>
-											<tr>
-
-										
-												<td height="40px" bgcolor="#FFFFFF"></td>
-											</tr>
-											<tr>
-
-												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(0).size()}" /></td>
-											</tr>
-											<tr>
-
-												<td align="center"><p:commandButton
-														update=":form:carDetail"
-														oncomplete="PF('carDialog').show()" title="View Detail">
-														<h:outputText styleClass="pi pi-search"
-															style="margin:0 auto;" />
-														<f:setPropertyActionListener value="0"
-															target="#{managedAssetBean.selectedSeverity}" />
-													</p:commandButton></td>
-											</tr>
-											<tr>
+								<td>
+									<table style="width: 100%">
+										<tr>
+											<td width="100"></td>
 
 
-										
-											</tr>
-										</table>
-
-</td>
-
-
+										</tr>
+										<tr>
+											<td height="40px" bgcolor="#FFFFFF"></td>
+										</tr>
+										<tr>
+											<td align="center"><h:outputText
+													value="#{managedAssetBean.getAssetsWithStatus(0).size()}" /></td>
+										</tr>
+										<tr>
+											<td align="center"><p:commandButton
+													update=":form:carDetail"
+													oncomplete="PF('carDialog').show()" title="View Detail">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="0"
+														target="#{managedAssetBean.selectedSeverity}" />
+												</p:commandButton></td>
+										</tr>
+		
+									</table>
+								</td>
 							</tr>
 						</table>
 
@@ -247,28 +236,28 @@
 						<p:panel rendered="false">
 							<table style="width: 100%">
 								<tr>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
-									<td width="100"></td>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
+									<td width="100"/>
 								</tr>
 								<tr>
-									<td height="40px" bgcolor="#548235"></td>
-									<td height="40px" bgcolor="#A9D08E"></td>
-									<td height="40px" bgcolor="#E2EFDA"></td>
-									<td height="40px" bgcolor="#BF8F00"></td>
-									<td height="40px" bgcolor="#FFD966"></td>
-									<td height="40px" bgcolor="#FFF2CC"></td>
-									<td height="40px" bgcolor="#EB0000"></td>
-									<td height="40px" bgcolor="#FF4F4F"></td>
-									<td height="40px" bgcolor="#FFC1C1"></td>
-									<td height="40px" bgcolor="#FFFFFF"></td>
+									<td height="40px" bgcolor="#548235"/>
+									<td height="40px" bgcolor="#A9D08E"/>
+									<td height="40px" bgcolor="#E2EFDA"/>
+									<td height="40px" bgcolor="#BF8F00"/>
+									<td height="40px" bgcolor="#FFD966"/>
+									<td height="40px" bgcolor="#FFF2CC"/>
+									<td height="40px" bgcolor="#EB0000"/>
+									<td height="40px" bgcolor="#FF4F4F"/>
+									<td height="40px" bgcolor="#FFC1C1"/>
+									<td height="40px" bgcolor="#FFFFFF"/>
 								</tr>
 								<tr>
 									<td align="center"><h:outputText
@@ -390,12 +379,12 @@
 						</p:panel>
 
 					</p:panel>
-					
-						<ui:include src="homeSituation.xhtml"></ui:include>
-					
+
+					<ui:include src="homeSituation.xhtml"/>
+
 					<p:panel>
 						<p:commandButton value="New intervento"
-							action="elencoAssetPerIntervento.xhtml"></p:commandButton>
+							action="elencoAssetPerIntervento.xhtml"/>
 					</p:panel>
 					<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
 						showEffect="fade" hideEffect="fade" resizable="false">

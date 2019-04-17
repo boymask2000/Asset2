@@ -60,6 +60,20 @@ public class InterventiDAO {
 		return list;
 	}
 
+	public List<Intervento> getInterventiPerAssetInData(Intervento u) {
+		List<Intervento> list = null;
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+
+		try {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			list = mapper.getInterventiPerAssetInData(u);
+
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 	public List<Intervento> getInterventiForAsset(long assetId, boolean done) {
 		List<Intervento> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();

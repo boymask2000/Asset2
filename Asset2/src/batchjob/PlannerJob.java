@@ -15,23 +15,22 @@ import database.dao.AssetDAO;
 import database.dao.CalendarioDAO;
 import database.dao.InterventiDAO;
 
-
 public class PlannerJob extends GenericJob {
 	@Override
 	public void go() {
-	
+
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
 				cleanInterventiCalendario();
-				
+
 				int count = 0;
 				AssetDAO assetDao = new AssetDAO();
 				List<Asset> allAssets = assetDao.selectAll();
 				for (Asset as : allAssets) {
-					queue.put(count+" / "+allAssets.size());
+					queue.put(count + " / " + allAssets.size());
 					count++;
-				//	System.out.println("ID: " + as.getId());
+					// System.out.println("ID: " + as.getId());
 					makePlan(as.getId(), TipoSchedulazione.MENSILE);
 				}
 				return count;
@@ -40,6 +39,7 @@ public class PlannerJob extends GenericJob {
 		submit(callable, "Pianificazione interventi");
 
 	}
+
 	private void makePlan(long assetId, TipoSchedulazione sched) {
 		CalendarioDAO calendarioDao = new CalendarioDAO();
 
@@ -60,13 +60,15 @@ public class PlannerJob extends GenericJob {
 				data = formatDate(cal);
 
 				List<Item> lista = order(cal, range);
+				if (lista.size() == 0)
+					break;
 
 				String goodDate = getMin(lista);
 
-			//	System.out.println(data + " --> " + goodDate);
+				// System.out.println(data + " --> " + goodDate);
 
 				incInter(goodDate);
-				
+
 				createIntervento(assetId, data, goodDate);
 
 				// dump(lista);
@@ -74,19 +76,29 @@ public class PlannerJob extends GenericJob {
 				cal.add(calType, num);
 			}
 		} catch (Throwable t) {
+			System.out.println("data: " + data);
 			t.printStackTrace();
 		}
 	}
+
 	private void createIntervento(long assetId, String data, String goodDate) {
 		Intervento u = new Intervento();
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
 		u.setData_teorica(data);
-		
+
 		InterventiDAO dao = new InterventiDAO();
+
+		int num=dao.getInterventiPerAssetInData(u).size();
+		if (num > 0) {
+		//	System.out.println("intervento duplcato "+num);
+			return;
+		}
+
 		dao.insert(u);
-		
+
 	}
+
 	private List<Item> order(Calendar cal, int r) {
 
 		List<Item> out = new ArrayList<Item>();
@@ -111,10 +123,12 @@ public class PlannerJob extends GenericJob {
 		return out;
 
 	}
+
 	private void cleanInterventiCalendario() {
 		CalendarioDAO dao = new CalendarioDAO();
 		dao.cleanInterventi();
 	}
+
 	private Integer getNumFromCale(String dat) {
 		CalendarioDAO dao = new CalendarioDAO();
 		Calendario c = new Calendario();
@@ -124,6 +138,7 @@ public class PlannerJob extends GenericJob {
 			return null;
 		return cc.getInterventi();
 	}
+
 	public String getMinRange(Calendar cal, int range) {
 		Calendar c = (Calendar) cal.clone();
 		c.add(Calendar.DAY_OF_YEAR, -range);
@@ -150,6 +165,7 @@ public class PlannerJob extends GenericJob {
 		}
 		return goodDate;
 	}
+
 	private void incInter(String goodDate) {
 		CalendarioDAO dao = new CalendarioDAO();
 		Calendario cc = new Calendario();
@@ -157,10 +173,12 @@ public class PlannerJob extends GenericJob {
 		dao.incInterventi(cc);
 
 	}
+
 	private String formatDate(Calendar c) {
 		return String.format("%4d%02d%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1,
 				c.get(Calendar.DAY_OF_MONTH));
 	}
+
 	class Item {
 		String data;
 		int num;

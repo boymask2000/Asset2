@@ -97,6 +97,11 @@
 		<managed-bean-class>printcreator.PrintCreatorFullDettaglioAsset</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>calendarioDaTavolo</managed-bean-name>
+		<managed-bean-class>managed.CalendarioDaTavolo</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

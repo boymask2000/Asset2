@@ -80,7 +80,7 @@ public abstract class SystemJob extends GenericJob {
 
 		while ((new Date()).getTime() - lastStart < periodo) {
 
-			System.out.println("Attesa " + ((new Date()).getTime() - lastStart));
+		//	System.out.println("Attesa " + ((new Date()).getTime() - lastStart));
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

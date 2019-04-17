@@ -1,0 +1,106 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<h:form id="form">
+
+				<p:remoteCommand name="rc" update="msgs"
+					action="#{calendarioDaTavolo.init}" autoRun="true" />
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="0">
+
+					<p:panel>
+						<h:panelGrid columns="2" cellpadding="0">
+							<p:panel>
+								<p:commandButton value="-"
+									action="#{calendarioDaTavolo.decAnno}" update=":form"></p:commandButton>
+								<h:outputText value="#{calendarioDaTavolo.anno}" />
+								<p:commandButton value="+"
+									action="#{calendarioDaTavolo.incAnno}" update=":form"></p:commandButton>
+							</p:panel>
+							<p:panel>
+								<p:commandButton value="-"
+									action="#{calendarioDaTavolo.decMese}" update=":form"></p:commandButton>
+								<h:outputText value="#{calendarioDaTavolo.sMese}" />
+								<p:commandButton value="+"
+									action="#{calendarioDaTavolo.incMese}" update=":form"></p:commandButton>
+							</p:panel>
+						</h:panelGrid>
+						<font  size="14">
+						<table border="1pt">
+						<tr>
+								<td>Dom</td>
+								<td>Lun</td>
+								<td>Mar</td>
+								<td>Mer</td>
+								<td>Giov</td>
+								<td>Ven</td>
+								<td>Sab</td>
+							</tr>
+							<tr>
+								<td>#{calendarioDaTavolo.getDay(0)}</td>
+								<td>#{calendarioDaTavolo.getDay(1)}</td>
+								<td>#{calendarioDaTavolo.getDay(2)}</td>
+								<td>#{calendarioDaTavolo.getDay(3)}</td>
+								<td>#{calendarioDaTavolo.getDay(4)}</td>
+								<td>#{calendarioDaTavolo.getDay(5)}</td>
+								<td>#{calendarioDaTavolo.getDay(6)}</td>
+							</tr>
+							<tr>
+								<td>#{calendarioDaTavolo.getDay(7)}</td>
+								<td>#{calendarioDaTavolo.getDay(8)}</td>
+								<td>#{calendarioDaTavolo.getDay(9)}</td>
+								<td>#{calendarioDaTavolo.getDay(10)}</td>
+								<td>#{calendarioDaTavolo.getDay(11)}</td>
+								<td>#{calendarioDaTavolo.getDay(12)}</td>
+								<td>#{calendarioDaTavolo.getDay(13)}</td>
+							</tr>
+							<tr>
+								<td>#{calendarioDaTavolo.getDay(14)}</td>
+								<td>#{calendarioDaTavolo.getDay(15)}</td>
+								<td>#{calendarioDaTavolo.getDay(16)}</td>
+								<td>#{calendarioDaTavolo.getDay(17)}</td>
+								<td>#{calendarioDaTavolo.getDay(18)}</td>
+								<td>#{calendarioDaTavolo.getDay(19)}</td>
+								<td>#{calendarioDaTavolo.getDay(20)}</td>
+							</tr>
+							<tr>
+								<td>#{calendarioDaTavolo.getDay(21)}</td>
+								<td>#{calendarioDaTavolo.getDay(22)}</td>
+								<td>#{calendarioDaTavolo.getDay(23)}</td>
+								<td>#{calendarioDaTavolo.getDay(24)}</td>
+								<td>#{calendarioDaTavolo.getDay(25)}</td>
+								<td>#{calendarioDaTavolo.getDay(26)}</td>
+								<td>#{calendarioDaTavolo.getDay(27)}</td>
+							</tr>
+							<tr>
+								<td>#{calendarioDaTavolo.getDay(28)}</td>
+								<td>#{calendarioDaTavolo.getDay(29)}</td>
+								<td>#{calendarioDaTavolo.getDay(30)}</td>
+								<td>#{calendarioDaTavolo.getDay(31)}</td>
+								<td>#{calendarioDaTavolo.getDay(32)}</td>
+								<td>#{calendarioDaTavolo.getDay(33)}</td>
+								<td>#{calendarioDaTavolo.getDay(34)}</td>
+							</tr>
+						</table>
+
+</font>
+					</p:panel>
+				</h:panelGrid>
+				<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+
+</html>

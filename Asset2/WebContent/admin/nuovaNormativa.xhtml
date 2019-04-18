@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<p:panel>
+				<h:form>
+					<p:growl id="growl1" life="2000" />
+
+
+					<p:growl id="msgs" showDetail="true" />
+					<table>
+						<tr>
+							<td><h:outputText value="Normativa" /></td>
+							<td><h:inputText required="true"
+									value="#{managedNormativaBean.selectedNormativa.normativa}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Codice" /></td>
+							<td><h:inputText required="true"
+									value="#{managedNormativaBean.selectedNormativa.codice}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Frequenza" /></td>
+							<td><h:selectOneMenu
+									value="#{managedNormativaBean.selectedNormativa.codFrequenza}">
+									<f:selectItems value="#{frequenzeBean.frequenze}" var="user"
+										itemValue="#{user.codFrequenza}" itemLabel="#{user}"/>
+								</h:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Data Inizio" /></td>
+							<td><p:calendar id="popup" update=":form"
+									onSelectUpdate="@this" pattern="yyyyMMdd">
+									<f:ajax event="dateSelect"
+										listener="#{managedNormativaBean.onDateSelect}"
+										update="growl1" />
+								</p:calendar></td>
+						</tr>
+					</table>
+
+
+
+
+
+					<p:commandButton process="@this" icon="pi pi-search" value="Esci"
+						action="normativeHome" />
+
+					<h:panelGroup id="postPanel2">
+						<p:commandButton value="ok" id="ajasx"
+							actionListener="#{managedNormativaBean.insertNormativa}"
+							update="growl1" styleClass="ui-priority-primary" />
+					</h:panelGroup>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

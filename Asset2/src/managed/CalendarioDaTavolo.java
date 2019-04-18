@@ -24,7 +24,7 @@ public class CalendarioDaTavolo {
 		Date dd = TimeUtil.getCurrentStringDate(currentDate);
 
 		cal.setTime(dd);
-		
+
 		update();
 	}
 
@@ -57,12 +57,11 @@ public class CalendarioDaTavolo {
 
 	public void init() {
 		System.out.println("Calnedario init");
-Calendar cc=(Calendar) cal.clone();
-		
+		Calendar cc = (Calendar) cal.clone();
 
 		cc.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
-		System.out.println(cc.get(Calendar.DAY_OF_WEEK));
+		// System.out.println(cc.get(Calendar.DAY_OF_WEEK));
 
 		days.clear();
 		cc.add(Calendar.DAY_OF_MONTH, -dayOne);
@@ -76,7 +75,7 @@ Calendar cc=(Calendar) cal.clone();
 	public int getDay(int pos) {
 		if (days.size() == 0)
 			init();
-		System.out.println("len= " + days.size());
+		// System.out.println("len= " + days.size());
 		return days.get(pos);
 	}
 

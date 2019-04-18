@@ -28,7 +28,7 @@ public class ManagedUtentiBean implements Serializable {
 //		return dao.selectAll();
 //	}
 	public List<Utente> getAllUtenti() {
-		Log.getLogger().debug("Ciao");
+	
 		UtenteDAO dao = new UtenteDAO();
 		myList = dao.selectAll();
 		return myList;

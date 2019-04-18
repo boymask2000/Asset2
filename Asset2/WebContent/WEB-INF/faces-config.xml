@@ -102,7 +102,37 @@
 		<managed-bean-class>managed.CalendarioDaTavolo</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedNormativaBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedNormativeBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>frequenzeBean</managed-bean-name>
+		<managed-bean-class>managed.FrequenzeBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>nuovaNormativa</from-outcome>
+			<to-view-id>/admin/nuovaNormativa.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>normativeHome</from-outcome>
+			<to-view-id>/admin/normativeHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

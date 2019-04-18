@@ -12,6 +12,7 @@ import batchjob.GenericJob;
 import beans.Batch;
 import common.Log;
 import common.TimeUtil;
+import servlets.MyServletContextListener;
 
 public abstract class SystemJob extends GenericJob {
 	private static final long MILLI_ORA = 60 * 60 * 1000;
@@ -45,47 +46,58 @@ public abstract class SystemJob extends GenericJob {
 
 			public Integer call() throws Exception {
 				attendiOraPartenza();
-				
+
 				while (true) {
 					attendiPeriodo();
+					checkFine();
 
-					Log.getLogger().info("System job "+desc+" started at "+(new Date()));
-					
-					int count = makeJob();
-					
-					Log.getLogger().info("System job "+desc+" completed at "+(new Date()));
-					
+					Log.getLogger().info("System job " + desc + " started at " + (new Date()));
+
+					makeJob();
+
+					Log.getLogger().info("System job " + desc + " completed at " + (new Date()));
+
 					lastStart = (new Date()).getTime();
 					// return count;
 				}
 			}
 
-		
 		};
 		submit(callable, desc);
 
 	}
-	private void attendiOraPartenza() {
-		while( TimeUtil.getCurrentTimeShort().compareTo(startTime)<0) {
-			System.out.println("Attesa ora partenza " + startTime);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
+	private void checkFine() throws Exception {
+		if (MyServletContextListener.isStopAll()) {
+			System.out.println("FFFFFFFFF");
+			throw new Exception("Fine");
 		}
-		
 	}
-	private void attendiPeriodo() {
+
+	private void attendiOraPartenza() throws Exception {
+		while (TimeUtil.getCurrentTimeShort().compareTo(startTime) < 0) {
+			System.out.println("Attesa ora partenza " + startTime);
+		//	try {
+				checkFine();
+				Thread.sleep(5000);
+//			} catch (InterruptedException e) {checkFine();
+//				e.printStackTrace();
+//			}
+		}
+
+	}
+
+	private void attendiPeriodo() throws Exception {
 
 		while ((new Date()).getTime() - lastStart < periodo) {
 
-		//	System.out.println("Attesa " + ((new Date()).getTime() - lastStart));
-			try {
+			// System.out.println("Attesa " + ((new Date()).getTime() - lastStart));
+		//	try {
+				checkFine();
 				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//			} catch (InterruptedException e) {checkFine();
+//				e.printStackTrace();
+//			}
 		}
 
 	}

@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="10">
+					<p:panel id="basic" header="Gestione normative"
+						style="margin-bottom:20px">
+						<p:dataTable id="radioDT" selectionMode="single"
+							value="#{managedNormativaBean.allNormative}" var="c"
+							selection="#{managedNormativaBean.selectedNormativa}"
+							rowKey="#{c.id}" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:ajax event="rowSelect"
+								listener="#{managedNormativeBean.onRowSelect}"
+								update=":form:msgs" />
+
+							<p:column headerText="Normativa">
+								<h:outputText value="#{c.normativa}" />
+							</p:column>
+
+							<p:column headerText="Codice">
+								<h:outputText value="#{c.codice}" />
+							</p:column>
+
+							<p:column headerText="Inizio">
+								<h:outputText value="#{c.dataInizio}" />
+							</p:column>
+
+							<p:column headerText="Frequenza">
+								<h:outputText value="#{c.frequenza}" />
+							</p:column>
+							<p:column >
+
+								<h:commandButton action="#{managedNormativaBean.delete}"
+									value="Delete">
+									<f:setPropertyActionListener
+										target="#{managedNormativaBean.selectedNormativa}"
+										value="#{c}" />
+								</h:commandButton>
+
+
+
+							</p:column>
+							<f:facet name="footer">
+
+								<p:commandButton action="nuovaNormativa" value="Nuova Normativa"
+									process="@this" />
+
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+				</h:panelGrid>
+	
+
+
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="adminHome" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

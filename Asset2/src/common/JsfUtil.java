@@ -3,8 +3,11 @@ package common;
 import java.util.Date;
 
 import javax.el.ELContext;
+import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
+
+import beans.Check;
 
 public class JsfUtil {
 	public static void redirect(String rule) {
@@ -30,5 +33,11 @@ public class JsfUtil {
 		return  FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext,
 				null, beanName);
 		
+	}
+	public static void showMessage(String s) {
+		FacesMessage msg = new FacesMessage(s);
+		
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Log.getLogger().debug(s);
 	}
 }

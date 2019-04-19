@@ -112,6 +112,11 @@
 		<managed-bean-class>managed.FrequenzeBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedChecksBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedChecksBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -120,6 +125,26 @@
 
 			<from-outcome>nuovaNormativa</from-outcome>
 			<to-view-id>/admin/nuovaNormativa.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>checksHome</from-outcome>
+			<to-view-id>/admin/checksHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>nuovoCheck</from-outcome>
+			<to-view-id>/admin/nuovoCheck.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>

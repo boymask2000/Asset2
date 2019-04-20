@@ -21,12 +21,7 @@ public class ManagedUtentiBean implements Serializable {
 	//
 //	@ManagedProperty(value = "selectedUser")
 	private Utente selectedUser = new Utente();
-	private String op;
 
-//	public List<Utente> getAllUtenti() {
-//		UtenteDAO dao = new UtenteDAO(MyBatisConnectionFactory.getSqlSessionFactory());
-//		return dao.selectAll();
-//	}
 	public List<Utente> getAllUtenti() {
 	
 		UtenteDAO dao = new UtenteDAO();

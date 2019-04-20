@@ -123,6 +123,16 @@
 
 		<navigation-case>
 
+			<from-outcome>checklistHome</from-outcome>
+			<to-view-id>/admin/checklistHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
 			<from-outcome>nuovaNormativa</from-outcome>
 			<to-view-id>/admin/nuovaNormativa.xhtml</to-view-id>
 		</navigation-case>

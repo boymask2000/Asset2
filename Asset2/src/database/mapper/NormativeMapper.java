@@ -14,8 +14,8 @@ public interface NormativeMapper {
 	final String SELECT_NORM_PER_CODICE = "SELECT * FROM " + TABELLA + " WHERE CODICE=#{codice} order by dataInizio desc limit 1";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (codice , dataInizio , frequenza, codFrequenza )" //
-			+ "VALUES (#{codice}, #{dataInizio}, #{frequenza}, #{codFrequenza})";
+			" (codice , dataInizio , frequenza, codFrequenza, filename )" //
+			+ "VALUES (#{codice}, #{dataInizio}, #{frequenza}, #{codFrequenza}, #{filename})";
 	
 	final String DELETE = "DELETE FROM " + TABELLA + " WHERE ID=#{id}";
 

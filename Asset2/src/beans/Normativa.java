@@ -9,6 +9,7 @@ public class Normativa {
 	private String dataInizio;
 	private String frequenza;
 	private int codFrequenza;
+	private String filename;
 
 	public int getId() {
 		return id;
@@ -57,5 +58,13 @@ public class Normativa {
 	public void setCodFrequenza(int c) {
 		this.codFrequenza = c;
 		frequenza = FrequenzeBean.getDesc(c);
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }

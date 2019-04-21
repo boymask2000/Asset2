@@ -10,7 +10,7 @@
 		<managed-bean-class>managed.ManagedCalendarioBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>managedManualiBean</managed-bean-name>
 		<managed-bean-class>managed.ManagedManualiBean</managed-bean-class>
@@ -22,19 +22,19 @@
 		<managed-bean-class>managed.ManagedUtentiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>managedAssetBean</managed-bean-name>
 		<managed-bean-class>managed.ManagedAssetBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>managedBatch</managed-bean-name>
 		<managed-bean-class>managed.ManagedBatch</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>manualeUpload</managed-bean-name>
 		<managed-bean-class>managed.ManualeUpload</managed-bean-class>
@@ -45,13 +45,13 @@
 		<managed-bean-class>managed.DocInterventoUpload</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>fileUploadView</managed-bean-name>
 		<managed-bean-class>managed.FileUploadView</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>selectedUser</managed-bean-name>
 		<managed-bean-class>beans.Utente</managed-bean-class>
@@ -63,13 +63,13 @@
 		<managed-bean-class>beans.Utente</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>timeUtil</managed-bean-name>
 		<managed-bean-class>common.TimeUtil</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>basicDocumentViewController</managed-bean-name>
 		<managed-bean-class>managed.BasicDocumentViewController</managed-bean-class>
@@ -80,13 +80,13 @@
 		<managed-bean-class>managed.ManagedInterventiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>managedDocInterventiBean</managed-bean-name>
 		<managed-bean-class>managed.ManagedDocInterventiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>plannerjob</managed-bean-name>
 		<managed-bean-class>batchjob.PlannerJob</managed-bean-class>
@@ -122,7 +122,7 @@
 		<managed-bean-class>managed.ManagedChecklistBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -130,6 +130,16 @@
 
 			<from-outcome>checklistHome</from-outcome>
 			<to-view-id>/admin/checklistHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>nuovaChecklist</from-outcome>
+			<to-view-id>/admin/nuovaChecklist.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>
@@ -204,7 +214,7 @@
 		</navigation-case>
 
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -215,7 +225,7 @@
 		</navigation-case>
 
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -226,7 +236,7 @@
 		</navigation-case>
 
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -307,7 +317,7 @@
 		</navigation-case>
 
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -315,12 +325,12 @@
 
 			<from-outcome>batchHome</from-outcome>
 			<to-view-id>/admin/batchHome.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 
 	</navigation-rule>
-	
-	
+
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

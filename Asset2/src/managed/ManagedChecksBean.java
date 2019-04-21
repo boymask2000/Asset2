@@ -8,9 +8,12 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import beans.Asset;
 import beans.Check;
+import beans.Checklist;
 import common.JsfUtil;
 import common.Log;
+import database.dao.ChecklistDAO;
 import database.dao.ChecksDAO;
 
 public class ManagedChecksBean implements Serializable {
@@ -20,6 +23,7 @@ public class ManagedChecksBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Check> myList;
 	//
+	private List<Check> multiSelect;
 
 	private Check selectedCheck = new Check();
 
@@ -27,6 +31,23 @@ public class ManagedChecksBean implements Serializable {
 		ChecksDAO dao = new ChecksDAO();
 		myList = dao.selectAll();
 		return myList;
+	}
+
+	public void aggiungi() {
+
+		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+		Asset as = mab.getSelectedAsset();
+		ChecklistDAO dao = new ChecklistDAO();
+		int count=0;
+		for(Check c:multiSelect) {
+			Checklist cl = new Checklist();
+			cl.setAssetId(as.getId());
+			cl.setCheckId(c.getId());
+			dao.insert(cl);
+			count++;
+			
+		}
+		JsfUtil.showMessage("Inseriti "+count +" checklist");
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -58,5 +79,14 @@ public class ManagedChecksBean implements Serializable {
 
 	public void setSelectedCheck(Check selectedCheck) {
 		this.selectedCheck = selectedCheck;
+	}
+
+	public List<Check> getMultiSelect() {
+		return multiSelect;
+	}
+
+	public void setMultiSelect(List<Check> multiSelect) {
+		this.multiSelect = multiSelect;
+		System.out.println("setMultiSelect");
 	}
 }

@@ -13,43 +13,32 @@
 				<p:growl id="msgs" showDetail="true" />
 
 				<h:panelGrid columns="1" cellpadding="10">
-					<p:panel id="basic" header="Gestione checklist"
+					<p:panel id="basic" header="Aggiungi nuova checklist"
 						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedChecklistBean.checklistForAsset}" var="c"
-							selection="#{managedChecklistBean.selectedChecklist}"
+						<p:dataTable id="radioDT" value="#{managedChecksBean.allChecks}"
+							var="c" selection="#{managedChecksBean.multiSelect}"
 							rowKey="#{c.id}" paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
-							<p:ajax event="rowSelect"
-								listener="#{managedChecklistBean.onRowSelect}"
-								update=":form:msgs" />
+							<p:column selectionMode="multiple"
+								style="width:16px;text-align:center" />
 
-							<p:column headerText="Id check">
-								<h:outputText value="#{c.checkId}" />
-							</p:column>
 							<p:column headerText="Descrizione">
 								<p:inputTextarea disabled="true" rows="10" cols="50"
 									value="#{c.description}" />
 							</p:column>
-
 
 							<p:column headerText="Codice Normativa">
 								<h:outputText value="#{c.codiceNormativa}" />
 							</p:column>
 
 
-
-
-
-
 							<f:facet name="footer">
-							
-							<p:commandButton value="Esci" action="adminHome" />
+								<p:commandButton value="Esci" action="checklistHome" />
 
-								<p:commandButton action="nuovaChecklist" value="Nuova Check"
-									process="@this" />
+								<p:commandButton process=":form"
+									action="#{managedChecksBean.aggiungi}" value="Aggiungi" />
 
 							</f:facet>
 						</p:dataTable>

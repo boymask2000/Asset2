@@ -41,6 +41,14 @@
 							<p:column headerText="Frequenza">
 								<h:outputText value="#{c.frequenza}" />
 							</p:column>
+							
+							
+							<p:column>
+										<h:commandButton 
+											action="#{managedNormativaBean.setupViewFile(c.filename)}"
+											value="View" />
+									</p:column>
+							
 							<p:column >
 
 								<h:commandButton action="#{managedNormativaBean.delete}"
@@ -49,7 +57,6 @@
 										target="#{managedNormativaBean.selectedNormativa}"
 										value="#{c}" />
 								</h:commandButton>
-
 
 
 							</p:column>

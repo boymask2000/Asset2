@@ -36,7 +36,6 @@ public class MyBatisConnectionFactory {
 
 			if (sqlSessionFactory == null) {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-
 	
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(CalendarioMapper.class);

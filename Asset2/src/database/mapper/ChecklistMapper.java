@@ -18,11 +18,13 @@ public interface ChecklistMapper {
 			+ "list.assetId, "//
 			+ "c.id as checkId, "//
 			+ "c.description, "//
-			+ "c.codiceNormativa as codiceNormativa "//
+			+ "c.codiceNormativa as codiceNormativa, "//
+			+ "n.filename as fileNormativa "//
 			+ "FROM " + //
 			TABELLA + " list, " + //
-			"checks c " + //
-			" WHERE list.assetId=#{id} and list.checkId=c.id";
+			"checks c, " + //
+			"normative n " + //
+			" WHERE list.assetId=#{id} and list.checkId=c.id and c.codiceNormativa=n.codice";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , checkId )" //

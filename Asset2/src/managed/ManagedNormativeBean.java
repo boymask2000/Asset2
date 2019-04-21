@@ -1,19 +1,23 @@
 package managed;
 
+import java.io.File;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import beans.Normativa;
+import common.ApplicationConfig;
+import common.JsfUtil;
 import common.Log;
 import database.dao.NormativeDAO;
 
-public class ManagedNormativeBean implements Serializable {
+public class ManagedNormativeBean extends ABaseBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -68,7 +72,15 @@ public class ManagedNormativeBean implements Serializable {
 	public void setSelectedNormativa(Normativa n) {
 		this.selectedNormativa = n;
 	
-	
+	}
+	public String setupViewFile(String nome) {
+		if(nome==null || nome.trim().length()==0) {
+			JsfUtil.showMessage("Nessun file caricato");return null;
+		}
+		System.out.println("setup");
+		BasicDocumentViewController c = getDocController();
+		c.setPdf(new File(getFullPath(nome)));
+		return "viewFile";
 	}
 	public void onDateSelect(SelectEvent event) {
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -77,4 +89,5 @@ public class ManagedNormativeBean implements Serializable {
 	    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
 	    selectedNormativa.setDataInizio(dd);
 	}
+
 }

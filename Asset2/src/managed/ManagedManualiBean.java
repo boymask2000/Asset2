@@ -16,7 +16,7 @@ import common.ApplicationConfig;
 import common.Log;
 import database.dao.ManualiDAO;
 
-public class ManagedManualiBean implements Serializable {
+public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	/**
 	 * 
 	 */
@@ -74,17 +74,5 @@ public class ManagedManualiBean implements Serializable {
 		c.setPdf(new File(getFullPath(nome)));
 		return "viewFile";
 	}
-	private String getFullPath(String nome) {
-		String dir = ApplicationConfig.getDocumentdir();
-		if( !dir.endsWith(File.separator))dir+=File.separator;
-		return dir+nome;
-	}
 
-	private BasicDocumentViewController getDocController() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
-				"#{basicDocumentViewController}", BasicDocumentViewController.class);
-		return assetBean;
-	}
 }

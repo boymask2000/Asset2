@@ -5,6 +5,9 @@ public class Checklist {
 	private long assetId;
 	private long checkId;
 	private String description;
+	private String codiceNormativa;
+	private String fileNormativa;
+
 	public long getId() {
 		return id;
 	}
@@ -35,5 +38,21 @@ public class Checklist {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getCodiceNormativa() {
+		return codiceNormativa;
+	}
+
+	public void setCodiceNormativa(String codiceNormativa) {
+		this.codiceNormativa = codiceNormativa;
+	}
+
+	public String getFileNormativa() {
+		return fileNormativa;
+	}
+
+	public void setFileNormativa(String fileNormativa) {
+		this.fileNormativa = fileNormativa;
 	}
 }

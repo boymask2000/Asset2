@@ -65,8 +65,6 @@ private Status status = new Status(0);
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((Asset) event.getObject()).getId());
 		selectedAsset = (Asset) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		Log.getLogger().debug("select");
-
 	}
 
 	public List<Status> getAllStatus() {

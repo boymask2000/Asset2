@@ -26,9 +26,11 @@
 								listener="#{managedChecklistBean.onRowSelect}" update=":form:msgs" />
 
 							<p:column headerText="Id check">
-								<p:inputTextarea disabled="true" rows="10" cols="50"  value="#{c.checkId}" />
+								<h:outputText value="#{c.checkId}" />
 							</p:column>
-
+<p:column headerText="Descrizione">
+								<p:inputTextarea disabled="true" rows="10" cols="50"  value="#{c.description}" />
+							</p:column>
 							
 
 

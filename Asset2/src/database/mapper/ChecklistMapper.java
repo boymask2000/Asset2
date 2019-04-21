@@ -13,7 +13,8 @@ public interface ChecklistMapper {
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 	
-	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA+ " WHERE assetId=#{assetId}";
+	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA+ " WHERE assetId=#{id}";
+	final String SELECT_FOR_ASSET2 = "SELECT list.assetId, c.id as checkId, c.description FROM " + TABELLA+ " list, checks c WHERE list.assetId=#{id} and list.checkId=c.id";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , checkId )" //
@@ -22,7 +23,7 @@ public interface ChecklistMapper {
 	@Select(SELECT_ALL)
 	public List<Checklist> getAll();
 	
-	@Select(SELECT_FOR_ASSET)
+	@Select(SELECT_FOR_ASSET2)
 	public List<Checklist> getChecksForAsset(Asset s);
 
 	@Insert(INSERT)

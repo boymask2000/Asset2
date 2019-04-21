@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import database.mapper.AssetMapper;
 import database.mapper.CalendarioMapper;
+import database.mapper.ChecklistMapper;
 import database.mapper.ChecksMapper;
 import database.mapper.DocInterventiMapper;
 import database.mapper.InterventiMapper;
@@ -45,6 +46,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(DocInterventiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(NormativeMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecksMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ChecklistMapper.class);
 			}
 			
 		}

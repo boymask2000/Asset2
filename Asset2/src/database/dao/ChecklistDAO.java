@@ -37,6 +37,7 @@ public class ChecklistDAO {
 		}
 	}
 	public List<Checklist> getChecklistForAsset(Asset s) {
+		System.out.println("getChecklistForAsset");
 		List<Checklist> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 
@@ -44,6 +45,8 @@ public class ChecklistDAO {
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 			
 			list = mapper.getChecksForAsset(s);
+		}catch( Throwable t){
+			t.printStackTrace();
 		} finally {
 			session.close();
 		}

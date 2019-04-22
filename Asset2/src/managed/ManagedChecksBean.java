@@ -11,10 +11,12 @@ import org.primefaces.event.SelectEvent;
 import beans.Asset;
 import beans.Check;
 import beans.Checklist;
+import beans.Normativa;
 import common.JsfUtil;
 import common.Log;
 import database.dao.ChecklistDAO;
 import database.dao.ChecksDAO;
+import database.dao.NormativeDAO;
 
 public class ManagedChecksBean implements Serializable {
 	/**
@@ -38,16 +40,16 @@ public class ManagedChecksBean implements Serializable {
 		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		Asset as = mab.getSelectedAsset();
 		ChecklistDAO dao = new ChecklistDAO();
-		int count=0;
-		for(Check c:multiSelect) {
+		int count = 0;
+		for (Check c : multiSelect) {
 			Checklist cl = new Checklist();
 			cl.setAssetId(as.getId());
 			cl.setCheckId(c.getId());
 			dao.insert(cl);
 			count++;
-			
+
 		}
-		JsfUtil.showMessage("Inseriti "+count +" checklist");
+		JsfUtil.showMessage("Inseriti " + count + " checklist");
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -64,6 +66,14 @@ public class ManagedChecksBean implements Serializable {
 		ChecksDAO dao = new ChecksDAO();
 
 		try {
+			Normativa n = new Normativa();
+			n.setCodice(selectedCheck.getCodiceNormativa());
+			NormativeDAO normDao = new NormativeDAO();
+			Normativa norma = normDao.getNormativaPerCodice(n);
+			if (norma == null) {
+				JsfUtil.showMessage("Normativa non trovata");
+				return;
+			}
 			dao.insert(selectedCheck);
 			JsfUtil.showMessage("Inserito check");
 		} catch (Throwable e) {

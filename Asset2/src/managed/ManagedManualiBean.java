@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -12,7 +11,6 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Manuale;
 import beans.Utente;
-import common.ApplicationConfig;
 import common.Log;
 import database.dao.ManualiDAO;
 
@@ -54,7 +52,7 @@ public class ManagedManualiBean extends ABaseBean  implements Serializable {
 		try {
 			dao.insert(manuale);
 		} catch (Throwable e) {
-			System.out.println("lllllllllllllllllllllllll");
+			e.printStackTrace();
 		}
 	}
 
@@ -71,7 +69,7 @@ public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	public String setupViewFile(String nome) {
 		System.out.println("setup");
 		BasicDocumentViewController c = getDocController();
-		c.setPdf(new File(getFullPath(nome)));
+		c.setPdf(new File(getFullPath("Manuali"+File.separator+nome)));
 		return "viewFile";
 	}
 

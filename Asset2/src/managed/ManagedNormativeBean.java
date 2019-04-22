@@ -63,31 +63,36 @@ public class ManagedNormativeBean extends ABaseBean implements Serializable {
 			selectedNormativa = new Normativa();
 		return selectedNormativa;
 	}
+
 	public void delete() {
-	
+
 		NormativeDAO dao = new NormativeDAO();
 		dao.delete(selectedNormativa);
 	}
 
 	public void setSelectedNormativa(Normativa n) {
 		this.selectedNormativa = n;
-	
+
 	}
+
 	public String setupViewFile(String nome) {
-		if(nome==null || nome.trim().length()==0) {
-			JsfUtil.showMessage("Nessun file caricato");return null;
+		if (nome == null || nome.trim().length() == 0) {
+			JsfUtil.showMessage("Nessun file caricato");
+			return null;
 		}
 		System.out.println("setup");
 		BasicDocumentViewController c = getDocController();
-		c.setPdf(new File(getFullPath(nome)));
+		c.setPdf(new File(getFullPath("Normative" + File.separator + nome)));
 		return "viewFile";
 	}
+
 	public void onDateSelect(SelectEvent event) {
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	    String dd = format.format(event.getObject());
-	    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-	    selectedNormativa.setDataInizio(dd);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String dd = format.format(event.getObject());
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+		selectedNormativa.setDataInizio(dd);
 	}
 
 }

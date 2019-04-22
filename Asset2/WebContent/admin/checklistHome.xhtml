@@ -40,19 +40,19 @@
 							</p:column>
 
 
-<p:column>
-										<h:commandButton 
-											action="#{managedNormativaBean.setupViewFile(c.fileNormativa)}"
-											value="View" />
-									</p:column>
-							
-						
+							<p:column>
+								<h:commandButton rendered="#{c.fileNormativa!=null}"
+									action="#{managedNormativaBean.setupViewFile(c.fileNormativa)}"
+									value="View" />
+							</p:column>
+
+
 
 
 
 							<f:facet name="footer">
-							
-							<p:commandButton value="Esci" action="adminHome" />
+
+								<p:commandButton value="Esci" action="adminHome" />
 
 								<p:commandButton action="nuovaChecklist" value="Nuova Check"
 									process="@this" />

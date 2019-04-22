@@ -1,7 +1,6 @@
 package managed;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,7 +18,7 @@ import common.JsfUtil;
 import database.dao.ManualiDAO;
 import database.dao.NormativeDAO;
 
-public class NormativaUpload {
+public class NormativaUpload extends ABaseBean {
 
 	private UploadedFile file;
 	private Manuale currentManuale;
@@ -42,38 +41,23 @@ public class NormativaUpload {
 		}
 	}
 
-	private String getExt(String fileName) {
-		String ext = "";
-		int pos = fileName.lastIndexOf(".");
-		if (pos != -1)
-			ext = fileName.substring(pos);
-		return ext;
-	}
-
 	private void loadFile(String fileName, InputStream is) {
-		byte buffer[] = new byte[1024];
-	
+
 		String ext = getExt(fileName);
 
-		String dir = ApplicationConfig.getDocumentdir();
+		String dir = ApplicationConfig.getDocumentdir() + File.separator + "Normative";
 		try {
-			File tmpFile = File.createTempFile("norm_", ext, new File(dir));
-	//		File tmpFile = File.createTempFile("man_" + assetId + "_", ext, new File(dir));
+			File tmpFile = createTempFile("norm_", ext, new File(dir));
 
-			try (FileOutputStream os = new FileOutputStream(tmpFile);) {
-				int count = 0;
-				while ((count = is.read(buffer)) != -1) {
-					os.write(buffer, 0, count);
-				}
-				os.flush();
+			load(is, tmpFile);
 
-				ManagedNormativeBean mnb = (ManagedNormativeBean) JsfUtil.getBean("managedNormativaBean");
-				Normativa norm = mnb.getSelectedNormativa();
-				norm.setFilename(tmpFile.getName());
-				NormativeDAO dao = new NormativeDAO();
-				dao.insert(norm);
-			}
-		} catch (IOException e) {
+			ManagedNormativeBean mnb = (ManagedNormativeBean) JsfUtil.getBean("managedNormativaBean");
+			Normativa norm = mnb.getSelectedNormativa();
+			norm.setFilename(tmpFile.getName());
+			NormativeDAO dao = new NormativeDAO();
+			dao.insert(norm);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

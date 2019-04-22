@@ -1,11 +1,9 @@
 package managed;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -14,9 +12,10 @@ import org.primefaces.model.UploadedFile;
 
 import beans.Manuale;
 import common.ApplicationConfig;
+import common.JsfUtil;
 import database.dao.ManualiDAO;
 
-public class ManualeUpload {
+public class ManualeUpload extends ABaseBean {
 
 	private UploadedFile file;
 	private Manuale currentManuale;
@@ -39,37 +38,22 @@ public class ManualeUpload {
 		}
 	}
 
-	private String getExt(String fileName) {
-		String ext = "";
-		int pos = fileName.lastIndexOf(".");
-		if (pos != -1)
-			ext = fileName.substring(pos);
-		return ext;
-	}
-
 	private void loadFile(String fileName, InputStream is) {
-		byte buffer[] = new byte[1024];
-		ManagedAssetBean assetBean = getManagedAssetBean();
+
+		ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		long assetId = assetBean.getSelectedAsset().getId();
 		String ext = getExt(fileName);
 
-		String dir = ApplicationConfig.getDocumentdir();
+		String dir = ApplicationConfig.getDocumentdir()+File.separator+"Manuali";
 		try {
-			File tmpFile = File.createTempFile("man_" + assetId + "_", ext, new File(dir));
+			File tmpFile = createTempFile("man_" + assetId + "_", ext, new File(dir));
 
-			try (FileOutputStream os = new FileOutputStream(tmpFile);) {
-				int count = 0;
-				while ((count = is.read(buffer)) != -1) {
-					os.write(buffer, 0, count);
-				}
-				os.flush();
+			load(is, tmpFile);
 
-				currentManuale.setNomefile(tmpFile.getName());
-				currentManuale.setExt(ext);
+			currentManuale.setNomefile(tmpFile.getName());
+			currentManuale.setExt(ext);
 
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -80,7 +64,7 @@ public class ManualeUpload {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 
-			ManagedAssetBean assetBean = getManagedAssetBean();
+			ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 
 			System.out.println(currentManuale.getDescrizione());
 			System.out.println(currentManuale.getNomefile());
@@ -94,17 +78,8 @@ public class ManualeUpload {
 		}
 	}
 
-	private ManagedAssetBean getManagedAssetBean() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
-				ManagedAssetBean.class);
-		return assetBean;
-	}
-
 	public void handleFileUpload(FileUploadEvent event) {
 		String fileName = event.getFile().getFileName();
-	//	fileName = getFullPath(fileName);
 
 		System.out.println("fleName: " + fileName);
 		try (InputStream inputStream = event.getFile().getInputstream();) {
@@ -118,7 +93,7 @@ public class ManualeUpload {
 		FacesMessage message = new FacesMessage("Succesful", fileName + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 
-		ManagedAssetBean assetBean = getManagedAssetBean();
+		ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 
 		System.out.println(currentManuale.getDescrizione());
 		System.out.println(currentManuale.getNomefile());
@@ -131,13 +106,6 @@ public class ManualeUpload {
 		manualiDAO.insert(currentManuale);
 
 	}
-
-//	private String getFullPath(String nome) {
-//		String dir = ApplicationConfig.getDocumentdir();
-//		if (!dir.endsWith(File.separator))
-//			dir += File.separator;
-//		return dir + nome;
-//	}
 
 	public Manuale getCurrentManuale() {
 		if (currentManuale == null)

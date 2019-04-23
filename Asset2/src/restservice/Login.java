@@ -13,7 +13,11 @@ public class Login {
 	@Path("{user}/{password}")
 	public Utente login(@PathParam("user") String user, @PathParam("password") String password) {
 		System.out.println("user:" + user + " passoword:" + password);
-		return new Utente();
+		Utente u = new Utente();
+		u.setUsername(user);
+		u.setPassword(password);
+		u.login();
+		return u;
 	}
 	
 	@GET

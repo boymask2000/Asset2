@@ -29,6 +29,17 @@ public class AssetDAO {
 		}
 		return list;
 	}
+	
+	public Asset search( Asset s ) {
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+			AssetMapper mapper = session.getMapper(AssetMapper.class);
+			return mapper.search(s);
+		
+		} finally {
+			session.close();
+		}
+	}
 
 	public void insert(Asset u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();

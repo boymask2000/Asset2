@@ -10,6 +10,8 @@ import beans.Asset;
 
 public interface AssetMapper {
 	final String TABELLA = "test1.asset";
+	
+	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " id=#{id}";
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA +" ORDER BY masterSystem, location";
 	
@@ -102,7 +104,7 @@ public interface AssetMapper {
 			"lastStatus = #{lastStatus}" + //
 			" WHERE id=#{id}";
 
-	final String SEARCH = "SELECT * FROM " + TABELLA + " WHERE " + " id=#{id}";
+
 
 	@Select(SELECT_ALL)
 	public List<Asset> selectAll();

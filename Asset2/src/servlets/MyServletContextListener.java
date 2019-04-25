@@ -3,19 +3,23 @@ package servlets;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import common.ApplicationConfig;
+import common.Log;
+
 public class MyServletContextListener implements ServletContextListener {
 	private static boolean stopAll=false;
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		System.out.println("ServletContextListener destroyed");
+		Log.getLogger().info("ServletContextListener destroyed");
 		setStopAll(true);
 	}
 
 	// Run this before web application is started
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		System.out.println("ServletContextListener started");
+		Log.getLogger().info("ServletContextListener started");
+		ApplicationConfig.getDocumentdir();
 	}
 
 	public synchronized static boolean isStopAll() {

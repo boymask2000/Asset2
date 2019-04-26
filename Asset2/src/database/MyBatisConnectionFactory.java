@@ -8,11 +8,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import database.mapper.AssetAlcaMapper;
 import database.mapper.AssetMapper;
 import database.mapper.CalendarioMapper;
 import database.mapper.ChecklistMapper;
 import database.mapper.ChecksMapper;
 import database.mapper.DocInterventiMapper;
+import database.mapper.FrequenzeAlcaMapper;
 import database.mapper.InterventiMapper;
 import database.mapper.ManualiMapper;
 import database.mapper.NormativeMapper;
@@ -46,6 +48,8 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(NormativeMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecksMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecklistMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(AssetAlcaMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(FrequenzeAlcaMapper.class);
 			}
 			
 		}

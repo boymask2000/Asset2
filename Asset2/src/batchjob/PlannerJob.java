@@ -7,12 +7,18 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import beans.Asset;
+import beans.AssetAlca;
 import beans.Calendario;
+import beans.Checklist;
+import beans.ChecklistIntervento;
+import beans.FrequenzaAlca;
 import beans.Intervento;
 import common.TipoSchedulazione;
-import database.dao.AssetDAO;
+import database.dao.AssetAlcaDAO;
 import database.dao.CalendarioDAO;
+import database.dao.ChecklistDAO;
+import database.dao.ChecklistInterventiDAO;
+import database.dao.FrequenzeAlcaDAO;
 import database.dao.InterventiDAO;
 
 public class PlannerJob extends GenericJob {
@@ -25,13 +31,25 @@ public class PlannerJob extends GenericJob {
 				cleanInterventiCalendario();
 
 				int count = 0;
-				AssetDAO assetDao = new AssetDAO();
-				List<Asset> allAssets = assetDao.selectAll();
-				for (Asset as : allAssets) {
+				AssetAlcaDAO assetDao = new AssetAlcaDAO();
+				List<AssetAlca> allAssets = assetDao.selectAll();
+				for (AssetAlca as : allAssets) {
 					queue.put(count + " / " + allAssets.size());
 					count++;
-					// System.out.println("ID: " + as.getId());
-					makePlan(as.getId(), TipoSchedulazione.MENSILE);
+					FrequenzeAlcaDAO fad = new FrequenzeAlcaDAO();
+
+					List<FrequenzaAlca> ll = fad.getFreqForRPIE(as.getRpieIdIndividual());
+
+					for (FrequenzaAlca fa : ll) {
+						int codFrequenza = fa.getIdFrequenza();
+						TipoSchedulazione tipo = TipoSchedulazione.getTipoFrequenza(codFrequenza);
+
+						ChecklistDAO cld = new ChecklistDAO();
+						List<Checklist> cl = cld.getChecklistForFrequenza(fa);
+						if (cl.size() > 0)
+							makePlan(as.getId(), tipo, cl);
+					}
+
 				}
 				return count;
 			}
@@ -40,7 +58,7 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private void makePlan(long assetId, TipoSchedulazione sched) {
+	private void makePlan(long assetId, TipoSchedulazione sched, List<Checklist> cl) {
 		CalendarioDAO calendarioDao = new CalendarioDAO();
 
 		String maxData = calendarioDao.getMaxData();
@@ -69,7 +87,8 @@ public class PlannerJob extends GenericJob {
 
 				incInter(goodDate);
 
-				createIntervento(assetId, data, goodDate);
+				for (Checklist ck : cl)
+					createIntervento(assetId, data, goodDate, ck);
 
 				// dump(lista);
 
@@ -81,7 +100,7 @@ public class PlannerJob extends GenericJob {
 		}
 	}
 
-	private void createIntervento(long assetId, String data, String goodDate) {
+	private void createIntervento(long assetId, String data, String goodDate, Checklist ck) {
 		Intervento u = new Intervento();
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
@@ -89,13 +108,18 @@ public class PlannerJob extends GenericJob {
 
 		InterventiDAO dao = new InterventiDAO();
 
-		int num=dao.getInterventiPerAssetInData(u).size();
-		if (num > 0) {
-		//	System.out.println("intervento duplcato "+num);
-			return;
+		int num = dao.getInterventiPerAssetInData(u).size();
+		if (num == 0) {
+			dao.insert(u);
 		}
+		Intervento ii = dao.getInterventiPerAssetInData(u).get(0);
 
-		dao.insert(u);
+		ChecklistIntervento cli = new ChecklistIntervento();
+		cli.setCheckId(ck.getCheckId());
+		cli.setInterventoId(ii.getId());
+
+		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
+		cliDao.insert(cli);
 
 	}
 

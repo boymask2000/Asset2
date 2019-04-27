@@ -43,31 +43,31 @@ public abstract class GenericJob {
 
 	}
 
-	public String getPartialResult2() {
-		if (batch.getFuture().isDone())
-			return lastGood;
-		String val = "";
-
-		while (true) {
-			String s = queue.poll();
-			if (s == null) {
-				if (batch.getFuture().isDone())
-					break;
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				continue;
-			}
-
-			val = s;
-			lastGood = val;
-		}
-		return val;
-
-	}
+//	public String getPartialResult2() {
+//		if (batch.getFuture().isDone())
+//			return lastGood;
+//		String val = "";
+//
+//		while (true) {
+//			String s = queue.poll();
+//			if (s == null) {
+//				if (batch.getFuture().isDone())
+//					break;
+//				try {
+//					Thread.sleep(200);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				continue;
+//			}
+//
+//			val = s;
+//			lastGood = val;
+//		}
+//		return val;
+//
+//	}
 
 	protected void submit(Callable<Integer> callable, String desc) {
 

@@ -42,6 +42,15 @@ public class TipoSchedulazione {
 		}
 		return "";
 	}
+	public static TipoSchedulazione getTipoFrequenza(int id) {
+		Set<Entry<String, TipoSchedulazione>> set = map.entrySet();
+		for (Iterator<Entry<String, TipoSchedulazione>> iterator = set.iterator(); iterator.hasNext();) {
+			Entry<String, TipoSchedulazione> e = iterator.next();
+			if (e.getValue().getId() == id)
+				return e.getValue();
+		}
+		return null;
+	}
 
 	public static int getIdSchedulazione(String val) {
 		TipoSchedulazione t = map.get(val);

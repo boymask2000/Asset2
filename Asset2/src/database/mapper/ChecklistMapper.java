@@ -16,8 +16,8 @@ public interface ChecklistMapper {
 
 	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA + " WHERE assetId=#{id}";
 	
-	final String SELECT_FOR_FREQ= "SELECT " //
-			+ "list.assetId "//
+	final String SELECT_FOR_FREQ= "SELECT * " //
+		
 			
 			+ "FROM " + //
 			TABELLA + " list " + //

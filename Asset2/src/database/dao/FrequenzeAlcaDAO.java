@@ -24,6 +24,13 @@ public class FrequenzeAlcaDAO {
 		return list;
 	}
 
+	public List<FrequenzaAlca> getFreqForRPIE(String rpie) {
+		FrequenzaAlca u = new FrequenzaAlca();
+		u.setRpieIdIndividual(rpie);
+
+		return getFreqForRPIE(u);
+	}
+
 	public List<FrequenzaAlca> getFreqForRPIEandFreq(FrequenzaAlca u) {
 		List<FrequenzaAlca> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();

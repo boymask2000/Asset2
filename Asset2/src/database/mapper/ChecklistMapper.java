@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import beans.Asset;
+import beans.AssetAlca;
 import beans.Checklist;
 
 public interface ChecklistMapper {
@@ -34,7 +34,7 @@ public interface ChecklistMapper {
 	public List<Checklist> getAll();
 
 	@Select(SELECT_FOR_ASSET2)
-	public List<Checklist> getChecksForAsset(Asset s);
+	public List<Checklist> getChecksForAsset(AssetAlca s);
 
 	@Insert(INSERT)
 	public void insert(Checklist cl);

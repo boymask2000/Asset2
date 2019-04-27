@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import beans.Asset;
+import beans.AssetAlca;
 import beans.Intervento;
 import common.JsfUtil;
 import common.Pair;
@@ -60,7 +61,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 	}
 
 	private void stampaUltimoIntervento(PrintCreator prt, ManagedAssetBean db) {
-		Asset asset = db.getSelectedAsset();
+		AssetAlca asset = db.getSelectedAsset();
 		InterventiDAO dao = new InterventiDAO();
 		Intervento lastInter = dao.getUltimoInterventoFatto(asset.getId());
 		Table t = new Table();
@@ -79,7 +80,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 
 	private void stampaInterventi(PrintCreator prt, ManagedAssetBean db) {
 
-		Asset asset = db.getSelectedAsset();
+		AssetAlca asset = db.getSelectedAsset();
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> li = dao.getInterventiForAsset(asset.getId());
 		for( Intervento inter: li) {
@@ -101,7 +102,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 
 	private void stampaMainData(PrintCreator prt, ManagedAssetBean bean) {
 
-		Asset asset = bean.getSelectedAsset();
+		AssetAlca asset = bean.getSelectedAsset();
 
 		Table t = new Table();
 		t.setHeader(false);

@@ -1,5 +1,6 @@
 package database.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -55,18 +56,17 @@ public class AssetAlcaDAO {
 			AssetAlca prec = mapper.searchByRPIE(u);
 			if (prec == null)
 				mapper.insert(u);
-			
+
 			FrequenzaAlca freqAlca = new FrequenzaAlca();
 			freqAlca.setRpieIdIndividual(u.getRpieIdIndividual());
 			freqAlca.setCodFrequenza(TipoSchedulazione.getIdSchedulazione(u.getFrequency()));
 			FrequenzeAlcaDAO fDao = new FrequenzeAlcaDAO();
-			
+
 			fDao.insert(freqAlca);
 			session.commit();
-		}catch(Throwable t) {
+		} catch (Throwable t) {
 			t.printStackTrace();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -82,6 +82,23 @@ public class AssetAlcaDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	public List<AssetAlca> selectAssetsWithStatus(int selectedSeverity) {
+		List<AssetAlca> lista=new ArrayList<AssetAlca>();
+		
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try {
+			AssetAlca alca = new AssetAlca();
+			alca.setLastStatus("" + selectedSeverity);
+			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
+			lista = 	mapper.selectAssetsWithStatus(alca);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
 
 }

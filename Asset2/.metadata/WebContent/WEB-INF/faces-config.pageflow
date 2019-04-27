@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15544934418580" configfile="/Asset2/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="3634" id="pf15544934821061" referenceLink="//@navigationRule.22/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074480 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15557955598883 pf15558600670900" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="3634" id="pf15544934821061" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074480 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15558600670900 pf15563667307410 pf15563668000853" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf155449348210714" referenceLink="//@navigationRule.20/@navigationCase.0/@toViewId|" inlinks="pf15544934821072 pf15546298401042" path="/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/admin.xhtml" x="122" y="1714" id="pf155449348210715" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" path="/admin/admin.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/modificaUtente.xhtml" x="338" y="562" id="pf155449348210716" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" inlinks="pf15544934821074" path="/admin/modificaUtente.xhtml"/>
@@ -26,8 +26,9 @@
   <nodes xsi:type="pageflow:PFPage" name="admin/nuovaNormativa.xhtml" x="338" y="5938" id="pf15555970876934" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15557955598882" path="/admin/nuovaNormativa.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/checksHome.xhtml" x="338" y="6322" id="pf15557955598914" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf15557955598880" path="/admin/checksHome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/nuovoCheck.xhtml" x="338" y="6706" id="pf15557955598915" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf15557955598881" path="/admin/nuovoCheck.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="admin/checklistHome.xhtml" x="338" y="7090" id="pf15557955598916" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15557955598883" path="/admin/checklistHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/checklistHome.xhtml" x="338" y="7090" id="pf15557955598916" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15563667307410" path="/admin/checklistHome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/nuovaChecklist.xhtml" x="338" y="7474" id="pf15558600670901" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15558600670900" path="/admin/nuovaChecklist.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/frequenzeAlcaHome.xhtml" id="pf15563668000864" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15563668000853" path="/admin/frequenzeAlcaHome.xhtml"/>
   <links id="pf15544934821072" target="pf155449348210714" source="pf15544934821061" outcome="login"/>
   <links id="pf15544934821074" target="pf155449348210716" source="pf15544934821061" outcome="modificautente"/>
   <links id="pf15545490252662" target="pf15545490252663" source="pf15544934821061" outcome="nuovoUtente"/>
@@ -49,6 +50,7 @@
   <links id="pf15557955598880" target="pf15557955598914" source="pf15544934821061" outcome="checksHome"/>
   <links id="pf15557955598881" target="pf15557955598915" source="pf15544934821061" outcome="nuovoCheck"/>
   <links id="pf15557955598882" target="pf15555970876934" source="pf15544934821061" outcome="nuovaNormativa"/>
-  <links id="pf15557955598883" target="pf15557955598916" source="pf15544934821061" outcome="checklistHome"/>
   <links id="pf15558600670900" target="pf15558600670901" source="pf15544934821061" outcome="nuovaChecklist"/>
+  <links id="pf15563667307410" target="pf15557955598916" source="pf15544934821061" outcome="checklistHome"/>
+  <links id="pf15563668000853" target="pf15563668000864" source="pf15544934821061" outcome="frequenzeAlcaHome"/>
 </pageflow:Pageflow>

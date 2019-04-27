@@ -21,6 +21,7 @@ public class AssetAlca implements Serializable{
 	private String rpieIdIndividual;
 	private String frequency;
 	private String schedAssignedOrg;
+	private String lastStatus;
 	
 	public long getId() {
 		return id;
@@ -96,6 +97,12 @@ public class AssetAlca implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getLastStatus() {
+		return lastStatus;
+	}
+	public void setLastStatus(String lastStatus) {
+		this.lastStatus = lastStatus;
 	}
 	
 

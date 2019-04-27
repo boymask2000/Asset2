@@ -16,6 +16,8 @@ public interface AssetAlcaMapper {
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA + " ORDER BY facNum";
 
+	final String SELECT_WITH_STATUS = "SELECT * FROM " + TABELLA + " WHERE lastStatus = #{lastStatus} ";
+
 	final String INSERT = "INSERT INTO " + TABELLA + "  (" + //
 
 			"facNum," + //
@@ -28,7 +30,7 @@ public interface AssetAlcaMapper {
 			"pmSchedSerial," + //
 			"rpieIdIndividual," + //
 			"frequency," + //
-			"schedAssignedOrg ) " + //
+			"schedAssignedOrg ,lastStatus) " + //
 			"VALUES (" + //
 			"#{facNum}," + //
 			"#{facSystem}," + //
@@ -40,7 +42,8 @@ public interface AssetAlcaMapper {
 			"#{pmSchedSerial}," + //
 			"#{rpieIdIndividual}," + //
 			"#{frequency}," + //
-			"#{schedAssignedOrg} )";
+			"#{schedAssignedOrg}," + //
+			"#{lastStatus} )";
 
 	final String UPDATE = "UPDATE " + TABELLA + "  SET " + //
 			"facNum = #{facNum}," + //
@@ -53,6 +56,7 @@ public interface AssetAlcaMapper {
 			"pmSchedSerial = #{pmSchedSerial}," + //
 			"rpieIdIndividual = #{rpieIdIndividual}," + //
 			"frequency = #{frequency}," + //
+			"lastStatus = #{lastStatus}," + //
 			"schedAssignedOrg = #{schedAssignedOrg} " + //
 
 			" WHERE rpieIdIndividual=#{rpieIdIndividual}";
@@ -71,6 +75,9 @@ public interface AssetAlcaMapper {
 
 	@Select(SEARCH_BY_RPIE)
 	public AssetAlca searchByRPIE(AssetAlca contact);
+
+	@Select(SELECT_WITH_STATUS)
+	public List<AssetAlca> selectAssetsWithStatus(AssetAlca contact);
 
 //	@Select(DELETE)
 //	public void delete(Asset contact);

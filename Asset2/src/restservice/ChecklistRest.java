@@ -7,7 +7,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import beans.Asset;
+import beans.AssetAlca;
 import beans.Checklist;
+import database.dao.AssetAlcaDAO;
 import database.dao.AssetDAO;
 import database.dao.ChecklistDAO;
 import restservice.beans.ChecklistRestBean;
@@ -21,13 +23,13 @@ public class ChecklistRest {
 
 		ChecklistDAO dao = new ChecklistDAO();
 
-		Asset s = new Asset();
+		AssetAlca s = new AssetAlca();
 		long id = Long.parseLong(assetId);
 		s.setId(id);
 		List<Checklist> lista = dao.getChecklistForAsset(s);
 		
-		AssetDAO assetDao=new AssetDAO();
-		s=assetDao.search(s);
+		AssetAlcaDAO assetDao=new AssetAlcaDAO();
+		s=assetDao.searchById(s);
 		
 		
 		ChecklistRestBean checklistRestBean=new ChecklistRestBean();

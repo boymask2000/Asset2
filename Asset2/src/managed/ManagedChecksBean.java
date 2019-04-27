@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.Asset;
+import beans.AssetAlca;
 import beans.Check;
 import beans.Checklist;
 import beans.Normativa;
@@ -38,7 +39,7 @@ public class ManagedChecksBean implements Serializable {
 	public void aggiungi() {
 
 		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
-		Asset as = mab.getSelectedAsset();
+		AssetAlca as = mab.getSelectedAsset();
 		ChecklistDAO dao = new ChecklistDAO();
 		int count = 0;
 		for (Check c : multiSelect) {

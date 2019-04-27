@@ -14,6 +14,7 @@ import org.primefaces.event.SelectEvent;
 import beans.Intervento;
 import common.Log;
 import common.TimeUtil;
+import database.dao.AssetAlcaDAO;
 import database.dao.AssetDAO;
 import database.dao.InterventiDAO;
 
@@ -160,8 +161,8 @@ public class ManagedInterventiBean implements Serializable {
 			Application application = context.getApplication();
 			ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
 					ManagedAssetBean.class);
-			assetBean.getSelectedAsset().setLastStatus(esito);
-			AssetDAO assetDao = new AssetDAO();
+			assetBean.getSelectedAsset().setLastStatus(""+esito);
+			AssetAlcaDAO assetDao = new AssetAlcaDAO();
 			assetDao.update(assetBean.getSelectedAsset());
 		}
 	}

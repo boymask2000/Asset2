@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import beans.Asset;
+import beans.AssetAlca;
 import beans.Checklist;
 
 public class ChecklistRestBean implements Serializable{
@@ -11,12 +12,12 @@ public class ChecklistRestBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Asset asset;
+	private AssetAlca asset;
 	private List<Checklist> lista;
-	public Asset getAsset() {
+	public AssetAlca getAsset() {
 		return asset;
 	}
-	public void setAsset(Asset asset) {
+	public void setAsset(AssetAlca asset) {
 		this.asset = asset;
 	}
 	public List<Checklist> getLista() {

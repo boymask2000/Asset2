@@ -2,7 +2,10 @@ package common;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class TipoSchedulazione {
 
@@ -28,6 +31,16 @@ public class TipoSchedulazione {
 		map.put("ANNUAL", ANNUALE);
 		map.put("SEMI-ANNUAL", OGNI_6_MESI);
 		map.put("WEEKLY", SETTIMANALE);
+	}
+
+	public static String getStringFrequenza(int id) {
+		Set<Entry<String, TipoSchedulazione>> set = map.entrySet();
+		for (Iterator<Entry<String, TipoSchedulazione>> iterator = set.iterator(); iterator.hasNext();) {
+			Entry<String, TipoSchedulazione> e = iterator.next();
+			if (e.getValue().getId() == id)
+				return e.getKey();
+		}
+		return "";
 	}
 
 	public static int getIdSchedulazione(String val) {

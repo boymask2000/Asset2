@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import beans.Asset;
+import beans.AssetAlca;
 import beans.Checklist;
 import database.MyBatisConnectionFactory;
 import database.mapper.ChecklistMapper;
@@ -36,7 +37,7 @@ public class ChecklistDAO {
 			session.close();
 		}
 	}
-	public List<Checklist> getChecklistForAsset(Asset s) {
+	public List<Checklist> getChecklistForAsset(AssetAlca s) {
 		System.out.println("getChecklistForAsset");
 		List<Checklist> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();

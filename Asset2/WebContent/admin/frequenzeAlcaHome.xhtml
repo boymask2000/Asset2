@@ -12,45 +12,40 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel id="basic" header="Gestione Asset"
+				<h:panelGrid columns="1" cellpadding="10">
+				<h:outputText value="#{managedAssetBean.selectedAsset.facNum} #{managedAssetBean.selectedAsset.nomenclature}" />
+					<p:panel id="basic" header="Frequenze Interventi"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedAssetBean.allAssets}" var="c"
-							selection="#{managedAssetBean.selectedAsset}"
-							rowKey="#{c.id}" paginator="true" rows="10"
+							value="#{managedFrequenzeAlcaBean.frequenzeForAsset}" var="c"
+							selection="#{managedFrequenzeAlcaBean.selectedFrequenza}"
+							rowKey="#{c.id}" paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
 							<p:ajax event="rowSelect"
-								listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
+								listener="#{managedChecklistBean.onRowSelect}"
+								update=":form:msgs" />
 
-							<p:column headerText="Fac System">
-								<h:outputText value="#{c.facSystem}" />
+							<p:column headerText="Frequenza">
+								<h:outputText value="#{c.stringFrequenza}" />
 							</p:column>
+					
 
-							<p:column headerText="Nomenclature">
-								<h:outputText value="#{c.nomenclature}" />
-							</p:column>
 
-				
-							<p:column headerText="LastStatus">
-								<h:outputText value="#{c.lastStatus}" />
-							</p:column>
 
 							<f:facet name="footer">
 
-								<h:commandButton action="goToDetailAsset"
-									value="Detail" process="@this">
-									<f:param name="op" value="NEW" />
-								</h:commandButton>
+								<p:commandButton value="Esci" action="adminHome" />
 
-
+								<p:commandButton action="nuovaFrequenza" value="Nuova Frequenza"
+									process="@this" />
 
 							</f:facet>
 						</p:dataTable>
 					</p:panel>
 				</h:panelGrid>
+
 
 
 				<p:commandButton process="@this" icon="pi pi-search" value="Home"

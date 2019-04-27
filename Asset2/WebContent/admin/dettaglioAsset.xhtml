@@ -16,73 +16,38 @@
 							<h:panelGrid columns="2" cellpadding="1">
 								<h:outputText value="ID" />
 								<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
-								<h:outputText value="masterSystem" />
+								<h:outputText value="Fac #" />
+								<h:inputText value="#{managedAssetBean.selectedAsset.facNum}" />
+								<h:outputText value="facSystem" />
+								<h:inputText value="#{managedAssetBean.selectedAsset.facSystem}" />
+								<h:outputText value="facSubsystem" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.masterSystem}" />
-								<h:outputText value="assetNum" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.assetNum}" />
-								<h:outputText value="changedDate" />
+									value="#{managedAssetBean.selectedAsset.facSubsystem}" />
+								<h:outputText value="assemblyCategory" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.changedDate}" />
-								<h:outputText value="description" />
+									value="#{managedAssetBean.selectedAsset.assemblyCategory}" />
+								<h:outputText value="nomenclature" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.description}" />
-								<h:outputText value="longDescription" />
+									value="#{managedAssetBean.selectedAsset.nomenclature}" />
+								<h:outputText value="procId" />
+								<h:inputText value="#{managedAssetBean.selectedAsset.procId}" />
+								<h:outputText value="pmSchedRecipient" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.longDescription}" />
-								<h:outputText value="system" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.system}" />
-								<h:outputText value="subSystem" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.subSystem}" />
-								<h:outputText value="location" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.location}" />
+									value="#{managedAssetBean.selectedAsset.pmSchedRecipient}" />
+								<h:outputText value="pmSchedSerial" />
+								<h:inputText
+									value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
 
-								<h:outputText value="workCenter" />
+								<h:outputText value="rpieIdIndividual" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.workCenter}" />
-								<h:outputText value="assetType" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.assetType}" />
-								<h:outputText value="assetQuantity" />
+									value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.assetQuantity}" />
-								<h:outputText value="unitOfMeasure" />
+									value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
+								<h:outputText value="lastStatus" />
 								<h:inputText
-									value="#{managedAssetBean.selectedAsset.unitOfMeasure}" />
-								<h:outputText value="inventoryCategory" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.inventoryCategory}" />
-								<h:outputText value="purchasePrice" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.purchasePrice}" />
-								<h:outputText value="budgetedCost" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.budgetedCost}" />
-								<h:outputText value="replacementCost" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.replacementCost}" />
-								<h:outputText value="meterGroup" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.meterGroup}" />
-								<h:outputText value="belongsTo" />
-								<h:inputText value="#{managedAssetBean.selectedAsset.belongsTo}" />
-								<h:outputText value="contractNumber" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.contractNumber}" />
-								<h:outputText value="taskDelivOrderNum" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.taskDelivOrderNum}" />
-								<h:outputText value="drawingRefId" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.drawingRefId}" />
-								<h:outputText value="warrantyExpDate" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.warrantyExpDate}" />
-								<h:outputText value="statusDate" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.statusDate}" />
-								<h:outputText value="installationDate" />
-								<h:inputText
-									value="#{managedAssetBean.selectedAsset.installationDate}" />
+									value="#{managedAssetBean.selectedAsset.lastStatus}" />
+
 							</h:panelGrid>
 							<p:commandButton action="#{managedAssetBean.updateAsset}"
 								value="update" update=":form" />
@@ -191,7 +156,7 @@
 
 					<h:commandButton value="Stampa"
 						action="#{printCreatorFullDettaglioAsset.printFullAsset}" />
-					<h:commandButton value="CheckList" action="checklistHome" />
+					<h:commandButton value="Frequenze" action="frequenzeAlcaHome" />
 				</p:panel>
 			</h:form>
 			<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"

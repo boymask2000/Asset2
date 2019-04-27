@@ -10,13 +10,13 @@ import database.mapper.FrequenzeAlcaMapper;
 
 public class FrequenzeAlcaDAO {
 
-	public List<FrequenzaAlca> getFreqForRPIE(FrequenzaAlca u){
+	public List<FrequenzaAlca> getFreqForRPIE(FrequenzaAlca u) {
 		List<FrequenzaAlca> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 
 		try {
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
-			
+
 			list = mapper.getFreqForRPIE(u);
 		} finally {
 			session.close();
@@ -24,17 +24,34 @@ public class FrequenzeAlcaDAO {
 		return list;
 	}
 
+	public List<FrequenzaAlca> getFreqForRPIEandFreq(FrequenzaAlca u) {
+		List<FrequenzaAlca> list = null;
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+
+		try {
+			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
+
+			list = mapper.getFreqForRPIEandFreq(u);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 	public void insert(FrequenzaAlca u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
-			mapper.insert(u);
-			session.commit();
+			List<FrequenzaAlca> lista = getFreqForRPIEandFreq(u);
+			if (lista.size() == 0) {
+				mapper.insert(u);
+				session.commit();
+			}
 		} finally {
 			session.close();
 		}
 	}
+
 	public void delete(FrequenzaAlca u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -45,6 +62,7 @@ public class FrequenzeAlcaDAO {
 			session.close();
 		}
 	}
+
 	public void update(FrequenzaAlca u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {

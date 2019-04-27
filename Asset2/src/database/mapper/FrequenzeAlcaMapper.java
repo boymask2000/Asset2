@@ -13,6 +13,9 @@ public interface FrequenzeAlcaMapper {
 
 	final String SELECT_FREQ_PER_CODICE = "SELECT * FROM " + TABELLA
 			+ " WHERE rpieIdIndividual=#{rpieIdIndividual} ";
+	
+	final String SELECT_FREQ_PER_CODICE_E_FREQ = "SELECT * FROM " + TABELLA
+			+ " WHERE rpieIdIndividual=#{rpieIdIndividual} AND idFrequenza = #{codFrequenza}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (rpieIdIndividual , idFrequenza  )" //
@@ -24,6 +27,10 @@ public interface FrequenzeAlcaMapper {
 			"idFrequenza = #{codFrequenza} " + //
 
 			" WHERE rpieIdIndividual=#{rpieIdIndividual}";
+	
+	
+	@Select(SELECT_FREQ_PER_CODICE_E_FREQ)
+	public List<FrequenzaAlca> getFreqForRPIEandFreq(FrequenzaAlca u);
 	
 	@Select(SELECT_FREQ_PER_CODICE)
 	public List<FrequenzaAlca> getFreqForRPIE(FrequenzaAlca u);

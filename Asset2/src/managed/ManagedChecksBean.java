@@ -38,13 +38,14 @@ public class ManagedChecksBean implements Serializable {
 
 	public void aggiungi() {
 
-		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
-		AssetAlca as = mab.getSelectedAsset();
+		//ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+		ManagedFrequenzeAlcaBean mfb = (ManagedFrequenzeAlcaBean) JsfUtil.getBean("managedFrequenzeAlcaBean");
+	//	AssetAlca as = mab.getSelectedAsset();
 		ChecklistDAO dao = new ChecklistDAO();
 		int count = 0;
 		for (Check c : multiSelect) {
 			Checklist cl = new Checklist();
-			cl.setAssetId(as.getId());
+			cl.setAssetId(mfb.getSelectedFrequenza().getId());
 			cl.setCheckId(c.getId());
 			dao.insert(cl);
 			count++;

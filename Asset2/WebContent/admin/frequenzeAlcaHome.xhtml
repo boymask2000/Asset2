@@ -13,7 +13,9 @@
 				<p:growl id="msgs" showDetail="true" />
 
 				<h:panelGrid columns="1" cellpadding="10">
+				
 				<h:outputText value="#{managedAssetBean.selectedAsset.facNum} #{managedAssetBean.selectedAsset.nomenclature}" />
+				
 					<p:panel id="basic" header="Frequenze Interventi"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" selectionMode="single"
@@ -30,7 +32,7 @@
 							<p:column headerText="Frequenza">
 								<h:outputText value="#{c.stringFrequenza}" />
 							</p:column>
-					
+				
 
 
 
@@ -39,6 +41,9 @@
 								<p:commandButton value="Esci" action="adminHome" />
 
 								<p:commandButton action="nuovaFrequenza" value="Nuova Frequenza"
+									process="@this" />
+									
+									<p:commandButton action="checklistHome" value="Checklist"
 									process="@this" />
 
 							</f:facet>

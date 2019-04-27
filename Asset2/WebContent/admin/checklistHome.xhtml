@@ -13,10 +13,13 @@
 				<p:growl id="msgs" showDetail="true" />
 
 				<h:panelGrid columns="1" cellpadding="10">
+				
+				<h:outputText value="#{managedAssetBean.selectedAsset.facNum} #{managedAssetBean.selectedAsset.nomenclature}       Frequenza:#{managedFrequenzeAlcaBean.selectedFrequenza.stringFrequenza}" />
+				
 					<p:panel id="basic" header="Gestione checklist"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedChecklistBean.checklistForAsset}" var="c"
+							value="#{managedChecklistBean.checklistForFrequenza}" var="c"
 							selection="#{managedChecklistBean.selectedChecklist}"
 							rowKey="#{c.id}" paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import beans.Asset;
 import beans.AssetAlca;
 import beans.Checklist;
+import beans.FrequenzaAlca;
 import database.MyBatisConnectionFactory;
 import database.mapper.ChecklistMapper;
 
@@ -46,6 +47,22 @@ public class ChecklistDAO {
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 			
 			list = mapper.getChecksForAsset(s);
+		}catch( Throwable t){
+			t.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	public List<Checklist> getChecklistForFrequenza(FrequenzaAlca s) {
+		System.out.println("getChecklistForAsset");
+		List<Checklist> list = null;
+		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+
+		try {
+			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
+			
+			list = mapper.getChecksForFrequenza(s);
 		}catch( Throwable t){
 			t.printStackTrace();
 		} finally {

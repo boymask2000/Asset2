@@ -11,6 +11,7 @@ import org.primefaces.event.SelectEvent;
 import beans.FrequenzaAlca;
 import common.JsfUtil;
 import common.Log;
+import database.dao.ChecklistDAO;
 import database.dao.FrequenzeAlcaDAO;
 
 public class ManagedFrequenzeAlcaBean implements Serializable {
@@ -23,11 +24,6 @@ public class ManagedFrequenzeAlcaBean implements Serializable {
 
 	private FrequenzaAlca selectedFrequenza = new FrequenzaAlca();
 
-//	public List<Checklist> getAllChecklist() {
-//		ChecklistDAO dao = new ChecklistDAO();
-//		myList = dao.getAll();
-//		return myList;
-//	}
 	
 	public List<FrequenzaAlca> getFrequenzeForAsset() {
 		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
@@ -67,6 +63,7 @@ public class ManagedFrequenzeAlcaBean implements Serializable {
 	}
 
 	public void setSelectedFrequenza(FrequenzaAlca d) {
+		
 		this.selectedFrequenza = d;
 	}
 }

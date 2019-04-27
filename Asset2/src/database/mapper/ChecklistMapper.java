@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import beans.AssetAlca;
 import beans.Checklist;
+import beans.FrequenzaAlca;
 
 public interface ChecklistMapper {
 	final String TABELLA = "test1.checklist";
@@ -14,6 +15,26 @@ public interface ChecklistMapper {
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
 	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA + " WHERE assetId=#{id}";
+	
+	final String SELECT_FOR_FREQ= "SELECT " //
+			+ "list.assetId "//
+			
+			+ "FROM " + //
+			TABELLA + " list " + //
+		
+			" WHERE list.assetId=#{id} ";
+	final String SELECT_FOR_FREQ2= "SELECT " //
+			+ "list.assetId, "//
+			+ "c.id as checkId, "//
+			+ "c.description, "//
+			+ "c.codiceNormativa as codiceNormativa, "//
+			+ "n.filename as fileNormativa "//
+			+ "FROM " + //
+			TABELLA + " list, " + //
+			"checks c, " + //
+			"normative n " + //
+			" WHERE list.assetId=#{id} and list.checkId=c.id and c.codiceNormativa=n.codice";
+	
 	final String SELECT_FOR_ASSET2 = "SELECT " //
 			+ "list.assetId, "//
 			+ "c.id as checkId, "//
@@ -35,6 +56,9 @@ public interface ChecklistMapper {
 
 	@Select(SELECT_FOR_ASSET2)
 	public List<Checklist> getChecksForAsset(AssetAlca s);
+	
+	@Select(SELECT_FOR_FREQ)
+	public List<Checklist> getChecksForFrequenza(FrequenzaAlca s);
 
 	@Insert(INSERT)
 	public void insert(Checklist cl);

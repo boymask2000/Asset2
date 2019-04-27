@@ -8,6 +8,7 @@ public class FrequenzaAlca {
 	private int codFrequenza;
 	private int idFrequenza;
 	private String stringFrequenza;
+	private int numCheckList;
 
 	public long getId() {
 		return id;
@@ -47,5 +48,14 @@ public class FrequenzaAlca {
 
 	public void setStringFrequenza(String stringFrequenza) {
 		this.stringFrequenza = stringFrequenza;
+	}
+
+	public void setNumCheckList(int numCheckList) {
+		this.numCheckList = numCheckList;
+
+	}
+
+	public int getNumCheckList() {
+		return numCheckList;
 	}
 }

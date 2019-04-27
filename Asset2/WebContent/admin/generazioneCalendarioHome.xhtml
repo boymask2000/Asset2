@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:panelGrid columns="1" cellpadding="100">
+				<p:panel rendered="#{managedCalendarioBean.maxData != null}">
+					<h:outputText
+						value="Calendario già generato dal #{managedCalendarioBean.minData} al #{managedCalendarioBean.maxData}" />
+				</p:panel>
+
+				<p:panel id="basic" style="margin-bottom:20px"
+					rendered="#{managedCalendarioBean.maxData == null}">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="messages" showDetail="true" />
+
+
+
+						<p:commandButton value="Genera Calendario"
+							action="#{generaCalendarioJob.go}" />
+					</h:form>
+				</p:panel>
+			</h:panelGrid>
+			<p:commandButton process="@this" icon="pi pi-search" value="Home"
+				action="adminHome" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

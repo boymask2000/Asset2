@@ -15,7 +15,6 @@ import beans.Intervento;
 import common.Log;
 import common.TimeUtil;
 import database.dao.AssetAlcaDAO;
-import database.dao.AssetDAO;
 import database.dao.InterventiDAO;
 
 public class ManagedInterventiBean implements Serializable {
@@ -83,17 +82,17 @@ public class ManagedInterventiBean implements Serializable {
 		try {
 			dao.insert(in);
 		} catch (Throwable e) {
-			System.out.println("lllllllllllllllllllllllll");
+			e.printStackTrace();
 		}
 	}
 
-	private BasicDocumentViewController getDocController() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
-				"#{basicDocumentViewController}", BasicDocumentViewController.class);
-		return assetBean;
-	}
+//	private BasicDocumentViewController getDocController() {
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Application application = context.getApplication();
+//		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
+//				"#{basicDocumentViewController}", BasicDocumentViewController.class);
+//		return assetBean;
+//	}
 
 	public Intervento getSelectedIntevento() {
 

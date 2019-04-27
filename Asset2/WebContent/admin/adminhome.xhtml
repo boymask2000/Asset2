@@ -12,8 +12,8 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel id="basic" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:panelGrid columns="1" cellpadding="10">
 
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Gestione utenti" action="utentiHome" />
@@ -27,8 +27,7 @@
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Checks" action="checksHome" />
 
-						<p:commandButton process="@this" icon="pi pi-search"
-							value="Caricamento massivo asset" action="loadAsset" />
+
 
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Lavori batch" action="batchHome" />
@@ -38,11 +37,17 @@
 
 
 
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="Caricamento massivo asset" action="loadAsset" />
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="Generazione Calendario" action="generazioneCalendario" />
+
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Planner" action="#{plannerjob.go}" />
+					</h:panelGrid>
 
-
-					</p:panel>
 				</h:panelGrid>
 
 				<p:commandButton process="@this" icon="pi pi-search" value="Esci"

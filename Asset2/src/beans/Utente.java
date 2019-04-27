@@ -14,7 +14,6 @@ public class Utente implements Serializable {
 	private String tipo="U";
 	private String descrizione;
 	private String email;
-	private String message;
 
 	public String getUsername() {
 		return username;
@@ -68,14 +67,13 @@ public class Utente implements Serializable {
 			tipo=u.getTipo();
 			email=u.getEmail();
 
-			message = "Successfully logged-in.";
+
 			if (u == null || !u.isAdmin())
 				return "home";
 			else
 				return "admin";
 		} else {
 			username = null;
-			message = "Wrong credentials.";
 			return "login";
 		}
 	}

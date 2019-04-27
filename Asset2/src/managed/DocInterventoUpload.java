@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -49,7 +48,7 @@ public class DocInterventoUpload {
 
 	private void loadFile(String fileName, InputStream is, long interventoId) {
 		
-		ManagedDocInterventiBean assetBean = getManagedDocInterventiBean();
+	//	ManagedDocInterventiBean assetBean = getManagedDocInterventiBean();
 		//long assetId = assetBean.getSelectedDocIntervento().getId();
 		
 		String ext = getExt(fileName);
@@ -95,13 +94,13 @@ public class DocInterventoUpload {
 //		}
 	}
 
-	private ManagedDocInterventiBean getManagedDocInterventiBean() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		ManagedDocInterventiBean assetBean = application.evaluateExpressionGet(context, "#{managedDocInterventiBean}",
-				ManagedDocInterventiBean.class);
-		return assetBean;
-	}
+//	private ManagedDocInterventiBean getManagedDocInterventiBean() {
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Application application = context.getApplication();
+//		ManagedDocInterventiBean assetBean = application.evaluateExpressionGet(context, "#{managedDocInterventiBean}",
+//				ManagedDocInterventiBean.class);
+//		return assetBean;
+//	}
 
 	public void handleFileUpload(FileUploadEvent event) {
 		long interventoId = (long) event.getComponent().getAttributes().get("intId");
@@ -121,10 +120,10 @@ public class DocInterventoUpload {
 		FacesMessage message = new FacesMessage("Succesful", fileName + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 
-		ManagedDocInterventiBean assetBean = getManagedDocInterventiBean();
-
-		System.out.println(currentDoc.getDescrizione());
-		System.out.println(currentDoc.getFilename());
+//		ManagedDocInterventiBean assetBean = getManagedDocInterventiBean();
+//
+//		System.out.println(currentDoc.getDescrizione());
+//		System.out.println(currentDoc.getFilename());
 
 	//	long assetId = assetBean.getSelectedDocIntervento().getId();
 		currentDoc.setInterventoId(interventoId);

@@ -6,11 +6,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import beans.Asset;
 import beans.AssetAlca;
 import beans.Checklist;
 import database.dao.AssetAlcaDAO;
-import database.dao.AssetDAO;
 import database.dao.ChecklistDAO;
 import restservice.beans.ChecklistRestBean;
 

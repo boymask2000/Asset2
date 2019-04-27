@@ -11,7 +11,6 @@ import org.primefaces.event.SelectEvent;
 import beans.FrequenzaAlca;
 import common.JsfUtil;
 import common.Log;
-import database.dao.ChecklistDAO;
 import database.dao.FrequenzeAlcaDAO;
 
 public class ManagedFrequenzeAlcaBean implements Serializable {

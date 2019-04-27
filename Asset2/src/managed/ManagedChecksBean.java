@@ -8,8 +8,6 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import beans.Asset;
-import beans.AssetAlca;
 import beans.Check;
 import beans.Checklist;
 import beans.Normativa;

@@ -5,14 +5,12 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import beans.Normativa;
-import common.ApplicationConfig;
 import common.JsfUtil;
 import common.Log;
 import database.dao.NormativeDAO;

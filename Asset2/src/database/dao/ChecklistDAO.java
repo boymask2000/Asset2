@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import beans.Asset;
 import beans.AssetAlca;
 import beans.Checklist;
 import beans.FrequenzaAlca;

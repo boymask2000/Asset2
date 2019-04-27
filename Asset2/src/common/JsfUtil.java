@@ -7,8 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 
-import beans.Check;
-
 public class JsfUtil {
 	public static void redirect(String rule) {
 		FacesContext ctx = FacesContext.getCurrentInstance();

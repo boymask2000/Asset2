@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.Intervento;
+import common.JsfUtil;
 import common.Log;
 import common.TimeUtil;
 import database.dao.AssetAlcaDAO;
@@ -114,7 +115,10 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void nuovoIntervento() {
+		ManagedAssetBean managedAssetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+		long id = managedAssetBean.getSelectedAsset().getId();
 	
+		selectedIntevento.setAssetId(id);
 		InterventiDAO dao = new InterventiDAO();
 		dao.insert(selectedIntevento);
 	}

@@ -39,9 +39,13 @@ public interface ChecklistMapper {
 			+ "n.filename as fileNormativa "//
 			+ "FROM " + //
 			TABELLA + " list, " + //
+			"frequenzealca freq,"+ //
 			"checks c, " + //
 			"normative n " + //
-			" WHERE list.assetId=#{id} and list.checkId=c.id and c.codiceNormativa=n.codice";
+			" WHERE  freq.rpieIdIndividual=#{rpieIdIndividual} "
+			+ "AND freq.id=list.assetId     "
+			+ "and list.checkId=c.id "
+			+ "and c.codiceNormativa=n.codice";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , checkId )" //

@@ -10,8 +10,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import beans.Asset;
+import beans.ChecklistIntervento;
 import beans.Intervento;
 import common.TimeUtil;
+import database.dao.ChecklistInterventiDAO;
 import database.dao.InterventiDAO;
 import restservice.beans.InterventoRestBean;
 
@@ -42,6 +44,41 @@ public class InterventoRest {
 		intervento.setData_effettiva(TimeUtil.getCurrentDate());
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(intervento);
+
+		return Response.ok().build();
+	}
+	@POST
+	@Path("/creaIntervento")
+	public Response crea(InterventoRestBean inter) throws URISyntaxException {
+		System.out.println("creaIntervento ricevuto " + inter);
+		System.out.println(inter.getId());
+		System.out.println(inter.getData_pianificata());
+	
+		Intervento u = new Intervento();
+		u.setId(inter.getId());
+		ChecklistInterventiDAO ckDao = new ChecklistInterventiDAO();
+		List<ChecklistIntervento> ll = ckDao.getCheckListForIntervento(u);
+		
+		
+		
+		InterventiDAO iDao = new InterventiDAO();
+		u.setData_pianificata(inter.getData_pianificata());
+		u.setData_effettiva("");
+		u.setData_teorica("");
+		iDao.insert(u);
+		System.out.println("ID: "+u.getId());
+		
+		for( ChecklistIntervento cli: ll) {
+			cli.setInterventoId(u.getId());
+			ckDao.insert(cli);
+		}
+		
+	
+
+//		Intervento intervento = (Intervento) inter;
+//		intervento.setData_effettiva(TimeUtil.getCurrentDate());
+//		InterventiDAO dao = new InterventiDAO();
+//		dao.update(intervento);
 
 		return Response.ok().build();
 	}

@@ -17,22 +17,18 @@ public class ChecklistRest {
 
 	@GET
 	@Path("{assetId}")
-	public ChecklistRestBean  getCheckist(@PathParam("assetId") String assetId) {
+	public ChecklistRestBean  getCheckist(@PathParam("assetId") String rpie) {
+		
+		AssetAlcaDAO assetDao = new AssetAlcaDAO();
+		AssetAlca asset = assetDao.searchByRPIE(rpie);
 
 		ChecklistDAO dao = new ChecklistDAO();
 
-		AssetAlca s = new AssetAlca();
-		long id = Long.parseLong(assetId);
-		s.setId(id);
-		List<Checklist> lista = dao.getChecklistForAsset(s);
-		
-		AssetAlcaDAO assetDao=new AssetAlcaDAO();
-		s=assetDao.searchById(s);
-		
+		List<Checklist> lista = dao.getChecklistForAsset(asset);
 		
 		ChecklistRestBean checklistRestBean=new ChecklistRestBean();
 		checklistRestBean.setLista(lista);
-		checklistRestBean.setAsset(s);
+		checklistRestBean.setAsset(asset);
 
 		return checklistRestBean;
 	}

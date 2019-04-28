@@ -49,6 +49,13 @@ public class AssetAlcaDAO {
 		}
 	}
 
+	public AssetAlca searchByRPIE(String rpie) {
+		AssetAlca s = new AssetAlca();
+		s.setRpieIdIndividual(rpie);
+
+		return searchByRPIE(s);
+	}
+
 	public void insert(AssetAlca u) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
@@ -85,14 +92,14 @@ public class AssetAlcaDAO {
 	}
 
 	public List<AssetAlca> selectAssetsWithStatus(int selectedSeverity) {
-		List<AssetAlca> lista=new ArrayList<AssetAlca>();
-		
+		List<AssetAlca> lista = new ArrayList<AssetAlca>();
+
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
 			AssetAlca alca = new AssetAlca();
 			alca.setLastStatus("" + selectedSeverity);
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
-			lista = 	mapper.selectAssetsWithStatus(alca);
+			lista = mapper.selectAssetsWithStatus(alca);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

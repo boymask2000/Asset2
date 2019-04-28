@@ -3,6 +3,7 @@ package database.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -59,6 +60,7 @@ public interface InterventiMapper {
 	public List<Intervento> selectAll();
 
 	@Insert(INSERT)
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public void insert(Intervento contact);
 
 	@Select(SELECT_INTERVENTI_PER_ASSET)

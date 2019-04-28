@@ -26,14 +26,14 @@ public class ViewUtentiBean implements Serializable{
 	public void setSelectedUser(Utente selectedUser) {
 		this.selectedUser = selectedUser;
 		Log.getLogger().debug("setSelectedUser");
-		System.out.println("setSelectedUser");
+		
 	}
 	
 	 public void onRowSelect(SelectEvent event) {
 	        FacesMessage msg = new FacesMessage(" Selected", ((Utente) event.getObject()).getUsername());
 	        FacesContext.getCurrentInstance().addMessage(null, msg);
 	        Log.getLogger().debug("select");
-	        System.out.println("onRowSelect");
+	       
 	    
 	    }
 	 

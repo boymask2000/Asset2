@@ -32,24 +32,24 @@ public class ManagedUtentiBean implements Serializable {
 
 
 	public void update(Utente u) {
-		System.out.println("Update");
+		
 		UtenteDAO dao = new UtenteDAO();
 		dao.update(u);
 	}
 
 	public void updateUtente() {
-		System.out.println("UpdateUtente");
+		
 		UtenteDAO dao = new UtenteDAO();
 		dao.update(selectedUser);
 	}
 	public void delete() {
-		System.out.println("delete");
+		
 		UtenteDAO dao = new UtenteDAO();
 		dao.delete(selectedUser);
 	}
 
 	public void updatePassword() {
-		System.out.println("UpdateUtente");
+		
 		UtenteDAO dao = new UtenteDAO();
 		dao.updatePassword(selectedUser);
 	}
@@ -60,8 +60,7 @@ public class ManagedUtentiBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
 
-		System.out.println("onRowSelect username=" + selectedUser.getUsername());
-
+	
 	}
 
 //	public void onRowUnselect(SelectEvent event) {
@@ -73,7 +72,7 @@ public class ManagedUtentiBean implements Serializable {
 //	}
 
 	public void insertUtente() {
-		System.out.println("insert");
+	
 
 		UtenteDAO dao = new UtenteDAO();
 
@@ -90,7 +89,7 @@ public class ManagedUtentiBean implements Serializable {
 
 	public void setSelectedUser(Utente s) {
 		if(s==null)return;
-		System.out.println("setSelectedUser username=" + s.getUsername());
+	
 		this.selectedUser = s;
 	}
 

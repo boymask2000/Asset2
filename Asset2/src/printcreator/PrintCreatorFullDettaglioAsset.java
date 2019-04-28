@@ -13,8 +13,6 @@ import managed.ManagedAssetBean;
 
 public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 
-
-
 	public String printFullAsset() {
 
 		ManagedAssetBean db = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
@@ -24,20 +22,20 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		PrintCreator prt = new PrintCreator();
 		prt.insertStartDoc();
 		prt.insertPageFormats();
-		
+
 		// ********************************PersonalData
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");
-	prt.dump();
-	
+		prt.dump();
+
 		prt.addBlock("Info asset", "20pt");
 		stampaMainData(prt, db);
-		
+
 		prt.endPageSequence();
 		// ********************************
 		prt.startPageSequence(null);
 		prt.addBlock("Ultimo aggiornamento", "20pt");
-		stampaUltimoIntervento(prt,db);
+		stampaUltimoIntervento(prt, db);
 		prt.endPageSequence();
 		// ********************************
 		prt.startPageSequence(null);
@@ -55,7 +53,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 			e.printStackTrace();
 		}
 
-	//	JsfUtil.goTo("stampa");
+		// JsfUtil.goTo("stampa");
 
 		return "viewFile";
 	}
@@ -64,18 +62,20 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		AssetAlca asset = db.getSelectedAsset();
 		InterventiDAO dao = new InterventiDAO();
 		Intervento lastInter = dao.getUltimoInterventoFatto(asset.getId());
-		Table t = new Table();
-		t.setHeader(false);
-		t.addColumnDefinition(new Column("", "6cm"));
-		t.addColumnDefinition(new Column("", "4cm"));
-		t.startRow();
-		t.addDataCol("Data ultimo intervento:");
-		t.addDataCol("" + lastInter.getData_effettiva());
-		t.startRow();
-		t.addDataCol("Esito:");
-		t.addDataCol("" + lastInter.getEsito());
-		
-		prt.addtable(t);
+		if (lastInter != null) {
+			Table t = new Table();
+			t.setHeader(false);
+			t.addColumnDefinition(new Column("", "6cm"));
+			t.addColumnDefinition(new Column("", "4cm"));
+			t.startRow();
+			t.addDataCol("Data ultimo intervento:");
+			t.addDataCol("" + lastInter.getData_effettiva());
+			t.startRow();
+			t.addDataCol("Esito:");
+			t.addDataCol("" + lastInter.getEsito());
+
+			prt.addtable(t);
+		}
 	}
 
 	private void stampaInterventi(PrintCreator prt, ManagedAssetBean db) {
@@ -83,12 +83,12 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		AssetAlca asset = db.getSelectedAsset();
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> li = dao.getInterventiForAsset(asset.getId());
-		for( Intervento inter: li) {
+		for (Intervento inter : li) {
 			Table t = new Table();
 			t.setHeader(false);
 			t.addColumnDefinition(new Column("", "6cm"));
 			t.addColumnDefinition(new Column("", "4cm"));
-			
+
 			List<Pair> lista = caricaCampi(inter);
 			for (Pair p : lista) {
 				t.startRow();
@@ -97,7 +97,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 			}
 			prt.addtable(t);
 		}
-		
+
 	}
 
 	private void stampaMainData(PrintCreator prt, ManagedAssetBean bean) {

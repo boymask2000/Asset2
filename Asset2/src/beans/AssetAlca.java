@@ -21,7 +21,7 @@ public class AssetAlca implements Serializable{
 	private String rpieIdIndividual;
 	private String frequency;
 	private String schedAssignedOrg;
-	private String lastStatus;
+	private String lastStatus="0";
 	
 	public long getId() {
 		return id;

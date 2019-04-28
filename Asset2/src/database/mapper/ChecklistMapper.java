@@ -15,15 +15,11 @@ public interface ChecklistMapper {
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
 	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA + " WHERE assetId=#{id}";
-	
-	final String SELECT_FOR_FREQ= "SELECT * " //
-		
-			
-			+ "FROM " + //
-			TABELLA + " list " + //
-		
-			" WHERE list.assetId=#{id} ";
-	final String SELECT_FOR_FREQ2= "SELECT " //
+
+	final String SELECT_FOR_FREQ = "SELECT * " //
+			+ "FROM " + TABELLA + //
+			" WHERE assetId=#{id} ";
+	final String SELECT_FOR_FREQ2 = "SELECT " //
 			+ "list.assetId, "//
 			+ "c.id as checkId, "//
 			+ "c.description, "//
@@ -34,7 +30,7 @@ public interface ChecklistMapper {
 			"checks c, " + //
 			"normative n " + //
 			" WHERE list.assetId=#{id} and list.checkId=c.id and c.codiceNormativa=n.codice";
-	
+
 	final String SELECT_FOR_ASSET2 = "SELECT " //
 			+ "list.assetId, "//
 			+ "c.id as checkId, "//
@@ -56,7 +52,7 @@ public interface ChecklistMapper {
 
 	@Select(SELECT_FOR_ASSET2)
 	public List<Checklist> getChecksForAsset(AssetAlca s);
-	
+
 	@Select(SELECT_FOR_FREQ)
 	public List<Checklist> getChecksForFrequenza(FrequenzaAlca s);
 

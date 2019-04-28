@@ -28,7 +28,7 @@ public class DocInterventoUpload {
 		this.file = file;
 		String fileName = file.getFileName();
 
-		System.out.println("fleName: " + file.getFileName());
+	
 		try (InputStream inputStream = file.getInputstream();) {
 
 			loadFile(fileName, inputStream,0);
@@ -75,7 +75,7 @@ public class DocInterventoUpload {
 	}
 
 	public void upload() {
-		System.out.println("upload file=" + file);
+	
 //		if (file != null) {
 //			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 //			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -108,7 +108,7 @@ public class DocInterventoUpload {
 		String fileName = event.getFile().getFileName();
 	//	fileName = getFullPath(fileName);
 
-		System.out.println("fleName: " + fileName);
+		
 		try (InputStream inputStream = event.getFile().getInputstream();) {
 
 			loadFile(fileName, inputStream, interventoId);

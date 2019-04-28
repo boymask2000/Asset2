@@ -56,7 +56,7 @@ public class CalendarioDaTavolo {
 	}
 
 	public void init() {
-		System.out.println("Calnedario init");
+	
 		Calendar cc = (Calendar) cal.clone();
 
 		cc.set(Calendar.DAY_OF_MONTH, 1);

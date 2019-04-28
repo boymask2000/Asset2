@@ -54,8 +54,7 @@ public class ManagedChecklistBean implements Serializable {
 	}
 
 	public void insertChecklist() {
-		System.out.println("insert");
-
+	
 		ChecklistDAO dao = new ChecklistDAO();
 
 		try {

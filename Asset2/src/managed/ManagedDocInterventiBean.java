@@ -38,13 +38,13 @@ public class ManagedDocInterventiBean implements Serializable {
 	}
 
 	public List<DocIntervento> getDocsForIntervento(int interId) {
-		System.out.println("getDocsForIntervento interId= "+interId);
+	
 		DocInterventiDAO dao = new DocInterventiDAO();
 		myList = dao.getDocForIntervento(interId);
 		return myList;
 	}
 	public String setupViewFile(String nome) {
-		System.out.println("setup");
+	
 		BasicDocumentViewController c = getDocController();
 		c.setPdf(new File(getFullPath(nome)));
 		return "viewFile";
@@ -63,14 +63,14 @@ public class ManagedDocInterventiBean implements Serializable {
 	}
 
 	public void insert(DocIntervento manuale) {
-		System.out.println("insert");
+	
 
 		DocInterventiDAO dao = new DocInterventiDAO();
 
 		try {
 			dao.insert(manuale);
 		} catch (Throwable e) {
-			System.out.println("lllllllllllllllllllllllll");
+			e.printStackTrace();
 		}
 	}
 

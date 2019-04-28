@@ -42,7 +42,7 @@ public class BasicDocumentViewController implements Serializable {
 	            return new DefaultStreamedContent();
 	        } else {
 	        	try {
-	        		System.out.println("file:"+pdf);
+	        	
 					return  new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -65,7 +65,7 @@ public class BasicDocumentViewController implements Serializable {
 	}
 
 	public void setPdf(File pdf) {
-		System.out.println("set file "+pdf);
+	
 		this.pdf = pdf;
 	}
 

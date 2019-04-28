@@ -45,7 +45,7 @@ public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	}
 
 	public void insertManuale(Manuale manuale) {
-		System.out.println("insert");
+		
 
 		ManualiDAO dao = new ManualiDAO();
 
@@ -67,7 +67,7 @@ public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	}
 
 	public String setupViewFile(String nome) {
-		System.out.println("setup");
+		
 		BasicDocumentViewController c = getDocController();
 		c.setPdf(new File(getFullPath("Manuali"+File.separator+nome)));
 		return "viewFile";

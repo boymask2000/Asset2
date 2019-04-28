@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -28,7 +29,7 @@ public class ManualeUpload extends ABaseBean {
 		this.file = file;
 		String fileName = file.getFileName();
 
-		System.out.println("fleName: " + file.getFileName());
+		
 		try (InputStream inputStream = file.getInputstream();) {
 
 			loadFile(fileName, inputStream);
@@ -59,29 +60,33 @@ public class ManualeUpload extends ABaseBean {
 	}
 
 	public void upload() {
-		System.out.println("upload file=" + file);
+	
 		if (file != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 
 			ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 
-			System.out.println(currentManuale.getDescrizione());
-			System.out.println(currentManuale.getNomefile());
+		
 
 			long assetId = assetBean.getSelectedAsset().getId();
 			currentManuale.setAssetId(assetId);
-			System.out.println(assetId);
-
+			
 			ManualiDAO manualiDAO = new ManualiDAO();
 			manualiDAO.insert(currentManuale);
 		}
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
+		if (!PhaseId.INVOKE_APPLICATION.equals(event.getPhaseId())) {
+	        event.setPhaseId(PhaseId.INVOKE_APPLICATION);
+	        event.queue();return;
+	    } else {
+	        //do stuff here, #{ngoPhotoBean.description} is set
+	    }
 		String fileName = event.getFile().getFileName();
 
-		System.out.println("fleName: " + fileName);
+		
 		try (InputStream inputStream = event.getFile().getInputstream();) {
 
 			loadFile(fileName, inputStream);
@@ -95,12 +100,11 @@ public class ManualeUpload extends ABaseBean {
 
 		ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 
-		System.out.println(currentManuale.getDescrizione());
-		System.out.println(currentManuale.getNomefile());
+		
 
 		long assetId = assetBean.getSelectedAsset().getId();
 		currentManuale.setAssetId(assetId);
-		System.out.println(assetId);
+	
 
 		ManualiDAO manualiDAO = new ManualiDAO();
 		manualiDAO.insert(currentManuale);

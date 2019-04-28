@@ -34,7 +34,7 @@ public class ManagedInterventiBean implements Serializable {
 	private String selectedDataForSituation;
 
 	public List<Intervento> getInterventiInData(String data) {
-		System.out.println("getInterventiInData "+data);
+		
 		if (data == null || data.trim().equalsIgnoreCase(""))
 			data = TimeUtil.getCurrentDate(new Date());
 		InterventiDAO dao = new InterventiDAO();
@@ -70,12 +70,12 @@ public class ManagedInterventiBean implements Serializable {
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
-		System.out.println("row select id=" + selectedIntevento.getId());
+	
 
 	}
 
 	public void insertManuale(Intervento in) {
-		System.out.println("insert");
+		
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -102,7 +102,7 @@ public class ManagedInterventiBean implements Serializable {
 	public void setSelectedIntevento(Intervento s) {
 		if (s == null)
 			return;
-		System.out.println("setSelectedIntevento idInter= " + s.getId());
+	
 		esito = s.getEsito();
 		this.selectedIntevento = s;
 
@@ -114,13 +114,13 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void nuovoIntervento() {
-		System.out.println("niovooo");
+	
 		InterventiDAO dao = new InterventiDAO();
 		dao.insert(selectedIntevento);
 	}
 
 	public void setDate_data_effettiva(Date d) {
-		System.out.println("set data: " + d);
+		
 		if (d == null)
 			d = new Date();
 		this.date_data_effettiva = d;
@@ -134,7 +134,7 @@ public class ManagedInterventiBean implements Serializable {
 
 	public void setDataNuovoIntervento(Date d) {
 
-		System.out.println("set data: " + d);
+		
 		if (d == null)
 			d = new Date();
 		this.dataNuovoIntervento = d;
@@ -146,7 +146,7 @@ public class ManagedInterventiBean implements Serializable {
 
 	public void setEsito(int esito) {
 		this.esito = esito;
-		System.out.println("esito :" + esito);
+		
 		selectedIntevento.setEsito(esito);
 		InterventiDAO dao = new InterventiDAO();
 
@@ -175,7 +175,7 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void setSelectedDataForSituation(String s) {
-		System.out.println(s);
+		
 		this.selectedDataForSituation = s;
 	}
 

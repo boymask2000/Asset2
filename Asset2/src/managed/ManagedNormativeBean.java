@@ -78,7 +78,7 @@ public class ManagedNormativeBean extends ABaseBean implements Serializable {
 			JsfUtil.showMessage("Nessun file caricato");
 			return null;
 		}
-		System.out.println("setup");
+		
 		BasicDocumentViewController c = getDocController();
 		c.setPdf(new File(getFullPath("Normative" + File.separator + nome)));
 		return "viewFile";

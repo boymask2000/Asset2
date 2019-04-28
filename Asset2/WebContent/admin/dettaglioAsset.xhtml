@@ -170,11 +170,13 @@
 								<h:inputText value="#{manualeUpload.currentManuale.descrizione}"
 									required="true" />
 								<p:fileUpload value="#{manualeUpload.file}" mode="advanced"
-									allowTypes="/(\.|\/)(pdf)$/" update=":form"
-									fileUploadListener="#{manualeUpload.handleFileUpload}">
-									<f:attribute name="assetId"
-										value="#{managedAssetBean.selectedAsset.id}" />
+									allowTypes="/(\.|\/)(pdf)$/" update=":form" process="@form"
+									fileUploadListener="#{manualeUpload.handleFileUpload}"
+									
+									>
+							
 								</p:fileUpload>
+
 
 							</h:form>
 						</p:panel>

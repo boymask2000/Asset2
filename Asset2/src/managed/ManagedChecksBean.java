@@ -61,7 +61,7 @@ public class ManagedChecksBean implements Serializable {
 	}
 
 	public void insertCheck() {
-		System.out.println("insert");
+	
 
 		ChecksDAO dao = new ChecksDAO();
 
@@ -97,6 +97,6 @@ public class ManagedChecksBean implements Serializable {
 
 	public void setMultiSelect(List<Check> multiSelect) {
 		this.multiSelect = multiSelect;
-		System.out.println("setMultiSelect");
+		
 	}
 }

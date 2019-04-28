@@ -95,8 +95,6 @@ public class ManagedAssetBean {
 
 		this.selectedSeverity = selectedSeverity;
 
-		System.out.println("selectedSeverity= " + selectedSeverity);
-
 	}
 
 	public Status getStatus() {

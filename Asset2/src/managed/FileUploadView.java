@@ -22,7 +22,7 @@ public class FileUploadView {
 
 	public void setFile(UploadedFile file) {
 		this.file = file;
-		System.out.println("fleName: "+file.getFileName());
+	
 		try {
 			inputStream = file.getInputstream();
 		} catch (IOException e) {
@@ -117,7 +117,7 @@ public class FileUploadView {
 //	}
 
 	public void upload() {
-		System.out.println("upload file="+file);
+		
 		if (file != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -127,7 +127,7 @@ public class FileUploadView {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		System.out.println("handleFileUpload");
+	
 		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

@@ -31,7 +31,7 @@ public class NormativaUpload extends ABaseBean {
 		this.file = file;
 		String fileName = file.getFileName();
 
-		System.out.println("fleName: " + file.getFileName());
+		
 		try (InputStream inputStream = file.getInputstream();) {
 
 			loadFile(fileName, inputStream);
@@ -63,19 +63,18 @@ public class NormativaUpload extends ABaseBean {
 	}
 
 	public void upload() {
-		System.out.println("upload file=" + file);
+	
 		if (file != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 
 			ManagedAssetBean assetBean = getManagedAssetBean();
 
-			System.out.println(currentManuale.getDescrizione());
-			System.out.println(currentManuale.getNomefile());
+			
 
 			long assetId = assetBean.getSelectedAsset().getId();
 			currentManuale.setAssetId(assetId);
-			System.out.println(assetId);
+			
 
 			ManualiDAO manualiDAO = new ManualiDAO();
 			manualiDAO.insert(currentManuale);
@@ -94,7 +93,7 @@ public class NormativaUpload extends ABaseBean {
 		String fileName = event.getFile().getFileName();
 		// fileName = getFullPath(fileName);
 
-		System.out.println("fleName: " + fileName);
+		
 		try (InputStream inputStream = event.getFile().getInputstream();) {
 
 			loadFile(fileName, inputStream);

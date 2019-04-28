@@ -43,8 +43,7 @@ public class ManagedFrequenzeAlcaBean implements Serializable {
 	}
 
 	public void insertFrequenza() {
-		System.out.println("insert");
-
+		
 		FrequenzeAlcaDAO dao = new FrequenzeAlcaDAO();
 
 		try {

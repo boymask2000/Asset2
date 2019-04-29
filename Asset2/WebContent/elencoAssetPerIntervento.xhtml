@@ -25,16 +25,16 @@
 							<p:ajax event="rowSelect"
 								listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
 
-							<p:column filterBy="#{c.masterSystem}" headerText="MasterSystem">
-								<h:outputText value="#{c.masterSystem}" />
+							<p:column filterBy="#{c.facNum}" headerText="facNum">
+								<h:outputText value="#{c.facNum}" />
 							</p:column>
 
-							<p:column filterBy="#{c.description}" headerText="Descrizione">
-								<h:outputText value="#{c.description}" />
+							<p:column filterBy="#{c.facSystem}" headerText="facSystem">
+								<h:outputText value="#{c.facSystem}" />
 							</p:column>
 
-							<p:column filterBy="#{c.location}" headerText="Location">
-								<h:outputText value="#{c.location}" />
+							<p:column filterBy="#{c.nomenclature}" headerText="nomenclature">
+								<h:outputText value="#{c.nomenclature}" />
 							</p:column>
 
 							<p:column headerText="LastStatus">

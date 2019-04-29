@@ -37,7 +37,7 @@ public class UploadRest {
 
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
 
-		String filename = writeToFile(uploadedInputStream, uploadDir);
+		String filename = writeToFile(uploadedInputStream, uploadDir,".jpg");
 
 		FotoIntervento foto = new FotoIntervento();
 		foto.setFilename(filename);
@@ -51,11 +51,32 @@ public class UploadRest {
 		return Response.status(200).entity(output).build();
 
 	}
+	@POST
+	@Path("/uploadAudio")
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	public Response uploadAudio(@FormDataParam("file") InputStream uploadedInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail, @QueryParam("id") long id) {
 
-	private String writeToFile(InputStream uploadedInputStream, String dir) {
+		String uploadDir = "/home/giovanni/Desktop" + File.separator;
+
+		String filename = writeToFile(uploadedInputStream, uploadDir,".3gp");
+System.out.println(filename);
+//		FotoIntervento foto = new FotoIntervento();
+//		foto.setFilename(filename);
+//		foto.setInterventoId(id);
+//		foto.setTimestamp(TimeUtil.getTimestamp());
+//
+//		FotoInterventoDAO dao = new FotoInterventoDAO();
+//		dao.insert(foto);
+		String output = "File saved to : " + filename;
+
+		return Response.status(200).entity(output).build();
+
+	}
+	private String writeToFile(InputStream uploadedInputStream, String dir, String ext) { // .jpg
 		String filename = null;
 		try {
-			File outFile = TempFileFactory.createTempFile("foto", ".jpg", new File(dir));
+			File outFile = TempFileFactory.createTempFile("foto", ext, new File(dir));
 			filename = outFile.getName();
 			int read = 0;
 			byte[] bytes = new byte[1024];

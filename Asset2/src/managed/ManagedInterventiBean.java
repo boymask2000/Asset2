@@ -35,20 +35,32 @@ public class ManagedInterventiBean implements Serializable {
 	private String selectedDataForSituation;
 
 	public List<Intervento> getInterventiInData(String data) {
-		
+
 		if (data == null || data.trim().equalsIgnoreCase(""))
 			data = TimeUtil.getCurrentDate(new Date());
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> ll = dao.getInterventiInData(data);
 		return ll;
 	}
-	public void onDateSelect(SelectEvent event) {
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	    String dd = format.format(event.getObject());
-	    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-	    setSelectedDataForSituation(dd);
+
+	public List<Intervento> getInterventiPerData() {
+
+		if (selectedDataForSituation == null || selectedDataForSituation.trim().equalsIgnoreCase(""))
+			selectedDataForSituation = TimeUtil.getCurrentDate(new Date());
+		InterventiDAO dao = new InterventiDAO();
+		List<Intervento> ll = dao.getInterventiInData(selectedDataForSituation);
+		return ll;
 	}
+
+	public void onDateSelect(SelectEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String dd = format.format(event.getObject());
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+		setSelectedDataForSituation(dd);
+	}
+
 	public List<Intervento> getAllInterventi() {
 		InterventiDAO dao = new InterventiDAO();
 		myList = dao.selectAll();
@@ -71,12 +83,10 @@ public class ManagedInterventiBean implements Serializable {
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
-	
 
 	}
 
 	public void insertManuale(Intervento in) {
-		
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -103,7 +113,7 @@ public class ManagedInterventiBean implements Serializable {
 	public void setSelectedIntevento(Intervento s) {
 		if (s == null)
 			return;
-	
+
 		esito = s.getEsito();
 		this.selectedIntevento = s;
 
@@ -117,14 +127,14 @@ public class ManagedInterventiBean implements Serializable {
 	public void nuovoIntervento() {
 		ManagedAssetBean managedAssetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		long id = managedAssetBean.getSelectedAsset().getId();
-	
+
 		selectedIntevento.setAssetId(id);
 		InterventiDAO dao = new InterventiDAO();
 		dao.insert(selectedIntevento);
 	}
 
 	public void setDate_data_effettiva(Date d) {
-		
+
 		if (d == null)
 			d = new Date();
 		this.date_data_effettiva = d;
@@ -138,7 +148,6 @@ public class ManagedInterventiBean implements Serializable {
 
 	public void setDataNuovoIntervento(Date d) {
 
-		
 		if (d == null)
 			d = new Date();
 		this.dataNuovoIntervento = d;
@@ -150,7 +159,7 @@ public class ManagedInterventiBean implements Serializable {
 
 	public void setEsito(int esito) {
 		this.esito = esito;
-		
+
 		selectedIntevento.setEsito(esito);
 		InterventiDAO dao = new InterventiDAO();
 
@@ -164,7 +173,7 @@ public class ManagedInterventiBean implements Serializable {
 			Application application = context.getApplication();
 			ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
 					ManagedAssetBean.class);
-			assetBean.getSelectedAsset().setLastStatus(""+esito);
+			assetBean.getSelectedAsset().setLastStatus("" + esito);
 			AssetAlcaDAO assetDao = new AssetAlcaDAO();
 			assetDao.update(assetBean.getSelectedAsset());
 		}
@@ -179,7 +188,7 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void setSelectedDataForSituation(String s) {
-		
+
 		this.selectedDataForSituation = s;
 	}
 

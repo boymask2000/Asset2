@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.faces.event.ActionEvent;
+
+import common.JsfUtil;
 import common.TimeUtil;
 
 public class CalendarioDaTavolo {
@@ -26,6 +29,38 @@ public class CalendarioDaTavolo {
 		cal.setTime(dd);
 
 		update();
+	}
+
+	public void showDay(int evt) {
+		System.out.println(evt);
+		
+		
+//	System.out.println(anno+ " "+mese+" "+days.get(evt));
+		
+
+		Calendar cc = (Calendar) cal.clone();
+	
+
+
+		cc.set(Calendar.DAY_OF_MONTH, 1);
+		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
+		cc.add(Calendar.DAY_OF_MONTH, -dayOne+1);
+		// System.out.println(cc.get(Calendar.DAY_OF_WEEK));
+		System.out
+		.println(cc.get(Calendar.YEAR) + " " + cc.get(Calendar.MONTH) + " " + cc.get(Calendar.DAY_OF_MONTH));
+		
+
+		for (int i = 0; i < evt; i++)
+			cc.add(Calendar.DAY_OF_MONTH, 1);
+
+		int a = cc.get(Calendar.YEAR);
+		int m = cc.get(Calendar.MONTH)+1;
+		int g = cc.get(Calendar.DAY_OF_MONTH);
+		System.out.println(a + " " + m + " " + g);
+		String out = String.format("%4d%02d%02d",a,m,g);
+		System.out.println(out);
+		ManagedInterventiBean bean=	(ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
+		bean.setSelectedDataForSituation(out);
 	}
 
 	private void update() {
@@ -56,7 +91,7 @@ public class CalendarioDaTavolo {
 	}
 
 	public void init() {
-	
+
 		Calendar cc = (Calendar) cal.clone();
 
 		cc.set(Calendar.DAY_OF_MONTH, 1);
@@ -75,7 +110,6 @@ public class CalendarioDaTavolo {
 	public int getDay(int pos) {
 		if (days.size() == 0)
 			init();
-		// System.out.println("len= " + days.size());
 		return days.get(pos);
 	}
 

@@ -16,7 +16,7 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<h:panelGrid columns="1" cellpadding="0">
+				<h:panelGrid columns="2" cellpadding="0">
 
 					<p:panel>
 						<h:panelGrid columns="2" cellpadding="0">
@@ -35,66 +35,176 @@
 									action="#{calendarioDaTavolo.incMese}" update=":form"></p:commandButton>
 							</p:panel>
 						</h:panelGrid>
-						<font  size="14">
-						<table border="1pt">
-						<tr>
-								<td>Dom</td>
-								<td>Lun</td>
-								<td>Mar</td>
-								<td>Mer</td>
-								<td>Giov</td>
-								<td>Ven</td>
-								<td>Sab</td>
-							</tr>
-							<tr>
-								<td>#{calendarioDaTavolo.getDay(0)}</td>
-								<td>#{calendarioDaTavolo.getDay(1)}</td>
-								<td>#{calendarioDaTavolo.getDay(2)}</td>
-								<td>#{calendarioDaTavolo.getDay(3)}</td>
-								<td>#{calendarioDaTavolo.getDay(4)}</td>
-								<td>#{calendarioDaTavolo.getDay(5)}</td>
-								<td>#{calendarioDaTavolo.getDay(6)}</td>
-							</tr>
-							<tr>
-								<td>#{calendarioDaTavolo.getDay(7)}</td>
-								<td>#{calendarioDaTavolo.getDay(8)}</td>
-								<td>#{calendarioDaTavolo.getDay(9)}</td>
-								<td>#{calendarioDaTavolo.getDay(10)}</td>
-								<td>#{calendarioDaTavolo.getDay(11)}</td>
-								<td>#{calendarioDaTavolo.getDay(12)}</td>
-								<td>#{calendarioDaTavolo.getDay(13)}</td>
-							</tr>
-							<tr>
-								<td>#{calendarioDaTavolo.getDay(14)}</td>
-								<td>#{calendarioDaTavolo.getDay(15)}</td>
-								<td>#{calendarioDaTavolo.getDay(16)}</td>
-								<td>#{calendarioDaTavolo.getDay(17)}</td>
-								<td>#{calendarioDaTavolo.getDay(18)}</td>
-								<td>#{calendarioDaTavolo.getDay(19)}</td>
-								<td>#{calendarioDaTavolo.getDay(20)}</td>
-							</tr>
-							<tr>
-								<td>#{calendarioDaTavolo.getDay(21)}</td>
-								<td>#{calendarioDaTavolo.getDay(22)}</td>
-								<td>#{calendarioDaTavolo.getDay(23)}</td>
-								<td>#{calendarioDaTavolo.getDay(24)}</td>
-								<td>#{calendarioDaTavolo.getDay(25)}</td>
-								<td>#{calendarioDaTavolo.getDay(26)}</td>
-								<td>#{calendarioDaTavolo.getDay(27)}</td>
-							</tr>
-							<tr>
-								<td>#{calendarioDaTavolo.getDay(28)}</td>
-								<td>#{calendarioDaTavolo.getDay(29)}</td>
-								<td>#{calendarioDaTavolo.getDay(30)}</td>
-								<td>#{calendarioDaTavolo.getDay(31)}</td>
-								<td>#{calendarioDaTavolo.getDay(32)}</td>
-								<td>#{calendarioDaTavolo.getDay(33)}</td>
-								<td>#{calendarioDaTavolo.getDay(34)}</td>
-							</tr>
-						</table>
+						<font size="14">
+							<table border="1pt">
+								<tr>
+									<td>Dom</td>
+									<td>Lun</td>
+									<td>Mar</td>
+									<td>Mer</td>
+									<td>Giov</td>
+									<td>Ven</td>
+									<td>Sab</td>
+								</tr>
+								<tr>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(0)}"
+											actionListener="#{calendarioDaTavolo.showDay(0)}"
+											update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(1)}"
+											action="#{calendarioDaTavolo.showDay(1)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(2)}"
+											action="#{calendarioDaTavolo.showDay(2)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(3)}"
+											action="#{calendarioDaTavolo.showDay(3)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(4)}"
+											action="#{calendarioDaTavolo.showDay(4)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(5)}"
+											action="#{calendarioDaTavolo.showDay(5)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(6)}"
+											action="#{calendarioDaTavolo.showDay(6)}" update=":form" /></td>
 
-</font>
+
+								</tr>
+								<tr>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(7)}"
+											action="#{calendarioDaTavolo.showDay(7)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(8)}"
+											action="#{calendarioDaTavolo.showDay(8)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(9)}"
+											action="#{calendarioDaTavolo.showDay(9)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(10)}"
+											action="#{calendarioDaTavolo.showDay(10)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(11)}"
+											action="#{calendarioDaTavolo.showDay(11)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(12)}"
+											action="#{calendarioDaTavolo.showDay(12)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(13)}"
+											action="#{calendarioDaTavolo.showDay(13)}" update=":form" /></td>
+
+								</tr>
+								<tr>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(14)}"
+											action="#{calendarioDaTavolo.showDay(14)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(15)}"
+											action="#{calendarioDaTavolo.showDay(15)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(16)}"
+											action="#{calendarioDaTavolo.showDay(16)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(17)}"
+											action="#{calendarioDaTavolo.showDay(17)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(18)}"
+											action="#{calendarioDaTavolo.showDay(18)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(19)}"
+											action="#{calendarioDaTavolo.showDay(19)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(20)}"
+											action="#{calendarioDaTavolo.showDay(20)}" update=":form" /></td>
+
+								</tr>
+								<tr>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(21)}"
+											action="#{calendarioDaTavolo.showDay(21)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(22)}"
+											action="#{calendarioDaTavolo.showDay(22)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(23)}"
+											action="#{calendarioDaTavolo.showDay(23)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(24)}"
+											action="#{calendarioDaTavolo.showDay(24)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(25)}"
+											action="#{calendarioDaTavolo.showDay(25)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(26)}"
+											action="#{calendarioDaTavolo.showDay(26)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(27)}"
+											action="#{calendarioDaTavolo.showDay(27)}" update=":form" /></td>
+
+								</tr>
+								<tr>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(28)}"
+											action="#{calendarioDaTavolo.showDay(28)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(29)}"
+											action="#{calendarioDaTavolo.showDay(29)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(30)}"
+											action="#{calendarioDaTavolo.showDay(30)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(31)}"
+											action="#{calendarioDaTavolo.showDay(31)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(32)}"
+											action="#{calendarioDaTavolo.showDay(32)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(33)}"
+											action="#{calendarioDaTavolo.showDay(33)}" update=":form" /></td>
+									<td><h:commandButton
+											value="#{calendarioDaTavolo.getDay(34)}"
+											action="#{calendarioDaTavolo.showDay(34)}" update=":form" /></td>
+
+								</tr>
+							</table>
+
+						</font>
 					</p:panel>
+
+
+					<p:panel header="Interventi In data #{managedInterventiBean.selectedDataForSituation}">
+						<p:dataTable id="radiopDT" selectionMode="single"
+							value="#{managedInterventiBean.interventiPerData}" var="c"
+							selection="#{managedInterventiBean.selectedIntevento}"
+							rowKey="#{c.id}" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:ajax event="rowSelect"
+								listener="#{managedInterventiBean.onRowSelect}"
+								update=":form:msgs" />
+							<p:column headerText="Data Prevista">
+								<h:outputText value="#{c.data_pianificata}" />
+							</p:column>
+							<p:column headerText="Data Effettiva">
+								<h:outputText value="#{c.data_effettiva}" />
+							</p:column>
+							<p:column headerText="Esito" styleClass="{'background':'yellow'}">
+
+								<table>
+									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
+										<td></td>
+									</tr>
+								</table>
+							</p:column>
+							<f:facet name="footer">
+								<h:commandButton action="goInsertIntervento" value="Detail">
+								</h:commandButton>
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+
 				</h:panelGrid>
 				<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 			</h:form>

@@ -41,19 +41,19 @@ public class MyBatisConnectionFactory {
 			if (sqlSessionFactory == null) {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 	
-				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(CalendarioMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(AssetMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(ManualiMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(InterventiMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(DocInterventiMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(NormativeMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(ChecksMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(ChecklistMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(AssetAlcaMapper.class);
-				sqlSessionFactory.getConfiguration().addMapper(FrequenzeAlcaMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(CalendarioMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecklistInterventoMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ChecklistMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ChecksMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(DocInterventiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(FotoInterventiMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(FrequenzeAlcaMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(InterventiMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ManualiMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(NormativeMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
 			}
 			
 		}

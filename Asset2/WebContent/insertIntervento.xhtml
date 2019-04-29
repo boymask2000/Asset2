@@ -104,21 +104,31 @@
 							</p:dataTable>
 
 						</p:panel>
+						<p:panel>
+							<p:galleria
+								value="#{managedFotoInterventoBean.fotoPerIntervento}"
+								var="image" showCaption="true">
+								<p:graphicImage name="images/#{image.filename}"
+									title="#{image.timestamp}" />
+							</p:galleria>
+						</p:panel>
 
 						<p:commandButton process="radioDT" update="panIntPass0"
 							icon="pi pi-search" value="Aggiungi intervento"
 							oncomplete="PF('setIntDialog0').show()" />
 
 					</p:panel>
+
 				</h:panelGrid>
+
 			</h:form>
 
 			<p:dialog header="Nuovo Intervento" widgetVar="setIntDialog0"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="panIntPass0" style="text-align:center;">
-				
+
 					<h:form>
-					
+
 						<p:calendar id="popup"
 							value="#{managedInterventiBean.dataNuovoIntervento}"
 							pattern="yyyyMMdd" />

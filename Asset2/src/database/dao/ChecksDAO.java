@@ -12,27 +12,22 @@ public class ChecksDAO {
 
 	public List<Check> selectAll() {
 		List<Check> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
-			
+
 			list = mapper.getAll();
-		} finally {
-			session.close();
 		}
 		return list;
 	}
 
-
 	public void insert(Check u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
 			mapper.insert(u);
 			session.commit();
-		} finally {
-			session.close();
 		}
 	}
 

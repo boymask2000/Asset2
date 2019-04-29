@@ -56,6 +56,31 @@ CREATE TABLE `asset` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `assetalca`
+--
+
+DROP TABLE IF EXISTS `assetalca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `assetalca` (
+  `facNum` varchar(50) DEFAULT NULL,
+  `facSystem` varchar(50) DEFAULT NULL,
+  `facSubsystem` varchar(50) DEFAULT NULL,
+  `assemblyCategory` varchar(50) DEFAULT NULL,
+  `nomenclature` varchar(70) DEFAULT NULL,
+  `procId` varchar(50) DEFAULT NULL,
+  `pmSchedRecipient` varchar(50) DEFAULT NULL,
+  `pmSchedSerial` varchar(50) DEFAULT NULL,
+  `rpieIdIndividual` varchar(50) DEFAULT NULL,
+  `frequency` varchar(50) DEFAULT NULL,
+  `schedAssignedOrg` varchar(50) DEFAULT NULL,
+  `lastStatus` varchar(10) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `calendario`
 --
 
@@ -85,7 +110,22 @@ CREATE TABLE `checklist` (
   `assetId` int(6) DEFAULT NULL,
   `checkId` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `checklistintervento`
+--
+
+DROP TABLE IF EXISTS `checklistintervento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklistintervento` (
+  `interventoId` int(6) DEFAULT NULL,
+  `checkId` int(6) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +140,7 @@ CREATE TABLE `checks` (
   `description` varchar(800) DEFAULT NULL,
   `codiceNormativa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +157,37 @@ CREATE TABLE `docinterventi` (
   `descrizione` varchar(200) DEFAULT NULL,
   `ext` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `fotointervento`
+--
+
+DROP TABLE IF EXISTS `fotointervento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fotointervento` (
+  `interventoId` int(6) DEFAULT NULL,
+  `filename` varchar(60) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `frequenzealca`
+--
+
+DROP TABLE IF EXISTS `frequenzealca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `frequenzealca` (
+  `rpieIdIndividual` varchar(50) DEFAULT NULL,
+  `idfrequenza` int(6) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +205,7 @@ CREATE TABLE `interventi` (
   `data_effettiva` varchar(10) DEFAULT NULL,
   `esito` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51555 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51591 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +222,7 @@ CREATE TABLE `manuali` (
   `nomeFile` varchar(45) DEFAULT NULL,
   `ext` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +241,7 @@ CREATE TABLE `normative` (
   `codFrequenza` int(11) DEFAULT NULL,
   `filename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,4 +270,4 @@ CREATE TABLE `utenti` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-20 22:55:01
+-- Dump completed on 2019-04-29 10:38:04

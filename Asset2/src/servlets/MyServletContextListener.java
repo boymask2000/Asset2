@@ -20,6 +20,8 @@ public class MyServletContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		Log.getLogger().info("ServletContextListener started");
 		ApplicationConfig.getDocumentdir();
+		
+		
 	}
 
 	public synchronized static boolean isStopAll() {

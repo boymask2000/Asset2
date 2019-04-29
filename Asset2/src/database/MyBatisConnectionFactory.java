@@ -15,6 +15,7 @@ import database.mapper.ChecklistInterventoMapper;
 import database.mapper.ChecklistMapper;
 import database.mapper.ChecksMapper;
 import database.mapper.DocInterventiMapper;
+import database.mapper.FotoInterventiMapper;
 import database.mapper.FrequenzeAlcaMapper;
 import database.mapper.InterventiMapper;
 import database.mapper.ManualiMapper;
@@ -52,6 +53,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(AssetAlcaMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(FrequenzeAlcaMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecklistInterventoMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(FotoInterventiMapper.class);
 			}
 			
 		}

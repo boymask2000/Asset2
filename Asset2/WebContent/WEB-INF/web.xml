@@ -28,6 +28,30 @@
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
     <param-value>resources.application</param-value>
   </context-param>
+  
+  
+  
+  
+  <context-param>
+  <param-name>quartz:config-file</param-name>
+  <param-value>quartz.properties</param-value>
+</context-param>
+<context-param>
+  <param-name>quartz:shutdown-on-unload</param-name>
+  <param-value>true</param-value>
+</context-param>
+<context-param>
+  <param-name>quartz:wait-on-shutdown</param-name>
+  <param-value>true</param-value>
+</context-param>
+<context-param>
+  <param-name>quartz:start-on-load</param-name>
+  <param-value>true</param-value>
+</context-param> 
+  
+  
+  
+  
   <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>filter.AuthFilter</filter-class>
@@ -42,7 +66,11 @@
         </listener-class>
    </listener>
    
-   
+   <listener>
+  <listener-class>
+		org.quartz.ee.servlet.QuartzInitializerListener
+	</listener-class>
+</listener>
    
     <servlet>
     <servlet-name>Jersey REST Service</servlet-name>

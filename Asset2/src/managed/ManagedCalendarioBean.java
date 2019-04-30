@@ -14,7 +14,6 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 
 import beans.Calendario;
-import common.Log;
 import database.dao.CalendarioDAO;
 
 public class ManagedCalendarioBean implements Serializable {
@@ -27,7 +26,6 @@ public class ManagedCalendarioBean implements Serializable {
 
 	public List<Calendario> getAllDates() {
 	
-		Log.getLogger().debug("Ciao");
 //		CalendarioDAO dao = new CalendarioDAO();
 //		myList = dao.selectAll();
 		return myList;

@@ -14,48 +14,45 @@
 				<h:form>
 					<p:growl id="growl1" life="2000" />
 
-		
-						<p:growl id="msgs" showDetail="true" />
-						<table>
-							<tr>
-								<td><h:outputText value="Username:" /></td>
-								<td><h:inputText required="true"
-										value="#{managedUtentiBean.selectedUser.username}" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Tipo" /></td>
-								<td>
-								 <p:selectOneMenu id="console" value="#{managedUtentiBean.selectedUser.tipo}" style="width:125px">
-          
-            <f:selectItem itemLabel="Amministratore" itemValue="A" />
-            <f:selectItem itemLabel="Utente" itemValue="U" />
- 
-        </p:selectOneMenu>
-								
-								
-										
-										</td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Email" /></td>
-								<td><h:inputText
-										value="#{managedUtentiBean.selectedUser.email}" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Descrizione:" /></td>
-								<td><h:inputText
-										value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Password" /></td>
-								<td><h:inputText required="true"
-										value="#{managedUtentiBean.selectedUser.password}" /></td>
-							</tr>
 
-						</table>
+					<p:growl id="msgs" showDetail="true" />
+					<table>
+						<tr>
+							<td><h:outputText value="Username:" /></td>
+							<td><h:inputText required="true"
+									value="#{managedUtentiBean.selectedUser.username}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Tipo" /></td>
+							<td><p:selectOneMenu id="console"
+									value="#{managedUtentiBean.selectedUser.tipo}"
+									style="width:125px">
+
+									<f:selectItem itemLabel="Amministratore" itemValue="A" />
+									<f:selectItem itemLabel="Utente" itemValue="U" />
+
+								</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Email" /></td>
+							<td><h:inputText
+									value="#{managedUtentiBean.selectedUser.email}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Descrizione:" /></td>
+							<td><h:inputText
+									value="#{managedUtentiBean.selectedUser.descrizione}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Password" /></td>
+							<td><h:inputText required="true"
+									value="#{managedUtentiBean.selectedUser.password}" /></td>
+						</tr>
+
+					</table>
 
 
-			
+
 
 					<p:commandButton action="#{managedUtentiBean.goToUtentiHome}"
 						value="Esci" process="@this" />

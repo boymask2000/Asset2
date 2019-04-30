@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -68,9 +67,7 @@ public class NormativaUpload extends ABaseBean {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 
-			ManagedAssetBean assetBean = getManagedAssetBean();
-
-			
+			ManagedAssetBean assetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 
 			long assetId = assetBean.getSelectedAsset().getId();
 			currentManuale.setAssetId(assetId);
@@ -81,13 +78,6 @@ public class NormativaUpload extends ABaseBean {
 		}
 	}
 
-	private ManagedAssetBean getManagedAssetBean() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Application application = context.getApplication();
-		ManagedAssetBean assetBean = application.evaluateExpressionGet(context, "#{managedAssetBean}",
-				ManagedAssetBean.class);
-		return assetBean;
-	}
 
 	public void handleFileUpload(FileUploadEvent event) {
 		String fileName = event.getFile().getFileName();

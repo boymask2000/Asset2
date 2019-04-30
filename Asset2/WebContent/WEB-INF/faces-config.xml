@@ -142,6 +142,11 @@
 		<managed-bean-class>managed.ManagedFotoInterventoBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedRitardiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedRitardiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

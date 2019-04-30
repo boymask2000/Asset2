@@ -86,4 +86,10 @@ public class NormativeDAO {
 			return null;
 		return list.get(0);
 	}
+	public Normativa getNormativaPerCodice(String cod) {
+		Normativa n = new Normativa();
+		n.setCodice(cod);
+		return getNormativaPerCodice(n);
+		
+	}
 }

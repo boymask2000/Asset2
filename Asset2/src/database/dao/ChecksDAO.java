@@ -21,7 +21,17 @@ public class ChecksDAO {
 		}
 		return list;
 	}
+	public List<Check> getChecksByID(long id) {
+		List<Check> list = null;
 
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
+
+			list = mapper.getChecksByID(id);
+		}
+		return list;
+	}
 	public void insert(Check u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 

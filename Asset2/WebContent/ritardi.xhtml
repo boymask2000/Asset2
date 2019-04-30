@@ -1,0 +1,44 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<p:panel id="bansic" header="Ritardi ">
+	<p:growl id="msgs0q" showDetail="true" />
+
+
+	<p:dataTable id="radi01DT" selectionMode="single"
+		value="#{managedRitardiBean.allRitardi}" var="c"
+		selection="#{managedRitardiBean.selectedRitardo}" rowKey="#{c.id}"
+		paginator="true" rows="10"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15">
+		<p:ajax event="rowSelect" listener="#{managedRitardiBean.onRowSelect}"
+			update="radi01DT" />
+
+		<p:column headerText="Data prevista">
+			<h:outputText value="#{c.dataPianificata}" />
+		</p:column>
+		<p:column headerText="Max Ritardo">
+			<h:outputText value="#{c.maxritardo}" />
+		</p:column>
+		<p:column headerText="Ritardo attuale">
+			<h:outputText value="#{c.currentRitardo}" />
+		</p:column>
+		<p:column headerText="Cod Normativa">
+			<h:outputText value="#{c.codNormativa}" />
+		</p:column>
+		<p:column headerText="Cod Normativa">
+			<h:outputText value="#{c.descCheck}" />
+		</p:column>
+
+	</p:dataTable>
+
+</p:panel>
+
+
+</html>

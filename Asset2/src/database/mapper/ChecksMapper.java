@@ -11,7 +11,7 @@ public interface ChecksMapper {
 	final String TABELLA = "test1.checks";
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
-	//final String SELECT_MANUALI_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}";
+	final String SELECT_CHECKS_BY_ID = "SELECT * FROM " + TABELLA + " WHERE ID=#{id}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (description , codiceNormativa )" //
@@ -22,5 +22,8 @@ public interface ChecksMapper {
 
 	@Insert(INSERT)
 	public void insert(Check contact);
+	
+	@Select(SELECT_CHECKS_BY_ID)
+	public List<Check> getChecksByID(long id);
 
 }

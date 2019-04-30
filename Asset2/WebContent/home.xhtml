@@ -32,15 +32,15 @@
 											</tr>
 											<tr>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(1).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(1)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(2).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(2)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(3).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(3)}" /></td>
 
 											</tr>
 											<tr>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(1).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(1)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -49,7 +49,7 @@
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
 
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(2).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(2)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -57,7 +57,7 @@
 														<f:setPropertyActionListener value="2"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(3).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(3)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -95,16 +95,16 @@
 											<tr>
 
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(4).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(4)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(5).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(5)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(6).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(6)}" /></td>
 
 											</tr>
 											<tr>
 
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(4).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(4)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -112,7 +112,7 @@
 														<f:setPropertyActionListener value="4"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(5).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(5)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -120,7 +120,7 @@
 														<f:setPropertyActionListener value="5"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(6).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(6)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -157,16 +157,16 @@
 											<tr>
 
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(7).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(7)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(8).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(8)}" /></td>
 												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsWithStatus(9).size()}" /></td>
+														value="#{managedAssetBean.getAssetsInStatus(9)}" /></td>
 
 											</tr>
 											<tr>
 
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(7).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(7)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -174,7 +174,7 @@
 														<f:setPropertyActionListener value="7"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(8).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(8)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -182,7 +182,7 @@
 														<f:setPropertyActionListener value="8"
 															target="#{managedAssetBean.selectedSeverity}" />
 													</p:commandButton></td>
-												<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(9).size()>0}"
+												<td align="center"><p:commandButton rendered="#{managedAssetBean.stat(9)>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
 														<h:outputText styleClass="pi pi-search"
@@ -211,7 +211,7 @@
 										</tr>
 										<tr>
 											<td align="center"><h:outputText
-													value="#{managedAssetBean.getAssetsWithStatus(0).size()}" /></td>
+													value="#{managedAssetBean.getAssetsInStatus(0)}" /></td>
 										</tr>
 										<tr>
 											<td align="center"><p:commandButton rendered="#{managedAssetBean.getAssetsWithStatus(0).size()>0}"

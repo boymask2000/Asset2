@@ -17,29 +17,29 @@ public class PrintElencoPazienti extends PrintCreator {
 		prt.insertPageFormats();
 
 		prt.startPageSequence(null);
-		prt.addBlock("Selection: "+db.getSelectedUser(), "30pt");
+		prt.addBlock("Selection: " + db.getSelectedUser(), "30pt");
 		Table t = new Table();
 		t.addColumnDefinition(new Column("", "6cm"));
 		t.addColumnDefinition(new Column("", "4cm"));
-		
+
 		List<Utente> lista = db.getAllUtenti();
-		
-		for( Utente p:lista) {
+
+		for (Utente p : lista) {
 			t.startRow();
 			t.addDataCol(p.getUsername());
-		
+
 		}
 
 		prt.addtable(t);
 		prt.endPageSequence();
 		prt.insertFineDoc();
 
-		InputStream is = prt.getBufferInputStream();
-		try {
+		try (InputStream is = prt.getBufferInputStream();) {
+
 			convertToPDFNEW(is);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		JsfUtil.goTo("stampa");
 		return "";
 	}

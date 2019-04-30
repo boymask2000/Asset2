@@ -67,7 +67,7 @@ public abstract class SystemJob extends GenericJob {
 
 	}
 
-	private void checkFine() throws Exception {
+	private static void checkFine() throws Exception {
 		if (MyServletContextListener.isStopAll()) {
 			System.out.println("FFFFFFFFF");
 			throw new Exception("Fine");

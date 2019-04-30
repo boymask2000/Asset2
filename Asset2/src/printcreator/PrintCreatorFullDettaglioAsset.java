@@ -3,7 +3,6 @@ package printcreator;
 import java.io.InputStream;
 import java.util.List;
 
-import beans.Asset;
 import beans.AssetAlca;
 import beans.Intervento;
 import common.JsfUtil;
@@ -46,14 +45,11 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 
 		prt.insertFineDoc();
 
-		InputStream is = prt.getBufferInputStream();
-		try {
+		try (InputStream is = prt.getBufferInputStream();) {
 			convertToPDFNEW(is);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// JsfUtil.goTo("stampa");
 
 		return "viewFile";
 	}

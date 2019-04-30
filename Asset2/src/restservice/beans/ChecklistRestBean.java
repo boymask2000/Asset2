@@ -3,7 +3,6 @@ package restservice.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import beans.Asset;
 import beans.AssetAlca;
 import beans.Checklist;
 

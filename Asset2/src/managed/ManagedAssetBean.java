@@ -22,9 +22,48 @@ public class ManagedAssetBean {
 	private Status status = new Status(0);
 	private AssetAlca selectedAsset;
 
+	private int stat[] = new int[10];
+
+	public int getAssetsInStatus(int st) {
+		int count = 0;
+		AssetAlcaDAO dao = new AssetAlcaDAO();
+		List<AssetAlca> listaAsset = dao.selectAll();
+
+		InterventiDAO intDao = new InterventiDAO();
+
+		for (AssetAlca asset : listaAsset) {
+			Intervento inte = intDao.getLastInterventoFatto(asset.getId());
+			if (inte != null && inte.getEsito() == st)
+				count++;
+			if (inte == null && st == 0)
+				count++;
+		}
+		stat[st] = count;
+		return count;
+	}
+
+	public int stat(int st) {
+		return stat[st];
+	}
+
 	public List<AssetAlca> getAllAssetsWithSeverity() {
-		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
-		return assetDAO.selectAssetsWithStatus(selectedSeverity);
+
+		List<AssetAlca> out = new ArrayList<AssetAlca>();
+
+		AssetAlcaDAO dao = new AssetAlcaDAO();
+		List<AssetAlca> listaAsset = dao.selectAll();
+
+		InterventiDAO intDao = new InterventiDAO();
+
+		for (AssetAlca asset : listaAsset) {
+			Intervento inte = intDao.getLastInterventoFatto(asset.getId());
+			if (inte != null && inte.getEsito() == selectedSeverity)
+				out.add(asset);
+			if (inte == null && selectedSeverity == 0)
+				out.add(asset);
+		}
+
+		return out;
 	}
 
 	public String getColor() {

@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import beans.Asset;
 import beans.ChecklistIntervento;
 import beans.Intervento;
 import common.TimeUtil;
@@ -26,9 +25,8 @@ public class InterventoRest {
 
 		InterventiDAO dao = new InterventiDAO();
 
-		Asset s = new Asset();
 		long id = Long.parseLong(assetId);
-		s.setId(id);
+	
 		List<Intervento> lista = dao.getInterventiForAsset(id, false);
 
 		return lista;
@@ -40,7 +38,7 @@ public class InterventoRest {
 		System.out.println("ricevuto " + inter);
 		System.out.println("ricevuto esito: " + inter.getEsito());
 
-		Intervento intervento = (Intervento) inter;
+		Intervento intervento = inter;
 		intervento.setData_effettiva(TimeUtil.getCurrentDate());
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(intervento);

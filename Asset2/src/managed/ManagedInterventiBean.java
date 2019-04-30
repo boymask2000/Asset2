@@ -13,7 +13,6 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Intervento;
 import common.JsfUtil;
-import common.Log;
 import common.TimeUtil;
 import database.dao.AssetAlcaDAO;
 import database.dao.InterventiDAO;
@@ -33,7 +32,8 @@ public class ManagedInterventiBean implements Serializable {
 	private int esito;
 
 	private String selectedDataForSituation;
-
+	
+	
 	public List<Intervento> getInterventiInData(String data) {
 
 		if (data == null || data.trim().equalsIgnoreCase(""))
@@ -68,7 +68,9 @@ public class ManagedInterventiBean implements Serializable {
 	}
 
 	public void update(Intervento u) {
+	
 		InterventiDAO dao = new InterventiDAO();
+		
 		dao.update(u);
 	}
 
@@ -82,8 +84,6 @@ public class ManagedInterventiBean implements Serializable {
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((Intervento) event.getObject()).getId());
 		selectedIntevento = (Intervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		Log.getLogger().debug("select");
-
 	}
 
 	public void insertManuale(Intervento in) {

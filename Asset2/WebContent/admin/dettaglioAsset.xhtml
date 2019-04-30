@@ -39,13 +39,13 @@
 									value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
 
 								<h:outputText value="rpieIdIndividual" />
-								<h:inputText
+								<h:outputText
 									value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
 								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
 									value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
 								<h:outputText value="lastStatus" />
-								<h:inputText
+								<h:outputText
 									value="#{managedAssetBean.selectedAsset.lastStatus}" />
 
 							</h:panelGrid>
@@ -89,7 +89,7 @@
 										</table>
 									</p:column>
 									<f:facet name="footer">
-										<h:commandButton action="goInsertIntervento" value="Detail">
+										<h:commandButton action="dettaglioIntervento" value="Detail">
 										</h:commandButton>
 									</f:facet>
 								</p:dataTable>

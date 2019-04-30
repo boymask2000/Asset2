@@ -26,14 +26,19 @@ public interface InterventiMapper {
 			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (assetId , data_teorica , data_pianificata, data_effettiva, esito )" //
-			+ "VALUES (#{assetId}, #{data_teorica}, #{data_pianificata}, #{data_effettiva}, #{esito})";
+			" (assetId , data_teorica , data_pianificata, data_effettiva, esito , user, timestamp)" //
+			+ "VALUES (#{assetId}, #{data_teorica}, #{data_pianificata}, #{data_effettiva}, #{esito}, #{user},#{timestamp})";
+	
+	final String SELECT_LAST_INTERVENTO = "SELECT * FROM " + TABELLA
+			+ " WHERE ASSETID=#{assetId} AND data_effettiva IS NOT NULL order by data_effettiva DESC limit 1";
 
 	final String UPDATE = "UPDATE " + TABELLA + "  SET " + //
 			"assetId = #{assetId}," + //
 			"data_teorica = #{data_teorica}," + //
 			"data_pianificata = #{data_pianificata}," + //
 			"data_effettiva = #{data_effettiva}," + //
+			"user = #{user}," + //
+			"timestamp = #{timestamp}," + //
 			"esito = #{esito}" + //
 			" WHERE id=#{id}";
 
@@ -43,6 +48,9 @@ public interface InterventiMapper {
 	final String SITUATION = "SELECT * FROM " + TABELLA + " WHERE " + //
 			"( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
 			" (data_effettiva =#{data} ) ";
+	
+	@Select(SELECT_LAST_INTERVENTO)
+	public List<Intervento> getLastIntervento(long assetId);
 	
 	@Select(SELECT_INTERVENTI_PER_ASSET_AND_DATA)
 	public List<Intervento> getInterventiPerAssetInData(Intervento contact);

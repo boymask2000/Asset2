@@ -5,16 +5,13 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import beans.Intervento;
+import beans.Utente;
+import common.JsfUtil;
+import common.TimeUtil;
 import database.MyBatisConnectionFactory;
 import database.mapper.InterventiMapper;
 
 public class InterventiDAO {
-
-	/**
-	 * Returns the list of all Person instances from the database.
-	 * 
-	 * @return the list of all Person instances from the database.
-	 */
 
 	public List<Intervento> selectAll() {
 		List<Intervento> list = null;
@@ -90,6 +87,17 @@ public class InterventiDAO {
 		return list;
 	}
 
+	public Intervento getLastInterventoFatto(long assetId) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+
+			List<Intervento> ll = mapper.getLastIntervento(assetId);
+			if (ll.size() > 0)
+				return ll.get(0);
+			return null;
+		}
+	}
+
 	public Intervento getUltimoInterventoFatto(long assetId) {
 		Intervento inte = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
@@ -118,23 +126,23 @@ public class InterventiDAO {
 	}
 
 	public void update(Intervento u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		Utente utente = (Utente) JsfUtil.getBean("utente");
+		u.setUser(utente.getUsername());
+		u.setTimestamp(TimeUtil.getTimestamp());
+
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			mapper.update(u);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 	}
 
 	public boolean isLastIntervento(String data) {
 		System.out.println("isLastIntervento data= " + data);
 		boolean out = true;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			List<Intervento> l = mapper.getInterventiFattiDopo(data);
@@ -142,8 +150,6 @@ public class InterventiDAO {
 				out = false;
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 		System.out.println("out = " + out);
 		return out;

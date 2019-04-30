@@ -94,21 +94,13 @@ public class DocInterventoUpload {
 //		}
 	}
 
-//	private ManagedDocInterventiBean getManagedDocInterventiBean() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Application application = context.getApplication();
-//		ManagedDocInterventiBean assetBean = application.evaluateExpressionGet(context, "#{managedDocInterventiBean}",
-//				ManagedDocInterventiBean.class);
-//		return assetBean;
-//	}
 
 	public void handleFileUpload(FileUploadEvent event) {
+	
 		long interventoId = (long) event.getComponent().getAttributes().get("intId");
 	
 		String fileName = event.getFile().getFileName();
-	//	fileName = getFullPath(fileName);
-
-		
+	
 		try (InputStream inputStream = event.getFile().getInputstream();) {
 
 			loadFile(fileName, inputStream, interventoId);
@@ -120,28 +112,13 @@ public class DocInterventoUpload {
 		FacesMessage message = new FacesMessage("Succesful", fileName + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 
-//		ManagedDocInterventiBean assetBean = getManagedDocInterventiBean();
-//
-//		System.out.println(currentDoc.getDescrizione());
-//		System.out.println(currentDoc.getFilename());
-
-	//	long assetId = assetBean.getSelectedDocIntervento().getId();
 		currentDoc.setInterventoId(interventoId);
-	
 	
 
 		DocInterventiDAO dao = new DocInterventiDAO();
 		dao.insert(currentDoc);
 
 	}
-
-//	private String getFullPath(String nome) {
-//		String dir = ApplicationConfig.getDocumentdir();
-//		if (!dir.endsWith(File.separator))
-//			dir += File.separator;
-//		return dir + nome;
-//	}
-
 
 
 	public DocIntervento getCurrentDoc() {

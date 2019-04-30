@@ -59,13 +59,14 @@
 							<h:outputText
 								value="#{managedInterventiBean.selectedIntevento.data_pianificata}" />
 							<h:outputText value="Data effettiva" />
-							<p:calendar id="popup"
-								value="#{managedInterventiBean.date_data_effettiva}"
-								pattern="yyyyMMdd" />
+							<h:outputText
+								value="#{managedInterventiBean.selectedIntevento.data_effettiva}"
+								 />
 
 						</h:panelGrid>
+				
 
-						<ui:include src="tabellaEsiti.xhtml"></ui:include>
+						<ui:include src="tabellaEsitiOutput.xhtml"></ui:include>
 
 						<p:panel id="bajsic" header="Documenti">
 
@@ -160,6 +161,7 @@
 									fileUploadListener="#{docInterventoUpload.handleFileUpload}">
 									<f:attribute name="intId" update=":form"
 										value="#{managedInterventiBean.selectedIntevento.id}" />
+						 
 								</p:fileUpload>
 
 							</h:form>

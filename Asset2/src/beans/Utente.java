@@ -11,7 +11,7 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = -4225392853135092868L;
 	private String username;
 	private String password;
-	private String tipo="U";
+	private String tipo = "U";
 	private String descrizione;
 	private String email;
 
@@ -58,27 +58,26 @@ public class Utente implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	public String login() {
 		UtenteDAO dao = new UtenteDAO();
 		Utente u = dao.search(this);
 
 		if (u != null) {
-			
-			tipo=u.getTipo();
-			email=u.getEmail();
 
+			tipo = u.getTipo();
+			email = u.getEmail();
 
-			if (u == null || !u.isAdmin())
+			if (!u.isAdmin())
 				return "home";
-			else
-				return "admin";
-		} else {
-			username = null;
-			return "login";
+			return "admin";
 		}
+		username = null;
+		return "login";
 	}
+
 	private boolean isAdmin() {
-		
+
 		return tipo.equalsIgnoreCase("A");
 	}
 
@@ -87,6 +86,7 @@ public class Utente implements Serializable {
 		password = null;
 		return "login";
 	}
+
 	public void clean() {
 		username = null;
 		password = null;

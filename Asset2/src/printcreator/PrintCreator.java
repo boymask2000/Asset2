@@ -62,8 +62,7 @@ public class PrintCreator {
 			pf = PORTRAT;
 
 		buffer.append("<fo:page-sequence master-reference=\"" + pf.getName() + "\">");
-		
-		
+
 //		buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
 //		buffer.append("   <fo:block text-align=\"center\">");
 //				buffer.append("      Page <fo:page-number/>");
@@ -72,7 +71,7 @@ public class PrintCreator {
 //		
 //		
 //		
-		
+
 		buffer.append("<fo:flow flow-name=\"xsl-region-body\">");
 		startedPageSequence = true;
 	}
@@ -82,7 +81,7 @@ public class PrintCreator {
 			return;
 		startedPageSequence = false;
 		buffer.append("</fo:flow>");
-		
+
 		buffer.append("</fo:page-sequence>");
 
 	}
@@ -120,14 +119,13 @@ public class PrintCreator {
 				+ "/";
 		String full = baseURL + url;
 
-
 		String s = "<fo:external-graphic  width=\"80pt\" content-height=\"80pt\""
 				+ " content-width=\"80pt\"  src=\"url('" + full + "')\"/>";
 
 		buffer.append("<fo:block >");
 		buffer.append(s);
 		buffer.append("</fo:block>");
-		
+
 		buffer.append("<fo:block text-align=\"right\">");
 		buffer.append(TimeUtil.getTimestamp());
 		buffer.append("</fo:block>");
@@ -141,11 +139,11 @@ public class PrintCreator {
 	public void addImage(byte[] photo) {
 		try {
 			File temp = File.createTempFile("img", ".jpg");
-			FileOutputStream fos = new FileOutputStream(temp);
+			try (FileOutputStream fos = new FileOutputStream(temp);) {
 
-			fos.write(photo);
-			fos.flush();
-			fos.close();
+				fos.write(photo);
+				fos.flush();
+			}
 			URL url = temp.toURI().toURL();
 
 			buffer.append("<fo:block >");
@@ -191,11 +189,10 @@ public class PrintCreator {
 		// a user agent is needed for transformation
 		FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
 		// Setup output
-		OutputStream out;
-		File tempPdf = TempFileFactory.getTempFile(".pdf");
-		out = new java.io.FileOutputStream(tempPdf);
 
-		try {
+		File tempPdf = TempFileFactory.getTempFile(".pdf");
+		try (OutputStream out = new java.io.FileOutputStream(tempPdf);) {
+
 			// Construct fop with desired output format
 			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
 
@@ -211,8 +208,6 @@ public class PrintCreator {
 			// PDF is created
 			Source src = new StreamSource(is);
 			transformer.transform(src, res);
-		} finally {
-			out.close();
 		}
 		BasicDocumentViewController view = (BasicDocumentViewController) JsfUtil.getBean("basicDocumentViewController");
 		view.setPdf(tempPdf);

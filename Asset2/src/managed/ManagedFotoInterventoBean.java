@@ -1,10 +1,6 @@
 package managed;
 
-import java.io.File;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +10,9 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.FotoIntervento;
-import beans.Manuale;
-import beans.Utente;
-import common.ApplicationConfig;
 import common.JsfUtil;
 import common.Log;
 import database.dao.FotoInterventoDAO;
-import database.dao.ManualiDAO;
 
 public class ManagedFotoInterventoBean extends ABaseBean implements Serializable {
 	/**

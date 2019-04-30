@@ -17,7 +17,7 @@ public class Faces {
     	FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HOMEDIR = externalContext.getRealPath("/");
-        System.out.println(HOMEDIR);
+
     }
 
     @PreDestroy

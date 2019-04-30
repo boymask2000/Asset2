@@ -13,6 +13,7 @@ import beans.Checklist;
 import beans.ChecklistIntervento;
 import beans.FrequenzaAlca;
 import beans.Intervento;
+import common.TimeUtil;
 import common.TipoSchedulazione;
 import database.dao.AssetAlcaDAO;
 import database.dao.CalendarioDAO;
@@ -71,11 +72,11 @@ public class PlannerJob extends GenericJob {
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(new Date());
 
-		String data = formatDate(cal);
+		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		try {
 			while (data.compareTo(maxData) < 0) {
 
-				data = formatDate(cal);
+				data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 
 				List<Item> lista = order(cal, range);
 				if (lista.size() == 0)
@@ -127,7 +128,7 @@ public class PlannerJob extends GenericJob {
 
 		List<Item> out = new ArrayList<Item>();
 
-		String data = formatDate(cal);
+		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 
 		Integer start = getNumFromCale(data);
 		if (start != null)
@@ -166,13 +167,13 @@ public class PlannerJob extends GenericJob {
 	public String getMinRange(Calendar cal, int range) {
 		Calendar c = (Calendar) cal.clone();
 		c.add(Calendar.DAY_OF_YEAR, -range);
-		return formatDate(c);
+		return TimeUtil.formatDate(c, TimeUtil.FORMAT_CANONICAL);
 	}
 
 	public String getMaxRange(Calendar cal, int range) {
 		Calendar c = (Calendar) cal.clone();
 		c.add(Calendar.DAY_OF_YEAR, range);
-		return formatDate(c);
+		return TimeUtil.formatDate(c, TimeUtil.FORMAT_CANONICAL);
 	}
 
 	private String getMin(List<Item> lista) {
@@ -198,11 +199,7 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private String formatDate(Calendar c) {
-		return String.format("%4d%02d%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1,
-				c.get(Calendar.DAY_OF_MONTH));
-	}
-
+	
 	class Item {
 		String data;
 		int num;

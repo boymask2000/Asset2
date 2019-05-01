@@ -20,6 +20,15 @@
 		<p:ajax event="rowSelect" listener="#{managedRitardiBean.onRowSelect}"
 			update="radi01DT" />
 
+		<p:column headerText="Asset">
+
+
+			<p:commandButton value="Asset"
+				actionListener="#{managedAssetViewBean.setSelectedAssetId(c.assetId)}"
+				update=":form:assDetail" oncomplete="PF('assDialog').show()"
+				title="View Detail" />
+
+		</p:column>
 		<p:column headerText="Data prevista">
 			<h:outputText value="#{c.dataPianificata}" />
 		</p:column>
@@ -30,15 +39,64 @@
 			<h:outputText value="#{c.currentRitardo}" />
 		</p:column>
 		<p:column headerText="Cod Normativa">
-			<h:outputText value="#{c.codNormativa}" />
+	
+			<h:commandButton value="#{c.codNormativa}" 
+											action="#{managedNormativaBean.setupViewFile(c.nomefile)}"
+										 />
 		</p:column>
-		<p:column headerText="Cod Normativa">
+		<p:column headerText="Descrizione operazione">
 			<h:outputText value="#{c.descCheck}" />
 		</p:column>
 
 	</p:dataTable>
+	<p:dialog header="Dettaglio Asset" widgetVar="assDialog" modal="true"
+		showEffect="fade" hideEffect="fade" resizable="false">
+		<p:outputPanel id="assDetail" >
+
+			<p:panel id="basi1c"
+				style="margin-bottom:10px">
+
+				<h:panelGrid columns="2" >
+					<h:outputText value="ID" />
+					<h:outputText value="#{managedAssetViewBean.selectedAsset.id}" />
+					<h:outputText value="Fac #" />
+					<h:outputText value="#{managedAssetViewBean.selectedAsset.facNum}" />
+
+					<h:outputText value="facSystem" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.facSystem}" />
+					<h:outputText value="facSubsystem" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.facSubsystem}" />
+					<h:outputText value="assemblyCategory" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.assemblyCategory}" />
+					<h:outputText value="nomenclature" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.nomenclature}" />
+					<h:outputText value="procId" />
+					<h:outputText value="#{managedAssetViewBean.selectedAsset.procId}" />
+					<h:outputText value="pmSchedRecipient" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.pmSchedRecipient}" />
+					<h:outputText value="pmSchedSerial" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.pmSchedSerial}" />
+
+					<h:outputText value="rpieIdIndividual" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.rpieIdIndividual}" />
+					<h:outputText value="schedAssignedOrg" />
+					<h:outputText
+						value="#{managedAssetViewBean.selectedAsset.schedAssignedOrg}" />
+
+				</h:panelGrid>
+
+			</p:panel>
+
+		</p:outputPanel>
+	</p:dialog>
 
 </p:panel>
-
 
 </html>

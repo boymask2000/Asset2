@@ -10,6 +10,8 @@ public class Ritardo {
 	private String descCheck;
 	private int maxritardo;
 	private int currentRitardo;
+	
+	String nomefile;
 
 	public long getId() {
 		return id;
@@ -81,6 +83,14 @@ public class Ritardo {
 
 	public void setCurrentRitardo(int currentRitardo) {
 		this.currentRitardo = currentRitardo;
+	}
+
+	public String getNomefile() {
+		return nomefile;
+	}
+
+	public void setNomefile(String nomefile) {
+		this.nomefile = nomefile;
 	}
 
 }

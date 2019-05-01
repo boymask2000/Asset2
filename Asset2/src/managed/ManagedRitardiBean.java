@@ -8,7 +8,9 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import beans.Normativa;
 import beans.Ritardo;
+import database.dao.NormativeDAO;
 import database.dao.RitardiDAO;
 
 public class ManagedRitardiBean implements Serializable {
@@ -24,6 +26,14 @@ public class ManagedRitardiBean implements Serializable {
 
 		RitardiDAO dao = new RitardiDAO();
 		myList = dao.selectAll();
+		
+		NormativeDAO nDao = new NormativeDAO();
+		for( Ritardo r: myList) {
+			Normativa norm = nDao.getNormativaPerCodice(r.getCodNormativa());
+			r.setNomefile(norm.getFilename());
+		}
+		
+		
 		return myList;
 	}
 

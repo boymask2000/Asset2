@@ -41,7 +41,10 @@ public class ManagedAssetBean {
 		stat[st] = count;
 		return count;
 	}
-
+	public void setSelectedAssetId(long id){
+		System.out.println("id: "+id);
+		
+	}
 	public int stat(int st) {
 		return stat[st];
 	}
@@ -102,6 +105,7 @@ public class ManagedAssetBean {
 	}
 
 	public void onRowSelect(SelectEvent event) {
+		System.out.println("ss");
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((AssetAlca) event.getObject()).getId());
 		selectedAsset = (AssetAlca) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);

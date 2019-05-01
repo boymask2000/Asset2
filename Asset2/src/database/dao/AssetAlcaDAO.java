@@ -28,14 +28,18 @@ public class AssetAlcaDAO {
 	}
 
 	public AssetAlca searchById(AssetAlca s) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			return mapper.searchById(s);
 
-		} finally {
-			session.close();
 		}
+	}
+
+	public AssetAlca searchById(long id) {
+		AssetAlca s = new AssetAlca();
+		s.setId(id);
+		return searchById(s);
 	}
 
 	public AssetAlca searchByRPIE(AssetAlca s) {

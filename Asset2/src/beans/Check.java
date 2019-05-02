@@ -5,6 +5,8 @@ public class Check {
 	private String description;
 	private String descriptionUS;
 	private String codiceNormativa;
+	
+	private String filename;
 
 	public int getId() {
 		return id;
@@ -36,5 +38,13 @@ public class Check {
 
 	public void setDescriptionUS(String descriptionUS) {
 		this.descriptionUS = descriptionUS;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }

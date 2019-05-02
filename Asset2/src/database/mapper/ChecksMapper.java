@@ -6,11 +6,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import beans.Check;
+import beans.Frequenza;
 
 public interface ChecksMapper {
 	final String TABELLA = "test1.checks";
+	final String NORMATIVE ="test1.normative";
 
-	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
+	final String SELECT_ALL = "SELECT * FROM " + TABELLA+ " c, "+NORMATIVE+" n where c.codiceNormativa=n.codice";
 	final String SELECT_CHECKS_BY_ID = "SELECT * FROM " + TABELLA + " WHERE ID=#{id}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //

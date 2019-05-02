@@ -35,7 +35,11 @@
 							</p:column>
 
 
-
+<p:column>
+									<h:commandButton rendered="#{c.filename!=null}"
+										action="#{managedNormativaBean.setupViewFile(c.filename)}"
+										value="View" />
+								</p:column>
 
 
 						

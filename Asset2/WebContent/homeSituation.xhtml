@@ -15,7 +15,7 @@
 		<f:ajax event="dateSelect"
 			listener="#{managedInterventiBean.onDateSelect}" update="msgs0"  render="radi00DT" /> 
 	</p:calendar>
-
+<p:commandButton value="Calendario" action="goCalendario"/>
 	<p:dataTable id="radi00DT" selectionMode="single"
 		value="#{managedInterventiBean.getInterventiInData(managedInterventiBean.selectedDataForSituation)}"
 		var="c" selection="#{managedInterventiBean.selectedIntevento}"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15544934418580" configfile="/Asset2/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="4018" id="pf15544934821061" referenceLink="//@navigationRule.25/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15558600670900 pf15563667307410 pf15563754805865 pf15566079963440 pf15566079963441 pf15567773999280" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="4018" id="pf15544934821061" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15558600670900 pf15563667307410 pf15563754805865 pf15566079963440 pf15567773999280 pf15568111649770 pf15568111649771" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf155449348210714" referenceLink="//@navigationRule.23/@navigationCase.0/@toViewId|" inlinks="pf15544934821072 pf15546298401042" path="/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/admin.xhtml" x="122" y="1906" id="pf155449348210715" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" path="/admin/admin.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/modificaUtente.xhtml" x="338" y="562" id="pf155449348210716" referenceLink="//@navigationRule.15/@navigationCase.0/@toViewId|" inlinks="pf15544934821074" path="/admin/modificaUtente.xhtml"/>
@@ -29,8 +29,9 @@
   <nodes xsi:type="pageflow:PFPage" name="admin/nuovaChecklist.xhtml" x="338" y="7474" id="pf15558600670901" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf15558600670900" path="/admin/nuovaChecklist.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/frequenzeAlcaHome.xhtml" x="338" y="7858" id="pf15563668000864" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15566079963440" path="/admin/generazioneCalendarioHome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/frequenzeAlcaHome.xhtml" x="338" y="8242" id="pf15563754805866" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15563754805865" path="/admin/frequenzeAlcaHome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="dettaglioIntervento.xhtml" id="pf15566079963442" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15566079963441" path="/dettaglioIntervento.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="dettaglioIntervento.xhtml" id="pf15566079963442" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15568111649770" path="/dettaglioIntervento.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/gestioneAsset2.xhtml" id="pf15567773999301" referenceLink="//@navigationRule.13/@navigationCase.0/@toViewId|" inlinks="pf15567773999280" path="/admin/gestioneAsset2.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="calendario.xhtml" id="pf15568111649782" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15568111649771" path="/calendario.xhtml"/>
   <links id="pf15544934821072" target="pf155449348210714" source="pf15544934821061" outcome="login"/>
   <links id="pf15544934821074" target="pf155449348210716" source="pf15544934821061" outcome="modificautente"/>
   <links id="pf15545490252662" target="pf15545490252663" source="pf15544934821061" outcome="nuovoUtente"/>
@@ -55,6 +56,7 @@
   <links id="pf15563667307410" target="pf15557955598916" source="pf15544934821061" outcome="checklistHome"/>
   <links id="pf15563754805865" target="pf15563754805866" source="pf15544934821061" outcome="frequenzeAlcaHome"/>
   <links id="pf15566079963440" target="pf15563668000864" source="pf15544934821061" outcome="generazioneCalendario"/>
-  <links id="pf15566079963441" target="pf15566079963442" source="pf15544934821061" outcome="dettaglioIntervento"/>
   <links id="pf15567773999280" target="pf15567773999301" source="pf15544934821061" outcome="gestioneAsset"/>
+  <links id="pf15568111649770" target="pf15566079963442" source="pf15544934821061" outcome="dettaglioIntervento"/>
+  <links id="pf15568111649771" target="pf15568111649782" source="pf15544934821061" outcome="goCalendario"/>
 </pageflow:Pageflow>

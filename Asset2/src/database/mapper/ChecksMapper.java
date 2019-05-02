@@ -14,8 +14,8 @@ public interface ChecksMapper {
 	final String SELECT_CHECKS_BY_ID = "SELECT * FROM " + TABELLA + " WHERE ID=#{id}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (description , codiceNormativa )" //
-			+ "VALUES (#{description}, #{codiceNormativa})";
+			" (description , codiceNormativa ,descriptionUS)" //
+			+ "VALUES (#{description}, #{codiceNormativa}, #{descriptionUS})";
 
 	@Select(SELECT_ALL)
 	public List<Check> getAll();

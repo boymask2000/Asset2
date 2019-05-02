@@ -24,14 +24,11 @@ public class NormativeDAO {
 
 	public List<Normativa> selectAll() {
 		List<Normativa> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		try {
 			NormativeMapper mapper = session.getMapper(NormativeMapper.class);
 
 			list = mapper.selectAll();
-		} finally {
-			session.close();
 		}
 		return list;
 	}
@@ -48,11 +45,12 @@ public class NormativeDAO {
 				mapper.insert(u);
 			else {
 				u.setId(ll.get(0).getId());
-				mapper.update(u);}
+				mapper.update(u);
+			}
 			session.commit();
 		} catch (Throwable t) {
 			t.printStackTrace();
-			
+
 		} finally {
 			session.close();
 		}
@@ -86,10 +84,11 @@ public class NormativeDAO {
 			return null;
 		return list.get(0);
 	}
+
 	public Normativa getNormativaPerCodice(String cod) {
 		Normativa n = new Normativa();
 		n.setCodice(cod);
 		return getNormativaPerCodice(n);
-		
+
 	}
 }

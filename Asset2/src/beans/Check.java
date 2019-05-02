@@ -3,6 +3,7 @@ package beans;
 public class Check {
 	private int id;
 	private String description;
+	private String descriptionUS;
 	private String codiceNormativa;
 
 	public int getId() {
@@ -27,5 +28,13 @@ public class Check {
 
 	public void setCodiceNormativa(String codiceNormativa) {
 		this.codiceNormativa = codiceNormativa;
+	}
+
+	public String getDescriptionUS() {
+		return descriptionUS;
+	}
+
+	public void setDescriptionUS(String descriptionUS) {
+		this.descriptionUS = descriptionUS;
 	}
 }

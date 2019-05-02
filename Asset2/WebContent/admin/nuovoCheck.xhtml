@@ -12,32 +12,85 @@
 		<ui:define name="content">
 			<p:panel>
 				<h:form>
-					<p:growl id="growl1" life="2000" />
+					<p:panel>
+						<p:growl id="growl1" life="2000" />
 
 
-					<p:growl id="msgs" showDetail="true" />
-					<table>
-						<tr>
-							<td><h:outputText value="Descrizione" /></td>
-							<td><p:inputTextarea rows="10" cols="50"
-									value="#{managedChecksBean.selectedCheck.description}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Codice Normativa" /></td>
-							<td><h:inputText
-									value="#{managedChecksBean.selectedCheck.codiceNormativa}" /></td>
-						</tr>
-
-					</table>
-					<h:panelGroup id="postPanel2">
-						<p:commandButton value="ok" id="ajasx"
-							actionListener="#{managedChecksBean.insertCheck}" update="growl1"
-							styleClass="ui-priority-primary" />
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+							<tr>
+								<td><h:outputText value="Descrizione" /></td>
+								<td><h:outputText value="Descrizione US" /></td>
+							</tr>
+							<tr>
+								<td><p:inputTextarea rows="3" cols="50"
+										value="#{managedChecksBean.selectedCheck.description}" /></td>
 
 
-						<p:commandButton action="checksHome" value="Esci" process="@this" />
-					</h:panelGroup>
+								<td><p:inputTextarea rows="3" cols="50"
+										value="#{managedChecksBean.selectedCheck.descriptionUS}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Codice Normativa" /></td>
+								<td><h:inputText
+										value="#{managedChecksBean.selectedCheck.codiceNormativa}" /></td>
+							</tr>
+
+						</table>
+						<h:panelGroup id="postPanel2">
+							<p:commandButton value="ok" id="ajasx"
+								actionListener="#{managedChecksBean.insertCheck}"
+								update="growl1" styleClass="ui-priority-primary" />
+
+
+							<p:commandButton action="checksHome" value="Esci" process="@this" />
+						</h:panelGroup>
+					</p:panel>
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:panel id="basic" header="Elenco normative"
+							style="margin-bottom:20px">
+							<p:dataTable id="radioDT" selectionMode="single"
+								value="#{managedNormativaBean.allNormative}" var="c"
+								selection="#{managedNormativaBean.selectedNormativa}"
+								rowKey="#{c.id}" paginator="true" rows="10"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+
+								<p:ajax event="rowSelect" 
+									listener="#{managedNormativeBean.onRowSelect}"
+
+									/>
+
+								<p:column headerText="Normativa">
+									<h:outputText value="#{c.normativa}" />
+								</p:column>
+
+								<p:column headerText="Codice">
+									<h:outputText value="#{c.codice}" />
+								</p:column>
+
+								<p:column headerText="Inizio">
+									<h:outputText value="#{c.dataInizio}" />
+								</p:column>
+
+								<p:column headerText="Frequenza">
+									<h:outputText value="#{c.frequenza}" />
+								</p:column>
+
+
+								<p:column>
+									<h:commandButton rendered="#{c.filename!=null}"
+										action="#{managedNormativaBean.setupViewFile(c.filename)}"
+										value="View" />
+								</p:column>
+
+								
+								
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
 				</h:form>
+
 			</p:panel>
 		</ui:define>
 	</ui:composition>

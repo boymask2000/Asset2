@@ -152,6 +152,11 @@
 		<managed-bean-class>managed.ManagedAssetViewBean</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedRicercaAssetBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedRicercaAssetBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -292,7 +297,7 @@
 		<navigation-case>
 
 			<from-outcome>gestioneAsset</from-outcome>
-			<to-view-id>/admin/gestioneAsset.xhtml</to-view-id>
+			<to-view-id>/admin/gestioneAsset2.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>

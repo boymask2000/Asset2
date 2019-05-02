@@ -11,14 +11,22 @@ import beans.FrequenzaAlca;
 
 public interface ChecklistMapper {
 	final String TABELLA = "test1.checklist";
+	final String CHECKS = "test1.checks";
+	final String NORMATIVE = "test1.normative";
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
+	
+	//final String SELECT_ALL = "SELECT * FROM " + TABELLA+" c, "+NORMATIVE+" n where c.checkId=n.id";
 
 	final String SELECT_FOR_ASSET = "SELECT * FROM " + TABELLA + " WHERE assetId=#{id}";
 
-	final String SELECT_FOR_FREQ = "SELECT * " //
-			+ "FROM " + TABELLA + //
-			" WHERE assetId=#{id} ";
+	final String SELECT_FOR_FREQ3 = "SELECT * FROM " + TABELLA +" WHERE assetId=#{id} ";
+	
+	final String SELECT_FOR_FREQ = "SELECT * FROM " + TABELLA+" c, "+NORMATIVE+" n, "+CHECKS+" cc WHERE c.assetId=#{id} " //
+			+ " AND c.checkId=cc.id and cc.codiceNormativa=n.codice";
+	
+	//select * from checklist c, checks cc, normative n where c.assetId=196 and c.checkId=cc.id and cc.codiceNormativa=n.codice;
+	
 	final String SELECT_FOR_FREQ2 = "SELECT " //
 			+ "list.assetId, "//
 			+ "c.id as checkId, "//

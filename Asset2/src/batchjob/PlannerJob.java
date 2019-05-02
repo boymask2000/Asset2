@@ -84,7 +84,6 @@ public class PlannerJob extends GenericJob {
 
 				String goodDate = getMin(lista);
 
-				// System.out.println(data + " --> " + goodDate);
 
 				incInter(goodDate);
 

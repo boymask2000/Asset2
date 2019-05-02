@@ -95,17 +95,7 @@ public class NormativaUpload extends ABaseBean {
 		FacesMessage message = new FacesMessage("Succesful", fileName + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 
-//		ManagedAssetBean assetBean = getManagedAssetBean();
-//
-//		System.out.println(currentManuale.getDescrizione());
-//		System.out.println(currentManuale.getNomefile());
-//
-//		long assetId = assetBean.getSelectedAsset().getId();
-//		currentManuale.setAssetId(assetId);
-//		System.out.println(assetId);
-//
-//		ManualiDAO manualiDAO = new ManualiDAO();
-//		manualiDAO.insert(currentManuale);
+
 
 	}
 

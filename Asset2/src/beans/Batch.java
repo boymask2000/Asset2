@@ -60,7 +60,7 @@ public class Batch {
 				}
 				
 				endTime = TimeUtil.getTimestamp();
-				System.out.println("terminato endTime="+endTime);
+		
 			}
 
 		};

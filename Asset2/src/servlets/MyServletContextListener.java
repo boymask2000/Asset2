@@ -18,8 +18,9 @@ public class MyServletContextListener implements ServletContextListener {
 	// Run this before web application is started
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		Log.getLogger().info("ServletContextListener started");
 		ApplicationConfig.getDocumentdir();
+		Log.getLogger().info("ServletContextListener started");
+	
 		
 		
 	}

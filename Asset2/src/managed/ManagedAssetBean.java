@@ -21,6 +21,8 @@ public class ManagedAssetBean {
 	private List<Status> allStatus = new ArrayList<Status>();
 	private Status status = new Status(0);
 	private AssetAlca selectedAsset;
+	
+private	List<AssetAlca> searchResult = null;
 
 	private int stat[] = new int[10];
 
@@ -82,6 +84,7 @@ public class ManagedAssetBean {
 	}
 
 	public List<AssetAlca> getAllAssets() {
+		if( searchResult!=null)return searchResult;
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
 		return assetDAO.selectAll();
 	}
@@ -105,7 +108,7 @@ public class ManagedAssetBean {
 	}
 
 	public void onRowSelect(SelectEvent event) {
-		System.out.println("ss");
+	
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((AssetAlca) event.getObject()).getId());
 		selectedAsset = (AssetAlca) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -146,5 +149,11 @@ public class ManagedAssetBean {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	public List<AssetAlca> getSearchResult() {
+		return searchResult;
+	}
+	public void setSearchResult(List<AssetAlca> searchResult) {
+		this.searchResult = searchResult;
 	}
 }

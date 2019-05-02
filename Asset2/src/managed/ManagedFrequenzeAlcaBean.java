@@ -61,7 +61,7 @@ public class ManagedFrequenzeAlcaBean implements Serializable {
 	}
 
 	public void setSelectedFrequenza(FrequenzaAlca d) {
-		
+	
 		this.selectedFrequenza = d;
 	}
 }

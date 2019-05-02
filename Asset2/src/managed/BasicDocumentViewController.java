@@ -40,19 +40,18 @@ public class BasicDocumentViewController implements Serializable {
 	        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
 	            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
 	            return new DefaultStreamedContent();
-	        } else {
-	        	try {
-	        	
-					return  new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            // So, browser is requesting the media. Return a real StreamedContent with the media bytes.
+	        }
+			try {
+			
+				return  new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// So, browser is requesting the media. Return a real StreamedContent with the media bytes.
 //	            String id = context.getExternalContext().getRequestParameterMap().get("id");
 //	            Media media = service.find(Long.valueOf(id));
 //	            return new DefaultStreamedContent(new ByteArrayInputStream(media.getBytes()));
-	        }
 	        return null;
 	}
 

@@ -61,8 +61,8 @@ public class AssetAlcaDAO {
 	}
 
 	public void insert(AssetAlca u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			AssetAlca prec = mapper.searchByRPIE(u);
 			if (prec == null)
@@ -77,8 +77,6 @@ public class AssetAlcaDAO {
 			session.commit();
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			session.close();
 		}
 	}
 
@@ -110,6 +108,16 @@ public class AssetAlcaDAO {
 			session.close();
 		}
 		return lista;
+	}
+
+	public List<AssetAlca> search(AssetAlca s) {
+		List<AssetAlca> ll = new ArrayList<AssetAlca>();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			ll = session.selectList("searchAsset", s);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ll;
 	}
 
 }

@@ -76,22 +76,7 @@ public class DocInterventoUpload {
 
 	public void upload() {
 	
-//		if (file != null) {
-//			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-//			FacesContext.getCurrentInstance().addMessage(null, message);
-//
-//			ManagedAssetBean assetBean = getManagedAssetBean();
-//
-//			System.out.println(currentDoc.getDescrizione());
-//			System.out.println(currentDoc.getFilename());
-//
-//			long assetId = assetBean.getSelectedAsset().getId();
-//			currentDoc.setAssetId(assetId);
-//			System.out.println(assetId);
-//
-//			ManualiDAO manualiDAO = new ManualiDAO();
-//			manualiDAO.insert(currentDoc);
-//		}
+
 	}
 
 

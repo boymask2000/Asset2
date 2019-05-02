@@ -56,8 +56,6 @@ public class GeneraCalendarioJob extends GenericJob {
 			String sDate = String.format("%4d%02d%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
 					calendar.get(Calendar.DAY_OF_MONTH));
 
-//			System.out.println(calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-"
-//					+ calendar.get(Calendar.YEAR) + " --- " + calendar.get(Calendar.DAY_OF_WEEK) + " ||| " + sDate);
 
 			queue.put(sDate);
 

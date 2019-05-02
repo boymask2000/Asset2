@@ -39,7 +39,7 @@ public class ManagedChecklistBean implements Serializable {
 	public List<Checklist> getChecklistForFrequenza() {
 	//	ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		ManagedFrequenzeAlcaBean mfab = (ManagedFrequenzeAlcaBean) JsfUtil.getBean("managedFrequenzeAlcaBean");
-		
+	
 		ChecklistDAO dao = new ChecklistDAO();
 		myList = dao.getChecklistForFrequenza(mfab.getSelectedFrequenza());
 		return myList;

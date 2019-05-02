@@ -30,10 +30,7 @@ public class CalendarioDaTavolo {
 	}
 
 	public void showDay(int evt) {
-		System.out.println(evt);
-		
-		
-//	System.out.println(anno+ " "+mese+" "+days.get(evt));
+
 		
 
 		Calendar cc = (Calendar) cal.clone();
@@ -43,7 +40,7 @@ public class CalendarioDaTavolo {
 		cc.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
 		cc.add(Calendar.DAY_OF_MONTH, -dayOne+1);
-		// System.out.println(cc.get(Calendar.DAY_OF_WEEK));
+	
 		System.out
 		.println(cc.get(Calendar.YEAR) + " " + cc.get(Calendar.MONTH) + " " + cc.get(Calendar.DAY_OF_MONTH));
 		

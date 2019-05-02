@@ -57,7 +57,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 					queue.put("" + count);
 				} catch (Throwable t) {
 					t.printStackTrace();
-					System.out.println(asset.toString());
+				
 				}
 			}
 

@@ -38,7 +38,7 @@ public class ChecklistDAO {
 		}
 	}
 	public List<Checklist> getChecklistForAsset(AssetAlca s) {
-	//	System.out.println("getChecklistForAsset");
+
 		List<Checklist> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 
@@ -54,7 +54,7 @@ public class ChecklistDAO {
 		return list;
 	}
 	public List<Checklist> getChecklistForFrequenza(FrequenzaAlca s) {
-	//	System.out.println("getChecklistForAsset");
+
 		List<Checklist> list = null;
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import beans.Check;
-import beans.Frequenza;
 
 public interface ChecksMapper {
 	final String TABELLA = "test1.checks";

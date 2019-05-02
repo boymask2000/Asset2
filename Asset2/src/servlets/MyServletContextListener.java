@@ -3,7 +3,6 @@ package servlets;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import common.ApplicationConfig;
 import common.Log;
 
 public class MyServletContextListener implements ServletContextListener {
@@ -18,11 +17,8 @@ public class MyServletContextListener implements ServletContextListener {
 	// Run this before web application is started
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		ApplicationConfig.getDocumentdir();
-		Log.getLogger().info("ServletContextListener started");
 	
-		
-		
+		Log.getLogger().info("ServletContextListener started");
 	}
 
 	public synchronized static boolean isStopAll() {

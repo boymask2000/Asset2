@@ -26,8 +26,10 @@
 								listener="#{managedChecksBean.onRowSelect}" update=":form:msgs" />
 
 							<p:column headerText="Descrizione">
-								<p:inputTextarea disabled="true" rows="3" cols="50"  value="#{c.description}" />
-								<p:inputTextarea disabled="true" rows="3" cols="50"  value="#{c.descriptionUS}" />
+								<p:inputTextarea disabled="true" rows="3" cols="50"
+									value="#{c.description}" />
+								<p:inputTextarea disabled="true" rows="3" cols="50"
+									value="#{c.descriptionUS}" />
 							</p:column>
 
 							<p:column headerText="Codice Normativa">
@@ -35,14 +37,12 @@
 							</p:column>
 
 
-<p:column>
-									<h:commandButton rendered="#{c.filename!=null}"
-										action="#{managedNormativaBean.setupViewFile(c.filename)}"
-										value="View" />
-								</p:column>
+							<p:column>
+								<h:commandButton rendered="#{c.filename!=null}"
+									action="#{managedNormativaBean.setupViewFile(c.filename)}"
+									value="View" />
+							</p:column>
 
-
-						
 							<f:facet name="footer">
 
 								<p:commandButton action="nuovoCheck" value="Nuova Check"

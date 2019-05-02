@@ -10,22 +10,14 @@ import database.mapper.CalendarioMapper;
 
 public class CalendarioDAO {
 
-	/**
-	 * Returns the list of all Person instances from the database.
-	 * 
-	 * @return the list of all Person instances from the database.
-	 */
 
 	public List<Calendario> selectAll() {
 		List<Calendario> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		try {
 			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
 
 			list = mapper.selectAll();
-		} finally {
-			session.close();
 		}
 
 		return list;
@@ -33,16 +25,14 @@ public class CalendarioDAO {
 	}
 
 	public void update(Calendario u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
 
 			mapper.update(u);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 	}
 
@@ -149,7 +139,6 @@ public class CalendarioDAO {
 			session.close();
 		}
 
-		
 	}
 
 }

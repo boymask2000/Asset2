@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: test1
 -- ------------------------------------------------------
--- Server version	5.7.25-1
+-- Server version	5.7.26-0ubuntu0.19.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -81,6 +81,40 @@ CREATE TABLE `assetalca` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `audiointervento`
+--
+
+DROP TABLE IF EXISTS `audiointervento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `audiointervento` (
+  `interventoId` int(6) DEFAULT NULL,
+  `filename` varchar(60) DEFAULT NULL,
+  `timestamp` varchar(30) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `audit`
+--
+
+DROP TABLE IF EXISTS `audit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `audit` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `username` varchar(15) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `assetId` int(6) DEFAULT NULL,
+  `azione` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `calendario`
 --
 
@@ -110,7 +144,7 @@ CREATE TABLE `checklist` (
   `assetId` int(6) DEFAULT NULL,
   `checkId` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +159,7 @@ CREATE TABLE `checklistintervento` (
   `checkId` int(6) DEFAULT NULL,
   `id` int(6) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,8 +173,9 @@ CREATE TABLE `checks` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(800) DEFAULT NULL,
   `codiceNormativa` varchar(45) DEFAULT NULL,
+  `descriptionUS` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +192,7 @@ CREATE TABLE `docinterventi` (
   `descrizione` varchar(200) DEFAULT NULL,
   `ext` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,8 +206,9 @@ CREATE TABLE `fotointervento` (
   `interventoId` int(6) DEFAULT NULL,
   `filename` varchar(60) DEFAULT NULL,
   `id` int(6) NOT NULL AUTO_INCREMENT,
+  `timestamp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,8 +240,10 @@ CREATE TABLE `interventi` (
   `data_pianificata` varchar(10) DEFAULT NULL,
   `data_effettiva` varchar(10) DEFAULT NULL,
   `esito` varchar(45) DEFAULT NULL,
+  `user` varchar(20) DEFAULT NULL,
+  `timestamp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51591 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51609 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +279,28 @@ CREATE TABLE `normative` (
   `codFrequenza` int(11) DEFAULT NULL,
   `filename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ritardi`
+--
+
+DROP TABLE IF EXISTS `ritardi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ritardi` (
+  `assetId` int(6) DEFAULT NULL,
+  `idIntervento` int(6) DEFAULT NULL,
+  `dataPianificata` varchar(10) DEFAULT NULL,
+  `checklistId` int(6) DEFAULT NULL,
+  `codNormativa` varchar(30) DEFAULT NULL,
+  `descCheck` varchar(300) DEFAULT NULL,
+  `maxritardo` int(5) DEFAULT NULL,
+  `currentRitardo` int(5) DEFAULT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,4 +329,4 @@ CREATE TABLE `utenti` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-29 10:38:04
+-- Dump completed on 2019-05-02 16:14:19

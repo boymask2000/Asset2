@@ -44,9 +44,7 @@
 								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
 									value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
-								<h:outputText value="lastStatus" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.lastStatus}" />
+								
 
 							</h:panelGrid>
 							<p:commandButton action="#{managedAssetBean.updateAsset}"
@@ -156,7 +154,7 @@
 
 					<h:commandButton value="Stampa"
 						action="#{printCreatorFullDettaglioAsset.printFullAsset}" />
-					<h:commandButton value="Frequenze" action="frequenzeAlcaHome" />
+					<h:commandButton value="Frequenze" action="frequenzeAlcaHome" rendered="false"/>
 				</p:panel>
 			</h:form>
 			<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"

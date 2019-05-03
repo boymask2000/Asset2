@@ -9,18 +9,20 @@ import java.util.concurrent.Callable;
 
 import beans.AssetAlca;
 import beans.Calendario;
-import beans.Checklist;
+import beans.Check;
 import beans.ChecklistIntervento;
-import beans.FrequenzaAlca;
+import beans.FamigliaAsset;
 import beans.Intervento;
+import beans.Normativa;
 import common.TimeUtil;
 import common.TipoSchedulazione;
 import database.dao.AssetAlcaDAO;
 import database.dao.CalendarioDAO;
-import database.dao.ChecklistDAO;
 import database.dao.ChecklistInterventiDAO;
-import database.dao.FrequenzeAlcaDAO;
+import database.dao.ChecksDAO;
+import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
+import database.dao.NormativeDAO;
 
 public class PlannerJob extends GenericJob {
 	@Override
@@ -37,18 +39,16 @@ public class PlannerJob extends GenericJob {
 				for (AssetAlca as : allAssets) {
 					queue.put(count + " / " + allAssets.size());
 					count++;
-					FrequenzeAlcaDAO fad = new FrequenzeAlcaDAO();
 
-					List<FrequenzaAlca> ll = fad.getFreqForRPIE(as.getRpieIdIndividual());
+					String famiglia = as.getFacSystem();
+					FamigliaAssetDAO fad = new FamigliaAssetDAO();
+					FamigliaAsset f = fad.searchByName(famiglia);
 
-					for (FrequenzaAlca fa : ll) {
-						int codFrequenza = fa.getIdFrequenza();
-						TipoSchedulazione tipo = TipoSchedulazione.getTipoFrequenza(codFrequenza);
+					ChecksDAO cDao = new ChecksDAO();
+					List<Check> checks = cDao.getChecksByFamilyId(f.getId());
 
-						ChecklistDAO cld = new ChecklistDAO();
-						List<Checklist> cl = cld.getChecklistForFrequenza(fa);
-						if (cl.size() > 0)
-							makePlan(as.getId(), tipo, cl);
+					for (Check check : checks) {
+						makePlan(as.getId(), check);
 					}
 
 				}
@@ -59,14 +59,17 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private void makePlan(long assetId, TipoSchedulazione sched, List<Checklist> cl) {
+	private void makePlan(long assetId, Check check) {
+	
+		TipoSchedulazione tipo = getTipoSchedulazione(check);
+		
+		int range = tipo.getRange();
+		int num = tipo.getNum();
+		int calType = tipo.getCalType();
+
 		CalendarioDAO calendarioDao = new CalendarioDAO();
 
 		String maxData = calendarioDao.getMaxData();
-
-		int num = sched.getNum();
-		int calType = sched.getCalType();
-		int range = sched.getRange();
 
 		// Data di partenza
 		Calendar cal = new GregorianCalendar();
@@ -84,11 +87,9 @@ public class PlannerJob extends GenericJob {
 
 				String goodDate = getMin(lista);
 
-
 				incInter(goodDate);
 
-				for (Checklist ck : cl)
-					createIntervento(assetId, data, goodDate, ck);
+				createIntervento(assetId, data, goodDate, check);
 
 				// dump(lista);
 
@@ -100,7 +101,7 @@ public class PlannerJob extends GenericJob {
 		}
 	}
 
-	private void createIntervento(long assetId, String data, String goodDate, Checklist ck) {
+	private static void createIntervento(long assetId, String data, String goodDate, Check ck) {
 		Intervento u = new Intervento();
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
@@ -115,13 +116,22 @@ public class PlannerJob extends GenericJob {
 		Intervento ii = dao.getInterventiPerAssetInData(u).get(0);
 
 		ChecklistIntervento cli = new ChecklistIntervento();
-		cli.setCheckId(ck.getCheckId());
+		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 
 		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
 		cliDao.insert(cli);
 
 	}
+
+	private static TipoSchedulazione getTipoSchedulazione( Check check) {
+		NormativeDAO normDao = new NormativeDAO();
+		Normativa normativa = normDao.getNormativaPerCodice(check.getCodiceNormativa());
+		int codFreq = normativa.getCodFrequenza();
+		return TipoSchedulazione.getTipoFrequenza(codFreq);
+	}
+
+
 
 	private List<Item> order(Calendar cal, int r) {
 
@@ -198,7 +208,6 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	
 	class Item {
 		String data;
 		int num;

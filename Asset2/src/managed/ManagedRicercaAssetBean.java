@@ -28,9 +28,9 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 	public void ricerca() {
 		AssetAlcaDAO dao = new AssetAlcaDAO();
 		List<AssetAlca> ll = dao.search(selectedAsset);
-System.out.println(ll.size());
-ManagedAssetBean bean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
-bean.setSearchResult(ll);
+
+		ManagedAssetBean bean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+		bean.setSearchResult(ll);
 	}
 
 }

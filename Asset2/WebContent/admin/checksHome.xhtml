@@ -12,11 +12,38 @@
 
 				<p:growl id="msgs" showDetail="true" />
 
-				<h:panelGrid columns="1" cellpadding="10">
-					<p:panel id="basic" header="Gestione normative"
+				<h:panelGrid columns="2" cellpadding="1">
+					<p:panel id="basic" header="Famiglie Asset"
 						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedChecksBean.allChecks}" var="c"
+						<p:dataTable id="familyDT" selectionMode="single"
+							value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
+							selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+							rowKey="#{c.id}" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:ajax event="rowSelect"
+								listener="#{managedFamiglieAssetBean.onRowSelect}"
+								update=":form" />
+
+
+							<p:column headerText="Nome">
+								<h:outputText value="#{c.famiglia}" />
+							</p:column>
+
+
+
+						</p:dataTable>
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="Reset Selezione" update=":form"
+							action="#{managedFamiglieAssetBean.resetSelezione()}" />
+					</p:panel>
+					<p:panel>
+						<p:outputLabel
+							value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
+							rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
+						<p:dataTable id="checksDT" selectionMode="single"
+							value="#{managedChecksBean.allChecksForFamily}" var="c"
 							selection="#{managedChecksBean.selectedCheck}" rowKey="#{c.id}"
 							paginator="true" rows="5"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

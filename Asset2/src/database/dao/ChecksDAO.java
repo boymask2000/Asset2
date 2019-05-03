@@ -32,6 +32,17 @@ public class ChecksDAO {
 		}
 		return list;
 	}
+	public List<Check> getChecksByFamilyId(long id) {
+		List<Check> list = null;
+
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
+
+			list = mapper.getChecksByFamilyId(id);
+		}
+		return list;
+	}
 	public void insert(Check u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 

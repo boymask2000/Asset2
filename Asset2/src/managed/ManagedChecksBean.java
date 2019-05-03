@@ -10,6 +10,7 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Check;
 import beans.Checklist;
+import beans.FamigliaAsset;
 import beans.Normativa;
 import common.JsfUtil;
 import common.Log;
@@ -34,16 +35,28 @@ public class ManagedChecksBean implements Serializable {
 		return myList;
 	}
 
+	public List<Check> getAllChecksForFamily() {
+		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+		FamigliaAsset fam = mfb.getSelectedFamiglia();
+		ChecksDAO dao = new ChecksDAO();
+
+		if (fam.getId() == 0) {
+
+			myList = dao.selectAll();
+			return myList;
+		}
+		return dao.getChecksByFamilyId(fam.getId());
+	}
+
 	public void aggiungi() {
 
-		//ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
-		ManagedFrequenzeAlcaBean mfb = (ManagedFrequenzeAlcaBean) JsfUtil.getBean("managedFrequenzeAlcaBean");
-	//	AssetAlca as = mab.getSelectedAsset();
+		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+
 		ChecklistDAO dao = new ChecklistDAO();
 		int count = 0;
 		for (Check c : multiSelect) {
 			Checklist cl = new Checklist();
-			cl.setAssetId(mfb.getSelectedFrequenza().getId());
+			cl.setAssetId(mfb.getSelectedFamiglia().getId());
 			cl.setCheckId(c.getId());
 			dao.insert(cl);
 			count++;
@@ -61,7 +74,9 @@ public class ManagedChecksBean implements Serializable {
 	}
 
 	public void insertCheck() {
-	
+		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+
+		selectedCheck.setFamigliaId(mfb.getSelectedFamiglia().getId());
 
 		ChecksDAO dao = new ChecksDAO();
 
@@ -97,6 +112,6 @@ public class ManagedChecksBean implements Serializable {
 
 	public void setMultiSelect(List<Check> multiSelect) {
 		this.multiSelect = multiSelect;
-		
+
 	}
 }

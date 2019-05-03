@@ -10,7 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import beans.AssetAlca;
+import beans.FamigliaAsset;
 import database.dao.AssetAlcaDAO;
+import database.dao.FamigliaAssetDAO;
 
 public class ExcelAssetAlcaLoaderJob extends GenericJob {
 	private InputStream inputStream;
@@ -50,14 +52,20 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				} catch (Exception e) {
 					continue;
 				}
+				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
 				try {
 					dao.insert(asset);
 					count++;
+
+					FamigliaAsset f = new FamigliaAsset();
+					f.setFamiglia(asset.getFacSystem());
+					famDao.insert(f);
+
 					queue.put("" + count);
 				} catch (Throwable t) {
 					t.printStackTrace();
-				
+
 				}
 			}
 
@@ -68,22 +76,9 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		}
 		return count;
 	}
-//	public static void main(String s[] ) {
-//		try {
-//			FileInputStream fis = new FileInputStream("/home/giovanni/Desktop/p.xlsx");
-//			ExcelAssetAlcaLoaderJob loader = new ExcelAssetAlcaLoaderJob();
-//			loader.setInputStream(fis);
-//			loader.jobBody();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 
-	private AssetAlca buildAsset(Row row) {
+
+	private static AssetAlca buildAsset(Row row) {
 
 		AssetAlca asset = new AssetAlca();
 		asset.setFacNum(row.getCell(0).toString());
@@ -96,7 +91,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		asset.setPmSchedRecipient(row.getCell(7).toString());
 		asset.setFrequency(row.getCell(8).toString());
 		asset.setPmSchedSerial(row.getCell(9).toString());
-		//asset.setFrequency(row.getCell(10).toString());
+		// asset.setFrequency(row.getCell(10).toString());
 		asset.setSchedAssignedOrg(row.getCell(11).toString());
 		asset.setRpieIdIndividual(row.getCell(15).toString());
 

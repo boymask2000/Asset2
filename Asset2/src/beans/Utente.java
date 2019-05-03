@@ -82,8 +82,7 @@ public class Utente implements Serializable {
 	}
 
 	public String logout() {
-		username = null;
-		password = null;
+		clean();
 		return "login";
 	}
 

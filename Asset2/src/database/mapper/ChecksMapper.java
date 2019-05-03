@@ -13,10 +13,13 @@ public interface ChecksMapper {
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA+ " c, "+NORMATIVE+" n where c.codiceNormativa=n.codice";
 	final String SELECT_CHECKS_BY_ID = "SELECT * FROM " + TABELLA + " WHERE ID=#{id}";
+	
+	final String SELECT_CHECKS_BY_FAM = "SELECT * FROM " + TABELLA +" c, "+NORMATIVE+" n  where c.codiceNormativa=n.codice AND"
+			+" c.famigliaId=#{id}" ;
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (description , codiceNormativa ,descriptionUS)" //
-			+ "VALUES (#{description}, #{codiceNormativa}, #{descriptionUS})";
+			" (description , codiceNormativa ,descriptionUS, famigliaId)" //
+			+ "VALUES (#{description}, #{codiceNormativa}, #{descriptionUS}, #{famigliaId})";
 
 	@Select(SELECT_ALL)
 	public List<Check> getAll();
@@ -26,5 +29,8 @@ public interface ChecksMapper {
 	
 	@Select(SELECT_CHECKS_BY_ID)
 	public List<Check> getChecksByID(long id);
+	
+	@Select(SELECT_CHECKS_BY_FAM)
+	public List<Check> getChecksByFamilyId(long idFamiglia);
 
 }

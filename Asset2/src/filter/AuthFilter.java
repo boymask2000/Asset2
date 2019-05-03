@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Utente;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthFilter implements Filter {
 
 	public AuthFilter() {
@@ -28,12 +28,11 @@ public class AuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
-
 			// check whether session variable is set
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response;
 			HttpSession ses = req.getSession(false);
-		//	if(ses==null)res.sendRedirect(req.getContextPath() + "/login.xhtml");
+			// if(ses==null)res.sendRedirect(req.getContextPath() + "/login.xhtml");
 			// allow user to proccede if url is login.xhtml or user logged in or user is
 			// accessing any page in //public folder
 			String reqURI = req.getRequestURI();
@@ -44,14 +43,17 @@ public class AuthFilter implements Filter {
 				return;
 			}
 			Utente utente = (Utente) ses.getAttribute("utente");
+			if (utente == null || utente.getUsername() == null) {
+				res.sendRedirect(req.getContextPath() + "/login.xhtml");
+			}
 			if (utente != null && utente.getTipo() != null) {
-				if (reqURI.indexOf("/admin/") !=-1  && !utente.getTipo().equalsIgnoreCase("A"))
+				if (reqURI.indexOf("/admin/") != -1 && !utente.getTipo().equalsIgnoreCase("A"))
 					res.sendRedirect(req.getContextPath() + "/login.xhtml");
 				else
 					chain.doFilter(request, response);
 			} else {
-				if (ses != null)
-					ses.invalidate();
+
+				ses.invalidate();
 				res.sendRedirect(req.getContextPath() + "/login.xhtml"); // Anonymous user. Redirect to login page
 
 			}

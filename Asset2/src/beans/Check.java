@@ -2,6 +2,7 @@ package beans;
 
 public class Check {
 	private int id;
+	private long famigliaId;
 	private String description;
 	private String descriptionUS;
 	private String codiceNormativa;
@@ -46,5 +47,13 @@ public class Check {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	public long getFamigliaId() {
+		return famigliaId;
+	}
+
+	public void setFamigliaId(long famigliaId) {
+		this.famigliaId = famigliaId;
 	}
 }

@@ -40,10 +40,7 @@ public class CalendarioDaTavolo {
 		cc.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
 		cc.add(Calendar.DAY_OF_MONTH, -dayOne+1);
-	
-		System.out
-		.println(cc.get(Calendar.YEAR) + " " + cc.get(Calendar.MONTH) + " " + cc.get(Calendar.DAY_OF_MONTH));
-		
+			
 
 		for (int i = 0; i < evt; i++)
 			cc.add(Calendar.DAY_OF_MONTH, 1);

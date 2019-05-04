@@ -10,13 +10,14 @@ import beans.Intervento;
 
 public interface ChecklistInterventoMapper {
 	final String TABELLA = "test1.checklistintervento";
-
+	final String TABELLA_CHECKS= "test1.checks"
+			;
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 	final String SEARCH = "SELECT * FROM " + TABELLA +" WHERE interventoId=#{interventoId} AND checkId=#{checkId} ";
 
 	final String SELECT_FOR_INTERVENTO = "SELECT * FROM " + TABELLA + " WHERE interventoId=#{id}";
 	
-	final String SELECT_FOR_INTERVENTO_ID = "SELECT * FROM " + TABELLA + " WHERE interventoId=#{id}";
+	final String SELECT_FOR_INTERVENTO_ID = "SELECT * FROM " + TABELLA + " cli, "+TABELLA_CHECKS+" ck WHERE cli.interventoId=#{id} and cli.checkId=ck.id";
 	
 
 	final String INSERT = "INSERT INTO " + TABELLA + //

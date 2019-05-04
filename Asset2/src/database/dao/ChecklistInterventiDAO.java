@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import beans.Checklist;
 import beans.ChecklistIntervento;
 import beans.Intervento;
 import database.MyBatisConnectionFactory;
 import database.mapper.ChecklistInterventoMapper;
-import database.mapper.ChecklistMapper;
 
 public class ChecklistInterventiDAO {
 

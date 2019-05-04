@@ -4,6 +4,9 @@ public class ChecklistIntervento {
 	private long id;
 	private long interventoId;
 	private long checkId;
+	
+	private String description;
+	private String descriptionUS;
 
 	public long getId() {
 		return id;
@@ -27,5 +30,21 @@ public class ChecklistIntervento {
 
 	public void setCheckId(long checkId) {
 		this.checkId = checkId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescriptionUS() {
+		return descriptionUS;
+	}
+
+	public void setDescriptionUS(String descriptionUS) {
+		this.descriptionUS = descriptionUS;
 	}
 }

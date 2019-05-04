@@ -111,7 +111,7 @@ CREATE TABLE `audit` (
   `assetId` int(6) DEFAULT NULL,
   `azione` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `checklistintervento` (
   `checkId` int(6) DEFAULT NULL,
   `id` int(6) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1395 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,8 +174,9 @@ CREATE TABLE `checks` (
   `description` varchar(800) DEFAULT NULL,
   `codiceNormativa` varchar(45) DEFAULT NULL,
   `descriptionUS` varchar(400) DEFAULT NULL,
+  `famigliaId` int(6) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,6 +197,20 @@ CREATE TABLE `docinterventi` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `famiglieasset`
+--
+
+DROP TABLE IF EXISTS `famiglieasset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `famiglieasset` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `famiglia` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `fotointervento`
 --
 
@@ -208,7 +223,7 @@ CREATE TABLE `fotointervento` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `timestamp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +258,7 @@ CREATE TABLE `interventi` (
   `user` varchar(20) DEFAULT NULL,
   `timestamp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51609 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52350 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +315,7 @@ CREATE TABLE `ritardi` (
   `currentRitardo` int(5) DEFAULT NULL,
   `id` int(6) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,4 +344,4 @@ CREATE TABLE `utenti` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-02 16:14:19
+-- Dump completed on 2019-05-04 19:25:12

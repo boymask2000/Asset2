@@ -10,6 +10,7 @@ import common.JsfUtil;
 import common.TimeUtil;
 import database.MyBatisConnectionFactory;
 import database.mapper.InterventiMapper;
+import restservice.beans.InterventoRestBean;
 
 public class InterventiDAO {
 
@@ -25,6 +26,16 @@ public class InterventiDAO {
 			session.close();
 		}
 		return list;
+	}
+
+	public Intervento getInterventoById(long id) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			List<Intervento> ll = mapper.getInterventoById(id);
+			if (ll == null || ll.size() == 0)
+				return null;
+			return ll.get(0);
+		}
 	}
 
 	public List<Intervento> getInterventiInData(String data) {
@@ -115,13 +126,10 @@ public class InterventiDAO {
 	}
 
 	public void insert(Intervento u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			mapper.insert(u);
 			session.commit();
-		} finally {
-			session.close();
 		}
 	}
 
@@ -139,8 +147,23 @@ public class InterventiDAO {
 		}
 	}
 
+	public void update(InterventoRestBean u) {
+
+		Intervento intervento = u;
+		intervento.setTimestamp(TimeUtil.getTimestamp());
+		intervento.setData_effettiva(TimeUtil.getCurrentDate());
+
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			mapper.update(intervento);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public boolean isLastIntervento(String data) {
-	
+
 		boolean out = true;
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
@@ -153,5 +176,13 @@ public class InterventiDAO {
 		}
 
 		return out;
+	}
+
+	public void cleanInterventi(String data) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			mapper.cleanInterventi(data);
+			session.commit();
+		}
 	}
 }

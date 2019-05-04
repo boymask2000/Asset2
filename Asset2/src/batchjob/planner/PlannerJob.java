@@ -1,4 +1,4 @@
-package batchjob;
+package batchjob.planner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import batchjob.GenericJob;
 import beans.AssetAlca;
 import beans.Calendario;
 import beans.Check;
@@ -60,9 +61,9 @@ public class PlannerJob extends GenericJob {
 	}
 
 	private void makePlan(long assetId, Check check) {
-	
+
 		TipoSchedulazione tipo = getTipoSchedulazione(check);
-		
+
 		int range = tipo.getRange();
 		int num = tipo.getNum();
 		int calType = tipo.getCalType();
@@ -87,12 +88,16 @@ public class PlannerJob extends GenericJob {
 
 				String goodDate = getMin(lista);
 
-				incInter(goodDate);
+				boolean done = placeInSameDay(assetId, lista, goodDate, data, check);
 
-				createIntervento(assetId, data, goodDate, check);
+				if (!done) {
 
-				// dump(lista);
+					incInter(goodDate);
 
+					createIntervento(assetId, data, goodDate, check);
+
+					// dump(lista);
+				}
 				cal.add(calType, num);
 			}
 		} catch (Throwable t) {
@@ -101,11 +106,34 @@ public class PlannerJob extends GenericJob {
 		}
 	}
 
-	private static void createIntervento(long assetId, String data, String goodDate, Check ck) {
+	private SchemaPlan schema = new SchemaPlan();
+
+	private boolean placeInSameDay(long assetId, List<Item> lista, String goodDate, String dataTeorica, Check ck) {
+
+		for (Item item : lista) {
+			String data = item.getData();
+
+			if (schema.hasDataAsset(data, assetId)) {
+
+				createIntervento(assetId, dataTeorica, data, ck);
+				incInter(data);
+
+				return true;
+			}
+
+		}
+
+		schema.set(assetId, goodDate);
+
+		return false;
+	}
+
+	private static void createIntervento(long assetId, String dataTeorica, String goodDate, Check ck) {
+
 		Intervento u = new Intervento();
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
-		u.setData_teorica(data);
+		u.setData_teorica(dataTeorica);
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -124,14 +152,12 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private static TipoSchedulazione getTipoSchedulazione( Check check) {
+	private static TipoSchedulazione getTipoSchedulazione(Check check) {
 		NormativeDAO normDao = new NormativeDAO();
 		Normativa normativa = normDao.getNormativaPerCodice(check.getCodiceNormativa());
 		int codFreq = normativa.getCodFrequenza();
 		return TipoSchedulazione.getTipoFrequenza(codFreq);
 	}
-
-
 
 	private List<Item> order(Calendar cal, int r) {
 
@@ -158,12 +184,19 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private void cleanInterventiCalendario() {
+	private static void cleanInterventiCalendario() {
+		String now = TimeUtil.getCurrentDate();
+
 		CalendarioDAO dao = new CalendarioDAO();
-		dao.cleanInterventi();
+		dao.cleanInterventi(now);
+
+		InterventiDAO iDao = new InterventiDAO();
+		iDao.cleanInterventi(now);
+
+		// TODO Pulire anche la checklistinterventi
 	}
 
-	private Integer getNumFromCale(String dat) {
+	private static Integer getNumFromCale(String dat) {
 		CalendarioDAO dao = new CalendarioDAO();
 		Calendario c = new Calendario();
 		c.setData(dat);
@@ -185,7 +218,7 @@ public class PlannerJob extends GenericJob {
 		return TimeUtil.formatDate(c, TimeUtil.FORMAT_CANONICAL);
 	}
 
-	private String getMin(List<Item> lista) {
+	private static String getMin(List<Item> lista) {
 		int min = lista.get(0).getNum();
 		String goodDate = lista.get(0).getData();
 		for (Item item : lista) {
@@ -200,7 +233,7 @@ public class PlannerJob extends GenericJob {
 		return goodDate;
 	}
 
-	private void incInter(String goodDate) {
+	private static void incInter(String goodDate) {
 		CalendarioDAO dao = new CalendarioDAO();
 		Calendario cc = new Calendario();
 		cc.setData(goodDate);

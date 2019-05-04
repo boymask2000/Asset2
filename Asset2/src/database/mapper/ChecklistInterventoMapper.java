@@ -15,6 +15,9 @@ public interface ChecklistInterventoMapper {
 	final String SEARCH = "SELECT * FROM " + TABELLA +" WHERE interventoId=#{interventoId} AND checkId=#{checkId} ";
 
 	final String SELECT_FOR_INTERVENTO = "SELECT * FROM " + TABELLA + " WHERE interventoId=#{id}";
+	
+	final String SELECT_FOR_INTERVENTO_ID = "SELECT * FROM " + TABELLA + " WHERE interventoId=#{id}";
+	
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (interventoId , checkId )" //
@@ -22,6 +25,9 @@ public interface ChecklistInterventoMapper {
 
 	@Select(SELECT_FOR_INTERVENTO)
 	public List<ChecklistIntervento> getCheckListForIntervento(Intervento s);
+	
+	@Select(SELECT_FOR_INTERVENTO_ID)
+	public List<ChecklistIntervento> getCheckListForInterventoId(long id);
 
 	@Insert(INSERT)
 	public void insert(ChecklistIntervento cl);

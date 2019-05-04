@@ -128,12 +128,12 @@ public class CalendarioDAO {
 		return u;
 	}
 
-	public void cleanInterventi() {
+	public void cleanInterventi(String data) {
 		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		try {
 			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
 
-			mapper.cleanInterventi();
+			mapper.cleanInterventi(data);
 			session.commit();
 		} finally {
 			session.close();

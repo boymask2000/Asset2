@@ -48,6 +48,14 @@ public interface InterventiMapper {
 	final String SITUATION = "SELECT * FROM " + TABELLA + " WHERE " + //
 			"( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
 			" (data_effettiva =#{data} ) ";
+
+	final String CLEAN_INTERVENTI = "DELETE FROM "+TABELLA+ " WHERE data_pianificata> #{data}";
+
+	final String GET_BY_ID = "SELECT * FROM " + TABELLA +" WHERE id=#{id}";
+	
+	
+	@Select(GET_BY_ID)
+	public List<Intervento> getInterventoById(long id);
 	
 	@Select(SELECT_LAST_INTERVENTO)
 	public List<Intervento> getLastIntervento(long assetId);
@@ -79,4 +87,7 @@ public interface InterventiMapper {
 
 	@Select(SELECT_INTERVENTI_PER_ASSET_UNDONE)
 	public List<Intervento> selectForAssetUndone(long assetId);
+	
+	@Select(CLEAN_INTERVENTI)
+	public void cleanInterventi(String data);
 }

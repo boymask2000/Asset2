@@ -28,7 +28,7 @@ public interface CalendarioMapper {
 			" lavorativo = #{lavorativo}" + //
 			" WHERE data = #{data}";
 
-	final String CLEAN_INTERVENTI = "UPDATE " + TABELLA + " SET interventi = 0";
+	final String CLEAN_INTERVENTI = "UPDATE " + TABELLA + " SET interventi = 0  where data > #{data}";
 
 	final String INC_INTERVENTI = "UPDATE " + TABELLA + " SET" + //
 			" interventi = interventi + 1" + //
@@ -72,6 +72,6 @@ public interface CalendarioMapper {
 	public String getMaxData();
 
 	@Select(CLEAN_INTERVENTI)
-	public void cleanInterventi();
+	public void cleanInterventi(String data);
 
 }

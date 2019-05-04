@@ -58,13 +58,17 @@ public interface ChecklistMapper {
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , checkId )" //
 			+ "VALUES (#{assetId}, #{checkId})";
+	
+
 
 	@Select(SELECT_ALL)
 	public List<Checklist> getAll();
 
 	@Select(SELECT_FOR_ASSET2)
 	public List<Checklist> getChecksForAsset(AssetAlca s);
+	
 
+	
 	@Select(SELECT_FOR_FREQ)
 	public List<Checklist> getChecksForFrequenza(FrequenzaAlca s);
 

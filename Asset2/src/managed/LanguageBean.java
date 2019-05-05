@@ -11,18 +11,20 @@ import javax.faces.event.ValueChangeEvent;
 public class LanguageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String selectedLang = "IT";
+
 	private String localeCode;
 
-	private static Map<String, Object> countries;
+	private static Map<String, Locale> countries;
+
+	private Locale locale=Locale.ENGLISH;
 	static {
-		countries = new LinkedHashMap<String, Object>();
-		countries.put("US", Locale.ENGLISH); // label, value
-		countries.put("IT", Locale.ITALIAN);
+		countries = new LinkedHashMap<String, Locale>();
+		countries.put("en", Locale.ENGLISH); // label, value
+		countries.put("it", Locale.ITALIAN);
 
 	}
 
-	public Map<String, Object> getCountriesInMap() {
+	public Map<String, Locale> getCountriesInMap() {
 		return countries;
 	}
 
@@ -31,42 +33,46 @@ public class LanguageBean implements Serializable {
 	}
 
 	public void setLocaleCode(String localeCode) {
+		System.out.println("localecode = " + localeCode);
 		this.localeCode = localeCode;
+		setLocale(localeCode);
 	}
 
 	// value change event listener
 	public void countryLocaleCodeChanged(ValueChangeEvent e) {
-		
+		if (e.getNewValue() == null)
+			return;
 		String newLocaleValue = e.getNewValue().toString();
 		System.out.println(newLocaleValue);
 		setLocale(newLocaleValue);
 
 	}
-	public void countryLocaleCodeChanged2() {
 
-	System.out.println("kkkkk");
+	private void setLocale(String newLocaleValue) {
+		System.out.println("setLocale " + newLocaleValue);
+		Locale loc = countries.get(newLocaleValue);
+
+		if (loc != null) {
+			System.out.println("impostato " + newLocaleValue);
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(loc);
+			System.out.println(loc);
+			locale=loc;
+		} else
+			System.out.println("non trovata " + newLocaleValue);
+
 	}
 
-	private static void setLocale(String newLocaleValue) {
-		for (Map.Entry<String, Object> entry : countries.entrySet()) {
-
-			if (entry.getKey().toString().equals(newLocaleValue)) {
-System.out.println("impostato "+newLocaleValue);
-				FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) entry.getValue());
-				Locale loc = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-				System.out.println(loc);
-			}
-		}
+	public String getCurrentLocale() {
+		Locale lo = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+		return lo.toString();
 	}
 
-	public String getSelectedLang() {
-		return selectedLang;
+	public  Locale getLocale() {
+		return locale;
 	}
 
-	public void setSelectedLang(String s) {
-		System.out.println(s);
-		this.selectedLang = s;
-		setLocale(s);
+	public  void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 }

@@ -19,6 +19,7 @@
 
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+		<f:view locale="#{language.locale}">
 			<h:form id="fm1">
 				<p:panel>
 					<h:panelGrid columns="2"
@@ -41,23 +42,23 @@
 							<h:commandButton value="Login" action="#{utente.login}" />
 
 						</p:panel>
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px"
-								cellpadding="5">
-								<p:outputLabel for="console" value="Language" />
-								<p:selectOneRadio id="console" value="#{language.selectedLang}" 
-									valueChangeListener="#{language.countryLocaleCodeChanged}">
-									<f:selectItem itemLabel="IT" itemValue="IT" />
-									<f:selectItem itemLabel="US" itemValue="US" />
-									 <p:ajax update="console" event="change" listener="#{language.countryLocaleCodeChanged2}"/>
-								</p:selectOneRadio>
-							</h:panelGrid>
 
-						
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="5">
+	
+								Language : 
+		<h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+								valueChangeListener="#{language.countryLocaleCodeChanged}">
+								<f:selectItems value="#{language.countriesInMap}" />
+							</h:selectOneMenu>
+						</h:panelGrid>
+
+
 					</h:panelGrid>
 
 				</p:panel>
 			</h:form>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -7,12 +7,13 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-
+<f:view locale="#{language.locale}">
 			<h:form id="form">
 				<p:panel>
 					<p:growl id="msgs" showDetail="true" />
 					<h:panelGrid columns="2" cellpadding="1">
 						<p:panel id="baic">
+						
 							<h:panelGrid columns="2" cellpadding="1">
 								<h:outputText value="ID" />
 								<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
@@ -44,7 +45,7 @@
 								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
 									value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
-								
+
 
 							</h:panelGrid>
 							<p:commandButton action="#{managedAssetBean.updateAsset}"
@@ -152,9 +153,10 @@
 						</p:panel>
 					</h:panelGrid>
 
-					<h:commandButton value="Stampa"
+					<h:commandButton value="#{msg['STAMPA']}"
 						action="#{printCreatorFullDettaglioAsset.printFullAsset}" />
-					<h:commandButton value="Frequenze" action="frequenzeAlcaHome" rendered="false"/>
+					<h:commandButton value="Frequenze" action="frequenzeAlcaHome"
+						rendered="false" />
 				</p:panel>
 			</h:form>
 			<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"
@@ -169,10 +171,8 @@
 									required="true" />
 								<p:fileUpload value="#{manualeUpload.file}" mode="advanced"
 									allowTypes="/(\.|\/)(pdf)$/" update=":form" process="@form"
-									fileUploadListener="#{manualeUpload.handleFileUpload}"
-									
-									>
-							
+									fileUploadListener="#{manualeUpload.handleFileUpload}">
+
 								</p:fileUpload>
 
 
@@ -184,7 +184,7 @@
 
 			<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 
-
+</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

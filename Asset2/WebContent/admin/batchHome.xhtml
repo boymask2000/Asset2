@@ -17,7 +17,7 @@
 
 				<h:panelGrid columns="1" cellpadding="100">
 
-					<p:panel id="basic" header="Lavori batch"
+					<p:panel id="basic" header="#{msg['LAVORI_BATCH']}"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" value="#{managedBatch.elencoBatch}"
 							var="c" paginator="true" rows="5"
@@ -25,7 +25,7 @@
 							rowsPerPageTemplate="5,10,15">
 
 
-							<p:column headerText="Descrizione">
+							<p:column headerText="#{msg['DESCRIZIONE']}">
 								<h:outputText value="#{c.description}" />
 							</p:column>
 

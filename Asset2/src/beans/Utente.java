@@ -86,6 +86,11 @@ public class Utente implements Serializable {
 		return "login";
 	}
 
+	public void uscita() {
+		clean();
+		
+	}
+
 	public void clean() {
 		username = null;
 		password = null;

@@ -16,13 +16,13 @@
 					<h:panelGrid columns="1" cellpadding="10">
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Gestione utenti" action="utentiHome" />
+							value="#{msg['GESTIONE_UTENTI']}" action="utentiHome" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Gestione calendario" action="calHome" />
+							value="#{msg['GESTIONE_CALENDARIO']}" action="calHome" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Gestione asset" action="gestioneAsset" />
+							value="#{msg['GESTIONE_ASSET']}" action="gestioneAsset" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Checks" action="checksHome" />
@@ -30,19 +30,19 @@
 
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Lavori batch" action="batchHome" />
+							value="#{msg['LAVORI_BATCH']}" action="batchHome" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Normative" action="normativeHome" />
+							value="#{msg['NORMATIVE']}" action="normativeHome" />
 
 
 
 					</h:panelGrid>
 					<h:panelGrid columns="1" cellpadding="10">
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Caricamento massivo asset" action="loadAsset" />
+							value="#{msg['CARICAMENTO_MASSIVO_ASSET']}" action="loadAsset" />
 						<p:commandButton process="@this" icon="pi pi-search"
-							value="Generazione Calendario" action="generazioneCalendario" />
+							value="#{msg['GENERAZIONE_CALENDARIO']}" action="generazioneCalendario" />
 
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="Planner" action="#{plannerjob.go}" />

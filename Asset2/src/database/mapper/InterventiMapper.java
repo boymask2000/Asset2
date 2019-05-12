@@ -11,6 +11,7 @@ import beans.Intervento;
 
 public interface InterventiMapper {
 	final String TABELLA = "test1.interventi";
+	final String TABELLA_ASSET = "test1.assetalca";
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 	final String SELECT_INTERVENTI_PER_ASSET = "SELECT * FROM " + TABELLA
@@ -45,9 +46,9 @@ public interface InterventiMapper {
 	final String CHECK_LAST_DATE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva > #{data} AND esito!=0";
 
-	final String SITUATION = "SELECT * FROM " + TABELLA + " WHERE " + //
-			"( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
-			" (data_effettiva =#{data} ) ";
+	final String SITUATION = "SELECT * FROM " + TABELLA + " i,"+TABELLA_ASSET+" a WHERE " + //
+			"i.assetid=a.id AND (( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
+			" (data_effettiva =#{data} )) ";
 
 	final String CLEAN_INTERVENTI = "DELETE FROM "+TABELLA+ " WHERE data_pianificata> #{data}";
 

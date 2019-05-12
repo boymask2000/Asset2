@@ -29,27 +29,26 @@
 				title="View Detail" />
 
 		</p:column>
-		<p:column headerText="Data prevista">
+		<p:column headerText="#{msg['DATA_PREVISTA']}">
 			<h:outputText value="#{c.dataPianificata}" />
 		</p:column>
-		<p:column headerText="Max Ritardo">
+		<p:column headerText="#{msg['MAX_RITARDO']}">
 			<h:outputText value="#{c.maxritardo}" />
 		</p:column>
-		<p:column headerText="Ritardo attuale">
+		<p:column headerText="#{msg['RITARDO_ATTUALE']}">
 			<h:outputText value="#{c.currentRitardo}" />
 		</p:column>
 		<p:column headerText="Cod Normativa">
 	
 			<h:commandButton value="#{c.codNormativa}" 
-											action="#{managedNormativaBean.setupViewFile(c.nomefile)}"
-										 />
+											action="#{managedNormativaBean.setupViewFile(c.nomefile)}"/>
 		</p:column>
-		<p:column headerText="Descrizione operazione">
+		<p:column headerText="#{msg['DESCRIZIONE_OPERAZIONE']}">
 			<h:outputText value="#{c.descCheck}" />
 		</p:column>
 
 	</p:dataTable>
-	<p:dialog header="Dettaglio Asset" widgetVar="assDialog" modal="true"
+	<p:dialog header="#{msg['DETTAGLIO_ASSET']}" widgetVar="assDialog" modal="true"
 		showEffect="fade" hideEffect="fade" resizable="false">
 		<p:outputPanel id="assDetail" >
 

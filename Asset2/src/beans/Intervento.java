@@ -9,7 +9,7 @@ public class Intervento {
 	private int esito;
 	private String user;
 	private String timestamp;
-	
+	private String rpieIdIndividual;
 	public long getId() {
 		return id;
 	}
@@ -57,5 +57,11 @@ public class Intervento {
 	}
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+	public String getRpieIdIndividual() {
+		return rpieIdIndividual;
+	}
+	public void setRpieIdIndividual(String rpieIdIndividual) {
+		this.rpieIdIndividual = rpieIdIndividual;
 	}
 }

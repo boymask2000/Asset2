@@ -13,9 +13,10 @@
 		value="#{managedInterventiBean.selectedDataForSituation}"
 		update=":form" onSelectUpdate="radi00DT" pattern="yyyyMMdd">
 		<f:ajax event="dateSelect"
-			listener="#{managedInterventiBean.onDateSelect}" update="msgs0"  render="radi00DT" /> 
+			listener="#{managedInterventiBean.onDateSelect}" update="msgs0"
+			render="radi00DT" />
 	</p:calendar>
-<p:commandButton value="Calendario" action="goCalendario"/>
+	<p:commandButton value="Calendario" action="goCalendario" />
 	<p:dataTable id="radi00DT" selectionMode="single"
 		value="#{managedInterventiBean.getInterventiInData(managedInterventiBean.selectedDataForSituation)}"
 		var="c" selection="#{managedInterventiBean.selectedIntevento}"
@@ -24,11 +25,13 @@
 		rowsPerPageTemplate="5,10,15">
 		<p:ajax event="rowSelect"
 			listener="#{managedInterventiBean.onRowSelect}" update="radi00DT" />
-
-		<p:column headerText="Data prevista">
+		<p:column headerText="rpieIdIndividual" style="width:30%">
+			<h:outputText value="#{c.rpieIdIndividual}" />
+		</p:column>
+		<p:column headerText="Data prevista" style="width:20%">
 			<h:outputText value="#{c.data_pianificata}" />
 		</p:column>
-		<p:column headerText="Data effettiva">
+		<p:column headerText="Data effettiva" style="width:20%">
 			<h:outputText value="#{c.data_effettiva}" />
 		</p:column>
 		<p:column headerText="Esito">

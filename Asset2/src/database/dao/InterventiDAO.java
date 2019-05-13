@@ -17,13 +17,11 @@ public class InterventiDAO {
 	public List<Intervento> selectAll() {
 		List<Intervento> list = null;
 
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+	
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			list = mapper.selectAll();
 
-		} finally {
-			session.close();
 		}
 		return list;
 	}

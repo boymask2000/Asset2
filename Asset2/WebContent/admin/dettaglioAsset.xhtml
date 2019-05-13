@@ -60,6 +60,12 @@
 									<tr>
 										<td height="40px" bgcolor="#{managedAssetBean.color}"></td>
 									</tr>
+									<tr>
+										<td>
+										<p:inputTextarea readonly="true" rows="3" cols="50"
+										value="#{managedAssetBean.commento}" rendered="#{managedAssetBean.commento!=null}"/>
+										</td>
+									</tr>
 								</table>
 							</p:panel>
 							<p:panel header="Interventi Eseguiti">

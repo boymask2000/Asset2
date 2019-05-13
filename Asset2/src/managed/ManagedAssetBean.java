@@ -11,6 +11,7 @@ import org.primefaces.event.SelectEvent;
 import beans.AssetAlca;
 import beans.Intervento;
 import beans.Status;
+import common.JsfUtil;
 import database.dao.AssetAlcaDAO;
 import database.dao.InterventiDAO;
 
@@ -21,8 +22,8 @@ public class ManagedAssetBean {
 	private List<Status> allStatus = new ArrayList<Status>();
 	private Status status = new Status(0);
 	private AssetAlca selectedAsset;
-	
-private	List<AssetAlca> searchResult = null;
+
+	private List<AssetAlca> searchResult = null;
 
 	private int stat[] = new int[10];
 
@@ -43,10 +44,12 @@ private	List<AssetAlca> searchResult = null;
 		stat[st] = count;
 		return count;
 	}
-	public void setSelectedAssetId(long id){
-		System.out.println("id: "+id);
-		
+
+	public void setSelectedAssetId(long id) {
+		System.out.println("id: " + id);
+
 	}
+
 	public int stat(int st) {
 		return stat[st];
 	}
@@ -83,8 +86,26 @@ private	List<AssetAlca> searchResult = null;
 		return Status.getColor(col);
 	}
 
+	public String getCommento() {
+		Intervento inte;
+		String comm = null;
+		InterventiDAO intDao = new InterventiDAO();
+		ManagedInterventiBean mib = (ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
+		if (mib == null)
+			inte = intDao.getUltimoInterventoFatto(selectedAsset.getId());
+		else
+			inte = mib.getSelectedIntevento();
+		
+		if (inte == null)
+			inte = intDao.getUltimoInterventoFatto(selectedAsset.getId());
+		if (inte != null)
+			comm = inte.getCommento();
+		return comm;
+	}
+
 	public List<AssetAlca> getAllAssets() {
-		if( searchResult!=null)return searchResult;
+		if (searchResult != null)
+			return searchResult;
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
 		return assetDAO.selectAll();
 	}
@@ -108,7 +129,7 @@ private	List<AssetAlca> searchResult = null;
 	}
 
 	public void onRowSelect(SelectEvent event) {
-	
+
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((AssetAlca) event.getObject()).getId());
 		selectedAsset = (AssetAlca) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -150,9 +171,11 @@ private	List<AssetAlca> searchResult = null;
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
 	public List<AssetAlca> getSearchResult() {
 		return searchResult;
 	}
+
 	public void setSearchResult(List<AssetAlca> searchResult) {
 		this.searchResult = searchResult;
 	}

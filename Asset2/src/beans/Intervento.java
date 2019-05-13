@@ -7,6 +7,7 @@ public class Intervento {
 	private String data_pianificata;
 	private String data_effettiva;
 	private int esito;
+	private String commento;
 	private String user;
 	private String timestamp;
 	private String rpieIdIndividual;
@@ -63,5 +64,11 @@ public class Intervento {
 	}
 	public void setRpieIdIndividual(String rpieIdIndividual) {
 		this.rpieIdIndividual = rpieIdIndividual;
+	}
+	public String getCommento() {
+		return commento;
+	}
+	public void setCommento(String commento) {
+		this.commento = commento;
 	}
 }

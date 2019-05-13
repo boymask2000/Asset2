@@ -27,8 +27,8 @@ public interface InterventiMapper {
 			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (assetId , data_teorica , data_pianificata, data_effettiva, esito , user, timestamp)" //
-			+ "VALUES (#{assetId}, #{data_teorica}, #{data_pianificata}, #{data_effettiva}, #{esito}, #{user},#{timestamp})";
+			" (assetId , data_teorica , data_pianificata, data_effettiva, esito , user, commento, timestamp)" //
+			+ "VALUES (#{assetId}, #{data_teorica}, #{data_pianificata}, #{data_effettiva}, #{esito}, #{user}, #{commento}, #{timestamp})";
 	
 	final String SELECT_LAST_INTERVENTO = "SELECT * FROM " + TABELLA
 			+ " WHERE ASSETID=#{assetId} AND data_effettiva IS NOT NULL order by data_effettiva DESC limit 1";
@@ -39,6 +39,7 @@ public interface InterventiMapper {
 			"data_pianificata = #{data_pianificata}," + //
 			"data_effettiva = #{data_effettiva}," + //
 			"user = #{user}," + //
+			"commento = #{commento}," + //
 			"timestamp = #{timestamp}," + //
 			"esito = #{esito}" + //
 			" WHERE id=#{id}";

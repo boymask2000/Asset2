@@ -13,7 +13,13 @@
 			<td width="100"></td>
 		</tr>
 		<tr>
-			<td height="40px" bgcolor="#{managedAssetBean.status.getColor(managedInterventiBean.esito)}"></td>
+			<td height="40px"
+				bgcolor="#{managedAssetBean.status.getColor(managedInterventiBean.esito)}"></td>
+		</tr>
+		<tr>
+			<td><p:inputTextarea readonly="true" rows="3" cols="50"
+					value="#{managedAssetBean.commento}"
+					rendered="#{managedAssetBean.commento!=null}" /></td>
 		</tr>
 
 	</table>

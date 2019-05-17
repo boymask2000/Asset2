@@ -7,7 +7,7 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-
+<f:view locale="#{language.locale}">
 			<h:form id="form">
 
 				<p:growl id="msgs" showDetail="true" />
@@ -86,7 +86,7 @@
 					action="adminHome" />
 
 			</h:form>
-
+</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

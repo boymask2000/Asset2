@@ -16,14 +16,12 @@ public class AssetAlcaDAO {
 	public List<AssetAlca> selectAll() {
 		List<AssetAlca> list = null;
 
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+	
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			list = mapper.selectAll();
 
-		} finally {
-			session.close();
-		}
+		} 
 		return list;
 	}
 
@@ -96,17 +94,15 @@ public class AssetAlcaDAO {
 	public List<AssetAlca> selectAssetsWithStatus(int selectedSeverity) {
 		List<AssetAlca> lista = new ArrayList<AssetAlca>();
 
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+	
 			AssetAlca alca = new AssetAlca();
 			alca.setLastStatus("" + selectedSeverity);
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			lista = mapper.selectAssetsWithStatus(alca);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		} 
 		return lista;
 	}
 

@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.FamigliaAsset;
+import common.JsfUtil;
 import common.Log;
 import database.dao.FamigliaAssetDAO;
 
@@ -64,6 +65,9 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 
 	public void setSelectedFamiglia(FamigliaAsset n) {
 		this.selectedFamiglia = n;
+		ManagedSafetyBean mfab = (ManagedSafetyBean) JsfUtil.getBean("managedSafetyBean");
+		if( mfab!=null)
+			mfab.setFamiglia(n);
 
 	}
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<p:panel header="#{msg['REPORT_INTERVENTI']}">
+					<h:form>
+						<p:growl id="growl1" life="2000" />
+
+
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+
+				
+							
+							<tr>
+								<td><h:outputText value="#{msg['DATA_INIZIO']}" /></td>
+								<td><p:calendar id="popup3" 
+										onSelectUpdate=":form" pattern="yyyyMMdd">
+										<p:ajax event="dateSelect"
+											listener="#{managedReportInterventiBean.onStartDateSelect}"
+											update="radi00DT" />
+									</p:calendar></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg['DATA_FINE']}" /></td>
+								<td><p:calendar id="popup41" 
+										onSelectUpdate=":form" pattern="yyyyMMdd">
+										<p:ajax event="dateSelect"
+											listener="#{managedReportInterventiBean.onEndDateSelect}"
+											update="radi00DT" />
+									</p:calendar></td>
+							</tr>
+						</table>
+
+						<p:dataTable id="radi00DT" selectionMode="single"
+							value="#{managedReportInterventiBean.interventi}" var="c"
+							selection="#{managedReportInterventiBean.selectedIntevento}"
+							rowKey="#{c.id}" paginator="true" rows="10"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:ajax event="rowSelect"
+								listener="#{managedInterventiBean.onRowSelect}"
+								update="radi00DT" />
+							<p:column headerText="rpieIdIndividual" style="width:30%">
+								<h:outputText value="#{c.rpieIdIndividual}" />
+							</p:column>
+							<p:column headerText="Data prevista" style="width:20%">
+								<h:outputText value="#{c.data_pianificata}" />
+							</p:column>
+							<p:column headerText="Data effettiva" style="width:20%">
+								<h:outputText value="#{c.data_effettiva}" />
+							</p:column>
+							<p:column headerText="Esito">
+								<table>
+									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
+										<td></td>
+									</tr>
+								</table>
+							</p:column>
+						</p:dataTable>
+
+						<p:commandButton process="@this" icon="pi pi-search" value="Esci"
+							action="adminHome" />
+
+
+					</h:form>
+				</p:panel>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

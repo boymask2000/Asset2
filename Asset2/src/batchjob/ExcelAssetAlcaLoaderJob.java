@@ -81,7 +81,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 	private static AssetAlca buildAsset(Row row) {
 
 		AssetAlca asset = new AssetAlca();
-		asset.setFacNum(row.getCell(0).toString());
+	//	asset.setFacNum(row.getCell(0).toString());
 		asset.setFacNum(row.getCell(1).toString());
 		asset.setFacSystem(row.getCell(2).toString());
 		asset.setFacSubsystem(row.getCell(3).toString());

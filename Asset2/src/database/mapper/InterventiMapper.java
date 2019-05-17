@@ -29,7 +29,7 @@ public interface InterventiMapper {
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , data_teorica , data_pianificata, data_effettiva, esito , user, commento, timestamp)" //
 			+ "VALUES (#{assetId}, #{data_teorica}, #{data_pianificata}, #{data_effettiva}, #{esito}, #{user}, #{commento}, #{timestamp})";
-	
+
 	final String SELECT_LAST_INTERVENTO = "SELECT * FROM " + TABELLA
 			+ " WHERE ASSETID=#{assetId} AND data_effettiva IS NOT NULL order by data_effettiva DESC limit 1";
 
@@ -47,21 +47,24 @@ public interface InterventiMapper {
 	final String CHECK_LAST_DATE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva > #{data} AND esito!=0";
 
-	final String SITUATION = "SELECT * FROM " + TABELLA + " i,"+TABELLA_ASSET+" a WHERE " + //
+	final String SITUATION = "SELECT * FROM " + TABELLA + " i," + TABELLA_ASSET + " a WHERE " + //
 			"i.assetid=a.id AND (( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
 			" (data_effettiva =#{data} )) ";
 
-	final String CLEAN_INTERVENTI = "DELETE FROM "+TABELLA+ " WHERE data_pianificata> #{data}";
+	final String SELECT_INTERVENTI_DATA_FROM_TO = "SELECT * FROM " + TABELLA + " i," + TABELLA_ASSET + " a  WHERE  i.assetid=a.id AND"
+			+ "(( i.data_pianificata >=#{param1} AND i.data_pianificata <=#{param2} ) OR "
+			+ "( i.data_effettiva >=#{param1} AND i.data_effettiva <=#{param2} )) ORDER BY i.data_pianificata,i.data_effettiva";
 
-	final String GET_BY_ID = "SELECT * FROM " + TABELLA +" WHERE id=#{id}";
-	
-	
+	final String CLEAN_INTERVENTI = "DELETE FROM " + TABELLA + " WHERE data_pianificata> #{data}";
+
+	final String GET_BY_ID = "SELECT * FROM " + TABELLA + " WHERE id=#{id}";
+
 	@Select(GET_BY_ID)
 	public List<Intervento> getInterventoById(long id);
-	
+
 	@Select(SELECT_LAST_INTERVENTO)
 	public List<Intervento> getLastIntervento(long assetId);
-	
+
 	@Select(SELECT_INTERVENTI_PER_ASSET_AND_DATA)
 	public List<Intervento> getInterventiPerAssetInData(Intervento contact);
 
@@ -89,7 +92,10 @@ public interface InterventiMapper {
 
 	@Select(SELECT_INTERVENTI_PER_ASSET_UNDONE)
 	public List<Intervento> selectForAssetUndone(long assetId);
-	
+
 	@Select(CLEAN_INTERVENTI)
 	public void cleanInterventi(String data);
+
+	@Select(SELECT_INTERVENTI_DATA_FROM_TO)
+	public List<Intervento> selectForDataFromTo(String startDate, String endDate);
 }

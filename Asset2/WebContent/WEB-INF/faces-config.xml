@@ -177,7 +177,29 @@
 		<managed-bean-class>managed.LanguageBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedLocationBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedLocationBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedReportInterventiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedReportInterventiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>reportInterventi</from-outcome>
+			<to-view-id>/admin/reportInterventi.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -188,6 +210,7 @@
 		</navigation-case>
 
 	</navigation-rule>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

@@ -17,9 +17,11 @@
 							<h:outputText value="ID" />
 							<h:inputText value="#{managedRicercaAssetBean.selectedAsset.id}" />
 							<h:outputText value="Fac #" />
-							<h:inputText value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
+							<h:inputText
+								value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
 							<h:outputText value="facSystem" />
-							<h:inputText value="#{managedRicercaAssetBean.selectedAsset.facSystem}" />
+							<h:inputText
+								value="#{managedRicercaAssetBean.selectedAsset.facSystem}" />
 							<h:outputText value="facSubsystem" />
 							<h:inputText
 								value="#{managedRicercaAssetBean.selectedAsset.facSubsystem}" />
@@ -30,7 +32,8 @@
 							<h:inputText
 								value="#{managedRicercaAssetBean.selectedAsset.nomenclature}" />
 							<h:outputText value="procId" />
-							<h:inputText value="#{managedRicercaAssetBean.selectedAsset.procId}" />
+							<h:inputText
+								value="#{managedRicercaAssetBean.selectedAsset.procId}" />
 							<h:outputText value="pmSchedRecipient" />
 							<h:inputText
 								value="#{managedRicercaAssetBean.selectedAsset.pmSchedRecipient}" />
@@ -63,7 +66,9 @@
 
 								<p:ajax event="rowSelect"
 									listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
-
+								<p:column headerText="rpieIdIndividual">
+									<h:outputText value="#{c.rpieIdIndividual}" />
+								</p:column>
 								<p:column headerText="Fac System">
 									<h:outputText value="#{c.facSystem}" />
 								</p:column>

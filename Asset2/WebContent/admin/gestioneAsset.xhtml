@@ -25,6 +25,10 @@
 							<p:ajax event="rowSelect"
 								listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
 
+							<p:column headerText="rpieIdIndividual">
+								<h:outputText value="#{c.rpieIdIndividual}" />
+							</p:column>
+							
 							<p:column headerText="Fac System">
 								<h:outputText value="#{c.facSystem}" />
 							</p:column>

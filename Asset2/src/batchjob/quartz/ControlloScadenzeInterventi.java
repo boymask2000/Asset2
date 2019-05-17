@@ -41,7 +41,7 @@ public class ControlloScadenzeInterventi implements Job {
 		List<AssetAlca> assets = assetDao.selectAll();
 
 		for (AssetAlca as : assets) {
-System.out.println(as.getId());
+//System.out.println(as.getId());
 			List<Intervento> ints = interventiDao.getInterventiForAsset(as.getId(), false);
 			for (Intervento intervento : ints) {
 				String s_dataPianificata = intervento.getData_pianificata();
@@ -50,16 +50,16 @@ System.out.println(as.getId());
 				System.out.println("intId="+intervento.getId()+" data:"+s_dataPianificata+" days:"+nDays);
 				List<ChecklistIntervento> ckList = clIntDao.getCheckListForIntervento(intervento);
 				for (ChecklistIntervento cli : ckList) {
-System.out.println("cli id: "+cli.getId());
+//System.out.println("cli id: "+cli.getId());
 					List<Check> cc = checksDao.getChecksByID(cli.getCheckId());
 
 					for (Check check : cc) {
 						String codNormativa = check.getCodiceNormativa();
 						Normativa norm = normativaDao.getNormativaPerCodice(codNormativa);
 						int codFreq = norm.getCodFrequenza();
-						System.out.println("Norm: "+norm.getCodice());
+						//System.out.println("Norm: "+norm.getCodice());
 						TipoSchedulazione tipo = TipoSchedulazione.getTipoFrequenza(codFreq);
-						System.out.println("Range: "+tipo.getRange());
+						//System.out.println("Range: "+tipo.getRange());
 						if( (2*tipo.getRange())<nDays) {
 							System.out.println("PROBLEM: "+as.getId()+" "+check.getDescription()+" "+norm.getCodice()+" "+tipo.getRange());
 	

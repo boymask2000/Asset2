@@ -14,44 +14,34 @@ public class ChecklistDAO {
 
 	public List<Checklist> getAll() {
 		List<Checklist> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		try {
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 
 			list = mapper.getAll();
-		} finally {
-			session.close();
 		}
 		return list;
 	}
 
 	public void insert(Checklist u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 			mapper.insert(u);
 			session.commit();
-		} finally {
-			session.close();
 		}
 	}
-
-
 
 	public List<Checklist> getChecklistForAsset(AssetAlca s) {
 
 		List<Checklist> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		try {
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 
 			list = mapper.getChecksForAsset(s);
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			session.close();
 		}
 		return list;
 	}
@@ -59,16 +49,13 @@ public class ChecklistDAO {
 	public List<Checklist> getChecklistForFrequenza(FrequenzaAlca s) {
 
 		List<Checklist> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		try {
 			ChecklistMapper mapper = session.getMapper(ChecklistMapper.class);
 
 			list = mapper.getChecksForFrequenza(s);
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			session.close();
 		}
 		return list;
 	}

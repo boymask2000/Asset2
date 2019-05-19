@@ -10,7 +10,7 @@ import common.Pair;
 import database.dao.InterventiDAO;
 import managed.ManagedAssetBean;
 
-public class PrintCreatorFullDettaglioAsset extends PrintCreator {
+public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 
 	public String printFullAsset() {
 
@@ -59,18 +59,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		InterventiDAO dao = new InterventiDAO();
 		Intervento lastInter = dao.getUltimoInterventoFatto(asset.getId());
 		if (lastInter != null) {
-			Table t = new Table();
-			t.setHeader(false);
-			t.addColumnDefinition(new Column("", "6cm"));
-			t.addColumnDefinition(new Column("", "4cm"));
-			t.startRow();
-			t.addDataCol("Data ultimo intervento:");
-			t.addDataCol("" + lastInter.getData_effettiva());
-			t.startRow();
-			t.addDataCol("Esito:");
-			t.addDataCol("" + lastInter.getEsito());
-
-			prt.addtable(t);
+			stampaIntervento(prt, lastInter);
 		}
 	}
 
@@ -80,18 +69,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> li = dao.getInterventiForAsset(asset.getId());
 		for (Intervento inter : li) {
-			Table t = new Table();
-			t.setHeader(false);
-			t.addColumnDefinition(new Column("", "6cm"));
-			t.addColumnDefinition(new Column("", "4cm"));
-
-			List<Pair> lista = caricaCampi(inter);
-			for (Pair p : lista) {
-				t.startRow();
-				t.addDataCol(p.getName() + ":");
-				t.addDataCol("" + p.getVal());
-			}
-			prt.addtable(t);
+			stampaIntervento(prt, inter);
 		}
 
 	}
@@ -115,29 +93,5 @@ public class PrintCreatorFullDettaglioAsset extends PrintCreator {
 		prt.addtable(t);
 	}
 
-//	private String toPlainText(String s) {
-//		String out ="<![CDATA[";
-//		out +=s;
-//		out+="]]>";
-//		return out;
-//	}
-//	private String toPlainText2(String s) {
-//		String out ="&lt;![CDATA[";
-//		out +=s;
-//		out+="]]&gt;";
-//		return out;
-//	}
-
-//	private int getSize(Pair p) {
-//		int size = (int) (p.getName().length() * 0.3);
-//		if (size < 1)
-//			size = 1;
-//		if (p.getType().equals("java.util.Date"))
-//			size = 2;
-//		if (size > 2)
-//			size = 2;
-//		return size;
-//	}
-//
 
 }

@@ -41,14 +41,12 @@ public class AssetAlcaDAO {
 	}
 
 	public AssetAlca searchByRPIE(AssetAlca s) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			return mapper.searchByRPIE(s);
 
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public AssetAlca searchByRPIE(String rpie) {
@@ -79,16 +77,14 @@ public class AssetAlcaDAO {
 	}
 
 	public void update(AssetAlca u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			mapper.update(u);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public List<AssetAlca> selectAssetsWithStatus(int selectedSeverity) {

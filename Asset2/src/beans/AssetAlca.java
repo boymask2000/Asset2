@@ -9,7 +9,7 @@ public class AssetAlca implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private long id;
-	
+	private long locationid;
 	private String facNum;
 	private String facSystem;
 	private String facSubsystem;
@@ -103,6 +103,12 @@ public class AssetAlca implements Serializable{
 	}
 	public void setLastStatus(String lastStatus) {
 		this.lastStatus = lastStatus;
+	}
+	public long getLocationid() {
+		return locationid;
+	}
+	public void setLocationid(long locationid) {
+		this.locationid = locationid;
 	}
 	
 

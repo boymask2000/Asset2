@@ -8,8 +8,10 @@ public class Table {
 	private List<Column> cols = new ArrayList<Column>();
 	private int fontSize = 10;
 	private int headerFontSize = 12;
-
-	private List<List<String>> rows = new ArrayList<List<String>>();
+	private List<CellData> currentRow = null;
+	private boolean hasHeader = true;
+	private List<List<CellData>> rows = new ArrayList<List<CellData>>();
+	private CellData lastCellData = null;
 
 	public Table() {
 
@@ -19,13 +21,11 @@ public class Table {
 		cols.add(col);
 	}
 
-	private List<String> currentRow = null;
-	private boolean hasHeader = true;
 	// private boolean rowStarted = false;
 
 	public void startRow() {
 
-		currentRow = new ArrayList<String>();
+		currentRow = new ArrayList<CellData>();
 		rows.add(currentRow);
 
 		// buffer.append("<fo:table-body>\n" + "<fo:table-row>");
@@ -39,11 +39,20 @@ public class Table {
 	// }
 
 	public void addDataCol(String val) {
-		currentRow.add(val);
+		lastCellData = new CellData(val);
+		currentRow.add(lastCellData);
 		/*
 		 * buffer.append(" <fo:table-cell>\n" + "<fo:block>\n"); buffer.append(val);
 		 * buffer.append("</fo:block>\n" + "</fo:table-cell>\n");
 		 */
+	}
+
+	public void setBackgroundColor(String col) {
+		lastCellData.setBackgroundColor(col);
+	}
+
+	public void setAlign(String col) {
+		lastCellData.setAlign(col);
 	}
 
 	public StringBuffer getBuffer() {
@@ -55,11 +64,18 @@ public class Table {
 		}
 		generateHeader();
 		buffer.append("<fo:table-body>");
-		for (List<String> row : rows) {
+		for (List<CellData> row : rows) {
 			buffer.append("<fo:table-row>");
-			for (String ss : row) {
-				buffer.append("<fo:table-cell border-style=\"solid\" border-color=\"black\" border-width=\"1pt\">");
-				buffer.append("<fo:block font-size=\"" + fontSize + "pt\" font-family=\"Helvetica\">");
+			for (CellData cd : row) {
+				String ss = cd.getValue();
+				buffer.append("<fo:table-cell ");
+				if (cd.getBackgroundColor() != null)
+					buffer.append(" background-color=\"" + cd.getBackgroundColor() + "\"");
+				if (cd.getAlign() != null)
+					buffer.append(" text-align=\"" + cd.getAlign() + "\"");
+				buffer.append(" border-style=\"solid\" border-color=\"black\" border-width=\"1pt\">");
+				buffer.append("<fo:block linefeed-treatment=\"preserve\" font-size=\"" + fontSize
+						+ "pt\" font-family=\"Helvetica\">");
 				buffer.append(ss);
 				buffer.append("</fo:block>");
 				buffer.append("</fo:table-cell>");

@@ -97,6 +97,8 @@ public class Calendario {
 			return "Nov";
 		case "12":
 			return "Dic";
+		default:
+			break;
 		}
 		return "--";
 	}

@@ -67,6 +67,7 @@ public class LanguageBean implements Serializable {
 		return lo.toString();
 	}
 
+
 	public  Locale getLocale() {
 		return locale;
 	}

@@ -5,6 +5,18 @@ public class Status {
 	private String color;
 	private int total;
 	
+
+	public static final String COL1="#548235";
+	public static final String COL2="#A9D08E";
+	public static final String COL3="#E2EFDA";
+	public static final String COL4="#BF8F00";
+	public static final String COL5="#FFD966";
+	public static final String COL6="#FFF2CC";
+	public static final String COL7="#EB0000";
+	public static final String COL8="#FF4F4F";
+	public static final String COL9="#FFC1C1";
+	public static final String COL0="#FFFFFF";
+
 	
 	
 	public Status(int sev) {

@@ -12,14 +12,12 @@ import database.mapper.NormativeMapper;
 public class NormativeDAO {
 
 	public void delete(Normativa u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		
 			NormativeMapper mapper = session.getMapper(NormativeMapper.class);
 			mapper.delete(u);
 			session.commit();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public List<Normativa> selectAll() {
@@ -36,8 +34,8 @@ public class NormativeDAO {
 	public void insert(Normativa u) {
 		if (u.getDataInizio() == null)
 			u.setDataInizio(TimeUtil.getCurrentDate());
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+	
 			NormativeMapper mapper = session.getMapper(NormativeMapper.class);
 
 			List<Normativa> ll = mapper.check(u);
@@ -51,35 +49,29 @@ public class NormativeDAO {
 		} catch (Throwable t) {
 			t.printStackTrace();
 
-		} finally {
-			session.close();
 		}
 	}
 
 	public void update(Normativa u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		
 			NormativeMapper mapper = session.getMapper(NormativeMapper.class);
 			mapper.update(u);
 			session.commit();
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public Normativa getNormativaPerCodice(Normativa u) {
 		List<Normativa> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
 
-		try {
+		
 			NormativeMapper mapper = session.getMapper(NormativeMapper.class);
 
 			list = mapper.getNormativaPerCodice(u);
-		} finally {
-			session.close();
-		}
+		} 
 		if (list == null || list.size() == 0)
 			return null;
 		return list.get(0);

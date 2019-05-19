@@ -8,9 +8,9 @@ public class Column {
 		this.name = name;
 	}
 
-	public Column(String name, String width) {
-		name=name.replace('_', ' ');
-		this.name = name;
+	public Column(String nam, String width) {
+		this.name = nam.replace('_', ' ');
+
 		this.width = width;
 	}
 

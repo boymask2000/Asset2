@@ -30,6 +30,7 @@ public interface AssetAlcaMapper {
 			"pmSchedSerial," + //
 			"rpieIdIndividual," + //
 			"frequency," + //
+			"locationid," + //
 			"schedAssignedOrg ,lastStatus) " + //
 			"VALUES (" + //
 			"#{facNum}," + //
@@ -42,6 +43,7 @@ public interface AssetAlcaMapper {
 			"#{pmSchedSerial}," + //
 			"#{rpieIdIndividual}," + //
 			"#{frequency}," + //
+			"#{locationid}," + //
 			"#{schedAssignedOrg}," + //
 			"#{lastStatus} )";
 
@@ -56,6 +58,7 @@ public interface AssetAlcaMapper {
 			"pmSchedSerial = #{pmSchedSerial}," + //
 			"rpieIdIndividual = #{rpieIdIndividual}," + //
 			"frequency = #{frequency}," + //
+			"locationid = #{locationid}," + //
 			"lastStatus = #{lastStatus}," + //
 			"schedAssignedOrg = #{schedAssignedOrg} " + //
 

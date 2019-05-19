@@ -38,45 +38,39 @@ public class InterventiDAO {
 
 	public List<Intervento> getInterventiInData(String data) {
 		List<Intervento> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
 
-		try {
+		
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			list = mapper.getInterventiInData(data);
 
-		} finally {
-			session.close();
-		}
+		} 
 		return list;
 	}
 
 	public List<Intervento> getInterventiForAsset(long assetId) {
 		List<Intervento> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
 
-		try {
+
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			list = mapper.selectForAsset(assetId);
 
-		} finally {
-			session.close();
 		}
 		return list;
 	}
 
 	public List<Intervento> getInterventiPerAssetInData(Intervento u) {
 		List<Intervento> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
 
-		try {
+
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			list = mapper.getInterventiPerAssetInData(u);
 
-		} finally {
-			session.close();
-		}
+		} 
 		return list;
 	}
 
@@ -106,17 +100,15 @@ public class InterventiDAO {
 
 	public Intervento getUltimoInterventoFatto(long assetId) {
 		Intervento inte = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
 
-		try {
+		
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			List<Intervento> list = mapper.selectForAssetDone(assetId);
 			if (list != null && list.size() > 0)
 				inte = list.get(0);
-		} finally {
-			session.close();
-		}
+		} 
 		return inte;
 	}
 

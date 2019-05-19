@@ -102,6 +102,16 @@ public class PrintCreator {
 		buffer.append("</fo:block>");
 
 	}
+	public void startBlock() {
+		buffer.append("<fo:block >");
+
+
+	}
+	public void endBlock() {
+
+		buffer.append("</fo:block>");
+
+	}
 
 	public void addtable(Table t) {
 		buffer.append(t.getBuffer());

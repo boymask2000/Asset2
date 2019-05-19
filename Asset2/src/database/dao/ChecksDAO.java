@@ -51,5 +51,23 @@ public class ChecksDAO {
 			session.commit();
 		}
 	}
+	public void update(Check u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
+			mapper.update(u);
+			session.commit();
+		}
+		
+	}
+	public void delete(Check c) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
+			mapper.delete(c);
+			session.commit();
+		}
+		
+	}
 
 }

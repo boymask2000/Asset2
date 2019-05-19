@@ -8,9 +8,11 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import beans.Check;
 import beans.FamigliaAsset;
 import common.JsfUtil;
 import common.Log;
+import database.dao.ChecksDAO;
 import database.dao.FamigliaAssetDAO;
 
 public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable {
@@ -22,6 +24,7 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 	//
 
 	private FamigliaAsset selectedFamiglia = new FamigliaAsset();
+	private FamigliaAsset selectedTargetFamiglia;
 
 	public List<FamigliaAsset> getAllFamiglie() {
 		FamigliaAssetDAO dao = new FamigliaAssetDAO();
@@ -44,6 +47,26 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
 
+	}
+	public void onRowSelectDialog(SelectEvent event) {
+	
+		selectedTargetFamiglia = (FamigliaAsset) event.getObject();
+	
+
+	}
+	public void copy(Check c) {
+		System.out.println(c);
+		c.setFamigliaId(selectedTargetFamiglia.getId());
+		ChecksDAO dao = new ChecksDAO();
+		dao.insert(c);
+		
+	}
+	public void delete(Check c) {
+		System.out.println(c);
+//		c.setFamigliaId(selectedTargetFamiglia.getId());
+		ChecksDAO dao = new ChecksDAO();
+		dao.delete(c);
+		
 	}
 
 	public void insertFamiglia() {
@@ -69,5 +92,11 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 		if( mfab!=null)
 			mfab.setFamiglia(n);
 
+	}
+	public FamigliaAsset getSelectedTargetFamiglia() {
+		return selectedTargetFamiglia;
+	}
+	public void setSelectedTargetFamiglia(FamigliaAsset selectedTargetFamiglia) {
+		this.selectedTargetFamiglia = selectedTargetFamiglia;
 	}
 }

@@ -47,7 +47,7 @@ public class ControlloScadenzeInterventi implements Job {
 				String s_dataPianificata = intervento.getData_pianificata();
 				Date dataPianificata = TimeUtil.getCurrentStringDate(s_dataPianificata);
 				long nDays = calcolaGiorniRitardo(dataPianificata);
-				System.out.println("intId="+intervento.getId()+" data:"+s_dataPianificata+" days:"+nDays);
+		//		System.out.println("intId="+intervento.getId()+" data:"+s_dataPianificata+" days:"+nDays);
 				List<ChecklistIntervento> ckList = clIntDao.getCheckListForIntervento(intervento);
 				for (ChecklistIntervento cli : ckList) {
 //System.out.println("cli id: "+cli.getId());

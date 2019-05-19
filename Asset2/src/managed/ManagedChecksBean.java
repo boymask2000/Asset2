@@ -89,7 +89,10 @@ public class ManagedChecksBean implements Serializable {
 				JsfUtil.showMessage("Normativa non trovata");
 				return;
 			}
-			dao.insert(selectedCheck);
+			if (selectedCheck.getId() == 0)
+				dao.insert(selectedCheck);
+			else
+				dao.update(selectedCheck);
 			JsfUtil.showMessage("Inserito check");
 		} catch (Throwable e) {
 			e.printStackTrace();

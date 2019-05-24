@@ -22,16 +22,15 @@ public class SafetyDAO {
 		return list;
 	}
 
-	public Safety selectByFamily(long id) {
+	public List<Safety> selectByFamily(long id) {
 		List<Safety> list = null;
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			SafetyMapper mapper = session.getMapper(SafetyMapper.class);
 
 			list = mapper.selectByFamily(id);
-			if (list.size() == 0)
-				return null;
-			return list.get(0);
+			
+			return list;
 		}
 
 	}
@@ -68,23 +67,23 @@ public class SafetyDAO {
 		}
 	}
 
-	public void saveGeneral(String general) {
-		Safety s = new Safety();
-		s.setFamilyid(0);
-		s.setTesto(general);
-		Safety gen = selectByFamily(0);
-		if (gen == null) {
-
-			insert(s);
-		} else {
-			updateGeneral(s);
-		}
-
-	}
+//	public void saveGeneral(String general) {
+//		Safety s = new Safety();
+//		s.setFamilyid(0);
+//		s.setTesto(general);
+//		Safety gen = selectByFamily(0);
+//		if (gen == null) {
+//
+//			insert(s);
+//		} else {
+//			updateGeneral(s);
+//		}
+//
+//	}
 	public void save(Safety s) {
 		
-		Safety gen = selectByFamily(s.getFamilyid());
-		if (gen == null) {
+		
+		if (s.getId() == 0) {
 
 			insert(s);
 		} else {

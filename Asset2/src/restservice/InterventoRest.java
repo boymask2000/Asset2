@@ -11,10 +11,14 @@ import javax.ws.rs.core.Response;
 
 import beans.AssetAlca;
 import beans.ChecklistIntervento;
+import beans.FamigliaAsset;
 import beans.Intervento;
+import beans.Safety;
 import database.dao.AssetAlcaDAO;
 import database.dao.ChecklistInterventiDAO;
+import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
+import database.dao.SafetyDAO;
 import restservice.beans.InterventoRestBean;
 
 @Path("/intervento")
@@ -50,10 +54,30 @@ public class InterventoRest {
 
 		return lista.get(0);
 	}
+	@GET
+	@Path("/getsafety/{rfid}")
+	public Safety getSafety(@PathParam("rfid") String rfid) {
+		
+		AssetAlcaDAO aad = new AssetAlcaDAO();
+		
+		AssetAlca asset = aad.searchByRPIE(rfid);
+		
+		FamigliaAssetDAO fad = new FamigliaAssetDAO();
+		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
+
+		SafetyDAO asdao = new SafetyDAO();
+
+		Safety safety = asdao.selectByFamily(fam.getId());
+		if(safety==null)
+			safety = asdao.selectByFamily(0);
+		
+
+		return safety;
+	}
 
 	@POST
 	@Path("/updateIntervento")
-	public Response update(InterventoRestBean inter) throws URISyntaxException {
+	public Response update(InterventoRestBean inter) {
 		System.out.println("ricevuto " + inter);
 		System.out.println("ricevuto esito: " + inter.getEsito());
 		System.out.println(inter.getUser());
@@ -66,7 +90,7 @@ public class InterventoRest {
 
 	@POST
 	@Path("/creaIntervento")
-	public Response crea(InterventoRestBean inter) throws URISyntaxException {
+	public Response crea(InterventoRestBean inter) {
 		System.out.println("creaIntervento ricevuto " + inter);
 		System.out.println(inter.getId());
 		System.out.println(inter.getData_pianificata());

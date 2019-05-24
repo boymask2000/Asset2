@@ -3,6 +3,13 @@ package managed;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.SelectEvent;
+
 import beans.FamigliaAsset;
 import beans.Safety;
 import common.JsfUtil;
@@ -14,19 +21,9 @@ public class ManagedSafetyBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String general;
-	private String testo;
-
 	private Safety selectedSafety = new Safety();
 
 	private FamigliaAsset famiglia;
-
-	public ManagedSafetyBean() {
-		SafetyDAO dao = new SafetyDAO();
-		Safety s = dao.selectByFamily(0);
-		if (s != null)
-			general = s.getTesto();
-	}
 
 	public List<Safety> getAllSafety() {
 
@@ -35,21 +32,29 @@ public class ManagedSafetyBean implements Serializable {
 		return myList;
 	}
 
-//	public void resetSelezione() {
-//		Safety fam = getSelectedSafety();
-//		fam.setId(0);
-//	}
-//
-//	public void onRowSelect(SelectEvent event) {
-//		FacesMessage msg = new FacesMessage(" Selected", "" + ((Safety) event.getObject()).getId());
-//		selectedSafety = (Safety) event.getObject();
-//		FacesContext.getCurrentInstance().addMessage(null, msg);
-//
-//	}
+	List<Safety> myList = null;
 
-	public void saveGeneral() {
+	public List<Safety> getAllSafetyForFamily() {
 		SafetyDAO dao = new SafetyDAO();
-		dao.saveGeneral(general);
+
+		if (myList == null)
+			if (famiglia != null)
+				myList = dao.selectByFamily(famiglia.getId());
+			else
+				myList = getAllSafety();
+		return myList;
+	}
+
+	public void resetSelezione() {
+		selectedSafety = null;
+	}
+
+//
+	public void onRowSelect(SelectEvent event) {
+		FacesMessage msg = new FacesMessage(" Selected", "" + ((Safety) event.getObject()).getId());
+		selectedSafety = (Safety) event.getObject();
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+
 	}
 
 	public void saveSafety() {
@@ -64,6 +69,7 @@ public class ManagedSafetyBean implements Serializable {
 		SafetyDAO dao = new SafetyDAO();
 
 		try {
+			selectedSafety.setFamilyid(famiglia.getId());
 			dao.insert(selectedSafety);
 			JsfUtil.showMessage("Safety inserita");
 		} catch (Throwable e) {
@@ -71,15 +77,28 @@ public class ManagedSafetyBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public Safety getSelectedSafety() {
-		if (selectedSafety == null)
-			selectedSafety = new Safety();
+
+	public void onCellEdit(CellEditEvent event) {
+		String oldValue = (String) event.getOldValue();
+		Object newValue = event.getNewValue();
+		System.out.println(oldValue + " -> " + newValue);
 		
-	
-		return selectedSafety;
-		
+		DataTable table = (DataTable) event.getSource();
+        Safety saf = (Safety) table.getRowData();
+
+        SafetyDAO dao = new SafetyDAO();
+        dao.update(saf);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
+				"Old: " + oldValue + ", New:" + newValue);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+
 	}
 
+	public Safety getSelectedSafety() {
+
+		return selectedSafety;
+
+	}
 
 	public void setSelectedSafety(Safety s) {
 		if (s == null)
@@ -88,33 +107,13 @@ public class ManagedSafetyBean implements Serializable {
 		this.selectedSafety = s;
 	}
 
-	public String getGeneral() {
-		return general;
-	}
-
-	public void setGeneral(String general) {
-		this.general = general;
-	}
-
-	public String getTesto() {
-		return testo;
-	}
-
-	public void setTesto(String testo) {
-		System.out.println(testo);
-		this.testo = testo;
-	}
-
 	public FamigliaAsset getFamiglia() {
 		return famiglia;
 	}
 
 	public void setFamiglia(FamigliaAsset famiglia) {
 		this.famiglia = famiglia;
-		if(famiglia==null)return;
-		getSelectedSafety().setFamilyid(famiglia.getId());
-		SafetyDAO dao = new SafetyDAO();
-		selectedSafety = dao.selectByFamily(famiglia.getId());
+		myList=null;
 	}
 
 }

@@ -45,20 +45,20 @@ public class PrintCommon extends PrintCreator {
 	}
 
 	public static void stampaSafety(PrintCreator prt, AssetAlca asset) {
-		FamigliaAssetDAO fad = new FamigliaAssetDAO();
-		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
-	
-		SafetyDAO dao = new SafetyDAO();
-		Safety saf = dao.selectByFamily(fam.getId());
-		if (saf == null)
-			saf = dao.selectByFamily(0);
-		String testo = saf.getTesto();
-		Table t = new Table();
-		t.setHeader(false);
-		t.addColumnDefinition(new Column("", "18cm"));
-		t.startRow();
-		t.addDataCol(testo);
-		prt.addtable(t);
+//		FamigliaAssetDAO fad = new FamigliaAssetDAO();
+//		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
+//	
+//		SafetyDAO dao = new SafetyDAO();
+//		Safety saf = dao.selectByFamily(fam.getId());
+//		if (saf == null)
+//			saf = dao.selectByFamily(0);
+//		String testo = saf.getTesto();
+//		Table t = new Table();
+//		t.setHeader(false);
+//		t.addColumnDefinition(new Column("", "18cm"));
+//		t.startRow();
+//		t.addDataCol(testo);
+//		prt.addtable(t);
 
 	}
 

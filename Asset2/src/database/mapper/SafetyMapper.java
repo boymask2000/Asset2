@@ -16,11 +16,25 @@ public interface SafetyMapper {
 	final String SELECT_BY_FAMILY = "SELECT * FROM " + TABELLA + " WHERE familyid = #{id}";
 
 	final String INSERT = "INSERT INTO  " + TABELLA + //
-			"  (familyid ,testo ) " + "VALUES (#{familyid}, #{testo} )";
+			"  (familyid ,risk_en, risk_it, ppe_en, ppe_it ) VALUES (#{familyid}, #{risk_en}, #{risk_it}, #{ppe_en}, #{ppe_it} )";
 
-	final String UPDATE = "UPDATE " + TABELLA + " set familyid=#{familyid}, testo=#{testo} WHERE id=#{id}";
-	
-	final String UPDATE_GENERAL = "UPDATE " + TABELLA + " set testo=#{testo} WHERE familyid=0";
+	final String UPDATE = "UPDATE " + TABELLA + " set " //
+			+ "familyid=#{familyid}, " //
+			+ "risk_en=#{risk_en}, " //
+			+ "risk_it=#{risk_it}, " //
+			+ "ppe_en=#{ppe_en}, " //
+			+ "ppe_it=#{ppe_it} " //
+
+			+ "WHERE id=#{id}";
+
+	final String UPDATE_GENERAL = "UPDATE " + TABELLA + " set " //
+			+ "familyid=#{familyid}, " //
+			+ "risk_en=#{risk_en}, " //
+			+ "risk_it=#{risk_it}, " //
+			+ "ppe_en=#{ppe_en}, " //
+			+ "ppe_it=#{ppe_it} " //
+
+			+ "WHERE familyid=0";
 
 	@Select(SELECT_ALL)
 	public List<Safety> selectAll();
@@ -33,7 +47,7 @@ public interface SafetyMapper {
 
 	@Update(UPDATE)
 	public void update(Safety u);
-	
+
 	@Update(UPDATE_GENERAL)
 	public void updateGeneral(Safety u);
 

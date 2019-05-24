@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<p:panel id="basic" header="Safety">
+					<h:form id="form">
+
+						<p:growl id="msgs" showDetail="true" />
+
+						<h:panelGrid columns="2" cellpadding="1">
+
+							<h:panelGrid columns="1">
+								<p:panel id="gen" header="Normative di sicurezza generali">
+
+
+									<p:inputTextarea rows="10" cols="80"
+										value="#{managedSafetyBean.general}" counter="display"
+										maxlength="1500" counterTemplate="{0} characters remaining."
+										autoResize="false" />
+									<h:commandButton icon="pi pi-search" value="Save" process=":form,@this"
+										action="#{managedSafetyBean.saveGeneral}" />
+
+								</p:panel>
+								<h:outputText id="display" />
+								<p:panel id="basic" header="Famiglie Asset"
+									style="margin-bottom:20px">
+									<p:dataTable id="familyDT" selectionMode="single"
+										value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
+										selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+										rowKey="#{c.id}" paginator="true" rows="5"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:ajax event="rowSelect"
+											listener="#{managedFamiglieAssetBean.onRowSelect}"
+											update=":form" />
+
+										<p:column headerText="Nome">
+											<h:outputText value="#{c.famiglia}" />
+										</p:column>
+
+									</p:dataTable>
+
+								</p:panel>
+							</h:panelGrid>
+
+							<p:panel>
+								<p:outputLabel
+									rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}"
+									value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}" />
+
+
+								<p:inputTextarea id="pp" rows="10" cols="80"
+									disabled="#{managedFamiglieAssetBean.selectedFamiglia.id ==0}"
+									value="#{managedSafetyBean.selectedSafety.testo}"
+									counter="display1" maxlength="1500"
+									counterTemplate="{0} characters remaining." autoResize="false" />
+
+								<h:outputText id="display1" />
+
+								<h:commandButton process="pp" icon="pi pi-search" value="Save"
+									action="#{managedSafetyBean.saveSafety}" />
+							</p:panel>
+						</h:panelGrid>
+
+						<p:commandButton process="@this" icon="pi pi-search" value="Home"
+							action="adminHome" />
+
+					</h:form>
+				</p:panel>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

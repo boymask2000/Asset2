@@ -8,29 +8,161 @@
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
 			<f:view locale="#{language.locale}">
-				<p:panel id="basic" header="Safety">
+				<p:panel id="basic" header="Norme di sicurezza">
 					<h:form id="form">
 
 						<p:growl id="msgs" showDetail="true" />
 
-						<h:panelGrid columns="2" cellpadding="1">
+						<h:panelGrid style="width:100%">
+							<p:row>
+								<p:column style="width:40%">
+									<p:panel id="basic" header="Famiglie Asset">
+										<p:dataTable id="familyDT" selectionMode="single"
+											value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
+											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											rowKey="#{c.id}" paginator="true" rows="5"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
 
-							<h:panelGrid columns="1">
-								<p:panel id="gen" header="Normative di sicurezza generali">
+											<p:ajax event="rowSelect"
+												listener="#{managedFamiglieAssetBean.onRowSelect}"
+												update=":form" />
 
 
-									<p:inputTextarea rows="10" cols="80"
-										value="#{managedSafetyBean.general}" counter="display"
-										maxlength="1500" counterTemplate="{0} characters remaining."
-										autoResize="false" />
-									<h:commandButton icon="pi pi-search" value="Save" process=":form,@this"
-										action="#{managedSafetyBean.saveGeneral}" />
+											<p:column headerText="Nome">
+												<h:outputText value="#{c.famiglia}" />
+											</p:column>
 
-								</p:panel>
-								<h:outputText id="display" />
-								<p:panel id="basic" header="Famiglie Asset"
-									style="margin-bottom:20px">
-									<p:dataTable id="familyDT" selectionMode="single"
+
+
+										</p:dataTable>
+										<p:commandButton process="@this" icon="pi pi-search"
+											value="Reset Selezione" update=":form"
+											action="#{managedSafetyBean.resetSelezione()}" />
+									</p:panel>
+								</p:column>
+								<p:column style="width:60%">
+									<p:panel>
+										<p:outputLabel
+											value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
+											rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
+										<p:dataTable id="checksDT" 
+											editable="true" editMode="cell"  widgetVar="cellCars"
+											value="#{managedSafetyBean.allSafetyForFamily}" var="c"
+								
+											rowKey="#{c.id}" paginator="true" rows="5"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15">
+											<p:ajax event="cellEdit"
+												listener="#{managedSafetyBean.onCellEdit}" process="@this"
+												update=":form:msgs" />
+										
+
+											<p:column headerText="Risk US">
+												<p:cellEditor>
+													<f:facet name="output">
+														<h:outputText value="#{c.risk_en}" />
+
+													</f:facet>
+													<f:facet name="input">
+														<p:inputText value="#{c.risk_en}" />
+
+													</f:facet>
+												</p:cellEditor>
+
+											</p:column>
+											<p:column headerText="Risk IT">
+												<p:cellEditor>
+													<f:facet name="output">
+
+														<h:outputText value="#{c.risk_it}" />
+													</f:facet>
+													<f:facet name="input">
+
+														<p:inputText value="#{c.risk_it}" />
+													</f:facet>
+												</p:cellEditor>
+
+											</p:column>
+
+											<p:column headerText="PPE US">
+												<p:cellEditor>
+													<f:facet name="output">
+
+														<h:outputText value="#{c.ppe_en}" />
+													</f:facet>
+													<f:facet name="input">
+
+														<p:inputText value="#{c.ppe_en}" />
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+											
+											<p:column headerText="PPE IT">
+												<p:cellEditor>
+													<f:facet name="output">
+
+														<h:outputText value="#{c.ppe_it}" />
+													</f:facet>
+													<f:facet name="input">
+
+														<p:inputText value="#{c.ppe_it}" />
+													</f:facet>
+												</p:cellEditor>
+											</p:column>
+
+											<!-- 											<p:column headerText="Codice Normativa" style="width:10%"> -->
+											<!-- 												<h:outputText value="#{c.codiceNormativa}" /> -->
+											<!-- 											</p:column> -->
+
+
+											<!-- 											<p:column style="width:10%"> -->
+											<!-- 												<h:commandButton rendered="#{c.filename!=null}" -->
+											<!-- 													action="#{managedNormativaBean.setupViewFile(c.filename)}" -->
+											<!-- 													value="View" /> -->
+											<!-- 											</p:column> -->
+
+											<f:facet name="footer">
+
+												<p:commandButton action="nuovoSafety" value="Nuova Check"
+													rendered="#{managedSafetyBean.famiglia!=null}"
+													process="@this" />
+
+												<p:commandButton action="nuovoSafety" value="Edit"
+													rendered="#{managedSafetyBean.selectedSafety.id!=0}"
+													process="@this" />
+
+												<p:commandButton process="form" update=":panSetPass0"
+													rendered="#{managedChecksBean.selectedCheck.getId()!=0}"
+													icon="pi pi-search" value="Copy to Family"
+													oncomplete="PF('setPassDialog0').show()" />
+
+												<p:commandButton process="form" update=":panSetConf0"
+													rendered="#{managedChecksBean.selectedCheck.getId()!=0}"
+													icon="pi pi-search" value="Delete"
+													oncomplete="PF('setConfDialog0').show()" />
+
+											</f:facet>
+										</p:dataTable>
+									</p:panel>
+								</p:column>
+							</p:row>
+						</h:panelGrid>
+
+
+
+						<p:commandButton process="@this" icon="pi pi-search" value="Home"
+							action="adminHome" />
+
+					</h:form>
+				</p:panel>
+				<p:dialog header="Famiglie Asset" widgetVar="setPassDialog0"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="panSetPass0" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<p:panel id="basic11" style="margin-bottom:20px">
+								<h:form enctype="multipart/form-data">
+									<p:dataTable id="fam" selectionMode="single"
 										value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 										selection="#{managedFamiglieAssetBean.selectedFamiglia}"
 										rowKey="#{c.id}" paginator="true" rows="5"
@@ -38,42 +170,46 @@
 										rowsPerPageTemplate="5,10,15">
 
 										<p:ajax event="rowSelect"
-											listener="#{managedFamiglieAssetBean.onRowSelect}"
-											update=":form" />
+											listener="#{managedFamiglieAssetBean.onRowSelectDialog}"
+											update="@this" />
+
 
 										<p:column headerText="Nome">
 											<h:outputText value="#{c.famiglia}" />
 										</p:column>
 
+										<f:facet name="footer">
+
+											<h:commandButton
+												action="#{managedFamiglieAssetBean.copy(managedChecksBean.selectedCheck)}"
+												value="Ok" process="@this" />
+										</f:facet>
+
 									</p:dataTable>
 
-								</p:panel>
-							</h:panelGrid>
-
-							<p:panel>
-								<p:outputLabel
-									rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}"
-									value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}" />
-
-
-								<p:inputTextarea id="pp" rows="10" cols="80"
-									disabled="#{managedFamiglieAssetBean.selectedFamiglia.id ==0}"
-									value="#{managedSafetyBean.selectedSafety.testo}"
-									counter="display1" maxlength="1500"
-									counterTemplate="{0} characters remaining." autoResize="false" />
-
-								<h:outputText id="display1" />
-
-								<h:commandButton process="pp" icon="pi pi-search" value="Save"
-									action="#{managedSafetyBean.saveSafety}" />
+								</h:form>
 							</p:panel>
-						</h:panelGrid>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
 
-						<p:commandButton process="@this" icon="pi pi-search" value="Home"
-							action="adminHome" />
+				<p:dialog header="Conferma" widgetVar="setConfDialog0" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="panSetConf0" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<p:panel id="basic1jk" style="margin-bottom:20px">
+								<h:outputText value="Conferma la cancellazione ?" />
+								<h:form>
+									<h:commandButton value="No" process="@this" />
+									<h:commandButton
+										action="#{managedFamiglieAssetBean.delete(managedChecksBean.selectedCheck)}"
+										value="Ok" process="@this" />
 
-					</h:form>
-				</p:panel>
+								</h:form>
+							</p:panel>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
 			</f:view>
 		</ui:define>
 	</ui:composition>

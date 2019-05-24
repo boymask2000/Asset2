@@ -64,12 +64,12 @@ public class AssetAlcaDAO {
 			if (prec == null)
 				mapper.insert(u);
 
-			FrequenzaAlca freqAlca = new FrequenzaAlca();
-			freqAlca.setRpieIdIndividual(u.getRpieIdIndividual());
-			freqAlca.setCodFrequenza(TipoSchedulazione.getIdSchedulazione(u.getFrequency()));
-			FrequenzeAlcaDAO fDao = new FrequenzeAlcaDAO();
-
-			fDao.insert(freqAlca);
+//			FrequenzaAlca freqAlca = new FrequenzaAlca();
+//			freqAlca.setRpieIdIndividual(u.getRpieIdIndividual());
+//			freqAlca.setCodFrequenza(TipoSchedulazione.getIdSchedulazione(u.getFrequency()));
+//			FrequenzeAlcaDAO fDao = new FrequenzeAlcaDAO();
+//
+//			fDao.insert(freqAlca);
 			session.commit();
 		} catch (Throwable t) {
 			t.printStackTrace();

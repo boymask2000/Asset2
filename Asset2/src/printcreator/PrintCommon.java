@@ -45,20 +45,28 @@ public class PrintCommon extends PrintCreator {
 	}
 
 	public static void stampaSafety(PrintCreator prt, AssetAlca asset) {
-//		FamigliaAssetDAO fad = new FamigliaAssetDAO();
-//		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
-//	
-//		SafetyDAO dao = new SafetyDAO();
-//		Safety saf = dao.selectByFamily(fam.getId());
-//		if (saf == null)
-//			saf = dao.selectByFamily(0);
-//		String testo = saf.getTesto();
-//		Table t = new Table();
-//		t.setHeader(false);
-//		t.addColumnDefinition(new Column("", "18cm"));
-//		t.startRow();
-//		t.addDataCol(testo);
-//		prt.addtable(t);
+		FamigliaAssetDAO fad = new FamigliaAssetDAO();
+		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
+	int count=1;
+		SafetyDAO dao = new SafetyDAO();
+		List<Safety> safList = dao.selectByFamily(fam.getId());
+		prt.addBlock("Checklist", "18pt");
+		for( Safety saf: safList) {
+			prt.addBlock("" + (count++), "16pt");
+			Table t = new Table();
+			t.setHeader(false);
+			t.addColumnDefinition(new Column("", "3cm"));
+			t.addColumnDefinition(new Column("", "12cm"));
+			t.startRow();
+			t.addDataCol("Risk:");
+			t.addDataCol(saf.getRisk_it());
+			t.startRow();
+			t.addDataCol("PPE:");
+			t.addDataCol(saf.getPpe_it());
+			prt.addtable(t);
+		}
+	
+
 
 	}
 
@@ -95,8 +103,8 @@ public class PrintCommon extends PrintCreator {
 
 				t = new Table();
 				t.setHeader(false);
-				t.addColumnDefinition(new Column("", "6cm"));
 				t.addColumnDefinition(new Column("", "4cm"));
+				t.addColumnDefinition(new Column("", "15cm"));
 
 				t.startRow();
 				t.addDataCol("Codice normativa:");

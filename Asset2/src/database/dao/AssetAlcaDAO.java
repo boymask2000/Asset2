@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import beans.AssetAlca;
-import beans.FrequenzaAlca;
-import common.TipoSchedulazione;
 import database.MyBatisConnectionFactory;
 import database.mapper.AssetAlcaMapper;
 

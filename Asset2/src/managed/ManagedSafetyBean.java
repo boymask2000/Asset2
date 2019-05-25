@@ -88,9 +88,9 @@ public class ManagedSafetyBean implements Serializable {
 
         SafetyDAO dao = new SafetyDAO();
         dao.update(saf);
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
-				"Old: " + oldValue + ", New:" + newValue);
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+//		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
+//				"Old: " + oldValue + ", New:" + newValue);
+//		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
 

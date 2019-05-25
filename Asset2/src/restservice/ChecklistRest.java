@@ -25,13 +25,13 @@ public class ChecklistRest {
 
 		AssetAlcaDAO assetDao = new AssetAlcaDAO();
 		AssetAlca asset = assetDao.searchByRPIE(rpie);
+System.out.println("Asset:"+asset);
+		ChecklistDAO dao = new ChecklistDAO();
 
-//		ChecklistDAO dao = new ChecklistDAO();
-//
-//		List<Checklist> lista = dao.getChecklistForAsset(asset);
+		List<Checklist> lista = dao.getChecklistForAsset(asset);
 //
 		ChecklistRestBean checklistRestBean = new ChecklistRestBean();
-//		checklistRestBean.setLista(lista);
+		checklistRestBean.setLista(lista);
 		checklistRestBean.setAsset(asset);
 
 		return checklistRestBean;
@@ -42,6 +42,7 @@ public class ChecklistRest {
 	public List<ChecklistIntervento> getChecksForIntervento(@PathParam("interventoId") long interventoId) {
 		ChecklistInterventiDAO dao = new ChecklistInterventiDAO();
 		List<ChecklistIntervento> lista = dao.getChecksForInterventoId(interventoId);
+		System.out.println("inteventoid:"+interventoId+"    getChecksForIntervento num:"+lista.size());
 		return lista;
 	}
 }

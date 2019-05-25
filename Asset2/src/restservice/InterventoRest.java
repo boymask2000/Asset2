@@ -56,18 +56,16 @@ public class InterventoRest {
 	}
 	@GET
 	@Path("/getsafety/{rfid}")
-	public Safety getSafety(@PathParam("rfid") String rfid) {
+	public List<Safety> getSafety(@PathParam("rfid") String family) {
 		
-		AssetAlcaDAO aad = new AssetAlcaDAO();
-		
-		AssetAlca asset = aad.searchByRPIE(rfid);
+
 		
 		FamigliaAssetDAO fad = new FamigliaAssetDAO();
-		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
+		FamigliaAsset fam = fad.searchByName(family);
 
 		SafetyDAO asdao = new SafetyDAO();
 
-		Safety safety = asdao.selectByFamily(fam.getId());
+		List<Safety> safety = asdao.selectByFamily(fam.getId());
 		if(safety==null)
 			safety = asdao.selectByFamily(0);
 		

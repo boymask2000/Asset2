@@ -110,4 +110,15 @@ public class AssetAlcaDAO {
 		return ll;
 	}
 
+	public List<String> getFamilies() {
+		List<String> ll = new ArrayList<String>();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
+			ll = mapper.selectFamilies();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ll;
+	}
+
 }

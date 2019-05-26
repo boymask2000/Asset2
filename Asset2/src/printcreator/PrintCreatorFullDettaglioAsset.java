@@ -25,7 +25,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 		// ********************************PersonalData
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");
-		prt.dump();
+	//	prt.dump();
 
 		prt.addBlock("Info asset", "20pt");
 		stampaMainData(prt, db);

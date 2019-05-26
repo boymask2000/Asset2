@@ -10,6 +10,7 @@ import beans.Intervento;
 import beans.Normativa;
 import beans.Safety;
 import beans.Status;
+import common.JsfUtil;
 import common.Pair;
 import common.TimeUtil;
 import common.Util;
@@ -19,8 +20,15 @@ import database.dao.ChecksDAO;
 import database.dao.FamigliaAssetDAO;
 import database.dao.NormativeDAO;
 import database.dao.SafetyDAO;
+import managed.LanguageBean;
 
 public class PrintCommon extends PrintCreator {
+	protected String locale;
+
+	public PrintCommon() {
+		LanguageBean bean = (LanguageBean) JsfUtil.getBean("language");
+		this.locale = bean.getCurrentLocale();
+	}
 
 	public void stampaInfoAsset(PrintCreator prt, Intervento inte) {
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
@@ -44,34 +52,42 @@ public class PrintCommon extends PrintCreator {
 
 	}
 
-	public static void stampaSafety(PrintCreator prt, AssetAlca asset) {
+	public void stampaSafety(PrintCreator prt, AssetAlca asset) {
 		FamigliaAssetDAO fad = new FamigliaAssetDAO();
 		FamigliaAsset fam = fad.searchByName(asset.getFacSystem());
-	int count=1;
+		int count = 1;
 		SafetyDAO dao = new SafetyDAO();
 		List<Safety> safList = dao.selectByFamily(fam.getId());
 		prt.addBlock("Checklist", "18pt");
-		for( Safety saf: safList) {
+		for (Safety saf : safList) {
 			prt.addBlock("" + (count++), "16pt");
 			Table t = new Table();
 			t.setHeader(false);
 			t.addColumnDefinition(new Column("", "3cm"));
 			t.addColumnDefinition(new Column("", "12cm"));
 			t.startRow();
-			t.addDataCol("Risk:");
-			t.addDataCol(saf.getRisk_it());
-			t.startRow();
-			t.addDataCol("PPE:");
-			t.addDataCol(saf.getPpe_it());
+			if (locale.equalsIgnoreCase("en")) {
+				t.addDataCol("Risk:");
+				t.addDataCol(saf.getRisk_en());
+				t.startRow();
+				t.addDataCol("PPE:");
+				t.addDataCol(saf.getPpe_en());
+			} else {
+				t.addDataCol("Risk:");
+				t.addDataCol(saf.getRisk_it());
+				t.startRow();
+				t.addDataCol("PPE:");
+				t.addDataCol(saf.getPpe_it());
+			}
 			prt.addtable(t);
 		}
-	
-
 
 	}
 
 	public void stampaIntervento(PrintCreator prt, Intervento inter) {
-		prt.addBlock(Util.getLocalizedString("INTERVENTO")+" " + TimeUtil.getFormattedDate(inter.getData_pianificata()), "18pt");
+		prt.addBlock(
+				Util.getLocalizedString("INTERVENTO") + " " + TimeUtil.getFormattedDate(inter.getData_pianificata()),
+				"18pt");
 		Table t = new Table();
 		t.setHeader(false);
 		t.addColumnDefinition(new Column("", "6cm"));
@@ -107,14 +123,17 @@ public class PrintCommon extends PrintCreator {
 				t.addColumnDefinition(new Column("", "15cm"));
 
 				t.startRow();
-				t.addDataCol("Codice normativa:");
+				t.addDataCol(Util.getLocalizedString("CODICE_NORMATIVA") + ":");
 				t.addDataCol(check.getCodiceNormativa());
 
 				stampaNormativa(t, check.getCodiceNormativa());
 
 				t.startRow();
-				t.addDataCol("Descrizione:");
-				t.addDataCol(check.getDescription());
+				t.addDataCol(Util.getLocalizedString("DESCRIZIONE") + ":");
+				if (locale.equalsIgnoreCase("en"))
+					t.addDataCol(check.getDescriptionUS());
+				else
+					t.addDataCol(check.getDescription());
 				prt.addtable(t);
 
 			}
@@ -128,7 +147,7 @@ public class PrintCommon extends PrintCreator {
 	}
 
 	private static void stampaEsiti(PrintCreator prt, Intervento inter) {
-		prt.addBlock("Esito", "16pt");
+		prt.addBlock(Util.getLocalizedString("ESITO"), "16pt");
 		Table t = new Table();
 		t.setHeader(false);
 		t.addColumnDefinition(new Column("", "6cm"));
@@ -196,7 +215,7 @@ public class PrintCommon extends PrintCreator {
 	}
 
 	private static void stampaCommento(PrintCreator prt, Intervento inter) {
-		prt.addBlock("Commento", "16pt");
+		prt.addBlock(Util.getLocalizedString("COMMENTO") + ":", "16pt");
 		Table t1 = new Table();
 		t1.setHeader(false);
 		t1.addColumnDefinition(new Column("", "18cm"));

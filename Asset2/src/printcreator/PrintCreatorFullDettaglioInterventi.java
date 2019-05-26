@@ -3,24 +3,8 @@ package printcreator;
 import java.io.InputStream;
 import java.util.List;
 
-import beans.AssetAlca;
-import beans.Check;
-import beans.ChecklistIntervento;
-import beans.FamigliaAsset;
 import beans.Intervento;
-import beans.Normativa;
-import beans.Safety;
-import beans.Status;
 import common.JsfUtil;
-import common.Pair;
-import database.dao.AssetAlcaDAO;
-import database.dao.ChecklistInterventiDAO;
-import database.dao.ChecksDAO;
-import database.dao.FamigliaAssetDAO;
-import database.dao.InterventiDAO;
-import database.dao.NormativeDAO;
-import database.dao.SafetyDAO;
-import managed.ManagedAssetBean;
 import managed.ManagedReportInterventiBean;
 
 public class PrintCreatorFullDettaglioInterventi extends PrintCommon {
@@ -55,7 +39,7 @@ public class PrintCreatorFullDettaglioInterventi extends PrintCommon {
 		// ********************************PersonalData
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");
-		prt.dump();
+	//	prt.dump();
 
 		prt.addBlock("Info asset", "20pt");
 		stampaInfoAsset(prt, inte);

@@ -12,6 +12,8 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private List<String> families;
 
 	private AssetAlca selectedAsset = new AssetAlca();
 
@@ -31,6 +33,16 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 
 		ManagedAssetBean bean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		bean.setSearchResult(ll);
+	}
+
+	public List<String> getFamilies() {
+		AssetAlcaDAO dao = new AssetAlcaDAO();
+		families=dao.getFamilies();
+		return families;
+	}
+
+	public void setFamilies(List<String> families) {
+		this.families = families;
 	}
 
 }

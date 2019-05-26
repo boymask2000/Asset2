@@ -10,6 +10,8 @@ import beans.AssetAlca;
 
 public interface AssetAlcaMapper {
 	final String TABELLA = "test1.assetalca";
+	
+	final String SELECT_FAMILIES ="SELECT distinct facSystem FROM " + TABELLA ;
 
 	final String SEARCH_BY_ID = "SELECT * FROM " + TABELLA + " WHERE " + " id=#{id}";
 	final String SEARCH_BY_RPIE = "SELECT * FROM " + TABELLA + " WHERE " + " rpieIdIndividual=#{rpieIdIndividual}";
@@ -81,6 +83,9 @@ public interface AssetAlcaMapper {
 
 	@Select(SELECT_WITH_STATUS)
 	public List<AssetAlca> selectAssetsWithStatus(AssetAlca contact);
+
+	@Select(SELECT_FAMILIES)
+	public List<String> selectFamilies();
 
 //	@Select(DELETE)
 //	public void delete(Asset contact);

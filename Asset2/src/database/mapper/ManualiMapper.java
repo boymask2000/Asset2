@@ -14,8 +14,8 @@ public interface ManualiMapper {
 	final String SELECT_MANUALI_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (assetId , descrizione , nomefile, ext )" //
-			+ "VALUES (#{assetId}, #{descrizione}, #{nomefile}, #{ext})";
+			" (assetId , descrizione , nomefile, ext, tipo )" //
+			+ "VALUES (#{assetId}, #{descrizione}, #{nomefile}, #{ext}, #{tipo})";
 
 	@Select(SELECT_ALL)
 	public List<Manuale> selectAll();

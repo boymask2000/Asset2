@@ -77,8 +77,13 @@ public class TimeUtil {
 		}
 
 	}
+	
+	public String getLocalizedDate(String d) {
+		return getFormattedDate(d);
+	}
 
 	public static String getFormattedDate(String d) {
+		if(d==null || d.length()!=8)return d;
 		LanguageBean lb = (LanguageBean) JsfUtil.getBean("language");
 		String loc = lb.getCurrentLocale();
 		switch (loc) {// AAAAMMGG

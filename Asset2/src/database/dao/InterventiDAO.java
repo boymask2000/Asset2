@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import beans.ChecklistIntervento;
 import beans.Intervento;
 import beans.Utente;
 import common.JsfUtil;
@@ -38,21 +39,19 @@ public class InterventiDAO {
 
 	public List<Intervento> getInterventiInData(String data) {
 		List<Intervento> list = null;
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			list = mapper.getInterventiInData(data);
 
-		} 
+		}
 		return list;
 	}
 
 	public List<Intervento> getInterventiForAsset(long assetId) {
 		List<Intervento> list = null;
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
@@ -64,13 +63,12 @@ public class InterventiDAO {
 
 	public List<Intervento> getInterventiPerAssetInData(Intervento u) {
 		List<Intervento> list = null;
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			list = mapper.getInterventiPerAssetInData(u);
 
-		} 
+		}
 		return list;
 	}
 
@@ -100,15 +98,14 @@ public class InterventiDAO {
 
 	public Intervento getUltimoInterventoFatto(long assetId) {
 		Intervento inte = null;
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-		
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 
 			List<Intervento> list = mapper.selectForAssetDone(assetId);
 			if (list != null && list.size() > 0)
 				inte = list.get(0);
-		} 
+		}
 		return inte;
 	}
 
@@ -181,7 +178,17 @@ public class InterventiDAO {
 
 			list = mapper.selectForDataFromTo(startDate, endDate);
 
-		}catch(Throwable t) {
+			for (Intervento inter : list) {
+				ChecklistInterventiDAO dd = new ChecklistInterventiDAO();
+				List<ChecklistIntervento> cl = dd.getCheckListForIntervento(inter);
+				for (ChecklistIntervento cli : cl) {
+					inter.addCodFrequenza(cli.getCodFrequenza());
+
+				}
+			}
+			for (Intervento inter : list) System.out.println("f: "+inter.getFrequenze());
+
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 		return list;

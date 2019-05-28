@@ -134,6 +134,7 @@ public class PlannerJob extends GenericJob {
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
 		u.setData_teorica(dataTeorica);
+		
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -146,6 +147,7 @@ public class PlannerJob extends GenericJob {
 		ChecklistIntervento cli = new ChecklistIntervento();
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
+		cli.setCodFrequenza(ck.getCodFrequenza());
 
 		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
 		cliDao.insert(cli);

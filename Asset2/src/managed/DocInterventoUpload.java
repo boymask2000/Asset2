@@ -104,6 +104,7 @@ public class DocInterventoUpload {
 		dao.insert(currentDoc);
 
 	}
+	private String desc;
 
 
 	public DocIntervento getCurrentDoc() {
@@ -114,5 +115,14 @@ public class DocInterventoUpload {
 
 	public void setCurrentDoc(DocIntervento currentDoc) {
 		this.currentDoc = currentDoc;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+		System.out.println(desc);
 	}
 }

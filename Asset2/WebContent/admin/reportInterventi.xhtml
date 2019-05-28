@@ -53,13 +53,16 @@
 							<p:column headerText="rpieIdIndividual" style="width:30%">
 								<h:outputText value="#{c.rpieIdIndividual}" />
 							</p:column>
-							<p:column headerText="Data prevista" style="width:20%">
-								<h:outputText value="#{c.data_pianificata}" />
+							<p:column headerText="#{msg['DATA_PREVISTA']}" style="width:20%">
+								<h:outputText value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
 							</p:column>
-							<p:column headerText="Data effettiva" style="width:20%">
-								<h:outputText value="#{c.data_effettiva}" />
+							<p:column headerText="#{msg['DATA_EFFETTIVA']}" style="width:20%">
+								<h:outputText value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 							</p:column>
-							<p:column headerText="Esito">
+							<p:column headerText="#{msg['FREQUENZA']}" style="width:20%">
+								<h:outputText value="#{c.frequenze}" />
+							</p:column>
+							<p:column headerText="#{msg['ESITO']}">
 								<table>
 									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
 										<td></td>

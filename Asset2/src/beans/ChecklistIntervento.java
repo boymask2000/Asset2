@@ -7,6 +7,8 @@ public class ChecklistIntervento {
 	
 	private String description;
 	private String descriptionUS;
+	
+	private int codFrequenza;
 
 	public long getId() {
 		return id;
@@ -46,5 +48,13 @@ public class ChecklistIntervento {
 
 	public void setDescriptionUS(String descriptionUS) {
 		this.descriptionUS = descriptionUS;
+	}
+
+	public int getCodFrequenza() {
+		return codFrequenza;
+	}
+
+	public void setCodFrequenza(int codFrequenza) {
+		this.codFrequenza = codFrequenza;
 	}
 }

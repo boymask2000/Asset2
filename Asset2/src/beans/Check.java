@@ -7,6 +7,10 @@ public class Check {
 	private String descriptionUS;
 	private String codiceNormativa;
 	
+	
+	private String frequenza;
+	private int codFrequenza;
+	
 	private String filename;
 
 	public int getId() {
@@ -55,5 +59,21 @@ public class Check {
 
 	public void setFamigliaId(long famigliaId) {
 		this.famigliaId = famigliaId;
+	}
+
+	public String getFrequenza() {
+		return frequenza;
+	}
+
+	public void setFrequenza(String frequenza) {
+		this.frequenza = frequenza;
+	}
+
+	public int getCodFrequenza() {
+		return codFrequenza;
+	}
+
+	public void setCodFrequenza(int codFrequenza) {
+		this.codFrequenza = codFrequenza;
 	}
 }

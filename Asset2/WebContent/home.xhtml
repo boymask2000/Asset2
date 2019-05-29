@@ -250,7 +250,7 @@
 							showEffect="fade" hideEffect="fade" resizable="false">
 							<p:outputPanel id="carDetail" style="text-align:center;">
 								<h:panelGrid columns="1" cellpadding="10">
-									<p:panel id="basi0c" header="Gestione Asset"
+									<p:panel id="basi0c" 
 										style="margin-bottom:10px">
 										<p:dataTable id="radioDT" selectionMode="single"
 											value="#{managedAssetBean.allAssetsWithSeverity}" var="c"
@@ -267,17 +267,17 @@
 												<h:outputText value="#{c.facNum}" />
 											</p:column>
 
-											<p:column headerText="Descrizione">
+											<p:column headerText="#{msg['FAMILY']}">
 												<h:outputText value="#{c.facSystem}" />
 											</p:column>
 
-											<p:column headerText="Location">
+											<p:column headerText="Nomenclature">
 												<h:outputText value="#{c.nomenclature}" />
 											</p:column>
 
-											<p:column headerText="LastStatus">
-												<h:outputText value="#{c.lastStatus}" />
-											</p:column>
+<!-- 											<p:column headerText="LastStatus"> -->
+<!-- 												<h:outputText value="#{c.lastStatus}" /> -->
+<!-- 											</p:column> -->
 
 											<f:facet name="footer">
 												<h:commandButton action="goToDetailAsset" value="Detail"

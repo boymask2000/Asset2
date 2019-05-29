@@ -70,7 +70,7 @@ public class ManagedAssetBean {
 			if (inte == null && selectedSeverity == 0)
 				out.add(asset);
 		}
-
+System.out.println("stat="+selectedSeverity+" num="+out.size());
 		return out;
 	}
 

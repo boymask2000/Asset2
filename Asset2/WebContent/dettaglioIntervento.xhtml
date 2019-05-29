@@ -56,10 +56,10 @@
 								<h:outputText value="ID intervento" />
 								<h:outputText
 									value="#{managedInterventiBean.selectedIntevento.id}" />
-								<h:outputText value="Data pianificata" />
+								<h:outputText value="#{msg['DATA_PREVISTA']}" />
 								<h:outputText
 									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_pianificata)}" />
-								<h:outputText value="Data effettiva" />
+								<h:outputText value="#{msg['DATA_EFFETTIVA']}" />
 								<h:outputText
 									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_effettiva)}" />
 

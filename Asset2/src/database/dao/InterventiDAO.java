@@ -186,7 +186,7 @@ public class InterventiDAO {
 
 				}
 			}
-			for (Intervento inter : list) System.out.println("f: "+inter.getFrequenze());
+		//	for (Intervento inter : list) System.out.println("f: "+inter.getFrequenze());
 
 		} catch (Throwable t) {
 			t.printStackTrace();

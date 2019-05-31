@@ -10,77 +10,79 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-			<p:panel>
-				<h:form>
-					<p:growl id="growl1" life="2000" />
+			<f:view locale="#{language.locale}">
+				<p:panel>
+					<h:form>
+						<p:growl id="growl1" life="2000" />
 
 
-					<p:growl id="msgs" showDetail="true" />
-					<table>
-						<tr>
-							<td><h:outputText value="Normativa" /></td>
-							<td><h:inputText required="true"
-									value="#{managedNormativaBean.selectedNormativa.normativa}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Codice" /></td>
-							<td><h:inputText required="true"
-									value="#{managedNormativaBean.selectedNormativa.codice}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Frequenza" /></td>
-							<td><h:selectOneMenu
-									value="#{managedNormativaBean.selectedNormativa.codFrequenza}">
-									<f:selectItems value="#{frequenzeBean.frequenze}" var="user"
-										itemValue="#{user.codFrequenza}" itemLabel="#{user}" />
-								</h:selectOneMenu></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Data Inizio" /></td>
-							<td><p:calendar id="popup" update=":form"
-									onSelectUpdate="@this" pattern="yyyyMMdd">
-									<f:ajax event="dateSelect"
-										listener="#{managedNormativaBean.onDateSelect}"
-										update="growl1" />
-								</p:calendar></td>
-						</tr>
-					</table>
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+							<tr>
+								<td><h:outputText value="#{msg['NORMATIVA']}" /></td>
+								<td><h:inputText required="true"
+										value="#{managedNormativaBean.selectedNormativa.normativa}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg['CODICE']}" /></td>
+								<td><h:inputText required="true"
+										value="#{managedNormativaBean.selectedNormativa.codice}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg['FREQUENZA']}" /></td>
+								<td><h:selectOneMenu
+										value="#{managedNormativaBean.selectedNormativa.codFrequenza}">
+										<f:selectItems value="#{frequenzeBean.frequenze}" var="user"
+											itemValue="#{user.codFrequenza}" itemLabel="#{user}" />
+									</h:selectOneMenu></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Data Inizio" /></td>
+								<td><p:calendar id="popup" update=":form"
+										onSelectUpdate="@this" pattern="yyyyMMdd">
+										<f:ajax event="dateSelect"
+											listener="#{managedNormativaBean.onDateSelect}"
+											update="growl1" />
+									</p:calendar></td>
+							</tr>
+						</table>
 
-					<p:commandButton update=":panSetPass0" icon="pi pi-search"
-						value="Carica file" oncomplete="PF('setPassDialog0').show()" />
+						<p:commandButton update=":panSetPass0" icon="pi pi-search"
+							value="Carica file" oncomplete="PF('setPassDialog0').show()" />
 
 
 
-					<p:commandButton process="@this" icon="pi pi-search" value="#{msg['ESCI']}"
-						action="normativeHome" />
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="#{msg['ESCI']}" action="normativeHome" />
 
-					<h:panelGroup id="postPanel2">
-						<p:commandButton value="ok" id="ajasx"
-							actionListener="#{managedNormativaBean.insertNormativa}"
-							update="growl1" styleClass="ui-priority-primary" />
-					</h:panelGroup>
-				</h:form>
-			</p:panel>
-			<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"
-				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="panSetPass0" style="text-align:center;">
-					<p:panelGrid columns="2" columnClasses="label,value">
-						<p:panel id="basic11" style="margin-bottom:20px">
-							<h:form enctype="multipart/form-data">
-								<p:growl id="messages" showDetail="true" />
+						<h:panelGroup id="postPanel2">
+							<p:commandButton value="ok" id="ajasx"
+								actionListener="#{managedNormativaBean.insertNormativa}"
+								update="growl1" styleClass="ui-priority-primary" />
+						</h:panelGroup>
+					</h:form>
+				</p:panel>
+				<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="panSetPass0" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<p:panel id="basic11" style="margin-bottom:20px">
+								<h:form enctype="multipart/form-data">
+									<p:growl id="messages" showDetail="true" />
 
-								<p:fileUpload
-									value="#{managedNormativaBean.selectedNormativa.filename}"
-									mode="advanced" allowTypes="/(\.|\/)(pdf)$/"
-									fileUploadListener="#{normativaUpload.handleFileUpload}">
+									<p:fileUpload
+										value="#{managedNormativaBean.selectedNormativa.filename}"
+										mode="advanced" allowTypes="/(\.|\/)(pdf)$/"
+										fileUploadListener="#{normativaUpload.handleFileUpload}">
 
-								</p:fileUpload>
+									</p:fileUpload>
 
-							</h:form>
-						</p:panel>
-					</p:panelGrid>
-				</p:outputPanel>
-			</p:dialog>
+								</h:form>
+							</p:panel>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

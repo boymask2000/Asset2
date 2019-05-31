@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import managed.LanguageBean;
 
@@ -58,6 +59,13 @@ public class TimeUtil {
 		}
 
 		return date1;
+	}
+	public static Date getNextDate(Date d, int ndays ) {
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+		c.add(Calendar.DAY_OF_MONTH, ndays);
+		return c.getTime();
+		
 	}
 
 	public static final int FORMAT_CANONICAL = 0;

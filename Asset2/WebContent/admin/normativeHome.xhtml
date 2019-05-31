@@ -26,19 +26,19 @@
 								listener="#{managedNormativeBean.onRowSelect}"
 								update=":form:msgs" />
 
-							<p:column headerText="Normativa">
+							<p:column headerText="#{msg['NORMATIVA']}">
 								<h:outputText value="#{c.normativa}" />
 							</p:column>
 
-							<p:column headerText="Codice">
+							<p:column headerText="#{msg['CODICE']}">
 								<h:outputText value="#{c.codice}" />
 							</p:column>
 
-							<p:column headerText="Inizio">
-								<h:outputText value="#{c.dataInizio}" />
+							<p:column headerText="#{msg['INIZIO']}">
+								<h:outputText value="#{timeUtil.getLocalizedDate(c.dataInizio)}" />
 							</p:column>
 
-							<p:column headerText="Frequenza">
+							<p:column headerText="#{msg['FREQUENZA']}">
 								<h:outputText value="#{c.frequenza}" />
 							</p:column>
 							
@@ -62,7 +62,7 @@
 							</p:column>
 							<f:facet name="footer">
 
-								<p:commandButton action="nuovaNormativa" value="Nuova Normativa"
+								<p:commandButton action="nuovaNormativa" value="#{msg['NUOVA_NORMATIVA']}"
 									process="@this" />
 
 							</f:facet>

@@ -6,12 +6,18 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 
+import beans.Check;
 import beans.Checklist;
+import beans.Safety;
 import common.JsfUtil;
 import common.Log;
 import database.dao.ChecklistDAO;
+import database.dao.ChecksDAO;
+import database.dao.SafetyDAO;
 
 public class ManagedChecklistBean implements Serializable {
 	/**
@@ -28,7 +34,7 @@ public class ManagedChecklistBean implements Serializable {
 		myList = dao.getAll();
 		return myList;
 	}
-	
+
 	public List<Checklist> getChecklistForAsset() {
 		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		

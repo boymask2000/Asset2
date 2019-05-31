@@ -34,6 +34,7 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 	public void resetSelezione(){
 		FamigliaAsset fam = getSelectedFamiglia() ;
 		fam.setId(0);
+		myList=null;
 	}
 	public FamigliaAsset searchById(long id) {
 		FamigliaAssetDAO dao = new FamigliaAssetDAO();
@@ -91,6 +92,9 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 		ManagedSafetyBean mfab = (ManagedSafetyBean) JsfUtil.getBean("managedSafetyBean");
 		if( mfab!=null)
 			mfab.setFamiglia(n);
+		ManagedChecksBean mcb = (ManagedChecksBean)JsfUtil.getBean("managedChecksBean");
+		if(mcb!=null)
+			mcb.setFamiglia(n);
 
 	}
 	public FamigliaAsset getSelectedTargetFamiglia() {

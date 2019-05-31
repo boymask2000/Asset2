@@ -45,20 +45,41 @@
 									<p:outputLabel
 										value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
 										rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
-									<p:dataTable id="checksDT" selectionMode="single"
+									<p:dataTable id="checksDT"
 										value="#{managedChecksBean.allChecksForFamily}" var="c"
-										selection="#{managedChecksBean.selectedCheck}"
-										rowKey="#{c.id}" paginator="true" rows="5"
+										editable="true" editMode="cell" widgetVar="cellCars" rowKey="#{c.id}"
+										paginator="true" rows="5"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate="5,10,15">
 
-										<p:ajax event="rowSelect"
-											listener="#{managedChecksBean.onRowSelect}" update=":form" />
+							
+										<p:ajax event="cellEdit"
+											listener="#{managedChecksBean.onCellEdit}" process="@this"
+											update=":form:msgs" />
 
-										<p:column headerText="Descrizione" style="width:80%">
-											<p:inputTextarea readonly="true" rows="3" cols="120"
-												value="#{c.description}" />
-											<p:inputTextarea readonly="true" rows="3" cols="120"
+
+										<p:column headerText="Descrizione" style="width:45%">
+
+
+											<p:cellEditor>
+												<f:facet name="output">
+													<p:inputTextarea readonly="true" rows="4" cols="50"
+														value="#{c.description}" />
+
+												</f:facet>
+												<f:facet name="input">
+													<p:inputTextarea readonly="false" rows="4" cols="50"
+														value="#{c.description}" />
+
+												</f:facet>
+											</p:cellEditor>
+
+
+										</p:column>
+
+
+										<p:column headerText="Descrizione" style="width:45%">
+											<p:inputTextarea readonly="true" rows="4" cols="50"
 												value="#{c.descriptionUS}" />
 										</p:column>
 
@@ -149,9 +170,7 @@
 							<p:panel id="basic1jk" style="margin-bottom:20px">
 								<h:outputText value="Conferma la cancellazione ?" />
 								<h:form>
-									<h:commandButton
-									
-										value="No" process="@this" />
+									<h:commandButton value="No" process="@this" />
 									<h:commandButton
 										action="#{managedFamiglieAssetBean.delete(managedChecksBean.selectedCheck)}"
 										value="Ok" process="@this" />

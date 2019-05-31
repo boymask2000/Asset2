@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 
 import beans.Check;
@@ -34,20 +36,39 @@ public class ManagedChecksBean implements Serializable {
 		myList = dao.selectAll();
 		return myList;
 	}
+	public void onCellEdit(CellEditEvent event) {
+		String oldValue = (String) event.getOldValue();
+		Object newValue = event.getNewValue();
+		System.out.println(oldValue + " -> " + newValue);
+		
+		DataTable table = (DataTable) event.getSource();
+        Check saf = (Check) table.getRowData();
 
+        ChecksDAO dao = new ChecksDAO();
+        dao.update(saf);
+//		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
+//				"Old: " + oldValue + ", New:" + newValue);
+//		FacesContext.getCurrentInstance().addMessage(null, msg);
+
+	}
 	public List<Check> getAllChecksForFamily() {
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
 		FamigliaAsset fam = mfb.getSelectedFamiglia();
 		ChecksDAO dao = new ChecksDAO();
-
+	if( myList==null) {
 		if (fam.getId() == 0) {
 
 			myList = dao.selectAll();
 			return myList;
 		}
-		return dao.getChecksByFamilyId(fam.getId());
+		myList= dao.getChecksByFamilyId(fam.getId());
 	}
-
+	return myList;
+	}
+	public void setFamiglia(FamigliaAsset n) {
+		myList=null;
+		
+	}
 	public void aggiungi() {
 
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
@@ -66,7 +87,7 @@ public class ManagedChecksBean implements Serializable {
 	}
 
 	public void onRowSelect(SelectEvent event) {
-		FacesMessage msg = new FacesMessage(" Selected", "" + ((Check) event.getObject()).getId());
+		FacesMessage msg = new FacesMessage(" Selected>", "" + ((Check) event.getObject()).getId());
 		selectedCheck = (Check) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
@@ -117,4 +138,5 @@ public class ManagedChecksBean implements Serializable {
 		this.multiSelect = multiSelect;
 
 	}
+	
 }

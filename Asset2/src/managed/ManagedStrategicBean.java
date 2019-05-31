@@ -46,24 +46,24 @@ public class ManagedStrategicBean {
 			}
 		}
 
-		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay8Pm()));
+	//	eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay8Pm()));
 	}
 
-	private Date previousDay8Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-		t.set(Calendar.HOUR, 8);
-
-		return t.getTime();
-	}
-
-	private Calendar today() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-		return calendar;
-	}
+//	private Date previousDay8Pm() {
+//		Calendar t = (Calendar) today().clone();
+//		t.set(Calendar.AM_PM, Calendar.PM);
+//		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
+//		t.set(Calendar.HOUR, 8);
+//
+//		return t.getTime();
+//	}
+//
+//	private Calendar today() {
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
+//
+//		return calendar;
+//	}
 
 	public ScheduleModel getEventModel() {
 		return eventModel;

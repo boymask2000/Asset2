@@ -56,14 +56,14 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 
 	}
 	public void copy(Check c) {
-		System.out.println(c);
+	
 		c.setFamigliaId(selectedTargetFamiglia.getId());
 		ChecksDAO dao = new ChecksDAO();
 		dao.insert(c);
 		
 	}
 	public void delete(Check c) {
-		System.out.println(c);
+		
 //		c.setFamigliaId(selectedTargetFamiglia.getId());
 		ChecksDAO dao = new ChecksDAO();
 		dao.delete(c);

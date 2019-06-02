@@ -26,7 +26,7 @@ public class ManagedReportInterventiBean extends ManagedInterventiBean  {
 	}
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
-		System.out.println(startDate);
+		
 	}
 	public String getEndDate() {
 		return endDate;
@@ -38,7 +38,7 @@ public class ManagedReportInterventiBean extends ManagedInterventiBean  {
 	public List<Intervento> getInterventi() {
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> ll = dao.getInterventiFromTo(startDate,endDate);
-		System.out.println(ll.size());
+		
 		return ll;
 		
 	}
@@ -53,7 +53,7 @@ public class ManagedReportInterventiBean extends ManagedInterventiBean  {
 		setStartDate(dd);
 	}
 	public void onStartDateSelect1(String s ) {
-		System.out.println(s);
+		
 		setStartDate(s);
 	}
 	public void onEndDateSelect(SelectEvent event) {

@@ -59,7 +59,7 @@ public class AuthFilter implements Filter {
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();
-			System.out.println(t.getMessage());
+			
 		}
 	} // doFilter
 

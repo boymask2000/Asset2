@@ -101,7 +101,7 @@ public class PlannerJob extends GenericJob {
 				cal.add(calType, num);
 			}
 		} catch (Throwable t) {
-			System.out.println("data: " + data);
+		
 			t.printStackTrace();
 		}
 	}

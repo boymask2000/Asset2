@@ -48,9 +48,9 @@ public class CalendarioDaTavolo {
 		int a = cc.get(Calendar.YEAR);
 		int m = cc.get(Calendar.MONTH)+1;
 		int g = cc.get(Calendar.DAY_OF_MONTH);
-		System.out.println(a + " " + m + " " + g);
+
 		String out = String.format("%4d%02d%02d",a,m,g);
-		System.out.println(out);
+	
 		ManagedInterventiBean bean=	(ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
 		bean.setSelectedDataForSituation(out);
 	}

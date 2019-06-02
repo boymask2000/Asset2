@@ -25,7 +25,7 @@ public class ChecklistRest {
 
 		AssetAlcaDAO assetDao = new AssetAlcaDAO();
 		AssetAlca asset = assetDao.searchByRPIE(rpie);
-System.out.println("Asset:"+asset);
+
 		ChecklistDAO dao = new ChecklistDAO();
 
 		List<Checklist> lista = dao.getChecklistForAsset(asset);

@@ -39,7 +39,7 @@ public class ManagedChecksBean implements Serializable {
 	public void onCellEdit(CellEditEvent event) {
 		String oldValue = (String) event.getOldValue();
 		Object newValue = event.getNewValue();
-		System.out.println(oldValue + " -> " + newValue);
+	
 		
 		DataTable table = (DataTable) event.getSource();
         Check saf = (Check) table.getRowData();

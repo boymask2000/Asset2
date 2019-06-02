@@ -123,6 +123,6 @@ public class DocInterventoUpload {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
-		System.out.println(desc);
+		
 	}
 }

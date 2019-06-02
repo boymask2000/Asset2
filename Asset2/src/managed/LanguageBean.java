@@ -33,7 +33,7 @@ public class LanguageBean implements Serializable {
 	}
 
 	public void setLocaleCode(String localeCode) {
-		System.out.println("localecode = " + localeCode);
+	
 		this.localeCode = localeCode;
 		setLocale(localeCode);
 	}
@@ -43,19 +43,19 @@ public class LanguageBean implements Serializable {
 		if (e.getNewValue() == null)
 			return;
 		String newLocaleValue = e.getNewValue().toString();
-		System.out.println(newLocaleValue);
+	
 		setLocale(newLocaleValue);
 
 	}
 
 	private void setLocale(String newLocaleValue) {
-		System.out.println("setLocale " + newLocaleValue);
+	
 		Locale loc = countries.get(newLocaleValue);
 
 		if (loc != null) {
-			System.out.println("impostato " + newLocaleValue);
+		
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(loc);
-			System.out.println(loc);
+		
 			locale=loc;
 		} else
 			System.out.println("non trovata " + newLocaleValue);

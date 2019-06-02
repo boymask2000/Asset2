@@ -31,7 +31,7 @@ public class InterventoRest {
 		InterventiDAO dao = new InterventiDAO();
 
 		long id = Long.parseLong(interventoId);
-		System.out.println("getInterventi " + id);
+	
 		return dao.getInterventoById(id);
 
 	}
@@ -76,9 +76,7 @@ public class InterventoRest {
 	@POST
 	@Path("/updateIntervento")
 	public Response update(InterventoRestBean inter) {
-		System.out.println("ricevuto " + inter);
-		System.out.println("ricevuto esito: " + inter.getEsito());
-		System.out.println(inter.getUser());
+	
 
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(inter);

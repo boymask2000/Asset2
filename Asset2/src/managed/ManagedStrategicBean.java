@@ -1,13 +1,14 @@
 package managed;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import beans.Intervento;
@@ -17,6 +18,7 @@ import common.TimeUtil;
 public class ManagedStrategicBean {
 	private ScheduleModel eventModel;
 	private Date startDate;
+	private ScheduleEvent event;
 
 	@PostConstruct
 	public void init() {
@@ -36,17 +38,28 @@ public class ManagedStrategicBean {
 			List<Intervento> ll = mrib.getInterventi();
 
 			for (Intervento inter : ll) {
+				DefaultScheduleEvent evt = new DefaultScheduleEvent();
+
 				String rmp = inter.getRpieIdIndividual();
 				String sdata = inter.getData_effettiva();
-				if (sdata == null)
+				if (sdata == null) {
+//evt.setStyleClass("emp1");
 					sdata = inter.getData_pianificata();
+				}
+
 				Date d = TimeUtil.getCurrentStringDate(sdata);
-				eventModel.addEvent(new DefaultScheduleEvent(rmp, d, d));
+				evt.setStartDate(d);
+				evt.setEndDate(d);
+				evt.setTitle(rmp);
+				evt.setData(inter);
+				eventModel.addEvent(evt);
+			//	new DefaultScheduleEvent(rmp, d, d));
 
 			}
 		}
 
-	//	eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay8Pm()));
+		// eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
+		// previousDay8Pm(), previousDay8Pm()));
 	}
 
 //	private Date previousDay8Pm() {
@@ -68,7 +81,9 @@ public class ManagedStrategicBean {
 	public ScheduleModel getEventModel() {
 		return eventModel;
 	}
-
+	public void onEventSelect(SelectEvent selectEvent) {
+        event = (ScheduleEvent) selectEvent.getObject();
+    }
 	public void setEventModel(ScheduleModel eventModel) {
 		this.eventModel = eventModel;
 	}
@@ -79,6 +94,14 @@ public class ManagedStrategicBean {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+
+	public ScheduleEvent getEvent() {
+		return event;
+	}
+
+	public void setEvent(ScheduleEvent event) {
+		this.event = event;
 	}
 
 }

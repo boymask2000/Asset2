@@ -14,11 +14,15 @@
 					<p:growl id="msgs" showDetail="true" />
 
 					<h:panelGrid columns="1" cellpadding="100">
-						<p:schedule id="schedule"
-							value="#{managedStrategicBean.eventModel}" 
+						<p:schedule id="schedule" rightHeaderTemplate="none"
+							leftHeaderTemplate="none"
+							value="#{managedStrategicBean.eventModel}"
 							initialDate="#{managedStrategicBean.startDate}"
-							widgetVar="myschedule"
-							timeZone="GMT+2">
+							widgetVar="myschedule" timeZone="GMT+2">
+
+							<p:ajax event="eventSelect"
+								listener="#{managedStrategicBean.onEventSelect}"
+								update="eventDetails" oncomplete="PF('eventDialog').show();" />
 
 						</p:schedule>
 
@@ -28,7 +32,29 @@
 
 					<p:commandButton process="@this" icon="pi pi-search" value="Home"
 						action="adminHome" />
+					<p:dialog widgetVar="eventDialog" header="Task Details"
+						showEffect="clip" hideEffect="clip">
+						<h:panelGrid id="eventDetails" columns="2">
+							<p:outputLabel for="title" value="Asset:" />
+							<p:inputText id="title" readonly="true"
+								value="#{managedStrategicBean.event.title}" />
 
+							<p:outputLabel for="dd" value="#{msg['DATA_PREVISTA']}" />
+							<p:inputText id="dd" readonly="true"
+								value="#{timeUtil.getLocalizedDate(managedStrategicBean.event.data.data_pianificata)}" />
+
+
+							<p:outputLabel for="ff" value="#{msg['DATA_EFFETTIVA']}" />
+							<p:inputText id="ff" readonly="true"
+								value="#{timeUtil.getLocalizedDate(managedStrategicBean.event.data.data_effettiva)}" />
+
+							<p:outputLabel for="op" value="#{msg['OPERATORE']}" />
+							<p:inputText id="op" readonly="true"
+								value="#{timeUtil.getLocalizedDate(managedStrategicBean.event.data.user)}" />
+
+
+						</h:panelGrid>
+					</p:dialog>
 				</h:form>
 			</f:view>
 		</ui:define>

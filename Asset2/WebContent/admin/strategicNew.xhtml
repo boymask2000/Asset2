@@ -15,7 +15,7 @@
 
 					<p:growl id="msgs" showDetail="true" />
 
-					<p:panel id="basic" header="#{msg['STRATEGIC_CALENDAR']}">
+					<h:panelGrid columns="1" cellpadding="100">
 						<p:schedule id="schedule" rightHeaderTemplate="none"
 							leftHeaderTemplate="none"
 							value="#{managedStrategicBean.eventModel}"
@@ -28,7 +28,7 @@
 
 						</p:schedule>
 
-					</p:panel>
+					</h:panelGrid>
 
 
 

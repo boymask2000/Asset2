@@ -1,11 +1,14 @@
 package database.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import beans.AssetAlca;
 import beans.ChecklistIntervento;
 import beans.Intervento;
+import beans.RicercaInterventiBean;
 import beans.Utente;
 import common.JsfUtil;
 import common.TimeUtil;
@@ -84,7 +87,15 @@ public class InterventiDAO {
 		}
 		return list;
 	}
-
+	public List<Intervento> search(RicercaInterventiBean s) {
+		List<Intervento> ll = new ArrayList<Intervento>();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			ll = session.selectList("searchInterventi", s);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ll;
+	}
 	public Intervento getLastInterventoFatto(long assetId) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);

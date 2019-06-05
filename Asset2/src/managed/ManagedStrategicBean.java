@@ -12,6 +12,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import beans.Intervento;
+import beans.RicercaInterventiBean;
 import common.JsfUtil;
 import common.TimeUtil;
 
@@ -23,7 +24,10 @@ public class ManagedStrategicBean {
 	@PostConstruct
 	public void init() {
 		eventModel = new DefaultScheduleModel();
-		ManagedReportInterventiBean mrib = (ManagedReportInterventiBean) JsfUtil.getBean("managedReportInterventiBean");
+	//	ManagedReportInterventiBean mrib = (ManagedReportInterventiBean) JsfUtil.getBean("managedReportInterventiBean");
+		
+		ManagedRicercaInterventiBean bean = (ManagedRicercaInterventiBean) JsfUtil.getBean("managedRicercaInterventiBean");
+	RicercaInterventiBean 	mrib=bean.getRicercaInterventiBean();
 		if (mrib != null) {
 			String s_startDate = mrib.getStartDate();
 			if (s_startDate == null) {
@@ -35,7 +39,7 @@ public class ManagedStrategicBean {
 			} else
 				startDate = TimeUtil.getCurrentStringDate(s_startDate);
 
-			List<Intervento> ll = mrib.getInterventi();
+			List<Intervento> ll = bean.getInterventi();
 
 			for (Intervento inter : ll) {
 				DefaultScheduleEvent evt = new DefaultScheduleEvent();
@@ -43,7 +47,7 @@ public class ManagedStrategicBean {
 				String rmp = inter.getRpieIdIndividual();
 				String sdata = inter.getData_effettiva();
 				if (sdata == null) {
-//evt.setStyleClass("emp1");
+				//	evt.setStyleClass("ff");
 					sdata = inter.getData_pianificata();
 				}
 
@@ -61,22 +65,8 @@ public class ManagedStrategicBean {
 		// eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
 		// previousDay8Pm(), previousDay8Pm()));
 	}
+	
 
-//	private Date previousDay8Pm() {
-//		Calendar t = (Calendar) today().clone();
-//		t.set(Calendar.AM_PM, Calendar.PM);
-//		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-//		t.set(Calendar.HOUR, 8);
-//
-//		return t.getTime();
-//	}
-//
-//	private Calendar today() {
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-//
-//		return calendar;
-//	}
 
 	public ScheduleModel getEventModel() {
 		return eventModel;
@@ -105,3 +95,4 @@ public class ManagedStrategicBean {
 	}
 
 }
+

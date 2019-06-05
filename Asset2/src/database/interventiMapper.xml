@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="alca">
+	<resultMap id="assetIn" type="beans.Intervento">
+		<result property="id" column="ID" />
+
+	</resultMap>
+	<select id="searchInterventi"
+		parameterType="beans.RicercaInterventiBean"
+		resultType="beans.Intervento">
+		SELECT * FROM test1.interventi i, test1.assetalca a
+
+		<where>
+			i.assetId=a.id
+
+			<if test="startDate != ''">
+			<![CDATA[
+				AND (data_pianificata >= #{startDate} or data_effettiva >= #{startDate})
+			]]>
+			</if>
+
+			<if test="endDate != '' ">
+			<![CDATA[
+				AND ( data_pianificata <= #{endDate} or data_effettiva <= #{endDate} )
+			]]>
+			</if>
+
+			<if test="facSystem != ''">
+				AND facSystem = #{facSystem}
+			</if>
+			<if test="rpieIdIndividual != ''">
+				AND rpieIdIndividual = #{rpieIdIndividual}
+			</if>
+
+
+		</where>
+	</select>
+</mapper>

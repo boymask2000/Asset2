@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<p:panel header="#{msg['REPORT_INTERVENTI']}">
+					<h:form>
+						<p:growl id="growl1" life="2000" />
+
+
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+
+
+
+							<tr>
+								<td><h:outputText value="#{msg['DATA_INIZIO']}" /></td>
+								<td><p:calendar id="popup3" onSelectUpdate=":form"
+										pattern="yyyyMMdd">
+										<p:ajax event="dateSelect"
+											listener="#{managedRicercaInterventiBean.onStartDateSelect}"
+											update="radi00pDT" />
+									</p:calendar></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg['DATA_FINE']}" /></td>
+								<td><p:calendar id="popup41" onSelectUpdate=":form"
+										pattern="yyyyMMdd">
+										<p:ajax event="dateSelect"
+											listener="#{managedRicercaInterventiBean.onEndDateSelect}"
+											update="radi00pDT" />
+									</p:calendar></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="facSystem" /></td>
+								<td><h:inputText
+										value="#{managedRicercaInterventiBean.ricercaInterventiBean.facSystem}" >
+										<p:ajax event="keyup" update="radi00pDT" listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
+										</h:inputText>
+								</td>
+							</tr>
+							<tr>
+								<td><h:outputText value="rpieIdIndividual" /></td>
+								<td><h:inputText
+										value="#{managedRicercaInterventiBean.ricercaInterventiBean.rpieIdIndividual}" >
+										<p:ajax event="keyup" update="radi00pDT" listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
+										</h:inputText>
+										</td>
+							</tr>
+						</table>
+
+
+
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="#{msg['STRATEGIC']}" action="strategic" />
+
+
+
+
+						<p:dataTable id="radi00pDT" selectionMode="single"
+							value="#{managedRicercaInterventiBean.interventi}" var="c"
+							selection="#{managedReportInterventiBean.selectedIntevento}"
+							rowKey="#{c.id}" paginator="true" rows="10"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:ajax event="rowSelect"
+								listener="#{managedInterventiBean.onRowSelect}"
+								update="radi00pDT" />
+							<p:column headerText="rpieIdIndividual" style="width:30%">
+								<h:outputText value="#{c.rpieIdIndividual}" />
+							</p:column>
+							<p:column headerText="#{msg['DATA_PREVISTA']}" style="width:20%">
+								<h:outputText
+									value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
+							</p:column>
+							<p:column headerText="#{msg['DATA_EFFETTIVA']}" style="width:20%">
+								<h:outputText
+									value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
+							</p:column>
+							<p:column headerText="#{msg['FREQUENZA']}" style="width:20%">
+								<h:outputText value="#{c.frequenze}" />
+							</p:column>
+							<p:column headerText="#{msg['ESITO']}">
+								<table>
+									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
+										<td></td>
+									</tr>
+								</table>
+							</p:column>
+						</p:dataTable>
+
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="#{msg['ESCI']}" action="adminHome" />
+
+						<h:commandButton value="#{msg['STAMPA']}"
+							action="#{printCreatorFullDettaglioInterventi.printAll}" />
+					</h:form>
+				</p:panel>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

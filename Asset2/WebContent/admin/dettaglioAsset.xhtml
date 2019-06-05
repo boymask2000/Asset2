@@ -68,7 +68,7 @@
 										</tr>
 									</table>
 								</p:panel>
-								<p:panel header="#{msg['PERFORMED_TASKS']}">
+								<p:panel header="#{msg['PERFORMED_TASKS1']}">
 									<p:dataTable id="radiopDT" selectionMode="single"
 										value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
 										var="c" selection="#{managedInterventiBean.selectedIntevento}"
@@ -78,7 +78,7 @@
 										<p:ajax event="rowSelect"
 											listener="#{managedInterventiBean.onRowSelect}"
 											update=":form:msgs" />
-										<p:column headerText="#{msg['DATA_PREVISTA']}">
+										<p:column headerText="#{msg['DATA_PREVISTA1']}">
 											<h:outputText
 												value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
 										</p:column>
@@ -86,7 +86,7 @@
 											<h:outputText
 												value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 										</p:column>
-										<p:column headerText="Esito"
+										<p:column headerText="#{msg['ESITO']}"
 											styleClass="{'background':'yellow'}">
 											<!-- 									<h:outputText value="#{c.esito}" /> -->
 											<table>

@@ -202,6 +202,11 @@
 		<managed-bean-class>managed.ManagedStrategicBean</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedRicercaInterventiBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedRicercaInterventiBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -247,7 +252,16 @@
 
 	</navigation-rule>
 	
-	
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>reportInterventiNew</from-outcome>
+			<to-view-id>/admin/reportInterventiNew.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

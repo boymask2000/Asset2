@@ -7,101 +7,101 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
 
-			<h:form id="form">
-
-				<p:growl id="msgs" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="1">
-					<p:panel id="baic" header="Ricerca Asset">
-						<h:panelGrid columns="2" cellpadding="1">
-							<h:outputText value="ID" />
-							<h:inputText value="#{managedRicercaAssetBean.selectedAsset.id}" />
-							<h:outputText value="Fac #" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
-								
-        
-							<h:outputText value="facSystem" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.facSystem}" />
-							<h:outputText value="facSubsystem" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.facSubsystem}" />
-							<h:outputText value="assemblyCategory" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.assemblyCategory}" />
-							<h:outputText value="nomenclature" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.nomenclature}" />
-							<h:outputText value="procId" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.procId}" />
-							<h:outputText value="pmSchedRecipient" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.pmSchedRecipient}" />
-							<h:outputText value="pmSchedSerial" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.pmSchedSerial}" />
-
-							<h:outputText value="rpieIdIndividual" />
-							<h:outputText
-								value="#{managedRicercaAssetBean.selectedAsset.rpieIdIndividual}" />
-							<h:outputText value="schedAssignedOrg" />
-							<h:inputText
-								value="#{managedRicercaAssetBean.selectedAsset.schedAssignedOrg}" />
+					<p:growl id="msgs" showDetail="true" />
+					<h:panelGrid columns="2" cellpadding="1">
+						<p:panel id="baic" header="#{msg['RICERCA_ASSET']}">
+							<h:panelGrid columns="2" cellpadding="1">
+								<h:outputText value="ID" />
+								<h:inputText value="#{managedRicercaAssetBean.selectedAsset.id}" />
+								<h:outputText value="Fac #" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
 
 
-						</h:panelGrid>
-						<p:commandButton action="#{managedRicercaAssetBean.ricerca}"
-							value="Cerca" update=":form" />
-					</p:panel>
+								<h:outputText value="facSystem" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.facSystem}" />
+								<h:outputText value="facSubsystem" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.facSubsystem}" />
+								<h:outputText value="assemblyCategory" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.assemblyCategory}" />
+								<h:outputText value="nomenclature" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.nomenclature}" />
+								<h:outputText value="procId" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.procId}" />
+								<h:outputText value="pmSchedRecipient" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.pmSchedRecipient}" />
+								<h:outputText value="pmSchedSerial" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.pmSchedSerial}" />
 
-					<h:panelGrid columns="1" cellpadding="100">
-						<p:panel id="basic" header="Gestione Asset"
-							style="margin-bottom:20px">
-							<p:dataTable id="radioDT" selectionMode="single"
-								value="#{managedAssetBean.allAssets}" var="c"
-								selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
-								paginator="true" rows="10"
-								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								rowsPerPageTemplate="5,10,15">
-
-								<p:ajax event="rowSelect"
-									listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
-								<p:column headerText="rpieIdIndividual">
-									<h:outputText value="#{c.rpieIdIndividual}" />
-								</p:column>
-								<p:column headerText="Fac System">
-									<h:outputText value="#{c.facSystem}" />
-								</p:column>
-
-								<p:column headerText="Nomenclature">
-									<h:outputText value="#{c.nomenclature}" />
-								</p:column>
-
-
-
-
-								<f:facet name="footer">
-
-									<h:commandButton action="goToDetailAsset" value="Detail"
-										process="@this">
-										<f:param name="op" value="NEW" />
-									</h:commandButton>
+								<h:outputText value="rpieIdIndividual" />
+								<h:outputText
+									value="#{managedRicercaAssetBean.selectedAsset.rpieIdIndividual}" />
+								<h:outputText value="schedAssignedOrg" />
+								<h:inputText
+									value="#{managedRicercaAssetBean.selectedAsset.schedAssignedOrg}" />
 
 
-
-								</f:facet>
-							</p:dataTable>
+							</h:panelGrid>
+							<p:commandButton action="#{managedRicercaAssetBean.ricerca}"
+								value="#{msg['SEARCH']}" update=":form" />
 						</p:panel>
+
+						<h:panelGrid columns="1" cellpadding="100">
+							<p:panel id="basic" header="Asset"
+								style="margin-bottom:20px">
+								<p:dataTable id="radioDT" selectionMode="single"
+									value="#{managedAssetBean.allAssets}" var="c"
+									selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
+									paginator="true" rows="10"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+									<p:ajax event="rowSelect"
+										listener="#{managedAssetBean.onRowSelect}" update=":form:msgs" />
+									<p:column headerText="rpieIdIndividual">
+										<h:outputText value="#{c.rpieIdIndividual}" />
+									</p:column>
+									<p:column headerText="Fac System">
+										<h:outputText value="#{c.facSystem}" />
+									</p:column>
+
+									<p:column headerText="Nomenclature">
+										<h:outputText value="#{c.nomenclature}" />
+									</p:column>
+
+
+
+
+									<f:facet name="footer">
+
+										<h:commandButton action="goToDetailAsset" value="Detail"
+											process="@this">
+											<f:param name="op" value="NEW" />
+										</h:commandButton>
+
+
+
+									</f:facet>
+								</p:dataTable>
+							</p:panel>
+						</h:panelGrid>
 					</h:panelGrid>
-				</h:panelGrid>
 
-				<p:commandButton process="@this" icon="pi pi-search" value="Home"
-					action="adminHome" />
+					<p:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="adminHome" />
 
-			</h:form>
-
+				</h:form>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

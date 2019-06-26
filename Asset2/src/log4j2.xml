@@ -3,7 +3,7 @@
 	xmlns="http://logging.apache.org/log4j/2.0/config">
 	<Properties>
 		<Property name="basePath1">/home/giovanni/Desktop</Property>
-		<Property name="basePath">${sys:logDir}</Property>
+		<Property name="basePath">/tmp</Property>
 	</Properties>
 	<Appenders>
 		<RollingFile name="rollingFile"

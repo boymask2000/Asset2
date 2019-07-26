@@ -26,6 +26,11 @@ public class ManagedAssetBean {
 	private List<AssetAlca> searchResult = null;
 
 	private int stat[] = new int[10];
+	
+	public String test( String d ) {
+		System.out.println(d);
+		return d;
+	}
 
 	public int getAssetsInStatus(int st) {
 		int count = 0;

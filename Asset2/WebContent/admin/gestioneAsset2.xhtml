@@ -14,8 +14,7 @@
 					<h:panelGrid columns="2" cellpadding="1">
 						<p:panel id="baic" header="#{msg['RICERCA_ASSET']}">
 							<h:panelGrid columns="2" cellpadding="1">
-								<h:outputText value="ID" />
-								<h:inputText value="#{managedRicercaAssetBean.selectedAsset.id}" />
+			
 								<h:outputText value="Fac #" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
@@ -84,7 +83,7 @@
 
 									<f:facet name="footer">
 
-										<h:commandButton action="goToDetailAsset" value="Detail"
+										<h:commandButton action="#{navigator.go('gestioneAsset','goToDetailAsset')}" value="Detail"
 											process="@this">
 											<f:param name="op" value="NEW" />
 										</h:commandButton>
@@ -98,7 +97,7 @@
 					</h:panelGrid>
 
 					<p:commandButton process="@this" icon="pi pi-search" value="Home"
-						action="adminHome" />
+						action="#{navigator.back()}" />
 
 				</h:form>
 			</f:view>

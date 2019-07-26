@@ -207,6 +207,11 @@
 		<managed-bean-class>managed.ManagedRicercaInterventiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>navigator</managed-bean-name>
+		<managed-bean-class>managed.Navigator</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

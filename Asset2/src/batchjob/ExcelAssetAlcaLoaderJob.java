@@ -55,6 +55,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
 				try {
+		//			System.out.println(asset.getRpieIdIndividual());
 					dao.insert(asset);
 					count++;
 

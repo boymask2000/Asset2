@@ -61,7 +61,7 @@ public class ControlloScadenzeInterventi implements Job {
 						TipoSchedulazione tipo = TipoSchedulazione.getTipoFrequenza(codFreq);
 						//System.out.println("Range: "+tipo.getRange());
 						if( (2*tipo.getRange())<nDays) {
-							System.out.println("PROBLEM: "+as.getId()+" "+check.getDescription()+" "+norm.getCodice()+" "+tipo.getRange());
+					//		System.out.println("PROBLEM: "+as.getId()+" "+check.getDescription()+" "+norm.getCodice()+" "+tipo.getRange());
 	
 						
 						Ritardo r = new Ritardo();

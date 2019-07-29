@@ -43,7 +43,7 @@
 								value="#{msg['CARICAMENTO_MASSIVO_ASSET']}" action="loadAsset" />
 								
 								<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['CARICAMENTO_MASSIVO_ASSET']} 2" action="loadAsset2" />
+								value="#{msg['CARICAMENTO_MASSIVO_ASSET']} 2" action="#{navigator.go('adminHome','loadAsset2')}" />
 								
 							<p:commandButton process="@this" icon="pi pi-search"
 								value="#{msg['GENERAZIONE_CALENDARIO']}"

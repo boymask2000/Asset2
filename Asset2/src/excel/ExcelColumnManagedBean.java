@@ -40,7 +40,7 @@ public class ExcelColumnManagedBean {
 
 		Set<Integer> nums = new HashSet<Integer>();
 		for (ColumnsItem item : colItems) {
-			System.out.println(item.getTitle() + "   " + item.getNum());
+		//	System.out.println(item.getTitle() + "   " + item.getNum());
 			if (nums.contains(item.getNum())) {
 				error = "No duplicate items";
 				break;

@@ -44,10 +44,10 @@ public class Excel {
 			short minColIx = row.getFirstCellNum();
 			short maxColIx = row.getLastCellNum();
 
-			System.out.println("ROW---------------------");
-			for (int i = minColIx; i < maxColIx; i++)
-				System.out.println(row.getCell(i).toString());
-			System.out.println("---------------------");
+//			System.out.println("ROW---------------------");
+//			for (int i = minColIx; i < maxColIx; i++)
+//				System.out.println(row.getCell(i).toString());
+//			System.out.println("---------------------");
 
 			
 			for (short colIx = minColIx; colIx < maxColIx; colIx++) {

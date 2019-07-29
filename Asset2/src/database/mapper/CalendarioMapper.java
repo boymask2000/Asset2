@@ -43,9 +43,12 @@ public interface CalendarioMapper {
 	@Select(SELECT_ALL)
 	@Results(value = {
 
-			@Result(property = "data", column = "data"), @Result(property = "interventi", column = "interventi"),
-			@Result(property = "lavorativo", column = "lavorativo"), @Result(property = "anno", column = "anno"),
-			@Result(property = "mese", column = "mese"), @Result(property = "giorno", column = "giorno"),
+			@Result(property = "data", column = "data"), //
+			@Result(property = "interventi", column = "interventi"),//
+			@Result(property = "lavorativo", column = "lavorativo"), //
+			@Result(property = "anno", column = "anno"),//
+			@Result(property = "mese", column = "mese"), //
+			@Result(property = "giorno", column = "giorno"),//
 
 	})
 	public List<Calendario> selectAll();

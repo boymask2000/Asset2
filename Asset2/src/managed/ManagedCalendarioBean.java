@@ -25,9 +25,11 @@ public class ManagedCalendarioBean implements Serializable {
 	private Calendario selectedData = new Calendario("");
 
 	public List<Calendario> getAllDates() {
-	
+
 //		CalendarioDAO dao = new CalendarioDAO();
 //		myList = dao.selectAll();
+		if (myList == null || myList.size() == 0)
+			init();
 		return myList;
 	}
 
@@ -35,6 +37,7 @@ public class ManagedCalendarioBean implements Serializable {
 	public void init() {
 		CalendarioDAO dao = new CalendarioDAO();
 		myList = dao.selectAll();
+		System.out.println(myList);
 	}
 
 	public boolean isVuoto() {
@@ -42,7 +45,7 @@ public class ManagedCalendarioBean implements Serializable {
 	}
 
 	public void update(Calendario u) {
-	
+
 		CalendarioDAO dao = new CalendarioDAO();
 		dao.update(u);
 	}
@@ -55,7 +58,7 @@ public class ManagedCalendarioBean implements Serializable {
 	}
 
 	public void delete() {
-		
+
 		CalendarioDAO dao = new CalendarioDAO();
 		dao.delete(selectedData);
 	}
@@ -89,10 +92,8 @@ public class ManagedCalendarioBean implements Serializable {
 			calendar.set(Calendar.DAY_OF_MONTH, gg);
 			calendar.set(Calendar.MONTH, mese - 1);
 			calendar.set(Calendar.YEAR, anno);
-			
 
 		}
-
 
 		for (int i = 0; i < 365; i++) {
 			boolean work = true;
@@ -108,12 +109,12 @@ public class ManagedCalendarioBean implements Serializable {
 //			System.out.println(calendar.get(Calendar.DAY_OF_MONTH) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-"
 //					+ calendar.get(Calendar.YEAR) + " --- " + calendar.get(Calendar.DAY_OF_WEEK) + " ||| " + sDate);
 
-			//CalendarioDAO dao = new CalendarioDAO();
+			// CalendarioDAO dao = new CalendarioDAO();
 
 			Calendario c = new Calendario(sDate);
 			c.setLavorativo(work ? "Y" : "N");
 			Calendario cc = dao.search(c);
-		
+
 			if (cc == null) {
 				dao.insert(c);
 

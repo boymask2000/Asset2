@@ -80,7 +80,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 					t.printStackTrace();
 
 				}
-				break;
+			
 			}
 
 		} catch (Throwable t) {
@@ -95,12 +95,12 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		short minColIx = row.getFirstCellNum();
 		short maxColIx = row.getLastCellNum();
 
-		System.out.println("ROW D---------------------");
-		for (int i = minColIx; i < maxColIx; i++)
-			System.out.println(row.getCell(i).toString());
-		System.out.println("---------------------");
+//		System.out.println("ROW D---------------------");
+//		for (int i = minColIx; i < maxColIx; i++)
+//			System.out.println(row.getCell(i).toString());
+//		System.out.println("---------------------");
+		
 		AssetAlca asset = new AssetAlca();
-		// asset.setFacNum(row.getCell(0).toString());
 		asset.setFacNum(getCell(row, 1));
 		asset.setFacSystem(getCell(row, 2));
 		asset.setFacSubsystem(getCell(row, 3));
@@ -110,11 +110,10 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		asset.setPmSchedRecipient(getCell(row, 7));
 		asset.setFrequency(getCell(row, 8));
 		asset.setPmSchedSerial(getCell(row, 9));
-		// asset.setFrequency(row.getCell(row,10).toString());
 		asset.setSchedAssignedOrg(getCell(row, 10));
 		asset.setRpieIdIndividual(getCell(row, 11));
 
-		System.out.println(asset.toString());
+	//	System.out.println(asset.toString());
 		return asset;
 	}
 
@@ -131,13 +130,6 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 
 		}
 		return null;
-//		ColumnsItem c = colItems.get(i - 1);
-//		System.out.println(i);
-//		if (c.getNum() == 0)
-//			return null;
-//		System.out.println(i+"  "+c.getNum());
-//		return row.getCell(c.getNum()).toString();
-
 	}
 
 	private static AssetAlca buildAsset_old(Row row) {

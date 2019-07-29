@@ -55,7 +55,7 @@ public class ManagedChecksBean implements Serializable {
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
 		FamigliaAsset fam = mfb.getSelectedFamiglia();
 		ChecksDAO dao = new ChecksDAO();
-	if( myList==null) {
+	if( myList==null || myList.size()==0) {
 		if (fam.getId() == 0) {
 
 			myList = dao.selectAll();

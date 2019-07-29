@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
+
+					<p:growl id="msgs" showDetail="true" />
+
+
+					<p:panel id="basic" header="#{msg['FAMILY']} Asset">
+					I campi a sinistra
+						<p:dataTable id="familyDT"
+							value="#{excelColumnManagedBean.colItems}" var="c" rowKey="#{c.num}"
+							paginator="true" rows="20"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+
+
+							<p:column headerText="Nome">
+								<h:outputText value="#{c.title}" />
+							</p:column>
+							<p:column headerText="Nome">
+								<h:selectOneMenu id="console" onchange="submit()"
+									value="#{c.num}" >
+								
+									<f:selectItem itemLabel=" " itemValue="0" />
+									<f:selectItem itemLabel="FacNum" itemValue="1" />
+									<f:selectItem itemLabel="FacSystem" itemValue="2" />
+									<f:selectItem itemLabel="FacSubsystem" itemValue="3" />
+									<f:selectItem itemLabel="AssemblyCategory" itemValue="4" />
+									<f:selectItem itemLabel="Nomenclature" itemValue="5" />
+									<f:selectItem itemLabel="ProcId" itemValue="6" />
+									<f:selectItem itemLabel="PmSchedRecipient" itemValue="7" />
+									<f:selectItem itemLabel="Frequency" itemValue="8" />
+									<f:selectItem itemLabel="PmSchedSerial" itemValue="9" />
+									<f:selectItem itemLabel="SchedAssignedOrg" itemValue="10" />
+									<f:selectItem itemLabel="RpieIdIndividual" itemValue="11" />
+								</h:selectOneMenu>
+							</p:column>
+						</p:dataTable>
+						<p:commandButton process="@this" icon="pi pi-search"
+							value="ok" update=":form"
+							action="#{excelColumnManagedBean.check}" />
+							<h:outputText value="#{excelColumnManagedBean.error}" style="font-weight:bold; color: red" />
+					</p:panel>
+
+				</h:form>>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

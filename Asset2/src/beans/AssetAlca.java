@@ -110,6 +110,15 @@ public class AssetAlca implements Serializable{
 	public void setLocationid(long locationid) {
 		this.locationid = locationid;
 	}
+	@Override
+	public String toString() {
+		return "AssetAlca [id=" + id + ", locationid=" + locationid + ", facNum=" + facNum + ", facSystem=" + facSystem
+				+ ", facSubsystem=" + facSubsystem + ", assemblyCategory=" + assemblyCategory + ", nomenclature="
+				+ nomenclature + ", procId=" + procId + ", pmSchedRecipient=" + pmSchedRecipient + ", pmSchedSerial="
+				+ pmSchedSerial + ", rpieIdIndividual=" + rpieIdIndividual + ", frequency=" + frequency
+				+ ", schedAssignedOrg=" + schedAssignedOrg + ", lastStatus=" + lastStatus + "]";
+	}
+	
 	
 
 }

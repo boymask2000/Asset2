@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import beans.AssetAlca;
 import beans.ChecklistIntervento;
 import beans.Intervento;
 import beans.RicercaInterventiBean;

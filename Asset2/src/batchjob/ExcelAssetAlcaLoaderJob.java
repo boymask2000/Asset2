@@ -3,19 +3,26 @@ package batchjob;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import beans.AssetAlca;
 import beans.FamigliaAsset;
 import database.dao.AssetAlcaDAO;
 import database.dao.FamigliaAssetDAO;
+import excel.ColumnsItem;
 
 public class ExcelAssetAlcaLoaderJob extends GenericJob {
 	private InputStream inputStream;
+	private List<ColumnsItem> colItems;
+	private int rowTitles;
+	private int firstRowData;
 
 	@Override
 	public void go() {
@@ -32,30 +39,35 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 
 	public int jobBody() throws IOException {
 		int count = 0;
-		try (XSSFWorkbook workbook = new XSSFWorkbook(inputStream);) {
+		try (Workbook workbook = WorkbookFactory.create(inputStream);) {
 
-			XSSFSheet sheet = workbook.getSheetAt(0);
+			Sheet sheet = workbook.getSheetAt(0);
 
 			// we iterate on rows
 			Iterator<Row> rowIt = sheet.iterator();
-			rowIt.next();
+
+			// Raggiungo la prima riga coi dati
+			for (int i = 0; i < firstRowData - 1; i++)
+				rowIt.next();
+
+			// rowIt.next();
 
 			while (rowIt.hasNext()) {
 
 				Row row = rowIt.next();
 
 				AssetAlca asset = buildAsset(row);
-				if (asset.getFacNum() == null || asset.getFacNum().trim().length() == 0)
-					continue;
-				try {
-					Integer.parseInt(asset.getFacNum());
-				} catch (Exception e) {
-					continue;
-				}
+//				if (asset.getFacNum() == null || asset.getFacNum().trim().length() == 0)
+//					continue;
+//				try {
+//					Integer.parseInt(asset.getFacNum());
+//				} catch (Exception e) {
+//					continue;
+//				}
 				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
 				try {
-		//			System.out.println(asset.getRpieIdIndividual());
+					// System.out.println(asset.getRpieIdIndividual());
 					dao.insert(asset);
 					count++;
 
@@ -68,6 +80,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 					t.printStackTrace();
 
 				}
+				break;
 			}
 
 		} catch (Throwable t) {
@@ -78,11 +91,59 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		return count;
 	}
 
+	private AssetAlca buildAsset(Row row) {
+		short minColIx = row.getFirstCellNum();
+		short maxColIx = row.getLastCellNum();
 
-	private static AssetAlca buildAsset(Row row) {
+		System.out.println("ROW D---------------------");
+		for (int i = minColIx; i < maxColIx; i++)
+			System.out.println(row.getCell(i).toString());
+		System.out.println("---------------------");
+		AssetAlca asset = new AssetAlca();
+		// asset.setFacNum(row.getCell(0).toString());
+		asset.setFacNum(getCell(row, 1));
+		asset.setFacSystem(getCell(row, 2));
+		asset.setFacSubsystem(getCell(row, 3));
+		asset.setAssemblyCategory(getCell(row, 4));
+		asset.setNomenclature(getCell(row, 5));
+		asset.setProcId(getCell(row, 6));
+		asset.setPmSchedRecipient(getCell(row, 7));
+		asset.setFrequency(getCell(row, 8));
+		asset.setPmSchedSerial(getCell(row, 9));
+		// asset.setFrequency(row.getCell(row,10).toString());
+		asset.setSchedAssignedOrg(getCell(row, 10));
+		asset.setRpieIdIndividual(getCell(row, 11));
+
+		System.out.println(asset.toString());
+		return asset;
+	}
+
+	private String getCell(Row row, int v) {
+		short minColIx = row.getFirstCellNum();
+		for (int i = 0; i < colItems.size(); i++) {
+			if (colItems.get(i).getNum() == v) {
+				Cell cell = row.getCell(i + minColIx);
+
+				if (cell == null)
+					return null;
+				return cell.toString();
+			}
+
+		}
+		return null;
+//		ColumnsItem c = colItems.get(i - 1);
+//		System.out.println(i);
+//		if (c.getNum() == 0)
+//			return null;
+//		System.out.println(i+"  "+c.getNum());
+//		return row.getCell(c.getNum()).toString();
+
+	}
+
+	private static AssetAlca buildAsset_old(Row row) {
 
 		AssetAlca asset = new AssetAlca();
-	//	asset.setFacNum(row.getCell(0).toString());
+		// asset.setFacNum(row.getCell(0).toString());
 		asset.setFacNum(row.getCell(1).toString());
 		asset.setFacSystem(row.getCell(2).toString());
 		asset.setFacSubsystem(row.getCell(3).toString());
@@ -101,5 +162,20 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
+	}
+
+	public void setColItems(List<ColumnsItem> colItems) {
+		this.colItems = colItems;
+
+	}
+
+	public void setRowTitles(int rowTitles) {
+		this.rowTitles = rowTitles;
+
+	}
+
+	public void setFirstRowData(int firstRowData) {
+		this.firstRowData = firstRowData;
+
 	}
 }

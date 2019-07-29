@@ -98,10 +98,11 @@ public class InterventoRest {
 
 		InterventiDAO iDao = new InterventiDAO();
 		u.setData_pianificata(inter.getData_pianificata());
-		u.setData_effettiva("");
-		u.setData_teorica("");
+		u.setData_effettiva(null);
+		u.setData_teorica(null);
+		u.setAssetId(inter.getAssetId());
 		iDao.insert(u);
-		System.out.println("ID: " + u.getId());
+	//	System.out.println("ID: " + u.getId());
 
 		for (ChecklistIntervento cli : ll) {
 			cli.setInterventoId(u.getId());

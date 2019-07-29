@@ -212,6 +212,11 @@
 		<managed-bean-class>managed.Navigator</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>excelColumnManagedBean</managed-bean-name>
+		<managed-bean-class>excel.ExcelColumnManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -452,6 +457,38 @@
 		</navigation-case>
 
 	</navigation-rule>
+	
+	
+	
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>loadAsset2</from-outcome>
+			<to-view-id>/admin/loadAsset2.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>handleExcelColumns</from-outcome>
+			<to-view-id>/admin/excelColumnsHandler.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	
+	
+	
+	
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

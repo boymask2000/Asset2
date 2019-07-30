@@ -11,7 +11,6 @@ import org.primefaces.event.SelectEvent;
 
 import beans.Utente;
 import common.JsfUtil;
-import common.Log;
 import database.dao.UtenteDAO;
 
 public class ManagedUtentiBean implements Serializable {

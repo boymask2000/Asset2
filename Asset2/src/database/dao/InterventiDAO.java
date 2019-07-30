@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import beans.AssetAlca;
 import beans.ChecklistIntervento;
 import beans.Intervento;
 import beans.RicercaInterventiBean;
@@ -202,5 +203,24 @@ public class InterventiDAO {
 			t.printStackTrace();
 		}
 		return list;
+	}
+
+	public Integer getPreviousInte(String date) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			
+			return mapper.getPreviousInte(date);
+		}
+	}
+
+	public List<AssetAlca> getPreviousInteAssets(String date) {
+	
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			
+			return mapper.getPreviousInteAssets(date);
+		}
 	}
 }

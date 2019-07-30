@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import beans.AssetAlca;
 import beans.Intervento;
 
 public interface InterventiMapper {
@@ -44,6 +45,12 @@ public interface InterventiMapper {
 			"esito = #{esito}" + //
 			" WHERE id=#{id}";
 
+	final String SELECT_ASSETS_INTERVENTI_PREC = "select distinct a.* from test1.assetalca a,  interventi i  where "
+			+ "i.assetid=a.id and i.data_effettiva is null and i.data_pianificata=#{data}";
+
+	final String SELECT_NUM_INTERVENTI_PREC = "SELECT COUNT(*) FROM " + TABELLA
+			+ " WHERE data_pianificata<#{data} AND data_effettiva IS NULL";
+
 	final String CHECK_LAST_DATE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva > #{data} AND esito!=0";
 
@@ -51,7 +58,8 @@ public interface InterventiMapper {
 			"i.assetid=a.id AND (( data_effettiva IS NULL AND data_pianificata =#{data} ) OR " + //
 			" (data_effettiva =#{data} )) ";
 
-	final String SELECT_INTERVENTI_DATA_FROM_TO = "SELECT * FROM " + TABELLA + " i," + TABELLA_ASSET + " a  WHERE  i.assetid=a.id AND"
+	final String SELECT_INTERVENTI_DATA_FROM_TO = "SELECT * FROM " + TABELLA + " i," + TABELLA_ASSET
+			+ " a  WHERE  i.assetid=a.id AND"
 			+ "(( i.data_pianificata >=#{param1} AND i.data_pianificata <=#{param2} ) OR "
 			+ "( i.data_effettiva >=#{param1} AND i.data_effettiva <=#{param2} )) ORDER BY i.data_pianificata,i.data_effettiva";
 
@@ -98,4 +106,10 @@ public interface InterventiMapper {
 
 	@Select(SELECT_INTERVENTI_DATA_FROM_TO)
 	public List<Intervento> selectForDataFromTo(String startDate, String endDate);
+
+	@Select(SELECT_NUM_INTERVENTI_PREC)
+	public Integer getPreviousInte(String date);
+
+	@Select(SELECT_ASSETS_INTERVENTI_PREC)
+	public List<AssetAlca> getPreviousInteAssets(String date);
 }

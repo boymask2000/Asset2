@@ -15,8 +15,8 @@ public interface NormativeMapper {
 			+ " WHERE CODICE=#{codice} order by dataInizio desc limit 1";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (codice , dataInizio , frequenza, codFrequenza, filename )" //
-			+ "VALUES (#{codice}, #{dataInizio}, #{frequenza}, #{codFrequenza}, #{filename})";
+			" (normativa, codice , dataInizio , frequenza, codFrequenza, filename )" //
+			+ "VALUES (#{normativa},#{codice}, #{dataInizio}, #{frequenza}, #{codFrequenza}, #{filename})";
 
 	final String DELETE = "DELETE FROM " + TABELLA + " WHERE ID=#{id}";
 

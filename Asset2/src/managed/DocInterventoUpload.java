@@ -38,7 +38,7 @@ public class DocInterventoUpload {
 		}
 	}
 
-	private String getExt(String fileName) {
+	private static String getExt(String fileName) {
 		String ext = "";
 		int pos = fileName.lastIndexOf(".");
 		if (pos != -1)

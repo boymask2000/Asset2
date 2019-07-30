@@ -7,13 +7,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import beans.AssetAlca;
-import beans.Check;
 import beans.Checklist;
 import beans.ChecklistIntervento;
 import database.dao.AssetAlcaDAO;
 import database.dao.ChecklistDAO;
 import database.dao.ChecklistInterventiDAO;
-import database.dao.ChecksDAO;
 import restservice.beans.ChecklistRestBean;
 
 @Path("/checklist")

@@ -1,7 +1,6 @@
 package managed;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -24,7 +23,7 @@ public class ManagedAudioInterventoBean extends ABaseBean implements Serializabl
 	private AudioIntervento selectedAudio = new AudioIntervento();
 
 	public List<AudioIntervento> getFotoPerIntervento() {
-		List<String> out = new ArrayList<String>();
+	//	List<String> out = new ArrayList<String>();
 
 		ManagedInterventiBean mib = (ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
 		long assetId = mib.getSelectedIntevento().getId();
@@ -35,10 +34,10 @@ public class ManagedAudioInterventoBean extends ABaseBean implements Serializabl
 //		out.add("images/red.jpg");
 //		out.add("images/green.jpg");
 
-		for (AudioIntervento foto : myList) {
+	//	for (AudioIntervento foto : myList) {
 
 	//		out.add("images/" + foto.getFilename());
-		}
+	//	}
 		return myList;
 	}
 

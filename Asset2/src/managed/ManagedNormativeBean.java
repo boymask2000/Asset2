@@ -51,6 +51,7 @@ public class ManagedNormativeBean extends ABaseBean implements Serializable {
 
 		try {
 			dao.insert(selectedNormativa);
+			JsfUtil.showMessage("Normativa inserita");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

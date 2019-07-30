@@ -112,7 +112,9 @@ public class ManagedAssetBean {
 		if (searchResult != null)
 			return searchResult;
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
-		return assetDAO.selectAll();
+		List<AssetAlca> ll = assetDAO.selectAll();
+		if( ll.size()>0)selectedAsset=ll.get(0);
+		return ll;
 	}
 
 	public void updateAsset() {
@@ -120,9 +122,9 @@ public class ManagedAssetBean {
 		assetDAO.update(selectedAsset);
 	}
 
-	public List<AssetAlca> getAssetsWithStatus(int status) {
+	public List<AssetAlca> getAssetsWithStatus(int s) {
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
-		return assetDAO.selectAssetsWithStatus(status);
+		return assetDAO.selectAssetsWithStatus(s);
 	}
 
 	public AssetAlca getSelectedAsset() {

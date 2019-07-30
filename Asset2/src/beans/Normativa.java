@@ -4,7 +4,7 @@ import managed.FrequenzeBean;
 
 public class Normativa {
 	private int id;
-	private String normativa = "PJC";
+	private String normativa ;
 	private String codice;
 	private String dataInizio;
 	private String frequenza;

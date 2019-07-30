@@ -1,6 +1,5 @@
 package restservice;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -23,6 +22,21 @@ import restservice.beans.InterventoRestBean;
 
 @Path("/intervento")
 public class InterventoRest {
+	
+	@GET
+	@Path("/getpreviousassets/{date}")
+	public List<AssetAlca> getPreviousInteAssets(@PathParam("date") String date) {
+		InterventiDAO dao = new InterventiDAO();
+		return dao.getPreviousInteAssets(date);
+	}
+	
+	@GET
+	@Path("/getprevious/{date}")
+	public Integer getPreviousInte(@PathParam("date") String date) {
+		InterventiDAO dao = new InterventiDAO();
+		
+		return dao.getPreviousInte(date);
+	}
 
 	@GET
 	@Path("{interventoId}")

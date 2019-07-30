@@ -92,8 +92,8 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 	}
 
 	private AssetAlca buildAsset(Row row) {
-		short minColIx = row.getFirstCellNum();
-		short maxColIx = row.getLastCellNum();
+//		short minColIx = row.getFirstCellNum();
+//		short maxColIx = row.getLastCellNum();
 
 //		System.out.println("ROW D---------------------");
 //		for (int i = minColIx; i < maxColIx; i++)
@@ -132,25 +132,25 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		return null;
 	}
 
-	private static AssetAlca buildAsset_old(Row row) {
-
-		AssetAlca asset = new AssetAlca();
-		// asset.setFacNum(row.getCell(0).toString());
-		asset.setFacNum(row.getCell(1).toString());
-		asset.setFacSystem(row.getCell(2).toString());
-		asset.setFacSubsystem(row.getCell(3).toString());
-		asset.setAssemblyCategory(row.getCell(4).toString());
-		asset.setNomenclature(row.getCell(5).toString());
-		asset.setProcId(row.getCell(6).toString());
-		asset.setPmSchedRecipient(row.getCell(7).toString());
-		asset.setFrequency(row.getCell(8).toString());
-		asset.setPmSchedSerial(row.getCell(9).toString());
-		// asset.setFrequency(row.getCell(10).toString());
-		asset.setSchedAssignedOrg(row.getCell(11).toString());
-		asset.setRpieIdIndividual(row.getCell(15).toString());
-
-		return asset;
-	}
+//	private static AssetAlca buildAsset_old(Row row) {
+//
+//		AssetAlca asset = new AssetAlca();
+//		// asset.setFacNum(row.getCell(0).toString());
+//		asset.setFacNum(row.getCell(1).toString());
+//		asset.setFacSystem(row.getCell(2).toString());
+//		asset.setFacSubsystem(row.getCell(3).toString());
+//		asset.setAssemblyCategory(row.getCell(4).toString());
+//		asset.setNomenclature(row.getCell(5).toString());
+//		asset.setProcId(row.getCell(6).toString());
+//		asset.setPmSchedRecipient(row.getCell(7).toString());
+//		asset.setFrequency(row.getCell(8).toString());
+//		asset.setPmSchedSerial(row.getCell(9).toString());
+//		// asset.setFrequency(row.getCell(10).toString());
+//		asset.setSchedAssignedOrg(row.getCell(11).toString());
+//		asset.setRpieIdIndividual(row.getCell(15).toString());
+//
+//		return asset;
+//	}
 
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;

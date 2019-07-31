@@ -110,13 +110,18 @@
 
 							</p:panel>
 							<p:panel>
-								<p:galleria
-									value="#{managedFotoInterventoBean.fotoPerIntervento}"
-									var="image" showCaption="true">
-									<p:graphicImage name="images/#{image.filename}"
-										title="#{image.timestamp}" />
-								</p:galleria>
+<!-- 								<p:galleria -->
+<!-- 									value="#{managedFotoInterventoBean.fotoPerIntervento}" -->
+<!-- 									var="image" showCaption="true"> -->
+<!-- 									<p:graphicImage name="images/#{image.filename}" -->
+<!-- 										title="#{image.timestamp}" /> -->
+<!-- 								</p:galleria> -->
 							</p:panel>
+							<p:contentFlow value="#{managedFotoInterventoBean.fotoPerIntervento}" var="image">
+								<p:graphicImage name="images/#{image.filename}"
+									styleClass="content" />
+								<div class="caption">#{image}</div>
+							</p:contentFlow>
 
 							<p:commandButton process="radioDT" update="panIntPass0"
 								icon="pi pi-search" value="#{msg['ADD_TASK']}"

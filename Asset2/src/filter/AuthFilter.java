@@ -1,6 +1,12 @@
 package filter;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Utente;
+import common.ApplicationConfig;
+import managed.Faces;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthFilter implements Filter {
@@ -22,6 +30,31 @@ public class AuthFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		copyImages();
+	}
+
+	private void copyImages() {
+		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
+		String backupDir = ApplicationConfig.getDocumentdir();
+		if (!backupDir.endsWith(File.separator))
+			backupDir += File.separator;
+		String dir = backupDir + "images";
+		File fDir = new File(dir);
+		String[] lista = fDir.list();
+		for (int i = 0; i < lista.length; i++) {
+			String file = dir + File.separator + lista[i];
+			Path copied = Paths.get(uploadDir + lista[i]);
+			Path originalPath = Paths.get(file);
+			System.out.println("origin: " + originalPath);
+			System.out.println("copied: " + copied);
+			try {
+				Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override
@@ -59,7 +92,7 @@ public class AuthFilter implements Filter {
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();
-			
+
 		}
 	} // doFilter
 

@@ -35,7 +35,7 @@ public class PrintCreatorFullDettaglioInterventi extends PrintCommon {
 		return "viewFile";
 	}
 
-	private void printSingle(PrintCreator prt, Intervento inte) {
+	public void printSingle(PrintCreator prt, Intervento inte) {
 		// ********************************PersonalData
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");

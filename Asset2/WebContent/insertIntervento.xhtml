@@ -58,7 +58,7 @@
 									value="#{managedInterventiBean.selectedIntevento.id}" />
 								<h:outputText value="#{msg['DATA_PREVISTA']}" />
 								<h:outputText
-									value="#{managedInterventiBean.selectedIntevento.data_pianificata}" />
+									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_pianificata)}" />
 								<h:outputText value="#{msg['DATA_EFFETTIVA']}" />
 								<p:calendar id="popup"
 									value="#{managedInterventiBean.date_data_effettiva}"
@@ -98,7 +98,7 @@
 									<f:facet name="footer">
 
 										<p:commandButton process="radioDT" update=":panSetPass0"
-											icon="pi pi-search" value="Aggiungi documento"
+											icon="pi pi-search" value="#{msg['ADD_DOC']}"
 											oncomplete="PF('setPassDialog0').show()" />
 
 									</f:facet>
@@ -115,17 +115,20 @@
 							</p:panel>
 
 							<p:commandButton process="radioDT" update="panIntPass0"
-								icon="pi pi-search" value="Aggiungi intervento"
+								icon="pi pi-search" value="#{msg['ADD_TASK']}"
 								oncomplete="PF('setIntDialog0').show()" />
 
 						</p:panel>
 
 					</h:panelGrid>
-
+					<h:commandButton value="#{msg['STAMPA']}"
+						action="#{printCreatorIntervento.printIntervento}" />
+					<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 				</h:form>
 
-				<p:dialog header="Nuovo Intervento" widgetVar="setIntDialog0"
-					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:dialog header="#{msg['NUOVO_INTERVENTO']}"
+					widgetVar="setIntDialog0" modal="true" showEffect="fade"
+					hideEffect="fade" resizable="false">
 					<p:outputPanel id="panIntPass0" style="text-align:center;">
 
 						<h:form>
@@ -135,7 +138,7 @@
 								pattern="yyyyMMdd" />
 
 							<p:commandButton update=":form" icon="pi pi-search"
-								value="Aggiungi intervento"
+								value="#{msg['ADD_TASK']}"
 								action="#{managedInterventiBean.nuovoIntervento}"
 								oncomplete="PF('setIntDialog0').hide();" />
 						</h:form>
@@ -143,7 +146,6 @@
 				</p:dialog>
 
 
-				<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 
 				<p:dialog header="#{msg['NUOVO_DOCUMENTO']}"
 					widgetVar="setPassDialog0" modal="true" showEffect="fade"

@@ -49,8 +49,8 @@ public class Manuale {
 
 	public String getFullPath() {
 		String dir = ApplicationConfig.getDocumentdir();
-		if (!dir.endsWith(File.pathSeparator))
-			dir += File.pathSeparator;
+		if (!dir.endsWith(File.separator))
+			dir += File.separator;
 		return dir + nomefile;
 	}
 

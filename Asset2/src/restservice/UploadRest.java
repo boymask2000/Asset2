@@ -1,7 +1,10 @@
 package restservice;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -16,6 +19,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import beans.FotoIntervento;
+import common.ApplicationConfig;
 import common.TempFileFactory;
 import common.TimeUtil;
 import database.dao.FotoInterventoDAO;
@@ -84,10 +88,39 @@ public class UploadRest {
 				}
 				out.flush();
 			}
+			saveToBackup(outFile, filename);
+
+			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
 		return filename;
+	}
+
+	private void saveToBackup(File outFile, String filename) throws Exception {
+		int read = 0;
+		byte[] bytes = new byte[1024];
+		String backupDir = ApplicationConfig.getDocumentdir();
+		System.out.println("backupDir1 "+backupDir);
+		if (!backupDir.endsWith(File.separator))
+			backupDir += File.separator;
+		
+		String dir=backupDir+"images";
+		File fDir=new File(dir);
+		if( !fDir.exists())fDir.mkdirs();
+		
+		backupDir += "images"+File.separator+filename;
+		System.out.println("backupDir2 "+backupDir);
+		try (FileInputStream is = new FileInputStream(outFile);) {
+			try (OutputStream out = new FileOutputStream(backupDir);) {
+				while ((read = is.read(bytes)) != -1) {
+					out.write(bytes, 0, read);
+				}
+				out.flush();
+			}
+		}
+		
 	}
 }

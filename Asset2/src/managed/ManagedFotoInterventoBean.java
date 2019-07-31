@@ -37,7 +37,8 @@ public class ManagedFotoInterventoBean extends ABaseBean implements Serializable
 
 		for (FotoIntervento foto : myList) {
 
-			out.add("images/" + foto.getFilename());
+		//	out.add("images/" + foto.getFilename());
+			out.add( foto.getFilename());
 		}
 		return myList;
 	}

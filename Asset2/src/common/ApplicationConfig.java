@@ -1,5 +1,6 @@
 package common;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
@@ -26,12 +27,35 @@ public class ApplicationConfig {
 			System.out.println("ATTENZIONE: NON Trovato propPath in configurazione Tomcat. Si assume " + DEFAULTPATH);
 		}
 
+		File f = new File(propPath);
+		if (!f.exists()) {
+			System.out.println("ATTENZIONE: File di configurazione " + propPath + " non trovato");
+
+		}
+		if (!f.canRead()) {
+			System.out.println("ATTENZIONE: File di configurazione " + propPath + " non leggibile");
+
+		}
 		try (InputStream is = new FileInputStream(propPath)) {
 			prop.load(is);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		String docDir = prop.getProperty("documentDir");
+		if (docDir == null)
+			System.out.println("ATTENZIONE:Non trovato documentDir nel file di configurazione");
+		else {
+			File fDir = new File(docDir);
+			if (!fDir.exists())
+				System.out.println("ATTENZIONE:Directory " + docDir + " non trovata");
+			else if (!fDir.canRead())
+				System.out.println("ATTENZIONE:Directory " + docDir + " non leggibile");
+		}
+
+	
 	}
 
 	public static String getProperty(String key) {

@@ -36,6 +36,8 @@ public class AuthFilter implements Filter {
 	private void copyImages() {
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
 		String backupDir = ApplicationConfig.getDocumentdir();
+		if (backupDir == null)
+			return;
 		if (!backupDir.endsWith(File.separator))
 			backupDir += File.separator;
 		String dir = backupDir + "images";
@@ -45,8 +47,7 @@ public class AuthFilter implements Filter {
 			String file = dir + File.separator + lista[i];
 			Path copied = Paths.get(uploadDir + lista[i]);
 			Path originalPath = Paths.get(file);
-			System.out.println("origin: " + originalPath);
-			System.out.println("copied: " + copied);
+
 			try {
 				Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {

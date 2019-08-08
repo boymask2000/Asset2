@@ -39,23 +39,20 @@ public class ApplicationConfig {
 		try (InputStream is = new FileInputStream(propPath)) {
 			prop.load(is);
 
+			String docDir = prop.getProperty("documentDir");
+			if (docDir == null)
+				System.out.println("ATTENZIONE:Non trovato documentDir nel file di configurazione");
+			else {
+				File fDir = new File(docDir);
+				if (!fDir.exists())
+					System.out.println("ATTENZIONE:Directory " + docDir + " non trovata");
+				else if (!fDir.canRead())
+					System.out.println("ATTENZIONE:Directory " + docDir + " non leggibile");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		String docDir = prop.getProperty("documentDir");
-		if (docDir == null)
-			System.out.println("ATTENZIONE:Non trovato documentDir nel file di configurazione");
-		else {
-			File fDir = new File(docDir);
-			if (!fDir.exists())
-				System.out.println("ATTENZIONE:Directory " + docDir + " non trovata");
-			else if (!fDir.canRead())
-				System.out.println("ATTENZIONE:Directory " + docDir + " non leggibile");
-		}
 
-	
 	}
 
 	public static String getProperty(String key) {

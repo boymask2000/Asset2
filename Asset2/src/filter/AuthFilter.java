@@ -26,18 +26,39 @@ import managed.Faces;
 public class AuthFilter implements Filter {
 
 	public AuthFilter() {
+		showInfo();
+		copyImages();
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		copyImages();
+		
+
 	}
 
-	private void copyImages() {
+	private static boolean doneCopy = false;
+	private static boolean doneInfo = false;
+
+	private static void showInfo() {
+		if (doneInfo)
+			return;
+		System.out.println("***************************************************************");
+		System.out.println("CFMS server for ALCA");
+		System.out.println("***************************************************************");
+		doneInfo = true;
+	}
+
+	private static void copyImages() {
+		if (doneCopy)
+			return;
+		doneCopy = true;
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
 		String backupDir = ApplicationConfig.getDocumentdir();
-		if (backupDir == null)
+		if (backupDir == null) {
+			System.out.println(
+					"ATTENZIONE: Non trovata documentDir dalla configurazione: Impossibile eseguire il restore delle immagini");
 			return;
+		}
 		if (!backupDir.endsWith(File.separator))
 			backupDir += File.separator;
 		String dir = backupDir + "images";
@@ -51,7 +72,6 @@ public class AuthFilter implements Filter {
 			try {
 				Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -70,6 +90,7 @@ public class AuthFilter implements Filter {
 			// allow user to proccede if url is login.xhtml or user logged in or user is
 			// accessing any page in //public folder
 			String reqURI = req.getRequestURI();
+	//		System.out.println("URI: "+reqURI);
 			if (reqURI.indexOf("/login.xhtml") >= 0 || ses == null) {
 				if (ses != null)
 					ses.invalidate();
@@ -77,11 +98,14 @@ public class AuthFilter implements Filter {
 				return;
 			}
 			Utente utente = (Utente) ses.getAttribute("utente");
+		//	System.out.println(utente);
 			if (utente == null || utente.getUsername() == null) {
 				res.sendRedirect(req.getContextPath() + "/login.xhtml");
+				return;
 			}
-			if (utente != null && utente.getTipo() != null) {
-				if (reqURI.indexOf("/admin/") != -1 && !utente.getTipo().equalsIgnoreCase("A"))
+			
+			if (utente.getTipo() != null) {
+				if (reqURI.indexOf("/admin/") != -1 && reqURI.indexOf("/dettaglio") == -1 &&!utente.getTipo().equalsIgnoreCase("A"))
 					res.sendRedirect(req.getContextPath() + "/login.xhtml");
 				else
 					chain.doFilter(request, response);

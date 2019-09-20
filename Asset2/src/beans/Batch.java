@@ -1,12 +1,17 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 import batchjob.GenericJob;
 import common.TimeUtil;
 
-public class Batch {
+public class Batch implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Callable<Integer> callable;
 	private String description;
 	private String startTime;

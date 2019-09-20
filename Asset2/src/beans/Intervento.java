@@ -1,11 +1,16 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import common.TipoSchedulazione;
 
-public class Intervento {
+public class Intervento implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private long assetId;
 	private String data_teorica;

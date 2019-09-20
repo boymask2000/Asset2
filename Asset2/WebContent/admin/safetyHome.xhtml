@@ -43,22 +43,25 @@
 								</p:column>
 								<p:column style="width:60%">
 									<p:panel>
+									<h:outputText value="Column texts can be updated by clicking on the table" />
 										<p:outputLabel
 											value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
 											rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
-										<p:dataTable id="checksDT" 
-											editable="true" editMode="cell"  widgetVar="cellCars"
+										<p:dataTable id="checksDT" editable="true" editMode="cell"
+											widgetVar="cellCars"
 											value="#{managedSafetyBean.allSafetyForFamily}" var="c"
-								
 											rowKey="#{c.id}" paginator="true" rows="5"
 											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 											rowsPerPageTemplate="5,10,15">
 											<p:ajax event="cellEdit"
 												listener="#{managedSafetyBean.onCellEdit}" process="@this"
 												update=":form:msgs" />
-										
 
-											<p:column headerText="Risk US">
+											<p:column headerText="RISK" style="width:20%">
+												<p:graphicImage
+													url="/resources/images/risk/risk_#{c.imgId}.jpg" />
+											</p:column>
+											<p:column headerText="Risk " style="width:30%">
 												<p:cellEditor>
 													<f:facet name="output">
 														<h:outputText value="#{c.risk_en}" />
@@ -71,21 +74,12 @@
 												</p:cellEditor>
 
 											</p:column>
-											<p:column headerText="Risk IT">
-												<p:cellEditor>
-													<f:facet name="output">
 
-														<h:outputText value="#{c.risk_it}" />
-													</f:facet>
-													<f:facet name="input">
-
-														<p:inputText value="#{c.risk_it}" />
-													</f:facet>
-												</p:cellEditor>
-
+											<p:column headerText="PPE" style="width:20%">
+												<p:graphicImage
+													url="/resources/images/ppe/ppe_#{c.imgId}.jpg" />
 											</p:column>
-
-											<p:column headerText="PPE US">
+											<p:column headerText="PPE" style="width:30%">
 												<p:cellEditor>
 													<f:facet name="output">
 
@@ -97,19 +91,10 @@
 													</f:facet>
 												</p:cellEditor>
 											</p:column>
-											
-											<p:column headerText="PPE IT">
-												<p:cellEditor>
-													<f:facet name="output">
 
-														<h:outputText value="#{c.ppe_it}" />
-													</f:facet>
-													<f:facet name="input">
 
-														<p:inputText value="#{c.ppe_it}" />
-													</f:facet>
-												</p:cellEditor>
-											</p:column>
+
+
 
 											<!-- 											<p:column headerText="Codice Normativa" style="width:10%"> -->
 											<!-- 												<h:outputText value="#{c.codiceNormativa}" /> -->
@@ -128,7 +113,7 @@
 													rendered="#{managedSafetyBean.famiglia!=null}"
 													process="@this" />
 
-											
+
 
 												<p:commandButton process="form" update=":panSetPass0"
 													rendered="#{managedChecksBean.selectedCheck.getId()!=0}"

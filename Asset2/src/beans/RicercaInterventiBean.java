@@ -1,6 +1,12 @@
 package beans;
 
-public class RicercaInterventiBean {
+import java.io.Serializable;
+
+public class RicercaInterventiBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String startDate="";
 	private String endDate="";
 	private String facSystem="";

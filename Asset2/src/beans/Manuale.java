@@ -1,10 +1,15 @@
 package beans;
 
 import java.io.File;
+import java.io.Serializable;
 
 import common.ApplicationConfig;
 
-public class Manuale {
+public class Manuale implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String TIPO_SCHEDA_TECNICA = "1";
 	public static final String INFO_RATING_GUIDANCE = "2";
 	public static final String INFO_GENERICO = "0";

@@ -1,8 +1,14 @@
 package beans;
 
+import java.io.Serializable;
+
 import managed.FrequenzeBean;
 
-public class Normativa {
+public class Normativa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String normativa ;
 	private String codice;

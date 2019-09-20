@@ -17,41 +17,9 @@
 
 
 						<p:growl id="msgs" showDetail="true" />
-						<table>
-							<tr>
-								<td><h:outputText value="Risk IT" /></td>
-								<td><h:outputText value="Risk US" /></td>
-							</tr>
-							<tr>
-								<td><p:inputTextarea rows="3" cols="50"
-										value="#{managedSafetyBean.selectedSafety.risk_it}" /></td>
+		
 
-
-								<td><p:inputTextarea rows="3" cols="50"
-										value="#{managedSafetyBean.selectedSafety.risk_en}" /></td>
-							</tr>
-
-							<tr>
-								<td><h:outputText value="PPE IT" /></td>
-								<td><h:outputText value="PPE US" /></td>
-							</tr>
-							<tr>
-								<td><p:inputTextarea rows="3" cols="50"
-										value="#{managedSafetyBean.selectedSafety.ppe_it}" /></td>
-
-
-								<td><p:inputTextarea rows="3" cols="50"
-										value="#{managedSafetyBean.selectedSafety.ppe_en}" /></td>
-							</tr>
-
-
-						</table>
-
-
-<h:outputText value="Selezionare il RISK-PPE"  rendered="#{managedSafetyBean.selectedImageNum==0}" styleClass="ui-priority-primary"/>
-
-
-						<h:panelGrid columns="3">
+						<h:panelGrid columns="2">
 						
 
 							<p:panel style="text-align:center">

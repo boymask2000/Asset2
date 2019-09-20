@@ -1,6 +1,12 @@
 package beans;
 
-public class Safety {
+import java.io.Serializable;
+
+public class Safety implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private long familyid;
 	private String risk_en;

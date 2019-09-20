@@ -37,6 +37,8 @@ public interface SafetyMapper {
 			+ "ppe_it=#{ppe_it} " //
 
 			+ "WHERE familyid=0";
+	
+	final String SELECT_SINGLE = "SELECT * FROM " + TABELLA +" where familyid=#{familyid} AND imgId=#{imgId}";
 
 	@Select(SELECT_ALL)
 	public List<Safety> selectAll();
@@ -52,5 +54,8 @@ public interface SafetyMapper {
 
 	@Update(UPDATE_GENERAL)
 	public void updateGeneral(Safety u);
+
+	@Select(SELECT_SINGLE)
+	public  List<Safety> search(Safety u);
 
 }

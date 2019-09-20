@@ -1,6 +1,12 @@
 package beans;
 
-public class DocIntervento {
+import java.io.Serializable;
+
+public class DocIntervento implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private long interventoId;
 	private String filename;

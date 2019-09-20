@@ -1,8 +1,13 @@
 package beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Audit {
+public class Audit implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String username;
 	private String time;

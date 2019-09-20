@@ -1,6 +1,12 @@
 package beans;
 
-public class FamigliaAsset {
+import java.io.Serializable;
+
+public class FamigliaAsset implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String famiglia;
 

@@ -87,16 +87,55 @@ public class ManagedSafetyBean implements Serializable {
 
 	public void insertSafety() {
 
+//		SafetyDAO dao = new SafetyDAO();
+
+		selectedSafety.setFamilyid(famiglia.getId());
+		if (selected1)
+			insert(1, selectedSafety);
+
+		if (selected3)
+			insert(2, selectedSafety);
+
+		if (selected3)
+			insert(3, selectedSafety);
+
+		if (selected4)
+			insert(4, selectedSafety);
+
+		if (selected5)
+			insert(5, selectedSafety);
+
+		if (selected6)
+			insert(6, selectedSafety);
+
+		if (selected7)
+			insert(7, selectedSafety);
+
+		if (selected8)
+			insert(8, selectedSafety);
+
+		if (selected9)
+			insert(9, selectedSafety);
+
+		if (selected10)
+			insert(10, selectedSafety);
+
+		if (selected11)
+			insert(11, selectedSafety);
+
+		if (selected12)
+			insert(12, selectedSafety);
+
+	}
+
+	private void insert(int id, Safety s) {
+		selectedSafety.setImgId(id);
+		selectedSafety.setPpe_en(getPPELabel(id));
+		selectedSafety.setPpe_it(getPPELabel(id));
+		selectedSafety.setRisk_en(getRiskLabel(id));
+		selectedSafety.setRisk_it(getRiskLabel(id));
 		SafetyDAO dao = new SafetyDAO();
-
-		try {
-			selectedSafety.setFamilyid(famiglia.getId());
-			dao.insert(selectedSafety);
-			JsfUtil.showMessage("Safety inserita");
-		} catch (Throwable e) {
-
-			e.printStackTrace();
-		}
+		dao.insert(s);
 	}
 
 	public void onCellEdit(CellEditEvent event) {
@@ -170,7 +209,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected1 = selected1;
-		selectedSafety.setImgId(1);
+
 	}
 
 	public boolean isSelected2() {
@@ -182,7 +221,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected2 = selected2;
-		selectedSafety.setImgId(2);
+
 	}
 
 	public String getRiskLabel(int n) {
@@ -251,19 +290,6 @@ public class ManagedSafetyBean implements Serializable {
 
 	private void cleanSelectedNum() {
 
-		selected1 = false;
-		selected2 = false;
-		selected3 = false;
-		selected4 = false;
-		selected5 = false;
-		selected6 = false;
-		selected7 = false;
-		selected8 = false;
-		selected9 = false;
-		selected10 = false;
-		selected11 = false;
-		selected12 = false;
-
 	}
 
 	public boolean isSelected3() {
@@ -275,7 +301,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected3 = selected3;
-		selectedSafety.setImgId(3);
+
 	}
 
 	public boolean isSelected4() {
@@ -287,7 +313,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected4 = selected4;
-		selectedSafety.setImgId(4);
+
 	}
 
 	public boolean isSelected5() {
@@ -299,7 +325,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected5 = selected5;
-		selectedSafety.setImgId(5);
+
 	}
 
 	public boolean isSelected6() {
@@ -311,7 +337,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected6 = selected6;
-		selectedSafety.setImgId(6);
+
 	}
 
 	public boolean isSelected7() {
@@ -323,7 +349,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected7 = selected7;
-		selectedSafety.setImgId(7);
+
 	}
 
 	public boolean isSelected8() {
@@ -335,7 +361,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected8 = selected8;
-		selectedSafety.setImgId(8);
+
 	}
 
 	public boolean isSelected9() {
@@ -347,7 +373,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected9 = selected9;
-		selectedSafety.setImgId(9);
+
 	}
 
 	public boolean isSelected10() {
@@ -359,7 +385,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected10 = selected10;
-		selectedSafety.setImgId(10);
+
 	}
 
 	public boolean isSelected11() {
@@ -371,7 +397,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected11 = selected11;
-		selectedSafety.setImgId(11);
+
 	}
 
 	public boolean isSelected12() {
@@ -383,7 +409,7 @@ public class ManagedSafetyBean implements Serializable {
 			return;
 		cleanSelectedNum();
 		this.selected12 = selected12;
-		selectedSafety.setImgId(12);
+
 	}
 
 }

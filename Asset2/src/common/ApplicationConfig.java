@@ -20,8 +20,9 @@ public class ApplicationConfig {
 			Context context = new InitialContext();
 			propPath = (String) context.lookup("java:comp/env/assetConfigFile");
 
-			System.out.println("Trovato path=" + propPath + " in configurazione Tomcat");
+			System.out.println("Trovato path=[" + propPath + "] in configurazione Tomcat");
 		} catch (NamingException e1) {
+			e1.printStackTrace();
 			propPath = DEFAULTPATH;
 
 			System.out.println("ATTENZIONE: NON Trovato propPath in configurazione Tomcat. Si assume " + DEFAULTPATH);

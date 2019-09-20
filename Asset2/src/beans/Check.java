@@ -1,6 +1,12 @@
 package beans;
 
-public class Check {
+import java.io.Serializable;
+
+public class Check implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private long famigliaId;
 	private String description;

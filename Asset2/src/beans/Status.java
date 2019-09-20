@@ -1,6 +1,12 @@
 package beans;
 
-public class Status {
+import java.io.Serializable;
+
+public class Status implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int severity;
 	private String color;
 	private int total;

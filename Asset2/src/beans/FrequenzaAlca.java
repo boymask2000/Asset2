@@ -1,8 +1,14 @@
 package beans;
 
+import java.io.Serializable;
+
 import common.TipoSchedulazione;
 
-public class FrequenzaAlca {
+public class FrequenzaAlca implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String rpieIdIndividual;
 	private int codFrequenza;

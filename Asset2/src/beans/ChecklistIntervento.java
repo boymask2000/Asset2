@@ -1,6 +1,12 @@
 package beans;
 
-public class ChecklistIntervento {
+import java.io.Serializable;
+
+public class ChecklistIntervento implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private long interventoId;
 	private long checkId;

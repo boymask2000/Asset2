@@ -1,5 +1,6 @@
 package database.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,19 +30,32 @@ public class SafetyDAO {
 			SafetyMapper mapper = session.getMapper(SafetyMapper.class);
 
 			list = mapper.selectByFamily(id);
-			
+
 			return list;
 		}
 
+	}
+
+	public List<Safety> search(Safety u) {
+		List<Safety> list = new ArrayList<Safety>();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			SafetyMapper mapper = session.getMapper(SafetyMapper.class);
+			list = mapper.search(u);
+
+		}
+		return list;
 	}
 
 	public void insert(Safety u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			SafetyMapper mapper = session.getMapper(SafetyMapper.class);
-			mapper.insert(u);
-			session.commit();
-			JsfUtil.showMessage("Inserimento eseguito");
+			if (search(u).size() == 0) {
+				mapper.insert(u);
+				session.commit();
+				JsfUtil.showMessage("Inserimento eseguito");
+			}
 		}
 	}
 
@@ -56,6 +70,7 @@ public class SafetyDAO {
 			t.printStackTrace();
 		}
 	}
+
 	public void updateGeneral(Safety u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
@@ -81,8 +96,7 @@ public class SafetyDAO {
 //
 //	}
 	public void save(Safety s) {
-		
-		
+
 		if (s.getId() == 0) {
 
 			insert(s);

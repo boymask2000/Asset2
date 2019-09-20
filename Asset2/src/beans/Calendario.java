@@ -1,6 +1,12 @@
 package beans;
 
-public class Calendario {
+import java.io.Serializable;
+
+public class Calendario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String data;
 	private int interventi;
 	private String lavorativo = "Y";

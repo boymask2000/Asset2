@@ -16,12 +16,13 @@ public interface SafetyMapper {
 	final String SELECT_BY_FAMILY = "SELECT * FROM " + TABELLA + " WHERE familyid = #{id}";
 
 	final String INSERT = "INSERT INTO  " + TABELLA + //
-			"  (familyid ,risk_en, risk_it, ppe_en, ppe_it ) VALUES (#{familyid}, #{risk_en}, #{risk_it}, #{ppe_en}, #{ppe_it} )";
+			"  (familyid ,risk_en, risk_it, ppe_en, ppe_it, imgId ) VALUES (#{familyid}, #{risk_en}, #{risk_it}, #{ppe_en}, #{ppe_it}, #{imgId} )";
 
 	final String UPDATE = "UPDATE " + TABELLA + " set " //
 			+ "familyid=#{familyid}, " //
 			+ "risk_en=#{risk_en}, " //
 			+ "risk_it=#{risk_it}, " //
+			+ "imgId=#{imgId}, " //
 			+ "ppe_en=#{ppe_en}, " //
 			+ "ppe_it=#{ppe_it} " //
 
@@ -31,6 +32,7 @@ public interface SafetyMapper {
 			+ "familyid=#{familyid}, " //
 			+ "risk_en=#{risk_en}, " //
 			+ "risk_it=#{risk_it}, " //
+			+ "imgId=#{imgId}, " //
 			+ "ppe_en=#{ppe_en}, " //
 			+ "ppe_it=#{ppe_it} " //
 

@@ -7,6 +7,7 @@ public class Safety {
 	private String risk_it;
 	private String ppe_en;
 	private String ppe_it;
+	private int imgId;
 
 	public long getId() {
 		return id;
@@ -54,6 +55,14 @@ public class Safety {
 
 	public void setPpe_it(String ppe_it) {
 		this.ppe_it = ppe_it;
+	}
+
+	public int getImgId() {
+		return imgId;
+	}
+
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
 	}
 
 

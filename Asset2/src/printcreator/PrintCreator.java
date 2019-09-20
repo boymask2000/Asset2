@@ -63,14 +63,11 @@ public class PrintCreator {
 
 		buffer.append("<fo:page-sequence master-reference=\"" + pf.getName() + "\">");
 
-//		buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
-//		buffer.append("   <fo:block text-align=\"center\">");
-//				buffer.append("      Page <fo:page-number/>");
-//						buffer.append("     </fo:block>");
-//								buffer.append("   </fo:static-content>");
-//		
-//		
-//		
+		buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
+		buffer.append("   <fo:block text-align=\"center\">");
+		buffer.append("      Page <fo:page-number/>");
+		buffer.append("     </fo:block>");
+		buffer.append("   </fo:static-content>");		
 
 		buffer.append("<fo:flow flow-name=\"xsl-region-body\">");
 		startedPageSequence = true;

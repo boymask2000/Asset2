@@ -120,7 +120,7 @@ public class PrintCommon extends PrintCreator {
 				t = new Table();
 				t.setHeader(false);
 				t.addColumnDefinition(new Column("", "4cm"));
-				t.addColumnDefinition(new Column("", "15cm"));
+				t.addColumnDefinition(new Column("", "12cm"));
 
 				t.startRow();
 				t.addDataCol(Util.getLocalizedString("CODICE_NORMATIVA") + ":");

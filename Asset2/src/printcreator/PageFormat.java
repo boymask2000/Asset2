@@ -29,6 +29,7 @@ public class PageFormat {
 		buffer.append(" margin-left=\"" + margin_left + "\" ");
 		buffer.append(" margin-right=\"" + margin_right + "\"> ");
 		buffer.append("<fo:region-body />");
+		buffer.append("<fo:region-after extent=\"1.5cm\"/>");
 		buffer.append("</fo:simple-page-master> ");
 		return buffer;
 	}

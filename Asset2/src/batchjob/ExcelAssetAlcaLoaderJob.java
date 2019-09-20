@@ -125,6 +125,9 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 
 				if (cell == null)
 					return null;
+				cell.setCellType(Cell.CELL_TYPE_STRING);
+			//	System.out.println(cell.getStringCellValue());
+				System.out.println(cell.toString());
 				return cell.toString();
 			}
 

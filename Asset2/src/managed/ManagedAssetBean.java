@@ -26,8 +26,8 @@ public class ManagedAssetBean {
 	private List<AssetAlca> searchResult = null;
 
 	private int stat[] = new int[10];
-	
-	public String test( String d ) {
+
+	public String test(String d) {
 		System.out.println(d);
 		return d;
 	}
@@ -100,7 +100,7 @@ public class ManagedAssetBean {
 			inte = intDao.getUltimoInterventoFatto(selectedAsset.getId());
 		else
 			inte = mib.getSelectedIntevento();
-		
+
 		if (inte == null)
 			inte = intDao.getUltimoInterventoFatto(selectedAsset.getId());
 		if (inte != null)
@@ -113,7 +113,8 @@ public class ManagedAssetBean {
 			return searchResult;
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
 		List<AssetAlca> ll = assetDAO.selectAll();
-		if( ll.size()>0)selectedAsset=ll.get(0);
+		if (selectedAsset == null && ll.size() > 0)
+			selectedAsset = ll.get(0);
 		return ll;
 	}
 

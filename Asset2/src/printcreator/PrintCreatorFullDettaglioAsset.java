@@ -25,7 +25,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 		// ********************************PersonalData
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");
-	//	prt.dump();
+		// prt.dump();
 
 		prt.addBlock("Info asset", "20pt");
 		stampaMainData(prt, db);
@@ -33,14 +33,15 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 		prt.endPageSequence();
 		// ********************************
 		prt.startPageSequence(null);
+		prt.addImage("resources/images/alca.gif");
 		prt.addBlock("Ultimo aggiornamento", "20pt");
 		stampaUltimoIntervento(prt, db);
 		prt.endPageSequence();
 		// ********************************
-		prt.startPageSequence(null);
-		prt.addBlock("Interventi", "20pt");
+		// prt.startPageSequence(null);
+		// prt.addBlock("Interventi", "20pt");
 		stampaInterventi(prt, db);
-		prt.endPageSequence();
+		// prt.endPageSequence();
 		// ********************************
 
 		prt.insertFineDoc();
@@ -69,7 +70,11 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> li = dao.getInterventiForAsset(asset.getId());
 		for (Intervento inter : li) {
+			prt.startPageSequence(null);
+			prt.addImage("resources/images/alca.gif");
+			prt.addBlock("", "20pt");
 			stampaIntervento(prt, inter);
+			prt.endPageSequence();
 		}
 
 	}
@@ -92,6 +97,5 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 
 		prt.addtable(t);
 	}
-
 
 }

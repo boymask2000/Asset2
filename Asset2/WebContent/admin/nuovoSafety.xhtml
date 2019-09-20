@@ -30,7 +30,7 @@
 								<td><p:inputTextarea rows="3" cols="50"
 										value="#{managedSafetyBean.selectedSafety.risk_en}" /></td>
 							</tr>
-							
+
 							<tr>
 								<td><h:outputText value="PPE IT" /></td>
 								<td><h:outputText value="PPE US" /></td>
@@ -43,19 +43,190 @@
 								<td><p:inputTextarea rows="3" cols="50"
 										value="#{managedSafetyBean.selectedSafety.ppe_en}" /></td>
 							</tr>
-							
+
 
 						</table>
+
+
+<h:outputText value="Selezionare il RISK-PPE"  rendered="#{managedSafetyBean.selectedImageNum==0}" styleClass="ui-priority-primary"/>
+
+
+						<h:panelGrid columns="3">
+						
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(1)}" />
+									<p:graphicImage url="/resources/images/risk/risk_1.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_1.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected1}"
+										itemLabel="#{managedSafetyBean.getPPELabel(1)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(1)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(2)}" />
+									<p:graphicImage url="/resources/images/risk/risk_2.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_2.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected2}"
+										itemLabel="#{managedSafetyBean.getPPELabel(2)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(2)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(3)}" />
+									<p:graphicImage url="/resources/images/risk/risk_3.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_3.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected3}"
+										itemLabel="#{managedSafetyBean.getPPELabel(3)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(3)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(4)}" />
+									<p:graphicImage url="/resources/images/risk/risk_4.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_4.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected4}"
+										itemLabel="#{managedSafetyBean.getPPELabel(4)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(4)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(5)}" />
+									<p:graphicImage url="/resources/images/risk/risk_5.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_5.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected5}"
+										itemLabel="#{managedSafetyBean.getPPELabel(5)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(5)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(6)}" />
+									<p:graphicImage url="/resources/images/risk/risk_6.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_6.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected6}"
+										itemLabel="#{managedSafetyBean.getPPELabel(6)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(6)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(7)}" />
+									<p:graphicImage url="/resources/images/risk/risk_7.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_7.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected7}"
+										itemLabel="#{managedSafetyBean.getPPELabel(7)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(7)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(8)}" />
+									<p:graphicImage url="/resources/images/risk/risk_8.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_8.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected8}"
+										itemLabel="#{managedSafetyBean.getPPELabel(8)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(8)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(9)}" />
+									<p:graphicImage url="/resources/images/risk/risk_9.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_9.jpg" />
+									<p:selectBooleanCheckbox value="#{managedSafetyBean.selected9}"
+										itemLabel="#{managedSafetyBean.getPPELabel(9)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(9)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(10)}" />
+									<p:graphicImage url="/resources/images/risk/risk_10.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_10.jpg" />
+									<p:selectBooleanCheckbox
+										value="#{managedSafetyBean.selected10}"
+										itemLabel="#{managedSafetyBean.getPPELabel(10)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(10)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(11)}" />
+									<p:graphicImage url="/resources/images/risk/risk_11.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_11.jpg" />
+									<p:selectBooleanCheckbox
+										value="#{managedSafetyBean.selected11}"
+										itemLabel="#{managedSafetyBean.getPPELabel(11)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(11)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel style="text-align:center">
+								<h:panelGrid columns="4">
+									<h:outputText value="#{managedSafetyBean.getRiskLabel(12)}" />
+									<p:graphicImage url="/resources/images/risk/risk_12.jpg" />
+									<p:graphicImage url="/resources/images/ppe/ppe_12.jpg" />
+									<p:selectBooleanCheckbox
+										value="#{managedSafetyBean.selected12}"
+										itemLabel="#{managedSafetyBean.getPPELabel(12)}">
+										<p:ajax update="@form"
+											listener="#{managedSafetyBean.setSelectedImageNum(12)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+						</h:panelGrid>
+
+
+
+
+
 						<h:panelGroup id="postPanel2">
-							<h:commandButton value="ok" id="ajasx"
+							<h:commandButton value="ok" id="ajasx" disabled="#{managedSafetyBean.selectedImageNum==0}"
 								actionListener="#{managedSafetyBean.insertSafety}"
 								update="growl1" styleClass="ui-priority-primary" />
 
 
-							<p:commandButton action="safetyHome" value="#{msg['ESCI']}" process="@this" />
+							<p:commandButton action="safetyHome" value="#{msg['ESCI']}"
+								process="@this" />
 						</h:panelGroup>
 					</p:panel>
-					
+
 				</h:form>
 
 			</p:panel>

@@ -222,6 +222,11 @@
 		<managed-bean-class>printcreator.PrintCreatorIntervento</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedAuditBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedAuditBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

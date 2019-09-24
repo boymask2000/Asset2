@@ -7,41 +7,41 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.primefaces.json.JSONObject;
 
-import com.google.gson.Gson;
-
 import beans.AssetAlca;
+import beans.Audit;
 import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
 import beans.Intervento;
 import beans.Safety;
 import database.dao.AssetAlcaDAO;
+import database.dao.AuditDAO;
 import database.dao.ChecklistInterventiDAO;
 import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
 import database.dao.SafetyDAO;
 import restservice.beans.InterventoRestBean;
+import restservice.beans.Messaggio;
 
 @Path("/intervento")
 public class InterventoRest {
-	
+
 	@GET
 	@Path("/getpreviousassets/{date}")
 	public List<AssetAlca> getPreviousInteAssets(@PathParam("date") String date) {
 		InterventiDAO dao = new InterventiDAO();
 		return dao.getPreviousInteAssets(date);
 	}
-	
+
 	@GET
 	@Path("/getprevious/{date}")
 	public Integer getPreviousInte(@PathParam("date") String date) {
 		InterventiDAO dao = new InterventiDAO();
-		
+
 		return dao.getPreviousInte(date);
 	}
 
@@ -52,7 +52,7 @@ public class InterventoRest {
 		InterventiDAO dao = new InterventiDAO();
 
 		long id = Long.parseLong(interventoId);
-	
+
 		return dao.getInterventoById(id);
 
 	}
@@ -75,36 +75,47 @@ public class InterventoRest {
 
 		return lista.get(0);
 	}
+
 	@GET
 	@Path("/getsafety/{rfid}")
 	public List<Safety> getSafety(@PathParam("rfid") String family) {
-		
 
-		
 		FamigliaAssetDAO fad = new FamigliaAssetDAO();
 		FamigliaAsset fam = fad.searchByName(family);
 
 		SafetyDAO asdao = new SafetyDAO();
 
 		List<Safety> safety = asdao.selectByFamily(fam.getId());
-		if(safety==null)
+		if (safety == null)
 			safety = asdao.selectByFamily(0);
-		
 
 		return safety;
 	}
 
 	@POST
 	@Path("/updateIntervento")
-	  @Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(InterventoRestBean inter) {
-	
 
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(inter);
 
-		JSONObject object = new JSONObject();
-		return Response.status(200).entity(object.toString()).build();
+		return RestUtil.buildOKResponse();
+	}
+
+	@POST
+	@Path("/cancelOnSafety")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response cancelOnSafety(Messaggio msg) {
+
+		AuditDAO dao = new AuditDAO();
+		Audit audit = new Audit();
+		audit.setAzione(msg.getText());
+		audit.setMsgtype(msg.getMsgType().name());
+		audit.setUsername(msg.getUsername());
+		dao.insert(audit);
+
+		return RestUtil.buildOKResponse();
 	}
 
 	@POST
@@ -125,7 +136,7 @@ public class InterventoRest {
 		u.setData_teorica(null);
 		u.setAssetId(inter.getAssetId());
 		iDao.insert(u);
-	//	System.out.println("ID: " + u.getId());
+		// System.out.println("ID: " + u.getId());
 
 		for (ChecklistIntervento cli : ll) {
 			cli.setInterventoId(u.getId());

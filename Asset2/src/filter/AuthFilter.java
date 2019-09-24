@@ -82,6 +82,8 @@ public class AuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
+//			  String client_ip = request.getRemoteAddr();
+//			  System.out.println(client_ip);
 			// check whether session variable is set
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response;

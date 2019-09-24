@@ -10,13 +10,13 @@ import beans.Audit;
 public interface AuditMapper {
 	final String TABELLA = "test1.audit";
 
-	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
+	final String SELECT_ALL = "SELECT * FROM " + TABELLA +" ORDER BY timestamp DESC";
 
 	final String SELECT_BY_USER = "SELECT * FROM " + TABELLA + " WHERE username = #{username}";
 
 	final String INSERT = "INSERT INTO  " + TABELLA + //
-			"  (username ," + " time ," + " assetId ," + " azione" + " ) " + ""
-			+ "VALUES (#{username}, #{time}, #{assetId}," + " #{azione} )";
+			"  (username , time , assetId ,azione, msgtype ) VALUES " + //
+			" (#{username}, #{time}, #{assetId}, #{azione}, #{msgtype} )";
 
 	@Select(SELECT_ALL)
 	public List<Audit> selectAll();

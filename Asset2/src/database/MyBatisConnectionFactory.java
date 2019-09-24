@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import database.mapper.AssetAlcaMapper;
+import database.mapper.AuditMapper;
 import database.mapper.CalendarioMapper;
 import database.mapper.ChecklistInterventoMapper;
 import database.mapper.ChecklistMapper;
@@ -60,6 +61,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(RitardiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(SafetyMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(AuditMapper.class);
 			}
 			
 		}

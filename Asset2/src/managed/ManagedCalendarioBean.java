@@ -37,7 +37,6 @@ public class ManagedCalendarioBean implements Serializable {
 	public void init() {
 		CalendarioDAO dao = new CalendarioDAO();
 		myList = dao.selectAll();
-		System.out.println(myList);
 	}
 
 	public boolean isVuoto() {

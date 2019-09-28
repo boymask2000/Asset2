@@ -40,4 +40,14 @@ public class AuditDAO {
 		}
 		return list;
 	}
+
+	public void delete(Audit u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			AuditMapper mapper = session.getMapper(AuditMapper.class);
+			mapper.delete(u);
+			session.commit();
+		}
+		
+	}
 }

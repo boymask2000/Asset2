@@ -30,7 +30,9 @@
 
 					</h:panelGrid>
 
-
+ <p:commandButton id="toPrint" value="Print" ajax="false">
+        <p:printer target="schedule" />
+    </p:commandButton>
 
 					<p:commandButton process="@this" icon="pi pi-search" value="Home"
 						action="adminHome" />

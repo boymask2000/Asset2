@@ -1,5 +1,5 @@
 package restservice.beans;
 
 public enum MsgType {
-    WARNING
+    WARNING, INFO
 }

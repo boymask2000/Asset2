@@ -27,7 +27,11 @@
 								update="eventDetails" oncomplete="PF('eventDialog').show();" />
 
 						</p:schedule>
-
+<!--  <p:commandButton id="toPrint" value="Print" ajax="false"> -->
+<!--         <p:printer target="schedule" /> -->
+<!--     </p:commandButton> -->
+    <h:commandButton value="#{msg['STAMPA']}"
+							action="#{printCreatorSchedule.printSchedule}" />
 					</p:panel>
 
 

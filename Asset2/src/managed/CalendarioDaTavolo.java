@@ -88,7 +88,6 @@ public class CalendarioDaTavolo {
 
 		cc.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
-		// System.out.println(cc.get(Calendar.DAY_OF_WEEK));
 
 		days.clear();
 		cc.add(Calendar.DAY_OF_MONTH, -dayOne);

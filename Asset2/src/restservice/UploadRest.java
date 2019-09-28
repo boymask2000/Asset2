@@ -60,7 +60,7 @@ public class UploadRest {
 		String uploadDir = "/home/giovanni/Desktop" + File.separator;
 
 		String filename = writeToFile(uploadedInputStream, uploadDir, ".3gp");
-		System.out.println(filename);
+
 //		FotoIntervento foto = new FotoIntervento();
 //		foto.setFilename(filename);
 //		foto.setInterventoId(id);

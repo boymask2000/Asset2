@@ -29,6 +29,7 @@ import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
 
+import common.AnagraficaCampi;
 import common.JsfUtil;
 import common.Pair;
 import common.TempFileFactory;
@@ -39,6 +40,7 @@ public class PrintCreator {
 	private StringBuffer buffer = new StringBuffer();
 	public static PageFormat PORTRAT = new PageFormat("PORTRAT");
 	public static PageFormat LANDSCAPE = new PageFormat("LANDSCAPE");
+	private boolean withPageNumber = true;
 
 	private List<PageFormat> pageFormats = new ArrayList<PageFormat>();
 
@@ -63,12 +65,13 @@ public class PrintCreator {
 
 		buffer.append("<fo:page-sequence master-reference=\"" + pf.getName() + "\">");
 
-		buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
-		buffer.append("   <fo:block text-align=\"center\">");
-		buffer.append("      Page <fo:page-number/>");
-		buffer.append("     </fo:block>");
-		buffer.append("   </fo:static-content>");		
-
+		if (isWithPageNumber()) {
+			buffer.append(" <fo:static-content flow-name=\"xsl-region-after\">");
+			buffer.append("   <fo:block text-align=\"center\">");
+			buffer.append("      Page <fo:page-number/>");
+			buffer.append("     </fo:block>");
+			buffer.append("   </fo:static-content>");
+		}
 		buffer.append("<fo:flow flow-name=\"xsl-region-body\">");
 		startedPageSequence = true;
 	}
@@ -99,11 +102,12 @@ public class PrintCreator {
 		buffer.append("</fo:block>");
 
 	}
+
 	public void startBlock() {
 		buffer.append("<fo:block >");
 
-
 	}
+
 	public void endBlock() {
 
 		buffer.append("</fo:block>");
@@ -133,8 +137,25 @@ public class PrintCreator {
 		buffer.append(s);
 		buffer.append("</fo:block>");
 
-		buffer.append("<fo:block text-align=\"right\">");
-		buffer.append(TimeUtil.getTimestamp());
+//		buffer.append("<fo:block text-align=\"right\">");
+//		buffer.append(TimeUtil.getTimestamp());
+//		buffer.append("</fo:block>");
+
+	}
+
+	public void addImage(String url, int w, int h) {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String urls = request.getRequestURL().toString();
+		String baseURL = urls.substring(0, urls.length() - request.getRequestURI().length()) + request.getContextPath()
+				+ "/";
+		String full = baseURL + url;
+
+		String s = "<fo:external-graphic  width=\"" + w + "pt\" content-height=\"" + h + "pt\"" + " content-width=\""
+				+ w + "pt\"  src=\"url('" + full + "')\"/>";
+
+		buffer.append("<fo:block >");
+		buffer.append(s);
 		buffer.append("</fo:block>");
 
 	}
@@ -228,30 +249,45 @@ public class PrintCreator {
 			for (Field f : ll) {
 				String name = f.getName();
 				String type = f.getType().getName();
-
-				if (name.equals("id"))
-					continue;
+				// System.out.println(name + " " + type);
+//				if (name.equals("id"))
+//					continue;
 				if (name.equals("n"))
 					continue;
-				if (!type.equals("int") && !type.equals("java.lang.String") && !type.equals("java.util.Date"))
+				if (!type.equals("long") && !type.equals("int") && !type.equals("java.lang.String")
+						&& !type.equals("java.util.Date"))
 					continue;
 
 				String methodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
-				Method meth = bean.getClass().getDeclaredMethod(methodName, null);
+				try {
+					Method meth = bean.getClass().getDeclaredMethod(methodName, null);
 
-				Object val = meth.invoke(bean, null);
+					Object val = meth.invoke(bean, null);
 
-				if (val == null)
-					val = "";
-				if (val instanceof Date)
-					val = TimeUtil.getCurrentDate((Date) val);
-				lista.add(new Pair(name, val, type));
+					if (val == null)
+						val = "";
+					if (val instanceof Date)
+						val = TimeUtil.getCurrentDate((Date) val);
+					String nameLoc = AnagraficaCampi.getLocalizedField(name);
+					val = AnagraficaCampi.getLocalizedVal(name, val);
+
+					lista.add(new Pair(nameLoc, val, type));
+				} catch (NoSuchMethodException r) {
+				}
 			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	public boolean isWithPageNumber() {
+		return withPageNumber;
+	}
+
+	public void setWithPageNumber(boolean withPageNumber) {
+		this.withPageNumber = withPageNumber;
 	}
 
 }

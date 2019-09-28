@@ -24,13 +24,15 @@ public class ManagedStrategicBean {
 	@PostConstruct
 	public void init() {
 		eventModel = new DefaultScheduleModel();
-	//	ManagedReportInterventiBean mrib = (ManagedReportInterventiBean) JsfUtil.getBean("managedReportInterventiBean");
-		
-		ManagedRicercaInterventiBean bean = (ManagedRicercaInterventiBean) JsfUtil.getBean("managedRicercaInterventiBean");
-	RicercaInterventiBean 	mrib=bean.getRicercaInterventiBean();
+		// ManagedReportInterventiBean mrib = (ManagedReportInterventiBean)
+		// JsfUtil.getBean("managedReportInterventiBean");
+
+		ManagedRicercaInterventiBean bean = (ManagedRicercaInterventiBean) JsfUtil
+				.getBean("managedRicercaInterventiBean");
+		RicercaInterventiBean mrib = bean.getRicercaInterventiBean();
 		if (mrib != null) {
 			String s_startDate = mrib.getStartDate();
-			if (s_startDate == null) {
+			if (s_startDate == null || s_startDate.trim().length() == 0) {
 				startDate = new Date();
 				mrib.setStartDate(TimeUtil.getCurrentDate());
 				Date d1 = TimeUtil.getNextDate(startDate, 30);
@@ -42,38 +44,82 @@ public class ManagedStrategicBean {
 			List<Intervento> ll = bean.getInterventi();
 
 			for (Intervento inter : ll) {
-				DefaultScheduleEvent evt = new DefaultScheduleEvent();
+				
 
 				String rmp = inter.getRpieIdIndividual();
 				String sdata = inter.getData_effettiva();
 				if (sdata == null) {
-				//	evt.setStyleClass("ff");
+					// evt.setStyleClass("ff");
 					sdata = inter.getData_pianificata();
 				}
 
 				Date d = TimeUtil.getCurrentStringDate(sdata);
+				
+				DefaultScheduleEvent evt = new DefaultScheduleEvent();
 				evt.setStartDate(d);
 				evt.setEndDate(d);
 				evt.setTitle(rmp);
 				evt.setData(inter);
 				eventModel.addEvent(evt);
-			//	new DefaultScheduleEvent(rmp, d, d));
+				// new DefaultScheduleEvent(rmp, d, d));
 
 			}
 		}
-
-		// eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
-		// previousDay8Pm(), previousDay8Pm()));
 	}
 	
+	public void init_old() {
+		eventModel = new DefaultScheduleModel();
+		// ManagedReportInterventiBean mrib = (ManagedReportInterventiBean)
+		// JsfUtil.getBean("managedReportInterventiBean");
 
+		ManagedRicercaInterventiBean bean = (ManagedRicercaInterventiBean) JsfUtil
+				.getBean("managedRicercaInterventiBean");
+		RicercaInterventiBean mrib = bean.getRicercaInterventiBean();
+		if (mrib != null) {
+			String s_startDate = mrib.getStartDate();
+			if (s_startDate == null || s_startDate.trim().length() == 0) {
+				startDate = new Date();
+				mrib.setStartDate(TimeUtil.getCurrentDate());
+				Date d1 = TimeUtil.getNextDate(startDate, 30);
+				String sd1 = TimeUtil.getCurrentDate(d1);
+				mrib.setEndDate(sd1);
+			} else
+				startDate = TimeUtil.getCurrentStringDate(s_startDate);
+
+			List<Intervento> ll = bean.getInterventi();
+
+			for (Intervento inter : ll) {
+				
+
+				String rmp = inter.getRpieIdIndividual();
+				String sdata = inter.getData_effettiva();
+				if (sdata == null) {
+					// evt.setStyleClass("ff");
+					sdata = inter.getData_pianificata();
+				}
+
+				Date d = TimeUtil.getCurrentStringDate(sdata);
+				
+				DefaultScheduleEvent evt = new DefaultScheduleEvent();
+				evt.setStartDate(d);
+				evt.setEndDate(d);
+				evt.setTitle(rmp);
+				evt.setData(inter);
+				eventModel.addEvent(evt);
+				// new DefaultScheduleEvent(rmp, d, d));
+
+			}
+		}
+	}
 
 	public ScheduleModel getEventModel() {
 		return eventModel;
 	}
+
 	public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
-    }
+		event = (ScheduleEvent) selectEvent.getObject();
+	}
+
 	public void setEventModel(ScheduleModel eventModel) {
 		this.eventModel = eventModel;
 	}
@@ -95,4 +141,3 @@ public class ManagedStrategicBean {
 	}
 
 }
-

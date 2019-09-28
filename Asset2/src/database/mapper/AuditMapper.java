@@ -2,6 +2,7 @@ package database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,6 +18,8 @@ public interface AuditMapper {
 	final String INSERT = "INSERT INTO  " + TABELLA + //
 			"  (username , time , assetId ,azione, msgtype ) VALUES " + //
 			" (#{username}, #{time}, #{assetId}, #{azione}, #{msgtype} )";
+	
+	final String DELETE = "DELETE FROM " + TABELLA + " WHERE ID = #{id}";
 
 	@Select(SELECT_ALL)
 	public List<Audit> selectAll();
@@ -26,5 +29,8 @@ public interface AuditMapper {
 
 	@Insert(INSERT)
 	public void insert(Audit contact);
+
+	@Delete(DELETE)
+	public void delete(Audit u);
 
 }

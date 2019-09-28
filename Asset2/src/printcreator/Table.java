@@ -38,13 +38,24 @@ public class Table {
 	// buffer.append("<fo:table-body>\n" + "<fo:table-row>");
 	// }
 
+	public void addDataCol(String val, boolean withBorder) {
+		lastCellData = new CellData(val, withBorder);
+		currentRow.add(lastCellData);
+	}
+
+	public void addDataCol(CellData val) {
+		lastCellData = val;
+		currentRow.add(lastCellData);
+	}
+
 	public void addDataCol(String val) {
 		lastCellData = new CellData(val);
 		currentRow.add(lastCellData);
-		/*
-		 * buffer.append(" <fo:table-cell>\n" + "<fo:block>\n"); buffer.append(val);
-		 * buffer.append("</fo:block>\n" + "</fo:table-cell>\n");
-		 */
+	}
+
+	public void addDataCol(Table t) {
+		lastCellData = new CellData(t.getBuffer().toString());
+		currentRow.add(lastCellData);
 	}
 
 	public void setBackgroundColor(String col) {
@@ -67,13 +78,18 @@ public class Table {
 		for (List<CellData> row : rows) {
 			buffer.append("<fo:table-row>");
 			for (CellData cd : row) {
+				if (cd.getFontSize() != 0)
+					fontSize = cd.getFontSize();
 				String ss = cd.getValue();
 				buffer.append("<fo:table-cell ");
 				if (cd.getBackgroundColor() != null)
 					buffer.append(" background-color=\"" + cd.getBackgroundColor() + "\"");
+
 				if (cd.getAlign() != null)
 					buffer.append(" text-align=\"" + cd.getAlign() + "\"");
-				buffer.append(" border-style=\"solid\" border-color=\"black\" border-width=\"1pt\">");
+				if (cd.isWithBorder())
+					buffer.append(" border-style=\"solid\" border-color=\"black\" border-width=\"1pt\"");
+				buffer.append(">");
 				buffer.append("<fo:block linefeed-treatment=\"preserve\" font-size=\"" + fontSize
 						+ "pt\" font-family=\"Helvetica\">");
 				buffer.append(ss);
@@ -109,14 +125,6 @@ public class Table {
 	public void setHeader(boolean b) {
 		hasHeader = b;
 
-	}
-
-	public int getFontSize() {
-		return fontSize;
-	}
-
-	public void setFontSize(int fontSize) {
-		this.fontSize = fontSize;
 	}
 
 	public int getHeaderFontSize() {

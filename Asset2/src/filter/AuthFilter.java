@@ -64,6 +64,7 @@ public class AuthFilter implements Filter {
 		String dir = backupDir + "images";
 		File fDir = new File(dir);
 		String[] lista = fDir.list();
+		if(lista==null)return;
 		for (int i = 0; i < lista.length; i++) {
 			String file = dir + File.separator + lista[i];
 			Path copied = Paths.get(uploadDir + lista[i]);

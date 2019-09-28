@@ -50,7 +50,7 @@ public class ManagedSafetyBean implements Serializable {
 	private List<Integer> images = new ArrayList<Integer>();
 
 	public void setImg(int id) {
-		System.out.println(id);
+
 	}
 
 	List<Safety> myList = null;
@@ -192,11 +192,9 @@ public class ManagedSafetyBean implements Serializable {
 
 	public void setSelectedImageNum(int selectedImageNum) {
 		this.selectedImageNum = selectedImageNum;
-		System.out.println(selectedImageNum);
 	}
 
 	public boolean isSelected(int v) {
-		System.out.println(v + " " + (v == selectedImageNum));
 		return v == selectedImageNum;
 	}
 

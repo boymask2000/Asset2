@@ -20,10 +20,10 @@ public class TimeUtil {
 
 	}
 
-	public String getTime() {
+	public static String getTime() {
 		Date date = new Date();
 
-		time = sdf.format(date.getTime());
+		String time = sdf.format(date.getTime());
 		return time;
 	}
 
@@ -60,12 +60,19 @@ public class TimeUtil {
 
 		return date1;
 	}
-	public static Date getNextDate(Date d, int ndays ) {
+
+	public static Date getNextDate(Date d, int ndays) {
 		Calendar c = new GregorianCalendar();
 		c.setTime(d);
 		c.add(Calendar.DAY_OF_MONTH, ndays);
 		return c.getTime();
-		
+
+	}
+
+	public static Calendar getCalendar(Date d) {
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+		return c;
 	}
 
 	public static final int FORMAT_CANONICAL = 0;
@@ -85,24 +92,36 @@ public class TimeUtil {
 		}
 
 	}
-	
+
 	public String getLocalizedDate(String d) {
 		return getFormattedDate(d);
 	}
 
 	public static String getFormattedDate(String d) {
-		if(d==null || d.length()!=8)return d;
+		if (d == null || d.length() != 8)
+			return d;
 		LanguageBean lb = (LanguageBean) JsfUtil.getBean("language");
 		String loc = lb.getCurrentLocale();
 		switch (loc) {// AAAAMMGG
-		case "en"://MMGGAAAA
-			return d.substring(4,6)+"/"+d.substring(6,8)+"/"+d.substring(0,4);
-		case "it"://GGMMAAAA
-			return d.substring(6,8)+"/"+d.substring(4,6)+"/"+d.substring(0,4);
+		case "en":// MMGGAAAA
+			return d.substring(4, 6) + "/" + d.substring(6, 8) + "/" + d.substring(0, 4);
+		case "it":// GGMMAAAA
+			return d.substring(6, 8) + "/" + d.substring(4, 6) + "/" + d.substring(0, 4);
 		default:
 			break;
-		
+
 		}
 		return d;
+	}
+
+	public static String getLocalizedMese(Calendar cal, String locale) {
+
+		String mesiIT[] = { "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto",
+				"Settembre", "Ottobre", "Novembre", "Dicembre" };
+		String mesiEN[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		int mese = cal.get(Calendar.MONTH);
+		if( locale.equalsIgnoreCase("it"))return mesiIT[mese];
+		return mesiEN[mese];
 	}
 }

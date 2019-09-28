@@ -32,15 +32,16 @@ public class PlannerJob extends GenericJob {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
-			//	cleanInterventiCalendario();
+	//		cleanInterventiCalendario();
 
 				int count = 0;
 				AssetAlcaDAO assetDao = new AssetAlcaDAO();
 				List<AssetAlca> allAssets = assetDao.selectAll();
 				for (AssetAlca as : allAssets) {
-					queue.put(count + " / " + allAssets.size());
+					
 					count++;
-
+					queue.put(count + " / " + allAssets.size());
+					
 					String famiglia = as.getFacSystem();
 					FamigliaAssetDAO fad = new FamigliaAssetDAO();
 					FamigliaAsset f = fad.searchByName(famiglia);
@@ -51,7 +52,7 @@ public class PlannerJob extends GenericJob {
 					for (Check check : checks) {
 						makePlan(as.getId(), check);
 					}
-
+					
 				}
 				return count;
 			}

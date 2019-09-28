@@ -43,6 +43,11 @@ public class ManagedAuditBean extends ABaseBean  implements Serializable {
 			selectedAudit = new Audit();
 		return selectedAudit;
 	}
+	
+	public void setDeleteSelected( Audit u ) {
+		AuditDAO dao = new AuditDAO();
+		dao.delete(u);
+	}
 
 	public void setSelectedAudit(Audit selectedManuale) {
 		this.selectedAudit = selectedManuale;

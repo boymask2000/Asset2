@@ -26,6 +26,7 @@ import database.dao.InterventiDAO;
 import database.dao.SafetyDAO;
 import restservice.beans.InterventoRestBean;
 import restservice.beans.Messaggio;
+import restservice.beans.MsgType;
 
 @Path("/intervento")
 public class InterventoRest {
@@ -99,8 +100,32 @@ public class InterventoRest {
 
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(inter);
+		
+		sendMessaggioInte(inter);
 
 		return RestUtil.buildOKResponse();
+	}
+
+	private static void sendMessaggioInte(InterventoRestBean inter) {
+		
+		AssetAlca ass=new AssetAlca();
+		ass.setId(inter.getAssetId());
+		AssetAlcaDAO assDao = new AssetAlcaDAO();
+		AssetAlca asset =assDao.searchById(ass);
+		
+		Messaggio msg=new Messaggio();
+		msg.setMsgType(MsgType.INFO);
+		msg.setUsername(inter.getUser());
+		msg.setText("Completato intervento su asset "+asset.getRpieIdIndividual());
+		sendMessaggio(msg);
+	}
+	private static void sendMessaggio( Messaggio msg) {
+		AuditDAO dao = new AuditDAO();
+		Audit audit = new Audit();
+		audit.setAzione(msg.getText());
+		audit.setMsgtype(msg.getMsgType().name());
+		audit.setUsername(msg.getUsername());
+		dao.insert(audit);
 	}
 
 	@POST
@@ -108,12 +133,7 @@ public class InterventoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cancelOnSafety(Messaggio msg) {
 
-		AuditDAO dao = new AuditDAO();
-		Audit audit = new Audit();
-		audit.setAzione(msg.getText());
-		audit.setMsgtype(msg.getMsgType().name());
-		audit.setUsername(msg.getUsername());
-		dao.insert(audit);
+		sendMessaggio( msg); 
 
 		return RestUtil.buildOKResponse();
 	}
@@ -121,9 +141,6 @@ public class InterventoRest {
 	@POST
 	@Path("/creaIntervento")
 	public Response crea(InterventoRestBean inter) {
-		System.out.println("creaIntervento ricevuto " + inter);
-		System.out.println(inter.getId());
-		System.out.println(inter.getData_pianificata());
 
 		Intervento u = new Intervento();
 		u.setId(inter.getId());
@@ -136,7 +153,6 @@ public class InterventoRest {
 		u.setData_teorica(null);
 		u.setAssetId(inter.getAssetId());
 		iDao.insert(u);
-		// System.out.println("ID: " + u.getId());
 
 		for (ChecklistIntervento cli : ll) {
 			cli.setInterventoId(u.getId());

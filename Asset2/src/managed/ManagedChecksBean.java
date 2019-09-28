@@ -36,39 +36,44 @@ public class ManagedChecksBean implements Serializable {
 		myList = dao.selectAll();
 		return myList;
 	}
+
 	public void onCellEdit(CellEditEvent event) {
 //		String oldValue = (String) event.getOldValue();
 //		Object newValue = event.getNewValue();
-	
-		
-		DataTable table = (DataTable) event.getSource();
-        Check saf = (Check) table.getRowData();
 
-        ChecksDAO dao = new ChecksDAO();
-        dao.update(saf);
+		DataTable table = (DataTable) event.getSource();
+		Check saf = (Check) table.getRowData();
+
+		ChecksDAO dao = new ChecksDAO();
+		dao.update(saf);
 //		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
 //				"Old: " + oldValue + ", New:" + newValue);
 //		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
+
 	public List<Check> getAllChecksForFamily() {
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
 		FamigliaAsset fam = mfb.getSelectedFamiglia();
 		ChecksDAO dao = new ChecksDAO();
-	if( myList==null || myList.size()==0) {
+
+		if (fam.getId() != 0)
+			myList = dao.getChecksByFamilyId(fam.getId());
+
 		if (fam.getId() == 0) {
 
 			myList = dao.selectAll();
 			return myList;
 		}
-		myList= dao.getChecksByFamilyId(fam.getId());
+
+		return myList;
 	}
-	return myList;
-	}
+
 	public void setFamiglia(FamigliaAsset n) {
-		myList=null;
-		
+		myList = null;
+
 	}
+
 	public void aggiungi() {
 
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
@@ -138,5 +143,5 @@ public class ManagedChecksBean implements Serializable {
 		this.multiSelect = multiSelect;
 
 	}
-	
+
 }

@@ -7,6 +7,7 @@ import beans.AssetAlca;
 import beans.Intervento;
 import common.JsfUtil;
 import common.Pair;
+import common.Util;
 import database.dao.InterventiDAO;
 import managed.ManagedAssetBean;
 
@@ -34,7 +35,7 @@ public class PrintCreatorFullDettaglioAsset extends PrintCommon {
 		// ********************************
 		prt.startPageSequence(null);
 		prt.addImage("resources/images/alca.gif");
-		prt.addBlock("Ultimo aggiornamento", "20pt");
+		prt.addBlock(Util.getLocalizedString("ULTIMO_AGGIORNAMENTO"), "20pt");
 		stampaUltimoIntervento(prt, db);
 		prt.endPageSequence();
 		// ********************************

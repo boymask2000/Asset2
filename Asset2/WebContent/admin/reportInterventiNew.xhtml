@@ -42,18 +42,18 @@
 							<tr>
 								<td><h:outputText value="facSystem" /></td>
 								<td><h:inputText
-										value="#{managedRicercaInterventiBean.ricercaInterventiBean.facSystem}" >
-										<p:ajax event="keyup" update="radi00pDT" listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
-										</h:inputText>
-								</td>
+										value="#{managedRicercaInterventiBean.ricercaInterventiBean.facSystem}">
+										<p:ajax event="keyup" update="radi00pDT"
+											listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
+									</h:inputText></td>
 							</tr>
 							<tr>
 								<td><h:outputText value="rpieIdIndividual" /></td>
 								<td><h:inputText
-										value="#{managedRicercaInterventiBean.ricercaInterventiBean.rpieIdIndividual}" >
-										<p:ajax event="keyup" update="radi00pDT" listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
-										</h:inputText>
-										</td>
+										value="#{managedRicercaInterventiBean.ricercaInterventiBean.rpieIdIndividual}">
+										<p:ajax event="keyup" update="radi00pDT"
+											listener="#{managedRicercaInterventiBean.handleKeyEvent}" />
+									</h:inputText></td>
 							</tr>
 						</table>
 
@@ -100,8 +100,11 @@
 						<p:commandButton process="@this" icon="pi pi-search"
 							value="#{msg['ESCI']}" action="adminHome" />
 
+
+
 						<h:commandButton value="#{msg['STAMPA']}"
-							action="#{printCreatorFullDettaglioInterventi.printAll}" />
+							action="#{printCreatorSchedule.printSchedule}" />
+
 					</h:form>
 				</p:panel>
 			</f:view>

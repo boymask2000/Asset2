@@ -22,7 +22,6 @@ public class ManagedRicercaInterventiBean extends ABaseBean implements Serializa
 	public List<Intervento> getInterventi() {
 		InterventiDAO dao = new InterventiDAO();
 		List<Intervento> ll = dao.search(ricercaInterventiBean);
-		System.out.println(ll.size());
 		return ll;
 	}
 

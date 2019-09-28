@@ -35,13 +35,7 @@ public class ManagedLocationBean implements Serializable {
 
 	}
 
-//	public void onRowUnselect(SelectEvent event) {
-//		FacesMessage msg = new FacesMessage(" Unselected", ((Utente) event.getObject()).getUsername());
-//		FacesContext.getCurrentInstance().addMessage(null, msg);
-//		Log.getLogger().debug("select");
-//		System.out.println("onRowUnelect");
-//
-//	}
+
 
 	public void insertLocation() {
 

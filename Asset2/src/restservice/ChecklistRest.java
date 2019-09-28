@@ -40,7 +40,6 @@ public class ChecklistRest {
 	public List<ChecklistIntervento> getChecksForIntervento(@PathParam("interventoId") long interventoId) {
 		ChecklistInterventiDAO dao = new ChecklistInterventiDAO();
 		List<ChecklistIntervento> lista = dao.getChecksForInterventoId(interventoId);
-		System.out.println("inteventoid:"+interventoId+"    getChecksForIntervento num:"+lista.size());
 		return lista;
 	}
 }

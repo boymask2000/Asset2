@@ -57,8 +57,7 @@ public class LanguageBean implements Serializable {
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(loc);
 		
 			locale=loc;
-		} else
-			System.out.println("non trovata " + newLocaleValue);
+		} 
 
 	}
 

@@ -78,7 +78,6 @@ public class AssetAlca implements Serializable{
 		this.pmSchedSerial = pmSchedSerial;
 	}
 	public String getRpieIdIndividual() {
-		System.out.println("Asset: "+rpieIdIndividual);
 		return rpieIdIndividual;
 	}
 	public void setRpieIdIndividual(String rpieIdIndividual) {

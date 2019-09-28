@@ -28,7 +28,7 @@ public class ManagedAssetBean {
 	private int stat[] = new int[10];
 
 	public String test(String d) {
-		System.out.println(d);
+
 		return d;
 	}
 
@@ -51,7 +51,7 @@ public class ManagedAssetBean {
 	}
 
 	public void setSelectedAssetId(long id) {
-		System.out.println("id: " + id);
+	
 
 	}
 

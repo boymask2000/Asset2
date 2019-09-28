@@ -62,6 +62,10 @@
 								<h:outputText value="#{msg['DATA_EFFETTIVA']}" />
 								<h:outputText
 									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_effettiva)}" />
+									
+									<h:outputText value="#{msg['UTENTE']}" />
+								<h:outputText
+									value="#{managedInterventiBean.selectedIntevento.user}" />
 
 							</h:panelGrid>
 

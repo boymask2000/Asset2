@@ -6,10 +6,12 @@ import beans.AssetAlca;
 import beans.Check;
 import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
+import beans.FotoIntervento;
 import beans.Intervento;
 import beans.Normativa;
 import beans.Safety;
 import beans.Status;
+import common.AnagraficaCampi;
 import common.JsfUtil;
 import common.Pair;
 import common.TimeUtil;
@@ -18,6 +20,7 @@ import database.dao.AssetAlcaDAO;
 import database.dao.ChecklistInterventiDAO;
 import database.dao.ChecksDAO;
 import database.dao.FamigliaAssetDAO;
+import database.dao.FotoInterventoDAO;
 import database.dao.NormativeDAO;
 import database.dao.SafetyDAO;
 import managed.LanguageBean;
@@ -142,7 +145,22 @@ public class PrintCommon extends PrintCreator {
 			stampaEsiti(prt, inter);
 			stampaCommento(prt, inter);
 		}
+		stampaFoto(prt, inter.getId());
 		// prt.addtable(t);
+
+	}
+
+	private static void stampaFoto(PrintCreator prt, long interventoId) {
+	
+		FotoInterventoDAO dao = new FotoInterventoDAO();
+		List<FotoIntervento> myList = dao.getFotoPerIntervento(interventoId);
+		prt.endPageSequence();
+		for (FotoIntervento foto : myList) {
+		
+			prt.startPageSequence(null);
+			prt.addImage("resources/images/" + foto.getFilename(), 500,500);
+			prt.endPageSequence();
+		}
 
 	}
 
@@ -233,8 +251,8 @@ public class PrintCommon extends PrintCreator {
 		NormativeDAO dao = new NormativeDAO();
 		Normativa nor = dao.getNormativaPerCodice(cod);
 		t.startRow();
-		t.addDataCol("Frequenza:");
-		t.addDataCol(nor.getFrequenza());
+		t.addDataCol(Util.getLocalizedString("FREQUENZA"));
+		t.addDataCol(AnagraficaCampi.getLocalizedField(nor.getFrequenza()));
 
 	}
 

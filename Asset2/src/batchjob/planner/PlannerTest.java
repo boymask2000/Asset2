@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import batchjob.GenericJob;
-import batchjob.planner.PlannerTest.Item;
 import beans.AssetAlca;
 import beans.Calendario;
 import beans.Check;
@@ -26,40 +25,40 @@ import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
 import database.dao.NormativeDAO;
 
-public class PlannerJob extends GenericJob {
-	@Override
-	public void go() {
+public class PlannerTest {
+	public static void main(String s[]) {
+		PlannerTest p = new PlannerTest();
+		try {
+			p.call();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-		Callable<Integer> callable = new Callable<Integer>() {
+	public Integer call() throws Exception {
+		// cleanInterventiCalendario();
 
-			public Integer call() throws Exception {
-	//		cleanInterventiCalendario();
+		int count = 0;
+		AssetAlcaDAO assetDao = new AssetAlcaDAO();
+		List<AssetAlca> allAssets = assetDao.selectAll();
+		for (AssetAlca as : allAssets) {
 
-				int count = 0;
-				AssetAlcaDAO assetDao = new AssetAlcaDAO();
-				List<AssetAlca> allAssets = assetDao.selectAll();
-				for (AssetAlca as : allAssets) {
-					
-					count++;
-					queue.put(count + " / " + allAssets.size());
-					
-					String famiglia = as.getFacSystem();
-					FamigliaAssetDAO fad = new FamigliaAssetDAO();
-					FamigliaAsset f = fad.searchByName(famiglia);
+			count++;
 
-					ChecksDAO cDao = new ChecksDAO();
-					List<Check> checks = cDao.getChecksByFamilyId(f.getId());
+			String famiglia = as.getFacSystem();
+			FamigliaAssetDAO fad = new FamigliaAssetDAO();
+			FamigliaAsset f = fad.searchByName(famiglia);
 
-					for (Check check : checks) {
-						makePlan(as.getId(), check);
-					}
-					
-				}
-				return count;
+			ChecksDAO cDao = new ChecksDAO();
+			List<Check> checks = cDao.getChecksByFamilyId(f.getId());
+
+			for (Check check : checks) {
+				makePlan(as.getId(), check);
 			}
-		};
-		submit(callable, "Pianificazione interventi");
 
+		}
+		return count;
 	}
 
 	private void makePlan(long assetId, Check check) {
@@ -103,7 +102,7 @@ public class PlannerJob extends GenericJob {
 				cal.add(calType, num);
 			}
 		} catch (Throwable t) {
-		
+
 			t.printStackTrace();
 		}
 	}
@@ -136,7 +135,6 @@ public class PlannerJob extends GenericJob {
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
 		u.setData_teorica(dataTeorica);
-		
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -172,7 +170,7 @@ public class PlannerJob extends GenericJob {
 		Integer start = getNumFromCale(data);
 		if (start != null)
 			out.add(new Item(data, start));
-		for (int i = 1; i <= r; i++) {
+		for (int i = 0; i <= r; i++) {
 			String min = getMinRange(cal, i);
 			String max = getMaxRange(cal, i);
 			Integer numMin = getNumFromCale(min);
@@ -223,7 +221,7 @@ public class PlannerJob extends GenericJob {
 	}
 
 	private static String getMin(Calendar cal, List<Item> lista) {
-	//	System.out.println(cal);
+		System.out.println(cal);
 		String fmtCal = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		Date fmtDate = TimeUtil.getCurrentStringDate(fmtCal);
 
@@ -255,6 +253,7 @@ public class PlannerJob extends GenericJob {
 //			}
 
 		}
+		System.out.println("goodDate="+goodDate);
 		return goodDate;
 	}
 

@@ -58,7 +58,7 @@ public class ManagedSafetyBean implements Serializable {
 	public List<Safety> getAllSafetyForFamily() {
 		SafetyDAO dao = new SafetyDAO();
 
-		if (myList == null)
+	
 			if (famiglia != null)
 				myList = dao.selectByFamily(famiglia.getId());
 			else
@@ -68,12 +68,17 @@ public class ManagedSafetyBean implements Serializable {
 
 	public void resetSelezione() {
 		selectedSafety = null;
+		famiglia=null;
 	}
 
 //
 	public void onRowSelect(SelectEvent event) {
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((Safety) event.getObject()).getId());
+		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+		famiglia=mfab.getSelectedFamiglia();
+		System.out.println("famiglia: "+famiglia.getFamiglia());
 		selectedSafety = (Safety) event.getObject();
+		System.out.println("selectedSafety: "+selectedSafety.getId());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
@@ -86,7 +91,8 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void insertSafety() {
-
+		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+		famiglia=mfab.getSelectedFamiglia();
 //		SafetyDAO dao = new SafetyDAO();
 
 		selectedSafety.setFamilyid(famiglia.getId());

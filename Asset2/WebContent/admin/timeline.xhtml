@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
+
+
+					<p:growl id="msgs" showDetail="true" />
+
+
+					<p:timeline id="timeline" value="#{timeLineManagedBean.model}"
+						height="250px" selectable="#{timeLineManagedBean.selectable}"
+						zoomable="#{timeLineManagedBean.zoomable}"
+						moveable="#{timeLineManagedBean.moveable}"
+						stackEvents="#{timeLineManagedBean.stackEvents}"
+						axisOnTop="#{timeLineManagedBean.axisOnTop}"
+						eventStyle="#{timeLineManagedBean.eventStyle}"
+						showCurrentTime="#{timeLineManagedBean.showCurrentTime}"
+						showNavigation="#{timeLineManagedBean.showNavigation}">
+
+
+					</p:timeline>
+
+
+
+					<p:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="adminHome" />
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

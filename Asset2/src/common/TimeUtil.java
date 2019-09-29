@@ -11,7 +11,7 @@ import managed.LanguageBean;
 public class TimeUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
 	private static final SimpleDateFormat sdfShort = new SimpleDateFormat("yyyyMMdd");
-
+private  String time;
 	public static String getTimestamp() {
 		Date date = new Date();
 
@@ -19,7 +19,7 @@ public class TimeUtil {
 
 	}
 
-	public static String getTime() {
+	public  String getTime() {
 		Date date = new Date();
 
 		String time = sdf.format(date.getTime());
@@ -59,6 +59,7 @@ public class TimeUtil {
 
 		return date1;
 	}
+	
 
 	public static Date getNextDate(Date d, int ndays) {
 		Calendar c = new GregorianCalendar();

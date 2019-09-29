@@ -15,6 +15,8 @@
 		</resource-bundle>
 	</application>
 
+
+
 	<managed-bean>
 		<managed-bean-name>managedCalendarioBean</managed-bean-name>
 		<managed-bean-class>managed.ManagedCalendarioBean</managed-bean-class>
@@ -232,6 +234,24 @@
 		<managed-bean-class>printcreator.PrintCreatorSchedule</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>timeLineManagedBean</managed-bean-name>
+		<managed-bean-class>managed.TimeLineManagedBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+
+
+<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>timeline</from-outcome>
+			<to-view-id>/admin/timeline.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

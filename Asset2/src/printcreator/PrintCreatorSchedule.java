@@ -202,10 +202,10 @@ public class PrintCreatorSchedule extends PrintCommon {
 
 		t.addDataCol(cd);
 
-		cd = new CellData(TimeUtil.getTime());
-		cd.setWithBorder(false);
-		cd.setFontSize(10);
-		t.addDataCol(cd);
+//		cd = new CellData(TimeUtil.getTime());
+//		cd.setWithBorder(false);
+//		cd.setFontSize(10);
+//		t.addDataCol(cd);
 
 		prt.addtable(t);
 	}

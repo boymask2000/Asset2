@@ -24,6 +24,7 @@ import database.mapper.ManualiMapper;
 import database.mapper.NormativeMapper;
 import database.mapper.RitardiMapper;
 import database.mapper.SafetyMapper;
+import database.mapper.TimeLineMapper;
 import database.mapper.UtentiMapper;
 
 
@@ -62,6 +63,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(SafetyMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(AuditMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(TimeLineMapper.class);
 			}
 			
 		}

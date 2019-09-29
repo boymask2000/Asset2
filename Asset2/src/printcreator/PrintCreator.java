@@ -2,10 +2,12 @@ package printcreator;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -162,6 +164,18 @@ public class PrintCreator {
 
 	public void dump() {
 		System.out.println(buffer.toString());
+	}
+	public void dump(String fileName) {
+		try {
+			PrintWriter pw = new PrintWriter(fileName);
+			pw.print(buffer.toString());
+			pw.flush();
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 	public void addImage(byte[] photo) {

@@ -13,6 +13,17 @@ public class Table {
 	private List<List<CellData>> rows = new ArrayList<List<CellData>>();
 	private CellData lastCellData = null;
 
+	public void dump(String s) {
+		int nrow=1;
+		for( List<CellData> row: rows) {
+			System.out.print(s+ " numRow: "+nrow++);
+			System.out.print( " numCell: "+row.size());
+			
+		}
+		
+	}
+
+	
 	public Table() {
 
 	}
@@ -30,6 +41,11 @@ public class Table {
 
 		// buffer.append("<fo:table-body>\n" + "<fo:table-row>");
 	}
+	public void removeLastRow() {
+		int size = rows.size();
+		if( size==0)return;
+		rows.remove(size-1);
+	}
 
 	// public void endRow() {
 	// if (!rowStarted)
@@ -37,7 +53,8 @@ public class Table {
 	// rowStarted = false;
 	// buffer.append("<fo:table-body>\n" + "<fo:table-row>");
 	// }
-
+	
+	
 	public void addDataCol(String val, boolean withBorder) {
 		lastCellData = new CellData(val, withBorder);
 		currentRow.add(lastCellData);

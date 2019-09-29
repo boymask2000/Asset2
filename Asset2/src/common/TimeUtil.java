@@ -11,7 +11,6 @@ import managed.LanguageBean;
 public class TimeUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
 	private static final SimpleDateFormat sdfShort = new SimpleDateFormat("yyyyMMdd");
-	private String time;
 
 	public static String getTimestamp() {
 		Date date = new Date();

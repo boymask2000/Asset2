@@ -6,25 +6,37 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import beans.Intervento;
+import beans.RicercaInterventiBean;
 import beans.Status;
 import common.JsfUtil;
 import common.TimeUtil;
 import managed.LanguageBean;
+import managed.ManagedRicercaInterventiBean;
 import managed.ManagedStrategicBean;
 
 public class PrintCreatorSchedule extends PrintCommon {
 	private static final int CELL_SIZE = 3;
 	private String currentLocale;
+	private String minDateAll;
+	private String maxDateAll;
 
 	public String printSchedule() {
-
+		ManagedRicercaInterventiBean mri = (ManagedRicercaInterventiBean) JsfUtil
+				.getBean("managedRicercaInterventiBean");
 		ManagedStrategicBean msb = (ManagedStrategicBean) JsfUtil.getBean("managedStrategicBean");
+
+		RicercaInterventiBean rib = mri.getRicercaInterventiBean();
+
+		minDateAll = rib.getStartDate();
+		maxDateAll = rib.getEndDate();
+
 		LanguageBean langBean = (LanguageBean) JsfUtil.getBean("language");
 		currentLocale = langBean.getCurrentLocale();
 
@@ -36,12 +48,8 @@ public class PrintCreatorSchedule extends PrintCommon {
 		prt.insertPageFormats();
 
 		// ********************************PersonalData
-		prt.startPageSequence(PrintCreator.LANDSCAPE);
-		prt.addImage("resources/images/alca.gif");
 
 		stampaMainData(prt, msb);
-
-		prt.endPageSequence();
 
 		prt.insertFineDoc();
 
@@ -62,23 +70,52 @@ public class PrintCreatorSchedule extends PrintCommon {
 
 		List<ScheduleEvent> events = model.getEvents();
 
-		DatiEventi de = new DatiEventi();
+		DatiEventiMese de = new DatiEventiMese();
+
+		String maxData = "";
+		String minData = "99999999";
 
 		for (ScheduleEvent event : events) {
 			Intervento inter = (Intervento) event.getData();
 			Date data = event.getStartDate();
+			String sData = TimeUtil.getCurrentDate(data);
+			if (sData.compareToIgnoreCase(minDateAll) < 0)
+				continue;
+			if (sData.compareToIgnoreCase(maxDateAll) > 0)
+				continue;
+			if (sData.compareTo(maxData) > 0)
+				maxData = sData;
+			if (sData.compareTo(minData) < 0)
+				minData = sData;
 			Calendar cal = TimeUtil.getCalendar(data);
 			int mese = cal.get(Calendar.MONTH);
-			if (mese != meseCorrente)
-				continue;
+//			if (mese != meseCorrente)
+//				continue;
+			// System.out.println(sData+ " "+maxData+" "+minData);
 			de.addEvent(data, event);
 
 		}
+		// System.out.println(maxData+" "+minData);
+		Map<String, DatiEventi> allEventiMese = de.getMap();
 
-		Calendar cal = TimeUtil.getCalendar(new Date());
+		for (Entry<String, DatiEventi> e : allEventiMese.entrySet()) {
 
-		cal.add(Calendar.DAY_OF_MONTH, -(cal.get(Calendar.DAY_OF_MONTH) - 1));
+			prt.startPageSequence(PrintCreator.LANDSCAPE);
+			prt.addImage("resources/images/alca.gif");
 
+			stampaCalendarioMese(e.getKey(), e.getValue(), prt);
+
+			prt.endPageSequence();
+		}
+
+	}
+
+	private void stampaCalendarioMese(String annoMese, DatiEventi de, PrintCreator prt) {
+		String sminData = annoMese + "01";
+		Date startDate = TimeUtil.getCurrentStringDate(sminData);
+
+		Calendar cal = TimeUtil.getCalendar(startDate);
+		boolean setRow = false;
 		printMese(prt, cal);
 
 		Table t = new Table();
@@ -92,6 +129,8 @@ public class PrintCreatorSchedule extends PrintCommon {
 			t.addDataCol("");
 			numCol++;
 		}
+		String sMese = annoMese.substring(4, 6);
+		int meseCorrente = Integer.parseInt(sMese) - 1;
 
 		while (cal.get(Calendar.MONTH) == meseCorrente) {
 
@@ -104,7 +143,9 @@ public class PrintCreatorSchedule extends PrintCommon {
 				for (int i = 0; i < 4; i++) {
 					te.startRow();
 					te.addDataCol((i == 0) ? ("" + cal.get(Calendar.DAY_OF_MONTH)) : ".", false);
+
 				}
+				setRow = true;
 				t.addDataCol(te);
 
 			} else {
@@ -119,7 +160,7 @@ public class PrintCreatorSchedule extends PrintCommon {
 					Intervento inter = (Intervento) evento.getData();
 					te.startRow();
 					te.addDataCol(inter.getRpieIdIndividual(), false);
-					
+
 					String col = Status.getColor(inter.getEsito());
 					te.setBackgroundColor(col);
 
@@ -127,6 +168,7 @@ public class PrintCreatorSchedule extends PrintCommon {
 				if (!has)
 					te.addDataCol("");
 
+				setRow = true;
 				t.addDataCol(te);
 
 			}
@@ -134,29 +176,32 @@ public class PrintCreatorSchedule extends PrintCommon {
 			if (numCol >= 7) {
 				numCol = 0;
 				t.startRow();
+				setRow = false;
 			}
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 		}
+		if (!setRow)
+			t.removeLastRow();
 
 		prt.addtable(t);
 	}
 
 	private void printMese(PrintCreator prt, Calendar cal) {
-	
+
 		String meseAnno = getMeseAnno(cal);
 		Table t = new Table();
 		t.setHeader(false);
 		t.addColumnDefinition(new Column("", "18cm"));
 		t.addColumnDefinition(new Column("", "7cm"));
 		t.startRow();
-		
+
 		CellData cd = new CellData(meseAnno);
 		cd.setFontSize(15);
 		cd.setWithBorder(false);
 		cd.setAlign("center");
-	
+
 		t.addDataCol(cd);
-		
+
 		cd = new CellData(TimeUtil.getTime());
 		cd.setWithBorder(false);
 		cd.setFontSize(10);
@@ -253,7 +298,35 @@ public class PrintCreatorSchedule extends PrintCommon {
 		return empty;
 	}
 
+	class DatiEventiMese {
+
+		private Map<String, DatiEventi> map = new TreeMap<String, DatiEventi>();
+
+		public void addEvent(Date d, ScheduleEvent evt) {
+			String sDate = TimeUtil.getCurrentDate(d);
+			String meseAnno = sDate.substring(0, 6);
+			// System.out.println("meseAnno = " + meseAnno);
+
+			DatiEventi de = map.get(meseAnno);
+			if (de == null) {
+				de = new DatiEventi();
+				map.put(meseAnno, de);
+			}
+			de.addEvent(d, evt);
+		}
+
+		public Map<String, DatiEventi> getMap() {
+			return map;
+		}
+
+		public DatiEventi getEventi(String meseAnno) {
+			return map.get(meseAnno);
+		}
+
+	};
+
 	class DatiEventi {
+
 		private Map<String, List<ScheduleEvent>> map = new TreeMap<String, List<ScheduleEvent>>();
 
 		public void addEvent(Date d, ScheduleEvent evt) {

@@ -9,9 +9,9 @@ import beans.TimeLineItem;
 public interface TimeLineMapper {
 	final String TABELLA = "test1.interventi";
 
-	final String SELECT = "select i.id,i.data_pianificata, c.codFrequenza, ck.description" //
-			+ " from interventi i, checklistintervento c, checks ck" //
-			+ " where i.assetId=#{assetId} and i.Id=c.interventoid and ck.Id=c.checkId";
+	final String SELECT = "select i.id,i.data_pianificata, c.codFrequenza, ck.description, n.normativa, n.codice" //
+			+ " from interventi i, checklistintervento c, checks ck, normative n" //
+			+ " where i.assetId=#{assetId} and i.Id=c.interventoid and ck.Id=c.checkId and n.codice=ck.codiceNormativa";
 
 	public Integer getPreviousInte(String date);
 

@@ -12865,3 +12865,18 @@
 2019-09-29 17:04:23 DEBUG Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@5d52e3ef]
 2019-09-29 17:04:23 DEBUG Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@5d52e3ef]
 2019-09-29 17:04:23 DEBUG Returned connection 1565713391 to pool.
+2019-10-01 16:16:07 DEBUG Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2019-10-01 16:16:07 DEBUG Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2019-10-01 16:16:07 DEBUG PooledDataSource forcefully closed/removed all connections.
+2019-10-01 16:16:07 DEBUG PooledDataSource forcefully closed/removed all connections.
+2019-10-01 16:16:07 DEBUG PooledDataSource forcefully closed/removed all connections.
+2019-10-01 16:16:07 DEBUG PooledDataSource forcefully closed/removed all connections.
+2019-10-01 16:16:07 DEBUG Opening JDBC Connection
+2019-10-01 16:16:07 DEBUG Created connection 1721576219.
+2019-10-01 16:16:07 DEBUG Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@669d2b1b]
+2019-10-01 16:16:07 DEBUG ==>  Preparing: select i.id,i.data_pianificata, c.codFrequenza, ck.description, n.normativa, n.codice from interventi i, checklistintervento c, checks ck, normative n where i.assetId=? and i.Id=c.interventoid and ck.Id=c.checkId and n.codice=ck.codiceNormativa 
+2019-10-01 16:16:07 DEBUG ==> Parameters: 118(Long)
+2019-10-01 16:16:07 DEBUG <==      Total: 66
+2019-10-01 16:16:07 DEBUG Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@669d2b1b]
+2019-10-01 16:16:07 DEBUG Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@669d2b1b]
+2019-10-01 16:16:07 DEBUG Returned connection 1721576219 to pool.

@@ -5,14 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
+import org.primefaces.event.timeline.TimelineSelectEvent;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
+import beans.Check;
 import beans.TimeLineItem;
 import common.JsfUtil;
 import common.TimeUtil;
+import database.dao.ChecksDAO;
 import database.dao.TimeLineDAO;
+
 
 public class TimeLineManagedBean {
 	private TimelineModel model;
@@ -25,6 +31,8 @@ public class TimeLineManagedBean {
 	private boolean axisOnTop;
 	private boolean showCurrentTime = true;
 	private boolean showNavigation = false;
+	
+private	TimelineEvent selectedTimelineEvent=null;
 
 	@PostConstruct
 	protected void initialize() {
@@ -44,10 +52,46 @@ public class TimeLineManagedBean {
 			Date d=TimeUtil.getCurrentStringDate(sData);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(d);
-			model.add(new TimelineEvent(item.getDescription(), cal.getTime()));
+			TimelineEvent evt = new TimelineEvent( item, cal.getTime());
+			
+			model.add(evt);
+		//	model.add(new TimelineEvent(item.getDescription(), cal.getTime()));
+		//	model.add(new TimelineEvent(item.getNormativa()+" "+item.getCodice(), cal.getTime()));
 		}
 	}
-
+	
+	 public void onSelect(TimelineSelectEvent e) {  
+		 selectedTimelineEvent = e.getTimelineEvent(); 
+		 System.out.println("1 "+selectedTimelineEvent);
+	   
+	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected event:", selectedTimelineEvent.getData().toString());  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+	        
+	        TimeLineItem item=  (TimeLineItem) selectedTimelineEvent.getData();
+	        
+	        ChecksDAO dao = new ChecksDAO();
+	        List<Check> ll = dao.getByCodiceNorm(item.getCodice());
+	        checks=ll;
+	        
+	        item.setChecksList(ll);
+	        
+	        selectedTimelineEvent.setData(null);
+	        selectedTimelineEvent.setData(item);
+	        
+	       
+	     
+	    }
+	 private List<Check> checks;
+	 
+	 public List<Check> getChecks() {
+		 System.out.println("2 ");
+		 if(checks==null)return null;
+//		 System.out.println("2 "+selectedTimelineEvent);
+//		 if( selectedTimelineEvent==null)return null;
+//		  TimeLineItem item  = (TimeLineItem) selectedTimelineEvent.getData();
+		 System.out.println("3 "+checks.size());
+		  return checks;
+	 }
 	public TimelineModel getModel() {
 		return model;
 	}
@@ -118,5 +162,13 @@ public class TimeLineManagedBean {
 
 	public void setShowNavigation(boolean showNavigation) {
 		this.showNavigation = showNavigation;
+	}
+
+	public TimelineEvent getSelectedTimelineEvent() {
+		return selectedTimelineEvent;
+	}
+
+	public void setSelectedTimelineEvent(TimelineEvent selectedTimelineEvent) {
+		this.selectedTimelineEvent = selectedTimelineEvent;
 	}
 }

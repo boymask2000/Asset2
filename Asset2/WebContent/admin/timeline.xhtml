@@ -11,8 +11,14 @@
 		<ui:define name="content">
 			<f:view locale="#{language.locale}">
 				<h:form id="form">
+					<p:panel>
 
-
+						<h:panelGrid columns="2" cellpadding="1">
+							<h:outputText value="rpieIdIndividual" />
+							<h:outputText
+								value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+						</h:panelGrid>
+					</p:panel>
 					<p:growl id="msgs" showDetail="true" />
 
 
@@ -26,6 +32,9 @@
 						showCurrentTime="#{timeLineManagedBean.showCurrentTime}"
 						showNavigation="#{timeLineManagedBean.showNavigation}">
 
+						<p:ajax event="select"
+							listener="#{timelineSelectionView.onRowSelect}"
+							oncomplete="PF('carOP').show()" update="radioDT" />
 
 					</p:timeline>
 
@@ -34,6 +43,34 @@
 					<p:commandButton process="@this" icon="pi pi-search" value="Home"
 						action="adminHome" />
 				</h:form>
+
+				<p:overlayPanel widgetVar="carOP" showEffect="fade" id="over"
+					hideEffect="fade" dismissable="false" showCloseIcon="true">
+					<p:outputPanel id="carDetail" style="text-align:center;">
+
+
+						<p:dataTable id="radioDT" value="#{timelineSelectionView.checks}"
+							var="c" rowKey="#{c.id}" paginator="true" rows="10"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+
+
+							<p:column headerText="description">
+								<h:outputText value="#{c.description}" />
+							</p:column>
+							<p:column headerText="description">
+								<h:outputText value="#{c.descriptionUS}" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:outputPanel>
+				</p:overlayPanel>
+
+
+
+
 			</f:view>
 		</ui:define>
 	</ui:composition>

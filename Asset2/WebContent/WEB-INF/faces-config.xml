@@ -239,6 +239,11 @@
 		<managed-bean-class>managed.TimeLineManagedBean</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>timelineSelectionView</managed-bean-name>
+		<managed-bean-class>managed.TimelineSelectionView</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
 
 
 <navigation-rule>

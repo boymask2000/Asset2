@@ -29,6 +29,7 @@ public interface ChecksMapper {
 			" famigliaId=#{famigliaId} WHERE id=#{id}";
 	
 	final String DELETE = "DELETE FROM " + TABELLA +"  WHERE id=#{id}";
+	final String SELECT_BY_CODNORM = "SELECT * FROM " + TABELLA +" WHERE codiceNormativa=#{codice}";
 
 
 	@Select(SELECT_ALL)
@@ -39,6 +40,11 @@ public interface ChecksMapper {
 
 	@Select(SELECT_CHECKS_BY_ID)
 	public List<Check> getChecksByID(long id);
+	
+	
+	@Select(SELECT_BY_CODNORM)
+	public List<Check> getByCodiceNorm(String codice);
+	
 
 	@Select(SELECT_CHECKS_BY_FAM)
 	public List<Check> getChecksByFamilyId(long idFamiglia);

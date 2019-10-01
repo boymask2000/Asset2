@@ -1,10 +1,15 @@
 package beans;
 
+import java.util.List;
+
 public class TimeLineItem {
 	private long id;
 	private String data_pianificata;
 	private int codiceFrequenza;
 	private String description;
+	private String normativa;
+	private String codice;
+	private List<Check> checksList;
 
 	public long getId() {
 		return id;
@@ -36,5 +41,36 @@ public class TimeLineItem {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getNormativa() {
+		return normativa;
+	}
+
+	public void setNormativa(String normativa) {
+		this.normativa = normativa;
+	}
+
+	public String getCodice() {
+		return codice;
+	}
+
+	public void setCodice(String codice) {
+		this.codice = codice;
+	}
+
+	@Override
+	public String toString() {
+		return getNormativa()+" "+getCodice() ;
+	}
+
+	public void setChecksList(List<Check> ll) {
+		checksList = ll;
+		
+	}
+
+	public List<Check> getChecksList() {
+		System.out.println("ss: "+checksList.size());
+		return checksList;
 	}
 }

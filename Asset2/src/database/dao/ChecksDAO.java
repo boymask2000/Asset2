@@ -32,6 +32,19 @@ public class ChecksDAO {
 		}
 		return list;
 	}
+	
+	public List<Check> getByCodiceNorm (String cod ){
+		List<Check> list = null;
+
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ChecksMapper mapper = session.getMapper(ChecksMapper.class);
+
+			list = mapper.getByCodiceNorm(cod);
+		}
+		return list;
+	}
+	
 	public List<Check> getChecksByFamilyId(long id) {
 		List<Check> list = null;
 

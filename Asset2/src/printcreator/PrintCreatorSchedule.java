@@ -1,5 +1,6 @@
 package printcreator;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +29,45 @@ public class PrintCreatorSchedule extends PrintCommon {
 	private String maxDateAll;
 
 	public String printSchedule() {
+//		ManagedRicercaInterventiBean mri = (ManagedRicercaInterventiBean) JsfUtil
+//				.getBean("managedRicercaInterventiBean");
+//		ManagedStrategicBean msb = (ManagedStrategicBean) JsfUtil.getBean("managedStrategicBean");
+//
+//		RicercaInterventiBean rib = mri.getRicercaInterventiBean();
+//
+//		minDateAll = rib.getStartDate();
+//		maxDateAll = rib.getEndDate();
+//
+//		LanguageBean langBean = (LanguageBean) JsfUtil.getBean("language");
+//		currentLocale = langBean.getCurrentLocale();
+//
+//		// Asset asset = db.getSelectedAsset();
+//
+//		PrintCreator prt = new PrintCreator();
+//		prt.setWithPageNumber(false);
+//		prt.insertStartDoc();
+//		prt.insertPageFormats();
+//
+//		// ********************************PersonalData
+//
+//		stampaMainData(prt, msb);
+//
+//		prt.insertFineDoc();
+//
+//		try (InputStream is = prt.getBufferInputStream();) {
+//			convertToPDFNEW(is);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		buildPDF();
+
+		return "viewFile";
+	}
+
+	private File pdfFile;
+
+	public String buildPDF() {
+
 		ManagedRicercaInterventiBean mri = (ManagedRicercaInterventiBean) JsfUtil
 				.getBean("managedRicercaInterventiBean");
 		ManagedStrategicBean msb = (ManagedStrategicBean) JsfUtil.getBean("managedStrategicBean");
@@ -54,12 +94,14 @@ public class PrintCreatorSchedule extends PrintCommon {
 		prt.insertFineDoc();
 
 		try (InputStream is = prt.getBufferInputStream();) {
-			convertToPDFNEW(is);
+			pdfFile = convertToPDFNEW(is);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if (pdfFile != null)
+			return pdfFile.getAbsolutePath();
+		return null;
 
-		return "viewFile";
 	}
 
 	private void stampaMainData(PrintCreator prt, ManagedStrategicBean bean) {

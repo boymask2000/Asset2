@@ -223,7 +223,7 @@ public class PrintCreator {
 		prt.dump();
 	}
 
-	public void convertToPDFNEW(InputStream is) throws IOException, FOPException, TransformerException {
+	public File convertToPDFNEW(InputStream is) throws IOException, FOPException, TransformerException {
 		// the XSL FO file
 
 		// create an instance of fop factory
@@ -253,6 +253,7 @@ public class PrintCreator {
 		}
 		BasicDocumentViewController view = (BasicDocumentViewController) JsfUtil.getBean("basicDocumentViewController");
 		view.setPdf(tempPdf);
+		return tempPdf;
 		// TempFileFactory.clean();
 	}
 

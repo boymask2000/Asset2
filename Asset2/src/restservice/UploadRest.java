@@ -2,9 +2,7 @@ package restservice;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -36,6 +34,7 @@ public class UploadRest {
 
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
 
+		System.out.println("upload dir: "+uploadDir);
 		String filename = writeToFile(uploadedInputStream, uploadDir, ".jpg");
 
 		FotoIntervento foto = new FotoIntervento();
@@ -81,15 +80,16 @@ public class UploadRest {
 			filename = outFile.getName();
 			int read = 0;
 			byte[] bytes = new byte[1024];
-
+long sum=0;
 			try (OutputStream out = new FileOutputStream(outFile);) {
 				while ((read = uploadedInputStream.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
+					sum +=read;
 				}
 				out.flush();
 			}
 			saveToBackup(outFile, filename);
-
+System.out.println("size: "+sum);
 			
 
 		} catch (Exception e) {

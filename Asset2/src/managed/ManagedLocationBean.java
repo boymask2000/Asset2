@@ -19,7 +19,7 @@ public class ManagedLocationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-	private Location selectedLocation = new Location();
+	private Location selectedLocation =new Location();
 
 	public List<Location> getAllLocations() {
 
@@ -44,6 +44,32 @@ public class ManagedLocationBean implements Serializable {
 		try {
 			dao.insert(selectedLocation);
 			JsfUtil.showMessage("Location inserita");
+		} catch (Throwable e) {
+
+			e.printStackTrace();
+		}
+	}
+	public void updateLocation() {
+
+		LocationDAO dao = new LocationDAO();
+
+		try {
+			dao.update(selectedLocation);
+			System.out.println(selectedLocation.getIp());
+			
+		} catch (Throwable e) {
+
+			e.printStackTrace();
+		}
+	}
+	public void delete() {
+
+		LocationDAO dao = new LocationDAO();
+
+		try {
+			dao.delete(selectedLocation);
+			JsfUtil.showMessage("Location inserita");
+		
 		} catch (Throwable e) {
 
 			e.printStackTrace();

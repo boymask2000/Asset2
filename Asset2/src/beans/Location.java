@@ -9,6 +9,7 @@ public class Location implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String name;
+	private String ip;
 	private String description;
 
 	public long getId() {
@@ -33,5 +34,14 @@ public class Location implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+		System.out.println("ip "+ip);
 	}
 }

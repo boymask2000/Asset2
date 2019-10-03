@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15544934418580" configfile="/Asset2/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="5554" id="pf15544934821061" referenceLink="//@navigationRule.34/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15558600670900 pf15563667307410 pf15563754805865 pf15566079963440 pf15567773999280 pf15568111649770 pf15580767701750 pf15581083533252 pf15587244195360 pf15587244195361 pf15593144306470 pf15596294076240 pf15642937591720 pf15644951410670 pf15697686277870" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="5554" id="pf15544934821061" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15544934821072 pf15544934821074 pf15545490252662 pf15545499277856 pf155455257330810 pf15546298401040 pf15546298401041 pf15546298401042 pf15546399466240 pf15546689607550 pf15547228740540 pf15548063153500 pf15548294074481 pf15549910761300 pf15549910761301 pf15555970876920 pf15555970876921 pf15557955598880 pf15557955598881 pf15557955598882 pf15558600670900 pf15563667307410 pf15563754805865 pf15566079963440 pf15567773999280 pf15568111649770 pf15580767701750 pf15581083533252 pf15587244195360 pf15587244195361 pf15593144306470 pf15596294076240 pf15642937591720 pf15644951410670 pf15697686277870 pf15701028112800" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf155449348210714" referenceLink="//@navigationRule.32/@navigationCase.0/@toViewId|" inlinks="pf15544934821072 pf15546298401042" path="/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/admin.xhtml" x="122" y="2674" id="pf155449348210715" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" path="/admin/admin.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/modificaUtente.xhtml" x="338" y="562" id="pf155449348210716" referenceLink="//@navigationRule.22/@navigationCase.0/@toViewId|" inlinks="pf15544934821074" path="/admin/modificaUtente.xhtml"/>
@@ -40,6 +40,7 @@
   <nodes xsi:type="pageflow:PFPage" name="admin/loadAsset2.xhtml" x="338" y="11314" id="pf15642937591741" referenceLink="//@navigationRule.24/@navigationCase.0/@toViewId|" inlinks="pf15642937591720" path="/admin/loadAsset2.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/excelColumnsHandler.xhtml" x="338" y="11698" id="pf15644951410681" referenceLink="//@navigationRule.25/@navigationCase.0/@toViewId|" inlinks="pf15644951410670" path="/admin/excelColumnsHandler.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="admin/timeline.xhtml" x="338" y="12082" id="pf15697686277871" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15697686277870" path="/admin/timeline.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/locationHome.xhtml" id="pf15701028112821" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15701028112800" path="/admin/locationHome.xhtml"/>
   <links id="pf15544934821072" target="pf155449348210714" source="pf15544934821061" outcome="login"/>
   <links id="pf15544934821074" target="pf155449348210716" source="pf15544934821061" outcome="modificautente"/>
   <links id="pf15545490252662" target="pf15545490252663" source="pf15544934821061" outcome="nuovoUtente"/>
@@ -75,4 +76,5 @@
   <links id="pf15642937591720" target="pf15642937591741" source="pf15544934821061" outcome="loadAsset2"/>
   <links id="pf15644951410670" target="pf15644951410681" source="pf15544934821061" outcome="handleExcelColumns"/>
   <links id="pf15697686277870" target="pf15697686277871" source="pf15544934821061" outcome="timeline"/>
+  <links id="pf15701028112800" target="pf15701028112821" source="pf15544934821061" outcome="locationhome"/>
 </pageflow:Pageflow>

@@ -65,6 +65,11 @@
 
 							<p:commandButton process="@this" icon="pi pi-search"
 								value="Planner" action="#{plannerjob.go}" />
+								
+								<p:commandButton process="@this" icon="pi pi-search" rendered="false"
+								value="#{msg['LOCATION']}"
+								action="#{navigator.go('adminHome','locationhome')}" />
+								
 						</h:panelGrid>
 
 					</h:panelGrid>

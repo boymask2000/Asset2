@@ -30,5 +30,26 @@ public class LocationDAO {
 		}
 	}
 
+	public void delete(Location u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			LocationMapper mapper = session.getMapper(LocationMapper.class);
+			mapper.delete(u);
+			session.commit();
+		}
+		
+	}
+
+	public void update(Location u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			LocationMapper mapper = session.getMapper(LocationMapper.class);
+			mapper.update(u);
+			System.out.println(u.getIp());
+			session.commit();
+		}
+		
+	}
+
 
 }

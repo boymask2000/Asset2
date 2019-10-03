@@ -2,10 +2,10 @@ package managed;
 
 import java.util.List;
 
-import beans.MailSender;
 import beans.Utente;
 import common.JsfUtil;
 import database.dao.UtenteDAO;
+import mail.MailSender;
 import printcreator.PrintCreatorSchedule;
 
 public class SendMailManagedBean {
@@ -21,7 +21,8 @@ public class SendMailManagedBean {
 
 	public void sendMail() {
 
-		MailSender sender = new MailSender();
+		MailSender sender = MailSender.getSender();
+		//MailSender sender = new MailSender();
 		
 		PrintCreatorSchedule pcs = (PrintCreatorSchedule)JsfUtil.getBean("printCreatorSchedule");
 		String fileName = pcs.buildPDF();

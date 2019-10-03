@@ -1,0 +1,158 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+
+			<h:form id="form">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" header="Gestione Location"
+						style="margin-bottom:20px">
+						<p:dataTable id="radioDT" selectionMode="single"
+							value="#{managedLocationBean.allLocations}" var="c"
+							selection="#{managedLocationBean.selectedLocation}"
+							rowKey="#{c.id}" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:ajax event="rowSelect"
+								listener="#{managedLocationBean.onRowSelect}"
+								update="radioDT" />
+
+							<p:column headerText="Name">
+								<h:outputText value="#{c.name}" />
+							</p:column>
+
+							<p:column headerText="Descrizione">
+								<h:outputText value="#{c.description}" />
+							</p:column>
+
+							<p:column headerText="Ip">
+								<h:outputText value="#{c.ip}" />
+							</p:column>
+
+
+							<f:facet name="footer">
+
+						
+
+								<p:commandButton process="radioDT" update=":form:panNewLocation"
+									icon="pi pi-search" value="Nuova location"
+									oncomplete="PF('newLocationDialog').show()" />
+
+								
+
+
+
+								<p:commandButton process="radioDT" update=":form:panDeleteUser"
+									icon="pi pi-search" value="Delete"
+									disabled="#{managedLocationBean.selectedLocation==null}"
+									oncomplete="PF('deleteUserDialog').show()" />
+									
+
+
+
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+				</h:panelGrid>
+				
+				
+				
+				
+				<p:dialog header="Update Location" widgetVar="updateLocationDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					oncomplete="updateLocationDialog.hide();">
+					<p:outputPanel id="panUpdateLocation" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Nome" />
+							<h:inputText
+								value="#{managedLocationBean.selectedLocation.name}" />
+
+							<h:outputText value="Descrizione" />
+							<h:inputText
+								value="#{managedLocationBean.selectedLocation.description}" />
+
+							<h:outputText value="Ip" />
+							<h:inputText value="#{managedLocationBean.selectedLocation.ip}" />
+
+
+							<p:commandButton value="ok" id="ajasx3"
+								actionListener="#{managedLocationBean.updateLocation}"
+								update="radioDT" styleClass="ui-priority-primary"
+								oncomplete="PF('updateLocationDialog').hide();" />
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+				
+				
+				
+
+
+				<p:dialog header="Delete Location" widgetVar="deleteUserDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					oncomplete="deleteUserDialog.hide();">
+					<p:outputPanel id="panDeleteUser" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Conferma la cancellazione della location " />
+							<h:outputText
+								value="#{managedLocationBean.selectedLocation.name}" />
+
+							<p:commandButton value="ok" id="ajasx1"
+								actionListener="#{managedLocationBean.delete}" update="radioDT"
+								styleClass="ui-priority-primary"
+								oncomplete="PF('deleteUserDialog').hide();" />
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+
+
+
+
+				<p:dialog header="Insert Location" widgetVar="newLocationDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					oncomplete="newLocationDialog.hide();">
+					<p:outputPanel id="panNewLocation" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Nome" />
+							<h:inputText
+								value="#{managedLocationBean.selectedLocation.name}" />
+
+							<h:outputText value="Descrizione" />
+							<h:inputText
+								value="#{managedLocationBean.selectedLocation.description}" />
+
+							<h:outputText value="Ip" />
+							<h:inputText value="#{managedLocationBean.selectedLocation.ip}" />
+
+
+							<p:commandButton value="ok" id="ajasx2"
+								actionListener="#{managedLocationBean.insertLocation}"
+								update="radioDT" styleClass="ui-priority-primary"
+								oncomplete="PF('newLocationDialog').hide();" />
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+
+
+
+
+
+
+
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="adminHome" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

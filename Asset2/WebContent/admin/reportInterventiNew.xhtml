@@ -104,51 +104,52 @@
 
 						<h:commandButton value="#{msg['STAMPA']}"
 							action="#{printCreatorSchedule.printSchedule}" />
-							
-							
-							<p:commandButton icon="pi pi-search" value="Mail"
+
+
+						<p:commandButton icon="pi pi-search" value="Mail"
 							oncomplete="PF('panSendMail0').show()" />
 
 					</h:form>
-								<p:dialog header="Seleziona destinatari" widgetVar="panSendMail0"
-					width="700" height="400" modal="true" showEffect="fade"
-					hideEffect="fade" resizable="false">
+					<p:dialog header="Seleziona destinatari" widgetVar="panSendMail0"
+						width="700" height="400" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false">
 
-					<h:form enctype="multipart/form-data">
-						<p:dataTable id="checkboxDT" 
-							value="#{sendMailManagedBean.allUtenti}" var="c"
-							selection="#{sendMailManagedBean.selectedUsers}"
-							rowKey="#{c.username}" paginator="true" rows="5"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+						<h:form enctype="multipart/form-data">
+							<p:dataTable id="checkboxDT"
+								value="#{sendMailManagedBean.allUtenti}" var="c"
+								selection="#{sendMailManagedBean.selectedUsers}"
+								rowKey="#{c.username}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
 
-  <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+								<p:column selectionMode="multiple"
+									style="width:16px;text-align:center" />
 
-							<p:column headerText="Username">
-								<h:outputText value="#{c.username}" />
-							</p:column>
+								<p:column headerText="Username">
+									<h:outputText value="#{c.username}" />
+								</p:column>
 
-							<p:column headerText="Tipo">
-								<h:outputText value="#{c.tipo}" />
-							</p:column>
+								<p:column headerText="Tipo">
+									<h:outputText value="#{c.tipo}" />
+								</p:column>
 
-							<p:column headerText="Descrizione">
-								<h:outputText value="#{c.descrizione}" />
-							</p:column>
+								<p:column headerText="Descrizione">
+									<h:outputText value="#{c.descrizione}" />
+								</p:column>
 
-							<p:column headerText="Email">
-								<h:outputText value="#{c.email}" />
-							</p:column>
-							<f:facet name="footer">
-								<h:commandButton value="Invia Mail"
-							action="#{sendMailManagedBean.sendMail}" />
-							</f:facet>
+								<p:column headerText="Email">
+									<h:outputText value="#{c.email}" />
+								</p:column>
+								<f:facet name="footer">
+									<h:commandButton value="Invia Mail"
+										action="#{sendMailManagedBean.sendMail}" />
+								</f:facet>
 
-						</p:dataTable>
+							</p:dataTable>
 
-					</h:form>
+						</h:form>
 
-				</p:dialog>
+					</p:dialog>
 				</p:panel>
 			</f:view>
 		</ui:define>

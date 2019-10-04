@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.mail.AuthenticationFailedException;
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -34,12 +35,14 @@ public class MailSenderGmail extends MailSender{
 		if (destinatari == null || destinatari.size() == 0)
 			return;
 
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+       Properties props = new Properties();
+
+       props.put("mail.smtp.host", "true");
+       props.put("mail.smtp.starttls.enable", "true");
+       props.put("mail.smtp.host", "smtp.gmail.com");
+       props.put("mail.smtp.port", "587");
+       props.put("mail.smtp.auth", "true");
         
 
 
@@ -48,6 +51,7 @@ public class MailSenderGmail extends MailSender{
 				return new PasswordAuthentication(smtpUser, smtpPassword);
 			}
 		});
+
 
 		// session.setDebug(true); // Enable the debug mode
 
@@ -72,8 +76,8 @@ public class MailSenderGmail extends MailSender{
 
 			SMTPTransport.send(message);
 
-		} catch (AuthenticationFailedException auth) {
-			auth.printStackTrace();
+		} catch (AuthenticationFailedException y) {
+			y.printStackTrace();
 
 		} catch (MessagingException e) {
 			e.printStackTrace();

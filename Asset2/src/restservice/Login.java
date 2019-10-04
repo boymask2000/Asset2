@@ -16,11 +16,15 @@ public class Login {
 	@GET
 	@Path("{user}/{password}")
 	public Utente login(@PathParam("user") String user, @PathParam("password") String password) {
-		System.out.println("user:" + user + " password:" + password + "     ip: " + req.getRemoteAddr());
+		System.out.println("user:[" + user + "] password: [" + password + "]     ip: " + req.getRemoteAddr());
 		Utente u = new Utente();
 		u.setUsername(user);
 		u.setPassword(password);
 		u.login();
+		if( u.getUsername()==null)
+			System.out.println("Rejected");
+		else
+			System.out.println("OK");
 		return u;
 	}
 

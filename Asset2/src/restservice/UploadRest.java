@@ -50,28 +50,6 @@ public class UploadRest {
 
 	}
 
-	@POST
-	@Path("/uploadAudio")
-	@Consumes({ MediaType.MULTIPART_FORM_DATA })
-	public Response uploadAudio(@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail, @QueryParam("id") long id) {
-
-		String uploadDir = "/home/giovanni/Desktop" + File.separator;
-
-		String filename = writeToFile(uploadedInputStream, uploadDir, ".3gp");
-
-//		FotoIntervento foto = new FotoIntervento();
-//		foto.setFilename(filename);
-//		foto.setInterventoId(id);
-//		foto.setTimestamp(TimeUtil.getTimestamp());
-//
-//		FotoInterventoDAO dao = new FotoInterventoDAO();
-//		dao.insert(foto);
-		String output = "File saved to : " + filename;
-
-		return Response.status(200).entity(output).build();
-
-	}
 
 	private String writeToFile(InputStream uploadedInputStream, String dir, String ext) { // .jpg
 		String filename = null;

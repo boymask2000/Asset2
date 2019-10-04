@@ -24,8 +24,9 @@ public class BasicDocumentViewController implements Serializable {
 	public void onPrerender(ComponentSystemEvent event) {
 
 		try {
-	//		pdf = new File("c:\\books.pdf");
+			// pdf = new File("c:\\books.pdf");
 			contentUrl = pdf.toURI().toURL().toString();
+			System.out.println(contentUrl);
 			content = new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,26 +34,23 @@ public class BasicDocumentViewController implements Serializable {
 	}
 
 	public StreamedContent getContent() {
-	//	return content;
-		
-		  FacesContext context = FacesContext.getCurrentInstance();
 
-	        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-	            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
-	            return new DefaultStreamedContent();
-	        }
-			try {
-			
-				return  new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			// So, browser is requesting the media. Return a real StreamedContent with the media bytes.
-//	            String id = context.getExternalContext().getRequestParameterMap().get("id");
-//	            Media media = service.find(Long.valueOf(id));
-//	            return new DefaultStreamedContent(new ByteArrayInputStream(media.getBytes()));
-	        return null;
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			// So, we're rendering the HTML. Return a stub StreamedContent so that it will
+			// generate right URL.
+			return new DefaultStreamedContent();
+		}
+		try {
+
+			return new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
+		} catch (FileNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	public void setContent(StreamedContent content) {
@@ -64,8 +62,18 @@ public class BasicDocumentViewController implements Serializable {
 	}
 
 	public void setPdf(File pdf) {
-	
+System.out.println("set pdf : "+pdf);
 		this.pdf = pdf;
+
+//		try {
+//			contentUrl = pdf.toURI().toURL().toString();
+//			System.out.println(contentUrl);
+//			content = new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 
 	public String getContentUrl() {
@@ -75,7 +83,8 @@ public class BasicDocumentViewController implements Serializable {
 	public void setContentUrl(String contentUrl) {
 		this.contentUrl = contentUrl;
 	}
+
 	public String generateRandomIdForNotCaching() {
 		return java.util.UUID.randomUUID().toString();
-}
+	}
 }

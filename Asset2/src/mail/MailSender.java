@@ -18,39 +18,21 @@ public abstract class MailSender {
 	protected final static String MAILTYPE_GMAIL = "gmail";
 	protected final static String MAILTYPE_LIBERO = "libero";
 
-	protected static final String SMTP_SERVER = "smtp_server";
+
 	protected static final String SMTP_USER = "smtp_user";
 	protected static final String SMTP_PASSWORD = "smtp_password";
 	protected static final String SMTP_PORT = "smtp_port";
 
-	protected String smtpServer;
+
 	protected String smtpUser;
 	protected String smtpPassword;
-	protected String smtpPort = "25";
+
 	protected boolean configOk = true;
 
 	public MailSender(String mailType) {
-		smtpServer = ApplicationConfig.getProperty(mailType + "." + SMTP_SERVER);
+	
 		smtpUser = ApplicationConfig.getProperty(mailType + "." + SMTP_USER);
 		smtpPassword = ApplicationConfig.getProperty(mailType + "." + SMTP_PASSWORD);
-		String s_smtpPort = ApplicationConfig.getProperty(mailType + "." + SMTP_PORT);
-		if (s_smtpPort != null) {
-
-			try {
-				Integer.parseInt(s_smtpPort);
-				smtpPort = s_smtpPort;
-			} catch (NumberFormatException e) {
-
-			}
-		}
-
-		if (smtpServer == null) {
-			JsfUtil.showMessage("Definire smtp server in configurazione");
-			System.out.println(SMTP_SERVER);
-			System.out.println(SMTP_USER);
-			System.out.println(SMTP_PASSWORD);
-			configOk = false;
-		}
 	}
 
 	public static void main(String s[]) {

@@ -13,9 +13,10 @@ public class ApplicationConfig {
 	private static final String DEFAULTPATH = "/home/giovanni/asset.properties";
 	private static Properties prop = new Properties();
 
+	private static String propPath = "";
 	static {
 
-		String propPath = "";
+		
 		try {
 			Context context = new InitialContext();
 			propPath = (String) context.lookup("java:comp/env/assetConfigFile");
@@ -37,6 +38,12 @@ public class ApplicationConfig {
 			System.out.println("ATTENZIONE: File di configurazione " + propPath + " non leggibile");
 
 		}
+		load();
+		
+
+	}
+	private static void load() {
+		prop.clear();
 		try (InputStream is = new FileInputStream(propPath)) {
 			prop.load(is);
 
@@ -53,14 +60,15 @@ public class ApplicationConfig {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public static String getProperty(String key) {
+		load();
 		return prop.getProperty(key);
 	}
 
 	public static String getDocumentdir() {
+		load();
 		return prop.getProperty("documentDir");
 	}
 }

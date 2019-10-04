@@ -1,6 +1,9 @@
 package managed;
 
+import java.io.File;
 import java.util.List;
+
+
 
 import beans.Utente;
 import common.JsfUtil;
@@ -22,12 +25,15 @@ public class SendMailManagedBean {
 	public void sendMail() {
 
 		MailSender sender = MailSender.getSender();
-		//MailSender sender = new MailSender();
 		
 		PrintCreatorSchedule pcs = (PrintCreatorSchedule)JsfUtil.getBean("printCreatorSchedule");
 		String fileName = pcs.buildPDF();
 System.out.println(fileName);
 		sender.send(fileName, selectedUsers, "Alca mail");
+		
+		JsfUtil.showMessage("Mail inviata");
+		
+		File f = new File(fileName); f.delete();
 	}
 
 	public List<Utente> getSelectedUsers() {

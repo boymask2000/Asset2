@@ -16,6 +16,7 @@ import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
 import beans.Intervento;
 import beans.Normativa;
+import common.JsfUtil;
 import common.TimeUtil;
 import common.TipoSchedulazione;
 import database.dao.AssetAlcaDAO;
@@ -59,7 +60,6 @@ public class PlannerJob extends GenericJob {
 			}
 		};
 		submit(callable, "Pianificazione interventi");
-
 	}
 
 	private void makePlan(long assetId, Check check) {

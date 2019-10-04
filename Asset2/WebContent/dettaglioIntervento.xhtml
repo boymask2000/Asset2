@@ -9,132 +9,150 @@
 		<ui:define name="content">
 			<f:view locale="#{language.locale}">
 				<h:form id="form">
+					<p:panel>
 
-					<p:growl id="msgs" showDetail="true" />
-					<h:panelGrid columns="2" cellpadding="1">
-						<p:panel id="baic">
-							<h:panelGrid columns="2" cellpadding="1">
-								<h:outputText value="ID" />
-								<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
-								<h:outputText value="Fac #" />
-								<h:outputText value="#{managedAssetBean.selectedAsset.facNum}" />
-								<h:outputText value="facSystem" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.facSystem}" />
-								<h:outputText value="facSubsystem" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.facSubsystem}" />
-								<h:outputText value="assemblyCategory" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.assemblyCategory}" />
-								<h:outputText value="nomenclature" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.nomenclature}" />
-								<h:outputText value="procId" />
-								<h:outputText value="#{managedAssetBean.selectedAsset.procId}" />
-								<h:outputText value="pmSchedRecipient" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.pmSchedRecipient}" />
-								<h:outputText value="pmSchedSerial" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
+						<p:growl id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" cellpadding="1">
+							<p:panel id="baic">
+								<h:panelGrid columns="2" cellpadding="1">
+									<h:outputText value="ID" />
+									<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
+									<h:outputText value="Fac #" />
+									<h:outputText value="#{managedAssetBean.selectedAsset.facNum}" />
+									<h:outputText value="facSystem" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.facSystem}" />
+									<h:outputText value="facSubsystem" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.facSubsystem}" />
+									<h:outputText value="assemblyCategory" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.assemblyCategory}" />
+									<h:outputText value="nomenclature" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.nomenclature}" />
+									<h:outputText value="procId" />
+									<h:outputText value="#{managedAssetBean.selectedAsset.procId}" />
+									<h:outputText value="pmSchedRecipient" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.pmSchedRecipient}" />
+									<h:outputText value="pmSchedSerial" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
 
-								<h:outputText value="rpieIdIndividual" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
-								<h:outputText value="schedAssignedOrg" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
-								<h:outputText value="lastStatus" />
-								<h:outputText
-									value="#{managedAssetBean.selectedAsset.lastStatus}" />
-							</h:panelGrid>
+									<h:outputText value="rpieIdIndividual" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+									<h:outputText value="schedAssignedOrg" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
+									<h:outputText value="lastStatus" />
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.lastStatus}" />
+								</h:panelGrid>
 
-						</p:panel>
-						<p:panel id="bc0">
-							<h:panelGrid columns="2" cellpadding="1">
-								<h:outputText value="#{msg['ID_INTERVENTO']}" />
-								<h:outputText
-									value="#{managedInterventiBean.selectedIntevento.id}" />
-								<h:outputText value="#{msg['DATA_PREVISTA']}" />
-								<h:outputText
-									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_pianificata)}" />
-								<h:outputText value="#{msg['DATA_EFFETTIVA']}" />
-								<h:outputText
-									value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_effettiva)}" />
-									
+							</p:panel>
+							<p:panel id="bc0">
+								<h:panelGrid columns="2" cellpadding="1">
+									<h:outputText value="#{msg['ID_INTERVENTO']}" />
+									<h:outputText
+										value="#{managedInterventiBean.selectedIntevento.id}" />
+									<h:outputText value="#{msg['DATA_PREVISTA']}" />
+									<h:outputText
+										value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_pianificata)}" />
+									<h:outputText value="#{msg['DATA_EFFETTIVA']}" />
+									<h:outputText
+										value="#{timeUtil.getLocalizedDate(managedInterventiBean.selectedIntevento.data_effettiva)}" />
+
 									<h:outputText value="#{msg['UTENTE']}" />
-								<h:outputText
-									value="#{managedInterventiBean.selectedIntevento.user}" />
+									<h:outputText
+										value="#{managedInterventiBean.selectedIntevento.user}" />
 
-							</h:panelGrid>
+								</h:panelGrid>
 
 
-							<ui:include src="tabellaEsitiOutput.xhtml"></ui:include>
+								<ui:include src="tabellaEsitiOutput.xhtml"></ui:include>
 
-							<h:outputText value="#{msg['NOTE']}" />
-							<p:inputTextarea readonly="true" rows="3" cols="50"
-								value="#{managedInterventiBean.selectedIntevento.commento}" />
+								<h:outputText value="#{msg['NOTE']}" />
+								<p:inputTextarea readonly="true" rows="3" cols="50"
+									value="#{managedInterventiBean.selectedIntevento.commento}" />
 
-							<p:panel id="bajsic" header="#{msg['DOCUMENTI']}">
+								<p:panel id="bajsic" header="#{msg['DOCUMENTI']}">
 
-								<p:dataTable id="radioDT" selectionMode="single"
-									value="#{managedDocInterventiBean.getDocsForIntervento(managedInterventiBean.selectedIntevento.id)}"
-									var="c"
-									selection="#{managedDocInterventiBean.selectedDocIntervento}"
-									rowKey="#{c.id}" paginator="true" rows="5"
-									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									rowsPerPageTemplate="5,10,15">
+									<p:dataTable id="radioDT" selectionMode="single"
+										value="#{managedDocInterventiBean.getDocsForIntervento(managedInterventiBean.selectedIntevento.id)}"
+										var="c"
+										selection="#{managedDocInterventiBean.selectedDocIntervento}"
+										rowKey="#{c.id}" paginator="true" rows="5"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
 
-									<p:ajax event="rowSelect"
-										listener="#{managedDocInterventiBean.onRowSelect}"
-										update=":form:msgs" />
+										<p:ajax event="rowSelect"
+											listener="#{managedDocInterventiBean.onRowSelect}"
+											update=":form:msgs" />
 
-									<p:column headerText="#{msg['DESCRIZIONE']}">
-										<h:outputText value="#{c.descrizione}" />
-									</p:column>
+										<p:column headerText="#{msg['DESCRIZIONE']}">
+											<h:outputText value="#{c.descrizione}" />
+										</p:column>
 
-									<p:column headerText="File">
-										<h:outputText value="#{c.filename}" />
-									</p:column>
-									<p:column>
-										<h:commandButton
-											action="#{managedDocInterventiBean.setupViewFile(c.filename)}"
-											value="View" />
-									</p:column>
+										<p:column headerText="File">
+											<h:outputText value="#{c.filename}" />
+										</p:column>
+										<p:column>
+											<h:commandButton
+												action="#{managedDocInterventiBean.setupViewFile(c.filename)}"
+												value="View" />
+										</p:column>
 
-									<f:facet name="footer">
+										<f:facet name="footer">
 
-										<p:commandButton process="radioDT" update=":panSetPass0"
-											icon="pi pi-search" value="#{msg['ADD_DOC']}"
-											oncomplete="PF('setPassDialog0').show()" />
+											<p:commandButton process="radioDT" update=":panSetPass0"
+												icon="pi pi-search" value="#{msg['ADD_DOC']}"
+												oncomplete="PF('setPassDialog0').show()" />
 
-									</f:facet>
-								</p:dataTable>
+										</f:facet>
+									</p:dataTable>
+
+								</p:panel>
+								<p:panel>
+									<!-- 								<p:galleria -->
+									<!-- 									value="#{managedFotoInterventoBean.fotoPerIntervento}" -->
+									<!-- 									var="image" showCaption="true"> -->
+									<!-- 									<p:graphicImage name="images/#{image.filename}" -->
+									<!-- 										title="#{image.timestamp}" /> -->
+									<!-- 								</p:galleria> -->
+								</p:panel>
+
+								<table>
+									<tr>
+										<ui:repeat var="o"
+											value="#{managedFotoInterventoBean.fotoPerIntervento}">
+											<td><p:graphicImage name="images/#{o.filename}"
+													styleClass="content" width="100" height="100" /></td>
+										</ui:repeat>
+									</tr>
+								</table>
+								<!-- 							<p:contentFlow value="#{managedFotoInterventoBean.fotoPerIntervento}" var="image"> -->
+								<!-- 								<p:graphicImage name="images/#{image.filename}" -->
+								<!-- 									styleClass="content" width="100" height="100"/> -->
+								<!-- 								<div class="caption">#{image}</div> -->
+								<!-- 							</p:contentFlow> -->
+
+								<p:commandButton process="radioDT" update="panIntPass0"
+									icon="pi pi-search" value="#{msg['ADD_TASK']}"
+									oncomplete="PF('setIntDialog0').show()" />
 
 							</p:panel>
-							<p:panel>
-<!-- 								<p:galleria -->
-<!-- 									value="#{managedFotoInterventoBean.fotoPerIntervento}" -->
-<!-- 									var="image" showCaption="true"> -->
-<!-- 									<p:graphicImage name="images/#{image.filename}" -->
-<!-- 										title="#{image.timestamp}" /> -->
-<!-- 								</p:galleria> -->
-							</p:panel>
-							<p:contentFlow value="#{managedFotoInterventoBean.fotoPerIntervento}" var="image">
-								<p:graphicImage name="images/#{image.filename}"
-									styleClass="content" width="200" height="200"/>
-								<div class="caption">#{image}</div>
-							</p:contentFlow>
 
-							<p:commandButton process="radioDT" update="panIntPass0"
-								icon="pi pi-search" value="#{msg['ADD_TASK']}"
-								oncomplete="PF('setIntDialog0').show()" />
+						</h:panelGrid>
+			>
+							
+							<h:commandButton value="#{msg['STAMPA']}"
+							action="#{printCreatorIntervento.printIntervento2}" />
 
-						</p:panel>
 
-					</h:panelGrid>
-
+						<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+					</p:panel>
 				</h:form>
 
 				<p:dialog header="#{msg['ADD_TASK']}" widgetVar="setIntDialog0"
@@ -156,7 +174,6 @@
 				</p:dialog>
 
 
-				<p:commandButton value="GO BACK!" onclick="window.history.back();" />
 
 				<p:dialog header="#{msg['ADD_DOC']}" widgetVar="setPassDialog0"
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false">

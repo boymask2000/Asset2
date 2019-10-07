@@ -55,7 +55,7 @@ public class ManagedLocationBean implements Serializable {
 
 		try {
 			dao.update(selectedLocation);
-			System.out.println(selectedLocation.getIp());
+
 			
 		} catch (Throwable e) {
 

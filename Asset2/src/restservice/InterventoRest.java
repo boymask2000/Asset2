@@ -10,8 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.primefaces.json.JSONObject;
-
 import beans.AssetAlca;
 import beans.Audit;
 import beans.ChecklistIntervento;

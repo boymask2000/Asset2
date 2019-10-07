@@ -28,7 +28,7 @@ public class SendMailManagedBean {
 		
 		PrintCreatorSchedule pcs = (PrintCreatorSchedule)JsfUtil.getBean("printCreatorSchedule");
 		String fileName = pcs.buildPDF();
-System.out.println(fileName);
+
 		sender.send(fileName, selectedUsers, "Alca mail");
 		
 		JsfUtil.showMessage("Mail inviata");

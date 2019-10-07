@@ -24,6 +24,6 @@ public class TimeLineDAO {
 	public static void main(String s[] ) {
 		TimeLineDAO dao = new TimeLineDAO();
 		 List<TimeLineItem> ll = dao.selectAll(118);
-		 System.out.println(ll.size());
+	
 	}
 }

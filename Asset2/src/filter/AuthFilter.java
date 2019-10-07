@@ -28,15 +28,16 @@ public class AuthFilter implements Filter {
 	public AuthFilter() {
 		showInfo();
 		copyImages();
+		copyDocs();
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
 
 	}
 
 	private static boolean doneCopy = false;
+	private static boolean doneCopyDocs = false;
 	private static boolean doneInfo = false;
 
 	private static void showInfo() {
@@ -46,6 +47,44 @@ public class AuthFilter implements Filter {
 		System.out.println("CFMS server for ALCA");
 		System.out.println("***************************************************************");
 		doneInfo = true;
+	}
+
+	private void copyDocs() {
+		if (doneCopyDocs)
+			return;
+		doneCopyDocs = true;
+		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "ManualiFamiglia" + File.separator;
+		String backupDir = ApplicationConfig.getDocumentdir();
+		if (backupDir == null) {
+			System.out.println(
+					"ATTENZIONE: Non trovata documentDir dalla configurazione: Impossibile eseguire il restore delle immagini");
+			return;
+		}
+		File fUpload = new File(uploadDir);
+		if( !fUpload.exists())fUpload.mkdirs();
+		
+		if (!backupDir.endsWith(File.separator))
+			backupDir += File.separator;
+		String dir = backupDir + "ManualiFamiglia";
+		File fDir = new File(dir);
+
+		String[] lista = fDir.list();
+		if (lista == null)
+			return;
+		for (int i = 0; i < lista.length; i++) {
+			String file = dir + File.separator + lista[i];
+			Path copied = Paths.get(uploadDir + lista[i]);
+			Path originalPath = Paths.get(file);
+
+			try {
+				Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("***************************************************************");
+		System.out.println("Eseguito restore manuali");
+		System.out.println("***************************************************************");
 	}
 
 	private static void copyImages() {
@@ -64,7 +103,8 @@ public class AuthFilter implements Filter {
 		String dir = backupDir + "images";
 		File fDir = new File(dir);
 		String[] lista = fDir.list();
-		if(lista==null)return;
+		if (lista == null)
+			return;
 		for (int i = 0; i < lista.length; i++) {
 			String file = dir + File.separator + lista[i];
 			Path copied = Paths.get(uploadDir + lista[i]);
@@ -76,7 +116,9 @@ public class AuthFilter implements Filter {
 				e.printStackTrace();
 			}
 		}
-
+		System.out.println("***************************************************************");
+		System.out.println("Eseguito restore immagini");
+		System.out.println("***************************************************************");
 	}
 
 	@Override
@@ -93,7 +135,7 @@ public class AuthFilter implements Filter {
 			// allow user to proccede if url is login.xhtml or user logged in or user is
 			// accessing any page in //public folder
 			String reqURI = req.getRequestURI();
-	//		System.out.println("URI: "+reqURI);
+			// System.out.println("URI: "+reqURI);
 			if (reqURI.indexOf("/login.xhtml") >= 0 || ses == null) {
 				if (ses != null)
 					ses.invalidate();
@@ -101,14 +143,15 @@ public class AuthFilter implements Filter {
 				return;
 			}
 			Utente utente = (Utente) ses.getAttribute("utente");
-		//	System.out.println(utente);
+			// System.out.println(utente);
 			if (utente == null || utente.getUsername() == null) {
 				res.sendRedirect(req.getContextPath() + "/login.xhtml");
 				return;
 			}
-			
+
 			if (utente.getTipo() != null) {
-				if (reqURI.indexOf("/admin/") != -1 && reqURI.indexOf("/dettaglio") == -1 &&!utente.getTipo().equalsIgnoreCase("A"))
+				if (reqURI.indexOf("/admin/") != -1 && reqURI.indexOf("/dettaglio") == -1
+						&& !utente.getTipo().equalsIgnoreCase("A"))
 					res.sendRedirect(req.getContextPath() + "/login.xhtml");
 				else
 					chain.doFilter(request, response);

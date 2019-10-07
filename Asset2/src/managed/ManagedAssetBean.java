@@ -9,10 +9,12 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.AssetAlca;
+import beans.FamigliaAsset;
 import beans.Intervento;
 import beans.Status;
 import common.JsfUtil;
 import database.dao.AssetAlcaDAO;
+import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
 
 public class ManagedAssetBean {
@@ -30,6 +32,14 @@ public class ManagedAssetBean {
 	public String test(String d) {
 
 		return d;
+	}
+	
+	public long getFamilyId() {
+		if( selectedAsset==null)return -1;
+		FamigliaAssetDAO fmaDao = new FamigliaAssetDAO();
+
+		FamigliaAsset fam = fmaDao.searchByName(selectedAsset.getFacSystem());
+		return fam.getId();
 	}
 
 	public int getAssetsInStatus(int st) {

@@ -249,6 +249,16 @@
 		<managed-bean-class>managed.SendMailManagedBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>managedManualiFamigliaBean</managed-bean-name>
+		<managed-bean-class>managed.ManagedManualiFamigliaBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>manualeFamigliaUpload</managed-bean-name>
+		<managed-bean-class>managed.ManualeFamigliaUpload</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 <navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -502,16 +512,16 @@
 		</navigation-case>
 
 	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id> -->
 
-		<navigation-case>
+<!-- 		<navigation-case> -->
 
-			<from-outcome>loadAsset</from-outcome>
-			<to-view-id>/admin/loadAsset.xhtml</to-view-id>
-		</navigation-case>
+<!-- 			<from-outcome>loadAsset</from-outcome> -->
+<!-- 			<to-view-id>/admin/loadAsset.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
 
-	</navigation-rule>
+<!-- 	</navigation-rule> -->
 	
 	
 	

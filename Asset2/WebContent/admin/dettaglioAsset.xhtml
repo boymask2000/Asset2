@@ -129,7 +129,7 @@
 									</p:dataTable>
 								</p:panel>
 
-								<p:panel id="bajsic" header="#{msg['MANUALI']}">
+								<p:panel id="bajsic" header="#{msg['MANUALI_PER_ASSET']}">
 
 									<p:dataTable id="radioDT" selectionMode="single"
 										value="#{managedManualiBean.getManualiForAsset(managedAssetBean.selectedAsset.id)}"
@@ -165,6 +165,44 @@
 									</p:dataTable>
 
 								</p:panel>
+
+								<p:panel id="baFam" header="#{msg['MANUALI_PER_FAMIGLIA']}">
+
+									<p:dataTable id="radioFamDT" selectionMode="single"
+										value="#{managedManualiFamigliaBean.getManualiForFamily(managedAssetBean.familyId)}"
+										var="c"
+										selection="#{managedManualiFamigliaBean.selectedManuale}"
+										rowKey="#{c.id}" paginator="true" rows="5"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+										<p:ajax event="rowSelect"
+											listener="#{managedManualiFamigliaBean.onRowSelect}"
+											update=":form:msgs" />
+
+										<p:column headerText="#{msg['DESCRIZIONE']}">
+											<h:outputText value="#{c.descr}" />
+										</p:column>
+
+										<p:column headerText="File">
+											<h:outputText value="#{c.nomeFile}" />
+										</p:column>
+										<p:column>
+											<h:commandButton
+												action="#{managedManualiFamigliaBean.setupViewFile(c.nomeFile)}"
+												value="View" />
+										</p:column>
+
+										<f:facet name="footer">
+
+											<p:commandButton process="radioFamDT" update=":panSetPassF"
+												icon="pi pi-search" value="New"
+												oncomplete="PF('newManFam0').show()" />
+
+										</f:facet>
+									</p:dataTable>
+
+								</p:panel>
 							</p:panel>
 						</h:panelGrid>
 
@@ -173,7 +211,7 @@
 
 						<h:commandButton value="TimeLine" action="timeline" />
 
-						
+
 
 
 
@@ -181,8 +219,38 @@
 				</h:form>
 
 
-	
 
+				<p:dialog header="Nuovo manuale per famiglia" widgetVar="newManFam0"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="panSetPassF" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<p:panel id="basiF" style="margin-bottom:20px">
+								<h:form enctype="multipart/form-data">
+									<p:growl id="messages" showDetail="true" />
+
+									<p:panelGrid columns="2">
+									
+									<h:outputText value="Tipo" for="tipo" />
+									<p:selectOneMenu id="tipo"
+										value="#{manualeFamigliaUpload.currentManuale.type}"
+										style="width:125px">
+
+										<f:selectItem itemLabel="Scheda per mobile" itemValue="3" />
+										<f:selectItem itemLabel="Scheda tecnica" itemValue="1" />
+										<f:selectItem itemLabel="Rating Guidance" itemValue="2" />
+										<f:selectItem itemLabel="Altro" itemValue="0" />
+									</p:selectOneMenu>
+									</p:panelGrid>
+									<p:fileUpload value="#{manualeFamigliaUpload.file}" mode="advanced"
+										allowTypes="/(\.|\/)(pdf)$/" update=":form" process="@form"
+										fileUploadListener="#{manualeFamigliaUpload.handleFileUpload}">
+
+									</p:fileUpload>
+								</h:form>
+							</p:panel>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
 
 
 

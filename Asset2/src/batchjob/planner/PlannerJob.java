@@ -223,7 +223,7 @@ public class PlannerJob extends GenericJob {
 	}
 
 	private static String getMin(Calendar cal, List<Item> lista) {
-	//	System.out.println(cal);
+
 		String fmtCal = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		Date fmtDate = TimeUtil.getCurrentStringDate(fmtCal);
 

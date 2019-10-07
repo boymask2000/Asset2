@@ -111,7 +111,7 @@ public class FileUploadView {
 
 	public void setRowTitles(int rowTitles) {
 		this.rowTitles = rowTitles;
-		System.out.println(rowTitles);
+
 	}
 
 	public int getFirstRowData() {
@@ -120,6 +120,6 @@ public class FileUploadView {
 
 	public void setFirstRowData(int firstRowData) {
 		this.firstRowData = firstRowData;
-		System.out.println(firstRowData);
+
 	}
 }

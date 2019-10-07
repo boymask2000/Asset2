@@ -26,7 +26,7 @@ public class BasicDocumentViewController implements Serializable {
 		try {
 			// pdf = new File("c:\\books.pdf");
 			contentUrl = pdf.toURI().toURL().toString();
-			System.out.println(contentUrl);
+
 			content = new DefaultStreamedContent(new FileInputStream(pdf), "application/pdf", "p.pdf");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class BasicDocumentViewController implements Serializable {
 	}
 
 	public void setPdf(File pdf) {
-System.out.println("set pdf : "+pdf);
+
 		this.pdf = pdf;
 
 //		try {

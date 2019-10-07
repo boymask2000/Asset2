@@ -20,6 +20,7 @@ import database.mapper.FotoInterventiMapper;
 import database.mapper.FrequenzeAlcaMapper;
 import database.mapper.InterventiMapper;
 import database.mapper.LocationMapper;
+import database.mapper.ManualiFamigliaMapper;
 import database.mapper.ManualiMapper;
 import database.mapper.NormativeMapper;
 import database.mapper.RitardiMapper;
@@ -64,6 +65,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(UtentiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(AuditMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(TimeLineMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ManualiFamigliaMapper.class);
 			}
 			
 		}

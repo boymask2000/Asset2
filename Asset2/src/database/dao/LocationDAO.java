@@ -45,7 +45,6 @@ public class LocationDAO {
 
 			LocationMapper mapper = session.getMapper(LocationMapper.class);
 			mapper.update(u);
-			System.out.println(u.getIp());
 			session.commit();
 		}
 		

@@ -34,7 +34,7 @@ public class UploadRest {
 
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "images" + File.separator;
 
-		System.out.println("upload dir: "+uploadDir);
+
 		String filename = writeToFile(uploadedInputStream, uploadDir, ".jpg");
 
 		FotoIntervento foto = new FotoIntervento();
@@ -67,7 +67,7 @@ long sum=0;
 				out.flush();
 			}
 			saveToBackup(outFile, filename);
-System.out.println("size: "+sum);
+
 			
 
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ System.out.println("size: "+sum);
 		int read = 0;
 		byte[] bytes = new byte[1024];
 		String backupDir = ApplicationConfig.getDocumentdir();
-		System.out.println("backupDir1 "+backupDir);
+
 		if (!backupDir.endsWith(File.separator))
 			backupDir += File.separator;
 		
@@ -90,7 +90,7 @@ System.out.println("size: "+sum);
 		if( !fDir.exists())fDir.mkdirs();
 		
 		backupDir += "images"+File.separator+filename;
-		System.out.println("backupDir2 "+backupDir);
+
 		try (FileInputStream is = new FileInputStream(outFile);) {
 			try (OutputStream out = new FileOutputStream(backupDir);) {
 				while ((read = is.read(bytes)) != -1) {

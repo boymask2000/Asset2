@@ -57,17 +57,10 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				Row row = rowIt.next();
 
 				AssetAlca asset = buildAsset(row);
-//				if (asset.getFacNum() == null || asset.getFacNum().trim().length() == 0)
-//					continue;
-//				try {
-//					Integer.parseInt(asset.getFacNum());
-//				} catch (Exception e) {
-//					continue;
-//				}
+
 				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
 				try {
-					// System.out.println(asset.getRpieIdIndividual());
 					dao.insert(asset);
 					count++;
 

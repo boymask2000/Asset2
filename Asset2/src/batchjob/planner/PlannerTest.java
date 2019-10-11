@@ -221,7 +221,7 @@ public class PlannerTest {
 	}
 
 	private static String getMin(Calendar cal, List<Item> lista) {
-		System.out.println(cal);
+
 		String fmtCal = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		Date fmtDate = TimeUtil.getCurrentStringDate(fmtCal);
 
@@ -253,7 +253,7 @@ public class PlannerTest {
 //			}
 
 		}
-		System.out.println("goodDate="+goodDate);
+
 		return goodDate;
 	}
 

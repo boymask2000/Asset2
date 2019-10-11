@@ -70,7 +70,6 @@ public class TimeLineItem {
 	}
 
 	public List<Check> getChecksList() {
-		System.out.println("ss: "+checksList.size());
 		return checksList;
 	}
 }

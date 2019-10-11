@@ -110,6 +110,7 @@
 										<f:facet name="footer">
 
 											<p:commandButton action="nuovoCheck" value="#{msg['NEW_CHECK']}"
+											rendered="#{managedFamiglieAssetBean.selectedFamiglia.getId()!=0}"
 												process="@this" />
 
 											<p:commandButton action="nuovoCheck" value="Edit"

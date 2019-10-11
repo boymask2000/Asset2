@@ -82,7 +82,6 @@ public class AuthFilter implements Filter {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("***************************************************************");
 		System.out.println("Eseguito restore manuali");
 		System.out.println("***************************************************************");
 	}
@@ -116,7 +115,6 @@ public class AuthFilter implements Filter {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("***************************************************************");
 		System.out.println("Eseguito restore immagini");
 		System.out.println("***************************************************************");
 	}

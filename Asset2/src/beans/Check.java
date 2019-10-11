@@ -40,6 +40,8 @@ public class Check implements Serializable{
 	}
 
 	public void setCodiceNormativa(String codiceNormativa) {
+		int index = codiceNormativa.lastIndexOf(' ');
+		if( index!=-1) codiceNormativa=codiceNormativa.substring(index+1);
 		this.codiceNormativa = codiceNormativa;
 	}
 

@@ -73,4 +73,9 @@ public class Normativa implements Serializable{
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	@Override
+	public String toString() {
+		return "Normativa: " + normativa + ", codice: " + codice ;
+	}
 }

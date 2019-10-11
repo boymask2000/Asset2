@@ -19,14 +19,12 @@ import com.sun.mail.smtp.SMTPTransport;
 
 import beans.Utente;
 
-public class MailSenderGmail extends MailSender{
+public class MailSenderGmail extends MailSender {
 
 	public MailSenderGmail() {
 		super(MAILTYPE_GMAIL);
 
 	}
-
-
 
 	public void send(String fileName, List<Utente> destinatari, String subject) {
 		if (!configOk)
@@ -35,23 +33,19 @@ public class MailSenderGmail extends MailSender{
 		if (destinatari == null || destinatari.size() == 0)
 			return;
 
+		Properties props = new Properties();
 
-       Properties props = new Properties();
-
-       props.put("mail.smtp.host", "true");
-       props.put("mail.smtp.starttls.enable", "true");
-       props.put("mail.smtp.host", "smtp.gmail.com");
-       props.put("mail.smtp.port", "587");
-       props.put("mail.smtp.auth", "true");
-        
-
+		props.put("mail.smtp.host", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
 
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(smtpUser, smtpPassword);
 			}
 		});
-
 
 		// session.setDebug(true); // Enable the debug mode
 
@@ -84,7 +78,5 @@ public class MailSenderGmail extends MailSender{
 		}
 
 	}
-
-
 
 }

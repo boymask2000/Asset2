@@ -143,5 +143,4 @@ public class ManagedChecksBean implements Serializable {
 		this.multiSelect = multiSelect;
 
 	}
-
 }

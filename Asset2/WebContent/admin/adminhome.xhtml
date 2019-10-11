@@ -12,68 +12,71 @@
 					<p:growl id="growl1" life="2000" />
 					<p:growl id="msgs" showDetail="true" />
 
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:panelGrid columns="1" cellpadding="10">
+					<h:panelGrid columns="3" cellpadding="10">
+						<p:panel id="setup" header="#{msg['SYSTEM_SETUP']}"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="1" cellpadding="10">
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['CARICAMENTO_MASSIVO_ASSET']}"
+									action="#{navigator.go('adminHome','loadAsset2')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['GESTIONE_UTENTI']}"
-								action="#{navigator.go('adminHome','utentiHome')}" />
-
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['GESTIONE_CALENDARIO']}"
-								action="#{navigator.go('adminHome','calHome')}" />
-
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['GESTIONEASSET']}"
-								action="#{navigator.go('adminHome','gestioneAsset')}" />
-
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="Checks" action="#{navigator.go('adminHome','checksHome')}" />
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['GESTIONE_CALENDARIO']}"
+									action="#{navigator.go('adminHome','calHome')}" />
 
 
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['GENERAZIONE_CALENDARIO']}"
+									action="#{navigator.go('adminHome','generazioneCalendario')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['LAVORI_BATCH']}" action="#{navigator.go('adminHome','batchHome')}" /> 
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="Planner" action="#{plannerjob.go}"
+									oncomplete="PF('panSendMail0').show()" />
+							</h:panelGrid>
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['NORMATIVE']}" action="#{navigator.go('adminHome','normativeHome')}" /> 
-								
-						</h:panelGrid>
-						<h:panelGrid columns="1" cellpadding="10">
-							<!-- 							<p:commandButton process="@this" icon="pi pi-search" -->
-							<!-- 								value="#{msg['CARICAMENTO_MASSIVO_ASSET']}" action="loadAsset" /> -->
+						</p:panel>
+						<p:panel id="Anagrafiche" header="#{msg['ANAGRAFICHE']}"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="1" cellpadding="10">
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['CARICAMENTO_MASSIVO_ASSET']}"
-								action="#{navigator.go('adminHome','loadAsset2')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['GENERAZIONE_CALENDARIO']}"
-								action="#{navigator.go('adminHome','generazioneCalendario')}" /> 
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['GESTIONE_UTENTI']}"
+									action="#{navigator.go('adminHome','utentiHome')}" />
 
-							<!-- 							<p:commandButton process="@this" icon="pi pi-search" -->
-							<!-- 								value="#{msg['REPORT_INTERVENTI']}" action="reportInterventi" /> -->
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['NORMATIVE']}"
+									action="#{navigator.go('adminHome','normativeHome')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['REPORT_INTERVENTI']} "
-								action="reportInterventiNew" />
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['HOME_SAFETY']}" action="safetyHome" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="#{msg['HOME_SAFETY']}" action="safetyHome" />
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="Checks"
+									action="#{navigator.go('adminHome','checksHome')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								value="Planner" action="#{plannerjob.go}"
-								oncomplete="PF('panSendMail0').show()" />
+								<p:commandButton process="@this" icon="pi pi-search"
+									rendered="false" value="#{msg['LOCATION']}"
+									action="#{navigator.go('adminHome','locationhome')}" />
+							</h:panelGrid>
+						</p:panel>
+						<p:panel id="Gestione" header="#{msg['GESTIONE']}"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="1" cellpadding="10">
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['GESTIONEASSET']}"
+									action="#{navigator.go('adminHome','gestioneAsset')}" />
 
-							<p:commandButton process="@this" icon="pi pi-search"
-								rendered="false" value="#{msg['LOCATION']}"
-								action="#{navigator.go('adminHome','locationhome')}" />
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['REPORT_INTERVENTI']} "
+									action="reportInterventiNew" />
 
-						</h:panelGrid>
-
+								<p:commandButton process="@this" icon="pi pi-search"
+									value="#{msg['LAVORI_BATCH']}"
+									action="#{navigator.go('adminHome','batchHome')}" />
+							</h:panelGrid>
+						</p:panel>
 					</h:panelGrid>
-
-
 
 
 					<p:panel id="basic" header="#{msg['EVENT_LOG']}">

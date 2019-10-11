@@ -56,17 +56,14 @@ public class Excel {
 					continue;
 				}
 				String title = cell.getStringCellValue();
-				System.out.println(title);
+		
 				cols.add(title);
 			}
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		} catch (EncryptedDocumentException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InvalidFormatException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

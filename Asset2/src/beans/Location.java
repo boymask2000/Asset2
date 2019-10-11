@@ -42,6 +42,5 @@ public class Location implements Serializable{
 
 	public void setIp(String ip) {
 		this.ip = ip;
-		System.out.println("ip "+ip);
 	}
 }

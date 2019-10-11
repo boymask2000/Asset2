@@ -8,17 +8,23 @@
 	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
-	
+
 		<table>
 			<tr>
-			<td><p:graphicImage url="/resources/images/alca.gif"/></td>
-			
-				<td><h:outputText 
-					style="font-size:26px;line-height:28px;"
-				value="Utente: #{utente.username}" rendered="#{utente.username!=null}"/></td>
-				
+				<td><p:graphicImage url="/resources/images/alca.gif" /></td>
+
+				<td><p:outputLabel
+						style="font-size:36px;line-height:48px;background-color:navy;color:white"
+						value="Computerized Facility Maintenance System" /></td>
+
+				<td align="right"><h:outputText
+						style="font-size:26px;line-height:28px;"
+						value="Utente: #{utente.username}"
+						rendered="#{utente.username!=null}" /></td>
+
 			</tr>
 		</table>
+
 	</ui:composition>
 </body>
 </html>

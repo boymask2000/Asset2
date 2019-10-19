@@ -14,6 +14,12 @@ import common.Log;
 import database.dao.AuditDAO;
 
 public class ManagedAuditBean extends ABaseBean  implements Serializable {
+	private boolean value1;
+	private boolean value2;
+	 public void addMessage() {
+	        String summary = value2 ? "Checked" : "Unchecked";
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
+	    }
 	/**
 	 * 
 	 */
@@ -51,6 +57,26 @@ public class ManagedAuditBean extends ABaseBean  implements Serializable {
 
 	public void setSelectedAudit(Audit selectedManuale) {
 		this.selectedAudit = selectedManuale;
+	}
+
+
+	public boolean isValue1() {
+		return value1;
+	}
+
+
+	public void setValue1(boolean value1) {
+		this.value1 = value1;
+	}
+
+
+	public boolean isValue2() {
+		return value2;
+	}
+
+
+	public void setValue2(boolean value2) {
+		this.value2 = value2;
 	}
 
 

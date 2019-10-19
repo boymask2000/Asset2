@@ -13,6 +13,7 @@
 				<h:form id="form">
 
 					<p:growl id="msgs" showDetail="true" />
+					<p:commandButton action="goCalendario" value="Cal" />
 
 					<h:panelGrid columns="1" cellpadding="0">
 						<p:panel id="basic" header="#{msg['GESTIONEASSET']}">
@@ -71,12 +72,7 @@
 														</p:commandButton></td>
 
 												</tr>
-<!-- 												<tr> -->
-<!-- 													<td colspan="3" align="center"><img -->
-<!-- 														src="resources/images/green.jpg" /></td> -->
 
-
-<!-- 												</tr> -->
 											</table>
 										</p:panel></td>
 									<td><p:panel>
@@ -135,10 +131,7 @@
 														</p:commandButton></td>
 
 												</tr>
-<!-- 												<tr> -->
-<!-- 													<td colspan="3" align="center"><img -->
-<!-- 														src="resources/images/yellow.jpg" /></td> -->
-<!-- 												</tr> -->
+
 											</table>
 
 										</p:panel></td>
@@ -198,12 +191,7 @@
 														</p:commandButton></td>
 
 												</tr>
-<!-- 												<tr> -->
 
-
-<!-- 													<td colspan="3" align="center"><img -->
-<!-- 														src="resources/images/red.jpg" /></td> -->
-<!-- 												</tr> -->
 											</table>
 										</p:panel></td>
 									<td>
@@ -219,7 +207,7 @@
 														value="#{managedAssetBean.getAssetsInStatus(0)}" /></td>
 											</tr>
 											<tr>
-												<td align="center"><p:commandButton 
+												<td align="center"><p:commandButton
 														rendered="#{managedAssetBean.getAssetsWithStatus(0).size()>0}"
 														update=":form:carDetail"
 														oncomplete="PF('carDialog').show()" title="View Detail">
@@ -242,16 +230,12 @@
 						<ui:include src="homeSituation.xhtml" />
 						<ui:include src="ritardi.xhtml" />
 
-						<p:panel>
-							<p:commandButton value="New #{msg['INTERVENTO']}"
-								action="elencoAssetPerIntervento.xhtml" />
-						</p:panel>
+
 						<p:dialog header="Info" widgetVar="carDialog" modal="true"
 							showEffect="fade" hideEffect="fade" resizable="false">
 							<p:outputPanel id="carDetail" style="text-align:center;">
 								<h:panelGrid columns="1" cellpadding="10">
-									<p:panel id="basi0c" 
-										style="margin-bottom:10px">
+									<p:panel id="basi0c" style="margin-bottom:10px">
 										<p:dataTable id="radioDT" selectionMode="single"
 											value="#{managedAssetBean.allAssetsWithSeverity}" var="c"
 											selection="#{managedAssetBean.selectedAsset}"
@@ -275,9 +259,6 @@
 												<h:outputText value="#{c.nomenclature}" />
 											</p:column>
 
-<!-- 											<p:column headerText="LastStatus"> -->
-<!-- 												<h:outputText value="#{c.lastStatus}" /> -->
-<!-- 											</p:column> -->
 
 											<f:facet name="footer">
 												<h:commandButton action="goToDetailAsset" value="Detail"
@@ -293,7 +274,7 @@
 							</p:outputPanel>
 						</p:dialog>
 					</h:panelGrid>
-					<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+					<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
 				</h:form>
 			</f:view>
 		</ui:define>

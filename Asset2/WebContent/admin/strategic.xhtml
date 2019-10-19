@@ -3,8 +3,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+<head>
+
+<h:outputStylesheet name="styles.css" link="css"/>
+</head>
 
 <h:body>
+
 
 
 	<ui:composition template="/template/commonTemplate.xhtml">
@@ -27,10 +32,8 @@
 								update="eventDetails" oncomplete="PF('eventDialog').show();" />
 
 						</p:schedule>
-<!--  <p:commandButton id="toPrint" value="Print" ajax="false"> -->
-<!--         <p:printer target="schedule" /> -->
-<!--     </p:commandButton> -->
-    <h:commandButton value="#{msg['STAMPA']}"
+
+						<h:commandButton value="#{msg['STAMPA']}"
 							action="#{printCreatorSchedule.printSchedule}" />
 					</p:panel>
 

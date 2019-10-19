@@ -19,6 +19,7 @@ public class CalendarioDaTavolo {
 	private int mese;
 	private int anno;
 	private String sMese;
+	private Calendar fixedCal;
 
 	public CalendarioDaTavolo() {
 		currentDate = TimeUtil.getCurrentDate();
@@ -29,29 +30,29 @@ public class CalendarioDaTavolo {
 		update();
 	}
 
-	public void showDay(int evt) {
-
-		
-
+	public String getDateProgressive(int evt) {
 		Calendar cc = (Calendar) cal.clone();
-	
-
 
 		cc.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOne = cc.get(Calendar.DAY_OF_WEEK);
-		cc.add(Calendar.DAY_OF_MONTH, -dayOne+1);
-			
+		cc.add(Calendar.DAY_OF_MONTH, -dayOne + 1);
 
 		for (int i = 0; i < evt; i++)
 			cc.add(Calendar.DAY_OF_MONTH, 1);
 
 		int a = cc.get(Calendar.YEAR);
-		int m = cc.get(Calendar.MONTH)+1;
+		int m = cc.get(Calendar.MONTH) + 1;
 		int g = cc.get(Calendar.DAY_OF_MONTH);
 
-		String out = String.format("%4d%02d%02d",a,m,g);
-	
-		ManagedInterventiBean bean=	(ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
+		String out = String.format("%4d%02d%02d", a, m, g);
+		return out;
+	}
+
+	public void showDay(int evt) {
+
+		String out = getDateProgressive(evt);
+
+		ManagedInterventiBean bean = (ManagedInterventiBean) JsfUtil.getBean("managedInterventiBean");
 		bean.setSelectedDataForSituation(out);
 	}
 
@@ -95,6 +96,7 @@ public class CalendarioDaTavolo {
 			cc.add(Calendar.DAY_OF_MONTH, 1);
 			days.add(cc.get(Calendar.DAY_OF_MONTH));
 		}
+		fixedCal = cc;
 
 	}
 

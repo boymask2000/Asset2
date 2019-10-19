@@ -101,13 +101,22 @@ public class AssetAlcaDAO {
 	}
 
 	public List<AssetAlca> search(AssetAlca s) {
+		AssetAlca ss = copyAssetForSearch(s);
+
 		List<AssetAlca> ll = new ArrayList<AssetAlca>();
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
-			ll = session.selectList("searchAsset", s);
+			ll = session.selectList("searchAsset", ss);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ll;
+	}
+
+	private AssetAlca copyAssetForSearch(AssetAlca s) {
+		AssetAlca ss=new AssetAlca();
+		if( s.getFacSystem()!=null && s.getFacSystem().trim().length()>0 )ss.setFacSystem("%"+s.getFacSystem()+"%");
+		if( s.getRpieIdIndividual()!=null && s.getRpieIdIndividual().trim().length()>0)ss.setRpieIdIndividual("%"+s.getRpieIdIndividual()+"%");
+		return ss;
 	}
 
 	public List<String> getFamilies() {

@@ -67,6 +67,8 @@ public class ManualeFamiglia implements Serializable {
 	}
 
 	public TypeManuale getTypeManuale() {
+		typeManuale= TypeManuale.getType((int) type);
+		System.out.println(typeManuale);
 		return typeManuale;
 	}
 

@@ -33,15 +33,13 @@ public class FrequenzeAlcaDAO {
 
 	public List<FrequenzaAlca> getFreqForRPIEandFreq(FrequenzaAlca u) {
 		List<FrequenzaAlca> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();)
+		{
 
-		try {
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 
 			list = mapper.getFreqForRPIEandFreq(u);
-		} finally {
-			session.close();
-		}
+		} 
 		return list;
 	}
 

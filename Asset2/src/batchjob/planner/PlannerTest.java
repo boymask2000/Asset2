@@ -5,9 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import batchjob.GenericJob;
 import beans.AssetAlca;
 import beans.Calendario;
 import beans.Check;

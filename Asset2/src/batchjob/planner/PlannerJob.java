@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import batchjob.GenericJob;
-import batchjob.planner.PlannerTest.Item;
 import beans.AssetAlca;
 import beans.Calendario;
 import beans.Check;
@@ -16,7 +15,6 @@ import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
 import beans.Intervento;
 import beans.Normativa;
-import common.JsfUtil;
 import common.TimeUtil;
 import common.TipoSchedulazione;
 import database.dao.AssetAlcaDAO;
@@ -144,7 +142,10 @@ public class PlannerJob extends GenericJob {
 		if (num == 0) {
 			dao.insert(u);
 		}
-		Intervento ii = dao.getInterventiPerAssetInData(u).get(0);
+		List<Intervento> listaInt = dao.getInterventiPerAssetInData(u);
+	//	System.out.println("size listaint: "+listaInt.size());
+		
+		Intervento ii = listaInt.get(0);
 
 		ChecklistIntervento cli = new ChecklistIntervento();
 		cli.setCheckId(ck.getId());

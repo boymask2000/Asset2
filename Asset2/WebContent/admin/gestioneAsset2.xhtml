@@ -14,7 +14,7 @@
 					<h:panelGrid columns="2" cellpadding="1">
 						<p:panel id="baic" header="#{msg['RICERCA_ASSET']}">
 							<h:panelGrid columns="2" cellpadding="1">
-			
+
 								<h:outputText value="Fac #" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
@@ -43,7 +43,7 @@
 									value="#{managedRicercaAssetBean.selectedAsset.pmSchedSerial}" />
 
 								<h:outputText value="rpieIdIndividual" />
-								<h:outputText
+								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.rpieIdIndividual}" />
 								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
@@ -52,12 +52,39 @@
 
 							</h:panelGrid>
 							<p:commandButton action="#{managedRicercaAssetBean.ricerca}"
-								value="#{msg['SEARCH']}" update=":form" />
+								value="#{msg['SEARCH']}" update="radioDT" />
 						</p:panel>
 
-						<h:panelGrid columns="1" cellpadding="100">
-							<p:panel id="basic" header="Asset"
-								style="margin-bottom:20px">
+						<h:panelGrid columns="1" >
+							<p:panel id="pFam" header="Families" style="margin-bottom:20px">
+							<p:dataTable id="dtFam" selectionMode="single"
+									value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
+									selection="#{managedFamiglieAssetBean.selectedFamiglia}" rowKey="#{c.id}"
+									paginator="true" rows="10"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+									
+										<p:ajax event="rowSelect"
+										listener="#{managedFamiglieAssetBean.onRowSelect4GestioneAset}" update=":form" />
+									
+									<p:column headerText="Famiglia">
+										<h:outputText value="#{c.famiglia}" />
+									</p:column>
+									
+									<f:facet name="footer">
+
+										<h:commandButton
+											action="#{managedFamiglieAssetBean.reset}"
+											value="Reset" process="@this">
+											
+										</h:commandButton>
+
+
+
+									</f:facet>
+									</p:dataTable>
+							</p:panel>
+							<p:panel id="basic" header="Asset" style="margin-bottom:20px">
 								<p:dataTable id="radioDT" selectionMode="single"
 									value="#{managedAssetBean.allAssets}" var="c"
 									selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
@@ -83,8 +110,9 @@
 
 									<f:facet name="footer">
 
-										<h:commandButton action="#{navigator.go('gestioneAsset','goToDetailAsset')}" value="Detail"
-											process="@this">
+										<h:commandButton
+											action="#{navigator.go('gestioneAsset','goToDetailAsset')}"
+											value="Detail" process="@this">
 											<f:param name="op" value="NEW" />
 										</h:commandButton>
 

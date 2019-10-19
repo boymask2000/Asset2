@@ -16,16 +16,16 @@ public interface InterventiMapper {
 
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 	final String SELECT_INTERVENTI_PER_ASSET = "SELECT * FROM " + TABELLA
-			+ " WHERE ASSETID=#{assetId} order by data_pianificata";
+			+ " WHERE ASSETID=#{assetId} order by data_pianificata, timestamp DESC";
 
 	final String SELECT_INTERVENTI_PER_ASSET_AND_DATA = "SELECT * FROM " + TABELLA + //
 			" WHERE ASSETID=#{assetId} AND data_pianificata=#{data_pianificata}";
 
 	final String SELECT_INTERVENTI_PER_ASSET_DONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
-			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA DESC";
+			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA DESC, timestamp DESC";
 
 	final String SELECT_INTERVENTI_PER_ASSET_UNDONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
-			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC";
+			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC, timestamp DESC";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (assetId , data_teorica , data_pianificata, data_effettiva, esito , user, commento, timestamp)" //

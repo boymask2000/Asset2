@@ -183,6 +183,9 @@
 										<p:column headerText="#{msg['DESCRIZIONE']}">
 											<h:outputText value="#{c.descr}" />
 										</p:column>
+										<p:column headerText="Type">
+											<h:outputText value="#{c.typeManuale.name}" />
+										</p:column>
 
 										<p:column headerText="File">
 											<h:outputText value="#{c.nomeFile}" />
@@ -191,6 +194,13 @@
 											<h:commandButton
 												action="#{managedManualiFamigliaBean.setupViewFile(c.nomeFile)}"
 												value="View" />
+										</p:column>
+										<p:column style="width:32px;text-align: center">
+											<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
+												title="Delete">
+												<f:setPropertyActionListener value="#{c}"
+													target="#{managedManualiFamigliaBean.deleteSelected}" />
+											</p:commandButton>
 										</p:column>
 
 										<f:facet name="footer">
@@ -229,20 +239,21 @@
 									<p:growl id="messages" showDetail="true" />
 
 									<p:panelGrid columns="2">
-									
-									<h:outputText value="Tipo" for="tipo" />
-									<p:selectOneMenu id="tipo"
-										value="#{manualeFamigliaUpload.currentManuale.type}"
-										style="width:125px">
 
-										<f:selectItem itemLabel="Scheda per mobile" itemValue="3" />
-										<f:selectItem itemLabel="Scheda tecnica" itemValue="1" />
-										<f:selectItem itemLabel="Rating Guidance" itemValue="2" />
-										<f:selectItem itemLabel="Altro" itemValue="0" />
-									</p:selectOneMenu>
+										<h:outputText value="Tipo" for="tipo" />
+										<p:selectOneMenu id="tipo"
+											value="#{manualeFamigliaUpload.currentManuale.type}"
+											style="width:125px">
+
+											<f:selectItem itemLabel="Scheda per mobile" itemValue="3" />
+											<f:selectItem itemLabel="Scheda tecnica" itemValue="1" />
+											<f:selectItem itemLabel="Rating Guidance" itemValue="2" />
+											<f:selectItem itemLabel="Altro" itemValue="0" />
+										</p:selectOneMenu>
 									</p:panelGrid>
-									<p:fileUpload value="#{manualeFamigliaUpload.file}" mode="advanced"
-										allowTypes="/(\.|\/)(pdf)$/" update=":form" process="@form"
+									<p:fileUpload value="#{manualeFamigliaUpload.file}"
+										mode="advanced" allowTypes="/(\.|\/)(pdf)$/" update=":form"
+										process="@form"
 										fileUploadListener="#{manualeFamigliaUpload.handleFileUpload}">
 
 									</p:fileUpload>

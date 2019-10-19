@@ -3,9 +3,6 @@ package managed;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-
-import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.event.timeline.TimelineSelectEvent;
 import org.primefaces.model.timeline.TimelineEvent;

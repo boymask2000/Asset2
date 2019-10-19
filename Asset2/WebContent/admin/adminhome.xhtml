@@ -4,6 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+<style>
+</style>
+
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
@@ -11,82 +14,183 @@
 				<h:form id="form">
 					<p:growl id="growl1" life="2000" />
 					<p:growl id="msgs" showDetail="true" />
+<style type="text/css">
+td.col_0 {
+	background-color: #FFFFFF !important;
+}
 
-					<h:panelGrid columns="3" cellpadding="10">
-						<p:panel id="setup" header="#{msg['SYSTEM_SETUP']}"
-							style="margin-bottom:20px">
-							<h:panelGrid columns="1" cellpadding="10">
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['CARICAMENTO_MASSIVO_ASSET']}"
-									action="#{navigator.go('adminHome','loadAsset2')}" />
+td.col_1 {
+	background-color: #548235 !important;
+}
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['GESTIONE_CALENDARIO']}"
-									action="#{navigator.go('adminHome','calHome')}" />
+td.col_2 {
+	background-color: #A9D08E !important;
+}
+
+td.col_3 {
+	background-color: #E2EFDA !important;
+}
+
+td.col_4 {
+	background-color: #BF8F00 !important;
+}
+
+td.col_5 {
+	background-color: #FFD966 !important;
+}
+
+td.col_6 {
+	background-color: #FFF2CC !important;
+}
+
+td.col_7 {
+	background-color: #EB0000 !important;
+}
+
+td.col_8 {
+	background-color: #FF4F4F !important;
+}
+
+td.col_9 {
+	background-color: #FFC1C1 !important;
+}
+</style>
+<p:poll update=":form:OnLine" interval="30" />
+
+					<p:panelGrid columns="4" width="100%" cellpadding="10"
+						styleClass="align">
+						<p:column style="width:25%">
+							<p:panel id="setup" header="#{msg['SYSTEM_SETUP']}"
+								style="margin-bottom:20px">
+								<h:panelGrid columns="1" cellpadding="10">
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['CARICAMENTO_MASSIVO_ASSET']}"
+										action="#{navigator.go('adminHome','loadAsset2')}" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['GESTIONE_CALENDARIO']}"
+										action="#{navigator.go('adminHome','calHome')}" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['GENERAZIONE_CALENDARIO']}"
+										action="#{navigator.go('adminHome','generazioneCalendario')}" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['PLANNER']}" action="#{plannerjob.go}"
+										oncomplete="PF('panSendMail0').show()" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['LAVORI_BATCH']}"
+										action="#{navigator.go('adminHome','batchHome')}" />
+								</h:panelGrid>
+
+							</p:panel>
+						</p:column>
+						<p:column style="width:25%">
+							<p:panel id="Anagrafiche" header="#{msg['ANAGRAFICHE']}"
+								style="margin-bottom:20px">
+								<h:panelGrid columns="1" cellpadding="10">
 
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['GENERAZIONE_CALENDARIO']}"
-									action="#{navigator.go('adminHome','generazioneCalendario')}" />
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['GESTIONE_UTENTI']}"
+										action="#{navigator.go('adminHome','utentiHome')}" />
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="Planner" action="#{plannerjob.go}"
-									oncomplete="PF('panSendMail0').show()" />
-							</h:panelGrid>
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['NORMATIVE']}"
+										action="#{navigator.go('adminHome','normativeHome')}" />
 
-						</p:panel>
-						<p:panel id="Anagrafiche" header="#{msg['ANAGRAFICHE']}"
-							style="margin-bottom:20px">
-							<h:panelGrid columns="1" cellpadding="10">
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['HOME_SAFETY']}" action="safetyHome" />
 
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['CHECKS']}"
+										action="#{navigator.go('adminHome','checksHome')}" />
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['GESTIONE_UTENTI']}"
-									action="#{navigator.go('adminHome','utentiHome')}" />
+									<p:commandButton process="@this" icon="pi pi-search"
+										rendered="true" value="#{msg['LOCATION']}"
+										action="#{navigator.go('adminHome','locationhome')}" />
+								</h:panelGrid>
+							</p:panel>
+						</p:column>
+						<p:column style="width:25%">
+							<p:panel id="Gestione" header="#{msg['GESTIONE']}"
+								style="margin-bottom:20px">
+								<h:panelGrid columns="1" cellpadding="10">
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['GESTIONEASSET']}"
+										action="#{navigator.go('adminHome','gestioneAsset')}" />
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['NORMATIVE']}"
-									action="#{navigator.go('adminHome','normativeHome')}" />
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['REPORT_INTERVENTI']} "
+										action="reportInterventiNew" />
 
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['HOME_SAFETY']}" action="safetyHome" />
-
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="Checks"
-									action="#{navigator.go('adminHome','checksHome')}" />
-
-								<p:commandButton process="@this" icon="pi pi-search"
-									rendered="false" value="#{msg['LOCATION']}"
-									action="#{navigator.go('adminHome','locationhome')}" />
-							</h:panelGrid>
-						</p:panel>
-						<p:panel id="Gestione" header="#{msg['GESTIONE']}"
-							style="margin-bottom:20px">
-							<h:panelGrid columns="1" cellpadding="10">
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['GESTIONEASSET']}"
-									action="#{navigator.go('adminHome','gestioneAsset')}" />
-
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['REPORT_INTERVENTI']} "
-									action="reportInterventiNew" />
-
-								<p:commandButton process="@this" icon="pi pi-search"
-									value="#{msg['LAVORI_BATCH']}"
-									action="#{navigator.go('adminHome','batchHome')}" />
-							</h:panelGrid>
-						</p:panel>
-					</h:panelGrid>
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['USER_HOME']}"
+										action="#{navigator.go('adminHome','home')}" />
+								</h:panelGrid>
+							</p:panel>
+						</p:column>
 
 
-					<p:panel id="basic" header="#{msg['EVENT_LOG']}">
-						<style type="text/css">
+						<p:column style="width:25%">
+							<!-- MONITOR INTERVENTI INIZIO -->
+							<p:panel id="OnLine" header="#{msg['LISTA_ONLINE']}">
+								<p:dataTable id="realtime"
+									value="#{interventiRealTimeManagedBean.infoInterventi}" var="c"
+									paginator="true" rows="10"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+
+
+									<p:column headerText="User">
+										<h:outputText value="#{c.interventoRealTime.user}" />
+									</p:column>
+									<p:column headerText="Asset">
+										<h:outputText value="#{c.interventoRealTime.assetRMP}" />
+									</p:column>
+									<p:column headerText="Start">
+										<h:outputText value="#{c.sDateStart}" />
+									</p:column>
+									<p:column headerText="End">
+										<h:outputText value="#{c.sDateEnd}" />
+									</p:column>
+									<p:column headerText="Outcome" styleClass="#{c.createStyle()}">
+
+									</p:column>
+
+									<p:column headerText="Status">
+										<h:outputText value="#{c.interventoRealTime.stato}" />
+									</p:column>
+
+									<f:facet name="footer">
+										<p:commandButton id="Refreshrt" value="Refresh"
+											icon="ui-icon-check" update="realtime" />
+									</f:facet>
+								</p:dataTable>
+							</p:panel>
+						</p:column>
+
+
+						<!-- MONITOR INTERVENTI FINE -->
+					</p:panelGrid>
+
+
+
+					<style type="text/css">
 .old {
 	background-color: #fca752 !important;
 	background-image: none !important;
 	color: #000000 !important;
 }
+
+.align td {
+	vertical-align: top;
+}
 </style>
+					<p:panel id="basic" header="#{msg['EVENT_LOG']}">
+	
 
 						<p:dataTable id="Events" selectionMode="single"
 							value="#{managedAuditBean.all}" var="c"

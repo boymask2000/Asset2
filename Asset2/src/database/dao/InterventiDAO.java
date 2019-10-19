@@ -87,15 +87,17 @@ public class InterventiDAO {
 		}
 		return list;
 	}
+
 	public List<Intervento> search(RicercaInterventiBean s) {
 		List<Intervento> ll = new ArrayList<Intervento>();
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			ll = session.selectList("searchInterventi", s);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ll;
 	}
+
 	public Intervento getLastInterventoFatto(long assetId) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
@@ -121,6 +123,7 @@ public class InterventiDAO {
 	}
 
 	public void insert(Intervento u) {
+		u.setTimestamp(TimeUtil.getTimestamp());
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
 			mapper.insert(u);
@@ -129,6 +132,7 @@ public class InterventiDAO {
 	}
 
 	public void update(Intervento u) {
+		u.setTimestamp(TimeUtil.getTimestamp());
 		Utente utente = (Utente) JsfUtil.getBean("utente");
 		u.setUser(utente.getUsername());
 		u.setTimestamp(TimeUtil.getTimestamp());
@@ -208,17 +212,17 @@ public class InterventiDAO {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
-			
+
 			return mapper.getPreviousInte(date);
 		}
 	}
 
 	public List<AssetAlca> getPreviousInteAssets(String date) {
-	
+
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
-			
+
 			return mapper.getPreviousInteAssets(date);
 		}
 	}

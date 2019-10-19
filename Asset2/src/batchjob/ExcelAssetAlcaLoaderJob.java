@@ -57,6 +57,9 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				Row row = rowIt.next();
 
 				AssetAlca asset = buildAsset(row);
+				String rpm = asset.getRpieIdIndividual();
+				if (rpm == null || rpm.trim().length() == 0)
+					continue;
 
 				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
@@ -73,7 +76,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 					t.printStackTrace();
 
 				}
-			
+
 			}
 
 		} catch (Throwable t) {
@@ -92,7 +95,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 //		for (int i = minColIx; i < maxColIx; i++)
 //			System.out.println(row.getCell(i).toString());
 //		System.out.println("---------------------");
-		
+
 		AssetAlca asset = new AssetAlca();
 		asset.setFacNum(getCell(row, 1));
 		asset.setFacSystem(getCell(row, 2));
@@ -106,7 +109,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 		asset.setSchedAssignedOrg(getCell(row, 10));
 		asset.setRpieIdIndividual(getCell(row, 11));
 
-	//	System.out.println(asset.toString());
+		// System.out.println(asset.toString());
 		return asset;
 	}
 
@@ -119,7 +122,7 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				if (cell == null)
 					return null;
 				cell.setCellType(Cell.CELL_TYPE_STRING);
-			//	System.out.println(cell.getStringCellValue());
+				// System.out.println(cell.getStringCellValue());
 				System.out.println(cell.toString());
 				return cell.toString();
 			}

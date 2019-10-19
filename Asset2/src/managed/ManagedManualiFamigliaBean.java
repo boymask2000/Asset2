@@ -14,7 +14,7 @@ import beans.Utente;
 import common.Log;
 import database.dao.ManualiFamigliaDAO;
 
-public class ManagedManualiFamigliaBean extends ABaseBean  implements Serializable {
+public class ManagedManualiFamigliaBean extends ABaseBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -35,10 +35,11 @@ public class ManagedManualiFamigliaBean extends ABaseBean  implements Serializab
 		myList = dao.getManualiForFamily(familyId);
 		return myList;
 	}
+
 	public ManualeFamiglia getManualeByType(ManualeFamiglia manual) {
 		ManualiFamigliaDAO dao = new ManualiFamigliaDAO();
 		return dao.getManualeByType(manual);
-	
+
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -49,8 +50,12 @@ public class ManagedManualiFamigliaBean extends ABaseBean  implements Serializab
 
 	}
 
+	public void setDeleteSelected(ManualeFamiglia u) {
+		ManualiFamigliaDAO dao = new ManualiFamigliaDAO();
+		dao.delete(u);
+	}
+
 	public void insertManuale(ManualeFamiglia manuale) {
-		
 
 		ManualiFamigliaDAO dao = new ManualiFamigliaDAO();
 
@@ -72,9 +77,9 @@ public class ManagedManualiFamigliaBean extends ABaseBean  implements Serializab
 	}
 
 	public String setupViewFile(String nome) {
-		
+
 		BasicDocumentViewController c = getDocController();
-		c.setPdf(new File(getFullPath("ManualiFamiglia"+File.separator+nome)));
+		c.setPdf(new File(getFullPath("ManualiFamiglia" + File.separator + nome)));
 		return "viewFile";
 	}
 

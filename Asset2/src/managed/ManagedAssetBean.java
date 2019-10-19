@@ -119,13 +119,16 @@ public class ManagedAssetBean {
 	}
 
 	public List<AssetAlca> getAllAssets() {
-		if (searchResult != null)
-			return searchResult;
-		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
-		List<AssetAlca> ll = assetDAO.selectAll();
-		if (selectedAsset == null && ll.size() > 0)
-			selectedAsset = ll.get(0);
-		return ll;
+		ManagedRicercaAssetBean mrab = (ManagedRicercaAssetBean)JsfUtil.getBean("managedRicercaAssetBean");
+		mrab.ricerca();
+		
+//		if (searchResult != null)
+//			return searchResult;
+//		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
+//		List<AssetAlca> ll = assetDAO.selectAll();
+//		if (selectedAsset == null && ll.size() > 0)
+//			selectedAsset = ll.get(0);
+		return searchResult;
 	}
 
 	public void updateAsset() {

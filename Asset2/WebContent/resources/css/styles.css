@@ -22,3 +22,9 @@
 {
      position: absolute !important;
 }
+
+.myclass .fc-event-inner {
+
+    background: Red;
+    border-color: Yellow;
+}

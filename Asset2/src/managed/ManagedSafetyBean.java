@@ -82,6 +82,10 @@ public class ManagedSafetyBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
+	public void setDeleteSelected(Safety u) {
+		SafetyDAO dao = new SafetyDAO();
+		dao.delete(u);
+	}
 
 	public void saveSafety() {
 		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");

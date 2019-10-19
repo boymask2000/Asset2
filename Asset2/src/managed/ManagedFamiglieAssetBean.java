@@ -49,6 +49,23 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 		Log.getLogger().debug("select");
 
 	}
+	
+	public void onRowSelect4GestioneAset(SelectEvent event) {
+		FacesMessage msg = new FacesMessage(" Selected", ((FamigliaAsset) event.getObject()).getFamiglia());
+		selectedFamiglia = (FamigliaAsset) event.getObject();
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Log.getLogger().debug("select4");
+		
+		ManagedRicercaAssetBean mab = (ManagedRicercaAssetBean)JsfUtil.getBean("managedRicercaAssetBean");
+		mab.getSelectedAsset().setFacSystem(selectedFamiglia.getFamiglia());
+		
+
+	}
+	public void reset() {
+
+		ManagedRicercaAssetBean mab = (ManagedRicercaAssetBean)JsfUtil.getBean("managedRicercaAssetBean");
+		mab.resetSelectedAsset();
+	}
 	public void onRowSelectDialog(SelectEvent event) {
 	
 		selectedTargetFamiglia = (FamigliaAsset) event.getObject();

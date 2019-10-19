@@ -39,6 +39,19 @@ public class ManualiFamigliaDAO {
 			t.printStackTrace();
 		}
 	}
+	
+	public void delete(ManualeFamiglia u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ManualiFamigliaMapper mapper = session.getMapper(ManualiFamigliaMapper.class);
+
+
+			mapper.delete(u);
+			session.commit();
+		}catch( Throwable t) {
+			t.printStackTrace();
+		}
+	}
 
 	public List<ManualeFamiglia> getManualiForFamily(long familyId) {
 		List<ManualeFamiglia> list = null;

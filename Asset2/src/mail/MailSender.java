@@ -12,7 +12,6 @@ import javax.mail.internet.MimeBodyPart;
 
 import beans.Utente;
 import common.ApplicationConfig;
-import common.JsfUtil;
 
 public abstract class MailSender {
 	protected final static String MAILTYPE_GMAIL = "gmail";

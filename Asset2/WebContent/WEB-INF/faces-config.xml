@@ -259,6 +259,12 @@
 		<managed-bean-class>managed.ManualeFamigliaUpload</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>interventiRealTimeManagedBean</managed-bean-name>
+		<managed-bean-class>managed.InterventiRealTimeManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+ 
 	
 <navigation-rule>
 		<from-view-id>*</from-view-id>

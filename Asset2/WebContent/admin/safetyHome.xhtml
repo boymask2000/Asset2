@@ -43,7 +43,8 @@
 								</p:column>
 								<p:column style="width:60%">
 									<p:panel>
-									<h:outputText value="Column texts can be updated by clicking on the table" />
+										<h:outputText
+											value="Column texts can be updated by clicking on the table" />
 										<p:outputLabel
 											value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
 											rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
@@ -91,7 +92,13 @@
 													</f:facet>
 												</p:cellEditor>
 											</p:column>
-
+											<p:column style="width:32px;text-align: center">
+												<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
+													title="Delete">
+													<f:setPropertyActionListener value="#{c}"
+														target="#{managedSafetyBean.deleteSelected}" />
+												</p:commandButton>
+											</p:column>
 
 
 

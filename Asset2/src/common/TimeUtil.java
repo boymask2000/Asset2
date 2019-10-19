@@ -11,15 +11,22 @@ import managed.LanguageBean;
 public class TimeUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
 	private static final SimpleDateFormat sdfShort = new SimpleDateFormat("yyyyMMdd");
-private  String time;
+	private String time;
+
 	public static String getTimestamp() {
 		Date date = new Date();
 
 		return sdf.format(date.getTime());
 
 	}
+	
+	public static String getTimestamp(Date date) {
 
-	public  String getTime() {
+		return sdf.format(date.getTime());
+
+	}
+
+	public String getTime() {
 		Date date = new Date();
 
 		String time = sdf.format(date.getTime());
@@ -59,7 +66,6 @@ private  String time;
 
 		return date1;
 	}
-	
 
 	public static Date getNextDate(Date d, int ndays) {
 		Calendar c = new GregorianCalendar();
@@ -121,7 +127,8 @@ private  String time;
 		String mesiEN[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
 				"October", "November", "December" };
 		int mese = cal.get(Calendar.MONTH);
-		if( locale.equalsIgnoreCase("it"))return mesiIT[mese];
+		if (locale.equalsIgnoreCase("it"))
+			return mesiIT[mese];
 		return mesiEN[mese];
 	}
 }

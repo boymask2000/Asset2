@@ -85,9 +85,7 @@ public class ManualeFamigliaUpload extends ABaseBean {
 		if (!PhaseId.INVOKE_APPLICATION.equals(event.getPhaseId())) {
 	        event.setPhaseId(PhaseId.INVOKE_APPLICATION);
 	        event.queue();return;
-	    } else {
-	        //do stuff here, #{ngoPhotoBean.description} is set
-	    }
+	    } 
 		String fileName = event.getFile().getFileName();
 
 		

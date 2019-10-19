@@ -62,7 +62,7 @@ private	TimelineEvent selectedTimelineEvent=null;
 	
 	 public void onSelect(TimelineSelectEvent e) {  
 		 selectedTimelineEvent = e.getTimelineEvent(); 
-		 System.out.println("1 "+selectedTimelineEvent);
+	
 	   
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected event:", selectedTimelineEvent.getData().toString());  
 	        FacesContext.getCurrentInstance().addMessage(null, msg);  

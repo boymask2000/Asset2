@@ -19,6 +19,9 @@ public enum TypeManuale {
 	public int getId() {
 		return id;
 	}
+	public String getName() {
+		return name();
+	}
 
 	public String getLongDescr() {
 		return longDescr;
@@ -29,6 +32,17 @@ public enum TypeManuale {
 	}
 	public static TypeManuale getType(int idd ){
 		switch(idd) {
+		case 0: return INFO_GENERICO;
+		case 1: return SCHEDA_TECNICA;
+		case 2: return INFO_RATING_GUIDANCE;
+		case 3: return SHORT_REFERENCE_FOR_MOBILE;
+		default:
+			break;
+		}
+		return INFO_GENERICO;
+	}
+	public  TypeManuale getType(){
+		switch(id) {
 		case 0: return INFO_GENERICO;
 		case 1: return SCHEDA_TECNICA;
 		case 2: return INFO_RATING_GUIDANCE;

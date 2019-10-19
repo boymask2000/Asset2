@@ -14,6 +14,8 @@ public interface SafetyMapper {
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
 	final String SELECT_BY_FAMILY = "SELECT * FROM " + TABELLA + " WHERE familyid = #{id}";
+	
+	final String DELETE = "DELETE FROM " + TABELLA + " WHERE id = #{id}";
 
 	final String INSERT = "INSERT INTO  " + TABELLA + //
 			"  (familyid ,risk_en, risk_it, ppe_en, ppe_it, imgId ) VALUES (#{familyid}, #{risk_en}, #{risk_it}, #{ppe_en}, #{ppe_it}, #{imgId} )";
@@ -48,6 +50,9 @@ public interface SafetyMapper {
 
 	@Insert(INSERT)
 	public void insert(Safety s);
+	
+	@Insert(DELETE)
+	public void delete(Safety s);
 
 	@Update(UPDATE)
 	public void update(Safety u);

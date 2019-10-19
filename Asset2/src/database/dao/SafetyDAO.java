@@ -59,6 +59,17 @@ public class SafetyDAO {
 		}
 	}
 
+	public void delete(Safety u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			SafetyMapper mapper = session.getMapper(SafetyMapper.class);
+
+			mapper.delete(u);
+			session.commit();
+
+		}
+	}
+
 	public void update(Safety u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 

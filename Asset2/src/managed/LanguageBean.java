@@ -1,7 +1,9 @@
 package managed;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -17,11 +19,23 @@ public class LanguageBean implements Serializable {
 	private static Map<String, Locale> countries;
 
 	private Locale locale=Locale.ENGLISH;
+	
+	private  List<Flag> flags=new ArrayList<Flag>();
+	
+	
 	static {
 		countries = new LinkedHashMap<String, Locale>();
 		countries.put("en", Locale.ENGLISH); // label, value
 		countries.put("it", Locale.ITALIAN);
+		
+		
+		
 
+	}
+	
+	public LanguageBean(){
+		flags.add(new Flag("us","flag_us"));
+		flags.add(new Flag("it","flag_it"));
 	}
 
 	public Map<String, Locale> getCountriesInMap() {
@@ -73,6 +87,14 @@ public class LanguageBean implements Serializable {
 
 	public  void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	public  List<Flag> getFlags() {
+		return flags;
+	}
+
+	public  void setFlags(List<Flag> flags) {
+		this.flags = flags;
 	}
 
 }

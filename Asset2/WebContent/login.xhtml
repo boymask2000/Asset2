@@ -19,41 +19,47 @@
 
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-		<f:view locale="#{language.locale}">
-			<h:form id="fm1">
-				<p:panel>
-					<h:panelGrid columns="2"
-						style="border:0px !important; background:none;margin:0 auto">
-
-						<p:panel>
+			<f:view locale="#{language.locale}">
 			
+				<h:form id="fm1">
 
-							<h:panelGrid columns="2">
-								<h:outputText value="#{msg['UTENTE'] }" />
-								<h:inputText value="#{utente.username}" required="true" />
+					<p:panel>
+						<h:panelGrid columns="2"
+							style="border:0px !important; background:none;margin:0 auto">
 
-								<h:outputText value="Password" />
-								<p:password value="#{utente.password}" required="true" />
-							</h:panelGrid>
-							<h:commandButton value="Login" action="#{utente.login}" />
+							<p:panel>
 
-						</p:panel>
 
-						<h:panelGrid columns="2" style="margin-bottom:10px"
-							cellpadding="5">
+								<h:panelGrid columns="2">
+									<h:outputText value="#{msg['UTENTE'] }" />
+									<h:inputText value="#{utente.username}" required="true" />
+
+									<h:outputText value="Password" />
+									<p:password value="#{utente.password}" required="true" />
+								</h:panelGrid>
+								<h:commandButton value="Login" action="#{utente.login}" />
+
+							</p:panel>
+
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
 	
 								Language : 
 		<h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
-								valueChangeListener="#{language.countryLocaleCodeChanged}">
-								<f:selectItems value="#{language.countriesInMap}" />
-							</h:selectOneMenu>
+									valueChangeListener="#{language.countryLocaleCodeChanged}">
+									<f:selectItems value="#{language.countriesInMap}" />
+								</h:selectOneMenu>
+
+
+
+
+							</h:panelGrid>
+
+
 						</h:panelGrid>
 
-
-					</h:panelGrid>
-
-				</p:panel>
-			</h:form>
+					</p:panel>
+				</h:form>
 			</f:view>
 		</ui:define>
 	</ui:composition>

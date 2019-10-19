@@ -16,19 +16,19 @@
 				id = #{id}
 			</if>
 
-			<if test="facNum != ''">
+			<if test="facNum != null">
 				AND facNum = #{facNum}
 			</if>
-			<if test="facSystem != ''">
-				AND facSystem = #{facSystem}
+			<if test="facSystem != null">
+				AND facSystem LIKE #{facSystem}
 			</if>
-			<if test="facSubsystem != ''">
-				AND facSubsystem = #{facSubsystem}
+			<if test="facSubsystem != null">
+				AND facSubsystem LIKE #{facSubsystem}
 			</if>
-			<if test="assemblyCategory != ''">
+			<if test="assemblyCategory != null">
 				AND assemblyCategory = #{assemblyCategory}
 			</if>
-			<if test="nomenclature != ''">
+			<if test="nomenclature != null">
 				AND nomenclature LIKE #{nomenclature}
 			</if>
 			<if test="procId != '' and procId != null">
@@ -41,7 +41,7 @@
 				AND pmSchedSerial = #{pmSchedSerial}
 			</if>
 			<if test="rpieIdIndividual != '' and rpieIdIndividual != null">
-				AND rpieIdIndividual = #{rpieIdIndividual}
+				AND rpieIdIndividual LIKE #{rpieIdIndividual}
 			</if>
 			<if test="frequency != '' and frequency != null">
 				AND frequency = #{frequency}

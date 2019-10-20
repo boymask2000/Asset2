@@ -7,65 +7,66 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-<f:view locale="#{language.locale}">
-			<h:form id="form">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
 
-				<p:growl id="msgs" showDetail="true" />
+					<p:growl id="msgs" showDetail="true" />
 
-				<h:panelGrid columns="1" cellpadding="10">
-				
-				<h:outputText value="#{managedAssetBean.selectedAsset.facNum} #{managedAssetBean.selectedAsset.nomenclature}       Frequenza:#{managedFrequenzeAlcaBean.selectedFrequenza.stringFrequenza}" />
-				
-					<p:panel id="basic" header="Gestione checklist"
-						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" selectionMode="single"
-							value="#{managedChecklistBean.checklistForFrequenza}" var="c"
-							selection="#{managedChecklistBean.selectedChecklist}"
-							rowKey="#{c.id}" paginator="true" rows="5"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+					<h:panelGrid columns="1" cellpadding="10">
 
-							<p:ajax event="rowSelect"
-								listener="#{managedChecklistBean.onRowSelect}"
-								update=":form:msgs" />
+						<h:outputText
+							value="#{managedAssetBean.selectedAsset.facNum} #{managedAssetBean.selectedAsset.nomenclature}       Frequenza:#{managedFrequenzeAlcaBean.selectedFrequenza.stringFrequenza}" />
 
-							<p:column headerText="Id check">
-								<h:outputText value="#{c.checkId}" />
-							</p:column>
-							<p:column headerText="Descrizione">
-								<p:inputTextarea readonly="true" rows="5" cols="50"
-									value="#{c.description}" />
-							</p:column>
+						<p:panel id="basic" header="Gestione checklist"
+							style="margin-bottom:20px">
+							<p:dataTable id="radioDT" selectionMode="single"
+								value="#{managedChecklistBean.checklistForFrequenza}" var="c"
+								selection="#{managedChecklistBean.selectedChecklist}"
+								rowKey="#{c.id}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
 
+								<p:ajax event="rowSelect"
+									listener="#{managedChecklistBean.onRowSelect}"
+									update=":form:msgs" />
 
-							<p:column headerText="Codice Normativa">
-								<h:outputText value="#{c.codiceNormativa}" />
-							</p:column>
+								<p:column headerText="Id check">
+									<h:outputText value="#{c.checkId}" />
+								</p:column>
+								<p:column headerText="Descrizione">
+									<p:inputTextarea readonly="true" rows="5" cols="50"
+										value="#{c.description}" />
+								</p:column>
 
 
-							<p:column>
-								<h:commandButton rendered="#{c.fileNormativa!=null}"
-									action="#{managedNormativaBean.setupViewFile(c.fileNormativa)}"
-									value="View" />
-							</p:column>
+								<p:column headerText="Codice Normativa">
+									<h:outputText value="#{c.codiceNormativa}" />
+								</p:column>
 
-							<f:facet name="footer">
 
-								<p:commandButton value="#{msg['ESCI']}" action="adminHome" />
+								<p:column>
+									<h:commandButton rendered="#{c.fileNormativa!=null}"
+										action="#{managedNormativaBean.setupViewFile(c.fileNormativa)}"
+										value="View" />
+								</p:column>
 
-								<p:commandButton action="nuovaChecklist" value="Nuova Check"
-									process="@this" />
+								<f:facet name="footer">
 
-							</f:facet>
-						</p:dataTable>
-					</p:panel>
-				</h:panelGrid>
+									<p:commandButton value="#{msg['ESCI']}" action="adminHome" />
 
-				<p:commandButton process="@this" icon="pi pi-search" value="Home"
-					action="adminHome" />
+									<p:commandButton action="nuovaChecklist" value="Nuova Check"
+										process="@this" />
 
-			</h:form>
-</f:view>
+								</f:facet>
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
+
+					<p:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="adminHome" />
+
+				</h:form>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

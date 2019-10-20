@@ -3,12 +3,11 @@ package managed;
 import java.io.File;
 import java.util.List;
 
-
-
 import beans.Utente;
 import common.JsfUtil;
 import database.dao.UtenteDAO;
 import mail.MailSender;
+import printcreator.NoCalendarDataException;
 import printcreator.PrintCreatorSchedule;
 
 public class SendMailManagedBean {
@@ -25,15 +24,21 @@ public class SendMailManagedBean {
 	public void sendMail() {
 
 		MailSender sender = MailSender.getSender();
-		
-		PrintCreatorSchedule pcs = (PrintCreatorSchedule)JsfUtil.getBean("printCreatorSchedule");
-		String fileName = pcs.buildPDF();
 
-		sender.send(fileName, selectedUsers, "Alca mail");
-		
-		JsfUtil.showMessage("Mail inviata");
-		
-		File f = new File(fileName); f.delete();
+		PrintCreatorSchedule pcs = (PrintCreatorSchedule) JsfUtil.getBean("printCreatorSchedule");
+		try {
+			String fileName = pcs.buildPDF();
+
+			sender.send(fileName, selectedUsers, "Alca mail");
+
+			JsfUtil.showMessage("Mail inviata");
+
+			File f = new File(fileName);
+			f.delete();
+		} catch (NoCalendarDataException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	public List<Utente> getSelectedUsers() {

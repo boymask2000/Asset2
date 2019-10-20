@@ -29,44 +29,22 @@ public class PrintCreatorSchedule extends PrintCommon {
 	private String maxDateAll;
 
 	public String printSchedule() {
-//		ManagedRicercaInterventiBean mri = (ManagedRicercaInterventiBean) JsfUtil
-//				.getBean("managedRicercaInterventiBean");
-//		ManagedStrategicBean msb = (ManagedStrategicBean) JsfUtil.getBean("managedStrategicBean");
-//
-//		RicercaInterventiBean rib = mri.getRicercaInterventiBean();
-//
-//		minDateAll = rib.getStartDate();
-//		maxDateAll = rib.getEndDate();
-//
-//		LanguageBean langBean = (LanguageBean) JsfUtil.getBean("language");
-//		currentLocale = langBean.getCurrentLocale();
-//
-//		// Asset asset = db.getSelectedAsset();
-//
-//		PrintCreator prt = new PrintCreator();
-//		prt.setWithPageNumber(false);
-//		prt.insertStartDoc();
-//		prt.insertPageFormats();
-//
-//		// ********************************PersonalData
-//
-//		stampaMainData(prt, msb);
-//
-//		prt.insertFineDoc();
-//
-//		try (InputStream is = prt.getBufferInputStream();) {
-//			convertToPDFNEW(is);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		buildPDF();
+
+		try {
+			buildPDF();
+		} catch (NoCalendarDataException e) {
+
+			System.out.println("No cal data");
+			return null;
+
+		}
 
 		return "viewFile";
 	}
 
 	private File pdfFile;
 
-	public String buildPDF() {
+	public String buildPDF() throws NoCalendarDataException {
 
 		ManagedRicercaInterventiBean mri = (ManagedRicercaInterventiBean) JsfUtil
 				.getBean("managedRicercaInterventiBean");
@@ -100,11 +78,12 @@ public class PrintCreatorSchedule extends PrintCommon {
 		}
 		if (pdfFile != null)
 			return pdfFile.getAbsolutePath();
+
 		return null;
 
 	}
 
-	private void stampaMainData(PrintCreator prt, ManagedStrategicBean bean) {
+	private void stampaMainData(PrintCreator prt, ManagedStrategicBean bean) throws NoCalendarDataException {
 		Calendar cal0 = TimeUtil.getCalendar(new Date());
 		int meseCorrente = cal0.get(Calendar.MONTH);
 
@@ -116,7 +95,7 @@ public class PrintCreatorSchedule extends PrintCommon {
 
 		String maxData = "";
 		String minData = "99999999";
-
+		boolean found = false;
 		for (ScheduleEvent event : events) {
 			Intervento inter = (Intervento) event.getData();
 			Date data = event.getStartDate();
@@ -134,7 +113,12 @@ public class PrintCreatorSchedule extends PrintCommon {
 //			if (mese != meseCorrente)
 //				continue;
 			// System.out.println(sData+ " "+maxData+" "+minData);
+			found = true;
 			de.addEvent(data, event);
+
+		}
+		if (!found) {
+			throw new NoCalendarDataException();
 
 		}
 		// System.out.println(maxData+" "+minData);

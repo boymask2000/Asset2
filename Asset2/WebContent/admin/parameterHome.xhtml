@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+
+				<h:form id="fm1">
+					<p:growl id="msgs" showDetail="false" life="3000"/>
+					<p:panel header="#{msg['SYSTEM_PARAMETERS']}">
+						<h:panelGrid columns="2"
+							style="border:0px !important; background:none;margin:0 auto">
+
+							<h:outputText value="#{msg['DESCRIZIONE'] }" />
+							<h:outputText value="#{msg['VALORE'] }" />
+
+							<h:outputText
+								value="#{parameterManagedBean.frequenzaControlloFisico.description_it}"
+								rendered="#{languageBean.isItalian()}" />
+							<h:outputText
+								value="#{parameterManagedBean.frequenzaControlloFisico.description_us}"
+								rendered="#{! languageBean.isItalian()}" />
+
+
+							<p:inputText
+								value="#{parameterManagedBean.frequenzaControlloFisico.value}"
+								required="true"
+								validator="#{parameterManagedBean.isPositiveNumber}" />
+						</h:panelGrid>
+						<h:commandButton value="#{msg['UPDATE'] }"
+							action="#{parameterManagedBean.update}" />
+					</p:panel>
+					<p:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="adminHome" />
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

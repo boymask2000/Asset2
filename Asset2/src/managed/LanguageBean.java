@@ -14,28 +14,28 @@ public class LanguageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final String ITALIAN = "it";;
+
 	private String localeCode;
 
 	private static Map<String, Locale> countries;
 
-	private Locale locale=Locale.ENGLISH;
-	
-	private  List<Flag> flags=new ArrayList<Flag>();
-	
-	
+	private Locale locale = Locale.ENGLISH;
+
+	private List<Flag> flags = new ArrayList<Flag>();
+
+	private String activeLocale;
+
 	static {
 		countries = new LinkedHashMap<String, Locale>();
 		countries.put("en", Locale.ENGLISH); // label, value
 		countries.put("it", Locale.ITALIAN);
-		
-		
-		
 
 	}
-	
-	public LanguageBean(){
-		flags.add(new Flag("us","flag_us"));
-		flags.add(new Flag("it","flag_it"));
+
+	public LanguageBean() {
+		flags.add(new Flag("us", "flag_us"));
+		flags.add(new Flag("it", "flag_it"));
 	}
 
 	public Map<String, Locale> getCountriesInMap() {
@@ -47,7 +47,7 @@ public class LanguageBean implements Serializable {
 	}
 
 	public void setLocaleCode(String localeCode) {
-	
+
 		this.localeCode = localeCode;
 		setLocale(localeCode);
 	}
@@ -56,22 +56,22 @@ public class LanguageBean implements Serializable {
 	public void countryLocaleCodeChanged(ValueChangeEvent e) {
 		if (e.getNewValue() == null)
 			return;
-		String newLocaleValue = e.getNewValue().toString();
-	
-		setLocale(newLocaleValue);
+		activeLocale = e.getNewValue().toString();
+
+		setLocale(activeLocale);
 
 	}
 
 	private void setLocale(String newLocaleValue) {
-	
+
 		Locale loc = countries.get(newLocaleValue);
 
 		if (loc != null) {
-		
+
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(loc);
-		
-			locale=loc;
-		} 
+
+			locale = loc;
+		}
 
 	}
 
@@ -80,21 +80,32 @@ public class LanguageBean implements Serializable {
 		return lo.toString();
 	}
 
-
-	public  Locale getLocale() {
+	public Locale getLocale() {
 		return locale;
 	}
 
-	public  void setLocale(Locale locale) {
+	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
 
-	public  List<Flag> getFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 
-	public  void setFlags(List<Flag> flags) {
+	public void setFlags(List<Flag> flags) {
 		this.flags = flags;
+	}
+
+	public String getActiveLocale() {
+		return activeLocale;
+	}
+
+	public void setActiveLocale(String activeLocale) {
+		this.activeLocale = activeLocale;
+		System.out.println("activeLocale "+activeLocale);
+	}
+	public boolean isItalian() {
+		return activeLocale.equalsIgnoreCase(ITALIAN);
 	}
 
 }

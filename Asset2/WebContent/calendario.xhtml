@@ -9,6 +9,63 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+		<style type="text/css">
+		
+
+td.col_0 {
+	background-color: #FFFFFF !important;
+	font-size: 12px;
+}
+
+td.col_1 {
+	background-color: #548235 !important;
+	font-size: 12px;
+}
+
+td.col_2 {
+	background-color: #A9D08E !important;
+	font-size: 12px;
+}
+
+td.col_3 {
+	background-color: #E2EFDA !important;
+	font-size: 12px;
+}
+
+td.col_4 {
+	background-color: #BF8F00 !important;
+	font-size: 12px;
+}
+
+td.col_5 {
+	background-color: #FFD966 !important;
+	font-size: 12px;
+}
+
+td.col_6 {
+	background-color: #FFF2CC !important;
+	font-size: 12px;
+}
+
+td.col_7 {
+	background-color: #EB0000 !important;
+	font-size: 12px;
+}
+
+td.col_8 {
+	background-color: #FF4F4F !important;
+	font-size: 12px;
+}
+
+td.col_9 {
+	background-color: #FFC1C1 !important;
+	font-size: 12px;
+}
+  .ui-button{
+            width:60px;
+            height:50px;
+        }
+</style>
 			<h:form id="form">
 
 				<p:remoteCommand name="rc" update="msgs"
@@ -38,36 +95,57 @@
 						<font size="14">
 							<table border="1pt">
 								<tr>
-									<td>Dom</td>
-									<td>Lun</td>
-									<td>Mar</td>
-									<td>Mer</td>
-									<td>Giov</td>
-									<td>Ven</td>
-									<td>Sab</td>
+									<td>
+									<h:outputText value="Dom" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Sun" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Lun" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Mon" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Mar" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Tue" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Mer" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Wed" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Gio" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Thu" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Ven" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Fri" rendered="#{! languageBean.isItalian()}"/>
+									</td>
+									<td>
+									<h:outputText value="Sab" rendered="#{languageBean.isItalian()}"/>
+									<h:outputText value="Sat" rendered="#{! languageBean.isItalian()}"/>
+									</td>
 								</tr>
 								<tr valign="top">
-									<td><h:commandButton
+									<td><h:commandButton 
 											value="#{calendarioDaTavolo.getDay(0)}"
 											actionListener="#{calendarioDaTavolo.showDay(0)}"
 											update=":form" /> <p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(0))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
-											</p:column>
+											</p:column >
 										</p:dataTable></td>
 									<td><h:commandButton
 											value="#{calendarioDaTavolo.getDay(1)}"
 											action="#{calendarioDaTavolo.showDay(1)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(1))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+												selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -76,10 +154,10 @@
 											action="#{calendarioDaTavolo.showDay(2)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(2))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											sselection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -88,10 +166,10 @@
 											action="#{calendarioDaTavolo.showDay(3)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(3))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -100,10 +178,10 @@
 											action="#{calendarioDaTavolo.showDay(4)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(4))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											sselection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -112,10 +190,10 @@
 											action="#{calendarioDaTavolo.showDay(5)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(5))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -124,11 +202,12 @@
 											action="#{calendarioDaTavolo.showDay(6)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(6))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
+												
 											</p:column>
 										</p:dataTable></td>
 
@@ -140,10 +219,10 @@
 											action="#{calendarioDaTavolo.showDay(7)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(7))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -152,10 +231,10 @@
 											action="#{calendarioDaTavolo.showDay(8)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(8))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -164,10 +243,10 @@
 											action="#{calendarioDaTavolo.showDay(9)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(9))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -176,10 +255,10 @@
 											action="#{calendarioDaTavolo.showDay(10)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(10))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -188,10 +267,10 @@
 											action="#{calendarioDaTavolo.showDay(11)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(11))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+												selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -200,10 +279,10 @@
 											action="#{calendarioDaTavolo.showDay(12)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(12))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+												selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -212,25 +291,25 @@
 											action="#{calendarioDaTavolo.showDay(13)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(13))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
 
-								</tr valign="top">
-								<tr>
+								</tr >
+								<tr valign="top">
 									<td><h:commandButton
 											value="#{calendarioDaTavolo.getDay(14)}"
 											action="#{calendarioDaTavolo.showDay(14)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(14))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -239,10 +318,10 @@
 											action="#{calendarioDaTavolo.showDay(15)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(15))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+										selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -251,10 +330,10 @@
 											action="#{calendarioDaTavolo.showDay(16)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(16))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -263,10 +342,10 @@
 											action="#{calendarioDaTavolo.showDay(17)}" update=":form" />
 										<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(17))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -276,11 +355,12 @@
 											<p:dataTable 
 											selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(18))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+										selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
+												
 											</p:column>
 										</p:dataTable></td>
 									<td><h:commandButton
@@ -288,10 +368,10 @@
 											action="#{calendarioDaTavolo.showDay(19)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(19))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -300,10 +380,10 @@
 											action="#{calendarioDaTavolo.showDay(20)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(20))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -315,10 +395,10 @@
 											action="#{calendarioDaTavolo.showDay(21)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(21))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											sselection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -327,10 +407,10 @@
 											action="#{calendarioDaTavolo.showDay(22)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(22))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -339,10 +419,10 @@
 											action="#{calendarioDaTavolo.showDay(23)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(23))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+										selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -351,10 +431,10 @@
 											action="#{calendarioDaTavolo.showDay(24)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(24))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -363,10 +443,10 @@
 											action="#{calendarioDaTavolo.showDay(25)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(25))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -375,10 +455,10 @@
 											action="#{calendarioDaTavolo.showDay(26)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(26))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -387,10 +467,10 @@
 											action="#{calendarioDaTavolo.showDay(27)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(27))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -402,10 +482,10 @@
 											action="#{calendarioDaTavolo.showDay(28)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(28))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -414,10 +494,10 @@
 											action="#{calendarioDaTavolo.showDay(29)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(29))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+										selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -426,10 +506,10 @@
 											action="#{calendarioDaTavolo.showDay(30)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(30))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -438,10 +518,10 @@
 											action="#{calendarioDaTavolo.showDay(31)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(31))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -450,10 +530,10 @@
 											action="#{calendarioDaTavolo.showDay(32)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(32))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -462,10 +542,10 @@
 											action="#{calendarioDaTavolo.showDay(33)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(33))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+										selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>
@@ -474,10 +554,10 @@
 											action="#{calendarioDaTavolo.showDay(34)}" update=":form" />
 											<p:dataTable selectionMode="single"
 											value="#{managedInterventiBean.getInterventiInData(calendarioDaTavolo.getDateProgressive(34))}"
-											var="c"
-											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+											var="c" emptyMessage=""
+											selection="#{managedInterventiBean.selectedIntevento}"
 											rowKey="#{c.id}">
-											<p:column>
+											<p:column styleClass="#{calendarioDaTavolo.createStyle(c)}">
 												<h:outputText value="#{c.rpieIdIndividual}" />
 											</p:column>
 										</p:dataTable></td>

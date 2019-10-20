@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import beans.Intervento;
 import common.JsfUtil;
 import common.TimeUtil;
 
@@ -121,5 +122,15 @@ public class CalendarioDaTavolo {
 	public void setsMese(String sMese) {
 		this.sMese = sMese;
 	}
+	public String getEsito(Intervento c) {
+int cc=0;
+if( c!=null)
+		cc = c.getEsito();
+		return "col_"+cc;
+	}
+	public String createStyle(Intervento c) {
 
+
+		return getEsito(c) ;
+	}
 }

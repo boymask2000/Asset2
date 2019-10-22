@@ -9,9 +9,11 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.Checklist;
+import beans.ChecklistIntervento;
 import common.JsfUtil;
 import common.Log;
 import database.dao.ChecklistDAO;
+import database.dao.ChecklistInterventiDAO;
 
 public class ManagedChecklistBean implements Serializable {
 	/**
@@ -51,6 +53,10 @@ public class ManagedChecklistBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
 
+	}
+	public List<ChecklistIntervento> getChecksForInterventoId(long id){
+		ChecklistInterventiDAO dao = new ChecklistInterventiDAO();
+		return dao.getChecksForInterventoId(id);
 	}
 
 	public void insertChecklist() {

@@ -33,6 +33,7 @@ import org.apache.fop.apps.MimeConstants;
 
 import common.AnagraficaCampi;
 import common.JsfUtil;
+import common.Languages;
 import common.Pair;
 import common.TempFileFactory;
 import common.TimeUtil;
@@ -165,6 +166,7 @@ public class PrintCreator {
 	public void dump() {
 		System.out.println(buffer.toString());
 	}
+
 	public void dump(String fileName) {
 		try {
 			PrintWriter pw = new PrintWriter(fileName);
@@ -175,7 +177,7 @@ public class PrintCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	public void addImage(byte[] photo) {
@@ -222,7 +224,38 @@ public class PrintCreator {
 
 		prt.dump();
 	}
+	public File convertToPDFNEWNoView(InputStream is) throws IOException, FOPException, TransformerException {
+		// the XSL FO file
 
+		// create an instance of fop factory
+		FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+		// a user agent is needed for transformation
+		FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+		// Setup output
+
+		File tempPdf = TempFileFactory.getTempFile(".pdf");
+		try (OutputStream out = new java.io.FileOutputStream(tempPdf);) {
+
+			// Construct fop with desired output format
+			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+
+			// Setup XSLT
+			TransformerFactory factory = TransformerFactory.newInstance();
+			Transformer transformer = factory.newTransformer();
+
+			// Resulting SAX events (the generated FO) must be piped through to FOP
+			Result res = new SAXResult(fop.getDefaultHandler());
+
+			// Start XSLT transformation and FOP processing
+			// That's where the XML is first transformed to XSL-FO and then
+			// PDF is created
+			Source src = new StreamSource(is);
+			transformer.transform(src, res);
+		}
+
+		return tempPdf;
+
+	}
 	public File convertToPDFNEW(InputStream is) throws IOException, FOPException, TransformerException {
 		// the XSL FO file
 
@@ -257,6 +290,45 @@ public class PrintCreator {
 		// TempFileFactory.clean();
 	}
 
+	public List<Pair> caricaCampi(Object bean, Languages l) {
+		List<Pair> lista = new ArrayList<Pair>();
+		try {
+			Field[] ll = bean.getClass().getDeclaredFields();
+			for (Field f : ll) {
+				String name = f.getName();
+				String type = f.getType().getName();
+
+				if (name.equals("n"))
+					continue;
+				if (!type.equals("long") && !type.equals("int") && !type.equals("java.lang.String")
+						&& !type.equals("java.util.Date"))
+					continue;
+
+				String methodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
+				try {
+					Method meth = bean.getClass().getDeclaredMethod(methodName, null);
+
+					Object val = meth.invoke(bean, null);
+
+					if (val == null)
+						val = "";
+					if (val instanceof Date)
+						val = TimeUtil.getCurrentDate((Date) val);
+					String nameLoc = AnagraficaCampi.getLocalizedField(name, l);
+					val = AnagraficaCampi.getLocalizedVal(name, val, l);
+
+					lista.add(new Pair(nameLoc, val, type));
+				} catch (NoSuchMethodException r) {
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+
 	public List<Pair> caricaCampi(Object bean) {
 		List<Pair> lista = new ArrayList<Pair>();
 		try {
@@ -264,9 +336,7 @@ public class PrintCreator {
 			for (Field f : ll) {
 				String name = f.getName();
 				String type = f.getType().getName();
-				// System.out.println(name + " " + type);
-//				if (name.equals("id"))
-//					continue;
+
 				if (name.equals("n"))
 					continue;
 				if (!type.equals("long") && !type.equals("int") && !type.equals("java.lang.String")

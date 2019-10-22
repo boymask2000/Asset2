@@ -1,5 +1,6 @@
 package printcreator;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -8,6 +9,16 @@ import common.JsfUtil;
 import managed.ManagedReportInterventiBean;
 
 public class PrintCreatorFullDettaglioInterventi extends PrintCommon {
+	
+//	public PrintCreatorFullDettaglioInterventi() {
+//		
+//		System.out.println("##############################################");
+//		ManagedReportInterventiBean mrib = (ManagedReportInterventiBean) JsfUtil.getBean("managedReportInterventiBean");
+//		System.out.println(mrib);
+//	}
+//
+//
+//	
 
 	public String printAll() {
 

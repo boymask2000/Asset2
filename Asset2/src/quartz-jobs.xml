@@ -53,5 +53,25 @@
 			</cron>
 		</trigger>
 	</schedule>
+	
+	<schedule>
+		<job>
+			<name>GeneraPDFInterventiMensili</name>
+			<group>pippoGroup</group>
+			<description>GeneraPDFInterventiMensili</description>
+			<job-class>batchjob.quartz.GeneraPDFInterventiMensili</job-class>
+			
+		</job>
+
+		<trigger>
+			<cron>
+				<name>TriggerPDF</name>
+				<job-name>GeneraPDFInterventiMensili</job-name>
+				<job-group>pippoGroup</job-group>
+<!-- 				<cron-expression>0 * 0 ? * * *</cron-expression> -->
+				<cron-expression>0/2 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
 
 </job-scheduling-data>

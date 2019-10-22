@@ -14,6 +14,16 @@ public class AnagraficaCampi {
 		return getLocalizedEn(field);
 	}
 
+	public static String getLocalizedField(String field, Languages l) {
+
+		String loc = l.getLanguage();
+
+		if (loc != null && loc.equalsIgnoreCase("it"))
+			return getLocalizedIt(field);
+
+		return getLocalizedEn(field);
+	}
+
 	private static String getLocalizedEn(String field) {
 		switch (field) {
 		case "data_teorica":
@@ -68,6 +78,21 @@ public class AnagraficaCampi {
 			return TimeUtil.getFormattedDate((String) val);
 		case "data_effettiva":
 			return TimeUtil.getFormattedDate((String) val);
+		default:
+			break;
+		}
+
+		return val;
+	}
+
+	public static Object getLocalizedVal(String name, Object val, Languages l) {
+		switch (name) {
+		case "data_teorica":
+			return TimeUtil.getFormattedDate((String) val, l);
+		case "data_pianificata":
+			return TimeUtil.getFormattedDate((String) val, l);
+		case "data_effettiva":
+			return TimeUtil.getFormattedDate((String) val, l);
 		default:
 			break;
 		}

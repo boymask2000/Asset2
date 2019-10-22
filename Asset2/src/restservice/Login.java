@@ -28,6 +28,12 @@ public class Login {
 		String location = inferLocation(req.getRemoteAddr());
 		System.out.println("Seems coming from " + location);
 		Utente u = new Utente();
+		
+		if( !location.startsWith("Italy :")) {
+			u.setUsername(null);
+			System.out.println("Estero: "+location);
+			return u;
+		}
 
 		u.setUsername(user);
 		u.setPassword(password);

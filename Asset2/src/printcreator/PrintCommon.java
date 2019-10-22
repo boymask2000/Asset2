@@ -1,6 +1,7 @@
 package printcreator;
 
 import java.util.List;
+import java.util.Locale;
 
 import beans.AssetAlca;
 import beans.Check;
@@ -13,6 +14,7 @@ import beans.Safety;
 import beans.Status;
 import common.AnagraficaCampi;
 import common.JsfUtil;
+import common.Languages;
 import common.Pair;
 import common.TimeUtil;
 import common.Util;
@@ -150,7 +152,7 @@ public class PrintCommon extends PrintCreator {
 
 	}
 
-	private static void stampaFoto(PrintCreator prt, long interventoId) {
+	public static void stampaFoto(PrintCreator prt, long interventoId) {
 	
 		FotoInterventoDAO dao = new FotoInterventoDAO();
 		List<FotoIntervento> myList = dao.getFotoPerIntervento(interventoId);
@@ -163,8 +165,74 @@ public class PrintCommon extends PrintCreator {
 		}
 
 	}
+	public static void stampaEsiti(PrintCreator prt, Intervento inter, Locale l) {
+		prt.addBlock(Util.getLocalizedString("ESITO",l), "16pt");
+		Table t = new Table();
+		t.setHeader(false);
+		t.addColumnDefinition(new Column("", "6cm"));
+		t.addColumnDefinition(new Column("", "6cm"));
+		t.addColumnDefinition(new Column("", "6cm"));
+		t.startRow();
+		if (inter.getEsito() == 1)
+			t.addDataCol("X");
+		else
+			t.addDataCol(".");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL1);
+		if (inter.getEsito() == 2)
+			t.addDataCol("X");
+		else
+			t.addDataCol(" ");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL2);
+		if (inter.getEsito() == 3)
+			t.addDataCol("X");
+		else
+			t.addDataCol(" ");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL3);
+		t.startRow();
+		if (inter.getEsito() == 4)
+			t.addDataCol("X");
+		else
+			t.addDataCol(".");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL4);
+		if (inter.getEsito() == 5)
+			t.addDataCol("X");
+		else
+			t.addDataCol("");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL5);
+		if (inter.getEsito() == 6)
+			t.addDataCol("X");
+		else
+			t.addDataCol("");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL6);
+		t.startRow();
+		if (inter.getEsito() == 7)
+			t.addDataCol("X");
+		else
+			t.addDataCol(".");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL7);
+		if (inter.getEsito() == 8)
+			t.addDataCol("X");
+		else
+			t.addDataCol("");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL8);
+		if (inter.getEsito() == 9)
+			t.addDataCol("X");
+		else
+			t.addDataCol("");
+		t.setAlign("center");
+		t.setBackgroundColor(Status.COL9);
+		prt.addtable(t);
 
-	private static void stampaEsiti(PrintCreator prt, Intervento inter) {
+	}
+	public static void stampaEsiti(PrintCreator prt, Intervento inter) {
 		prt.addBlock(Util.getLocalizedString("ESITO"), "16pt");
 		Table t = new Table();
 		t.setHeader(false);
@@ -232,7 +300,7 @@ public class PrintCommon extends PrintCreator {
 
 	}
 
-	private static void stampaCommento(PrintCreator prt, Intervento inter) {
+	public static void stampaCommento(PrintCreator prt, Intervento inter) {
 		prt.addBlock(Util.getLocalizedString("COMMENTO") + ":", "16pt");
 		Table t1 = new Table();
 		t1.setHeader(false);
@@ -246,13 +314,35 @@ public class PrintCommon extends PrintCreator {
 			t1.addDataCol(inter.getCommento());
 		prt.addtable(t1);
 	}
+	public static void stampaCommento(PrintCreator prt, Intervento inter,Locale l) {
+		prt.addBlock(Util.getLocalizedString("COMMENTO",l) + ":", "16pt");
+		Table t1 = new Table();
+		t1.setHeader(false);
+		t1.addColumnDefinition(new Column("", "18cm"));
 
-	private static void stampaNormativa(Table t, String cod) {
+		t1.startRow();
+
+		if (inter.getCommento() == null)
+			t1.addDataCol(".");
+		else
+			t1.addDataCol(inter.getCommento());
+		prt.addtable(t1);
+	}
+
+	public static void stampaNormativa(Table t, String cod) {
 		NormativeDAO dao = new NormativeDAO();
 		Normativa nor = dao.getNormativaPerCodice(cod);
 		t.startRow();
 		t.addDataCol(Util.getLocalizedString("FREQUENZA"));
 		t.addDataCol(AnagraficaCampi.getLocalizedField(nor.getFrequenza()));
+
+	}
+	public static void stampaNormativa(Table t, String cod, Languages l) {
+		NormativeDAO dao = new NormativeDAO();
+		Normativa nor = dao.getNormativaPerCodice(cod);
+		t.startRow();
+		t.addDataCol(Util.getLocalizedString("FREQUENZA",l.getLocale()));
+		t.addDataCol(AnagraficaCampi.getLocalizedField(nor.getFrequenza(),l));
 
 	}
 

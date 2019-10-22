@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import managed.LanguageBean;
 
@@ -108,6 +109,23 @@ public class TimeUtil {
 			return d;
 		LanguageBean lb = (LanguageBean) JsfUtil.getBean("language");
 		String loc = lb.getCurrentLocale();
+		switch (loc) {// AAAAMMGG
+		case "en":// MMGGAAAA
+			return d.substring(4, 6) + "/" + d.substring(6, 8) + "/" + d.substring(0, 4);
+		case "it":// GGMMAAAA
+			return d.substring(6, 8) + "/" + d.substring(4, 6) + "/" + d.substring(0, 4);
+		default:
+			break;
+
+		}
+		return d;
+	}
+
+	public static String getFormattedDate(String d, Languages lang) {
+		if (d == null || d.length() != 8)
+			return d;
+
+		String loc = lang.getLanguage();
 		switch (loc) {// AAAAMMGG
 		case "en":// MMGGAAAA
 			return d.substring(4, 6) + "/" + d.substring(6, 8) + "/" + d.substring(0, 4);

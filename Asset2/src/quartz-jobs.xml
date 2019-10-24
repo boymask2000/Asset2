@@ -68,8 +68,7 @@
 				<name>TriggerPDF</name>
 				<job-name>GeneraPDFInterventiMensili</job-name>
 				<job-group>pippoGroup</job-group>
-<!-- 				<cron-expression>0 * 0 ? * * *</cron-expression> -->
-				<cron-expression>0/2 * * * * ?</cron-expression>
+				<cron-expression>0 0 * ? * * *</cron-expression>
 			</cron>
 		</trigger>
 	</schedule>

@@ -11,13 +11,22 @@ import managed.LanguageBean;
 
 public class TimeUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
+	private static final SimpleDateFormat timeShort = new SimpleDateFormat("HHmmss");
 	private static final SimpleDateFormat sdfShort = new SimpleDateFormat("yyyyMMdd");
+	private static final SimpleDateFormat annoMese = new SimpleDateFormat("yyyyMM");
 	private String time;
 
 	public static String getTimestamp() {
 		Date date = new Date();
 
 		return sdf.format(date.getTime());
+
+	}
+	
+	public static String getShortTime() {
+		Date date = new Date();
+
+		return timeShort.format(date.getTime());
 
 	}
 	
@@ -148,5 +157,12 @@ public class TimeUtil {
 		if (locale.equalsIgnoreCase("it"))
 			return mesiIT[mese];
 		return mesiEN[mese];
+	}
+
+	public static String getCurrentAnnoMese() {
+		Date date = new Date();
+
+		String time = annoMese.format(date.getTime());
+		return time;
 	}
 }

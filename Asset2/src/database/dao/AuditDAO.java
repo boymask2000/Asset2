@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import beans.Audit;
 import database.MyBatisConnectionFactory;
 import database.mapper.AuditMapper;
+import restservice.beans.Messaggio;
+import restservice.beans.MsgType;
 
 public class AuditDAO {
 
@@ -48,6 +50,23 @@ public class AuditDAO {
 			mapper.delete(u);
 			session.commit();
 		}
-		
+
+	}
+
+	public static void sendMessaggio(Messaggio msg) {
+		AuditDAO dao = new AuditDAO();
+		Audit audit = new Audit();
+		audit.setAzione(msg.getText());
+		audit.setMsgtype(msg.getMsgType().name());
+		audit.setUsername(msg.getUsername());
+		dao.insert(audit);
+	}
+
+	public static void generateSystemMessage(String m, MsgType type) {
+		Messaggio msg = new Messaggio();
+		msg.setMsgType(type);
+		msg.setText(m);
+		msg.setUsername("*SYSTEM*");
+		sendMessaggio(msg);
 	}
 }

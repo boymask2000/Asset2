@@ -14,14 +14,14 @@
 			<f:view locale="#{language.locale}">
 
 				<h:form id="fm1">
-					<p:growl id="msgs" showDetail="false" life="3000"/>
+					<p:growl id="msgs" showDetail="false" life="3000" />
 					<p:panel header="#{msg['SYSTEM_PARAMETERS']}">
 						<h:panelGrid columns="2"
 							style="border:0px !important; background:none;margin:0 auto">
 
 							<h:outputText value="#{msg['DESCRIZIONE'] }" />
 							<h:outputText value="#{msg['VALORE'] }" />
-
+						
 							<h:outputText
 								value="#{parameterManagedBean.frequenzaControlloFisico.description_it}"
 								rendered="#{languageBean.isItalian()}" />
@@ -34,6 +34,21 @@
 								value="#{parameterManagedBean.frequenzaControlloFisico.value}"
 								required="true"
 								validator="#{parameterManagedBean.isPositiveNumber}" />
+
+							<h:outputText
+								value="#{parameterManagedBean.directoryPDFInterventiMensili.description_it}"
+								rendered="#{languageBean.isItalian()}" />
+							<h:outputText
+								value="#{parameterManagedBean.directoryPDFInterventiMensili.description_us}"
+								rendered="#{! languageBean.isItalian()}" />
+
+
+							<p:inputText
+								value="#{parameterManagedBean.directoryPDFInterventiMensili.value}"
+								required="true"
+								validator="#{parameterManagedBean.existDirectory}" />
+
+
 						</h:panelGrid>
 						<h:commandButton value="#{msg['UPDATE'] }"
 							action="#{parameterManagedBean.update}" />

@@ -115,23 +115,16 @@ public class InterventoRest {
 		msg.setMsgType(MsgType.INFO);
 		msg.setUsername(inter.getUser());
 		msg.setText("Completato intervento su asset "+asset.getRpieIdIndividual());
-		sendMessaggio(msg);
+		AuditDAO.sendMessaggio(msg);
 	}
-	private static void sendMessaggio( Messaggio msg) {
-		AuditDAO dao = new AuditDAO();
-		Audit audit = new Audit();
-		audit.setAzione(msg.getText());
-		audit.setMsgtype(msg.getMsgType().name());
-		audit.setUsername(msg.getUsername());
-		dao.insert(audit);
-	}
+	
 
 	@POST
 	@Path("/cancelOnSafety")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cancelOnSafety(Messaggio msg) {
 
-		sendMessaggio( msg); 
+		AuditDAO.sendMessaggio( msg); 
 
 		return RestUtil.buildOKResponse();
 	}

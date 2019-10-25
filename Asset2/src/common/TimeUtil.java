@@ -22,14 +22,14 @@ public class TimeUtil {
 		return sdf.format(date.getTime());
 
 	}
-	
+
 	public static String getShortTime() {
 		Date date = new Date();
 
 		return timeShort.format(date.getTime());
 
 	}
-	
+
 	public static String getTimestamp(Date date) {
 
 		return sdf.format(date.getTime());
@@ -165,4 +165,24 @@ public class TimeUtil {
 		String time = annoMese.format(date.getTime());
 		return time;
 	}
+
+	public static String getLastDayInThisMonth() {
+		Date d;
+		String prev="";
+		String dd = getCurrentDate().substring(4, 6);
+		Calendar cal = getCalendar(new Date());
+		String dat = "";
+		String current = dd;
+		while (current.equals(dd)) {
+			d = cal.getTime();
+			prev = getCurrentDate(d);
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+
+			d = cal.getTime();
+			dat = getCurrentDate(d);
+			current = dat.substring(4, 6);
+		}
+		return prev;
+	}
+
 }

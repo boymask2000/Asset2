@@ -24,11 +24,14 @@ public class GeneraPDFInterventiMensili implements Job {
 
 		System.out.println("***************** Stampa ");
 		String data = TimeUtil.getCurrentDate();
+		String firstDay = TimeUtil.getCurrentAnnoMese() + "01";
+		String lastDay = TimeUtil.getLastDayInThisMonth();
+
 		String time = TimeUtil.getShortTime();
 		String dat = data + "_" + time;
 
-		genera(Languages.LANGUAGE_US, dat);
-		genera(Languages.LANGUAGE_IT, dat);
+		genera(Languages.LANGUAGE_US, dat, firstDay, lastDay);
+		genera(Languages.LANGUAGE_IT, dat, firstDay, lastDay);
 	}
 
 	private boolean alreadyDone() {
@@ -45,11 +48,12 @@ public class GeneraPDFInterventiMensili implements Job {
 		return false;
 	}
 
-	public void genera(Languages l, String data) {
+	public void genera(Languages l, String data, String firstDay, String lastDay) {
 		try {
 
 			PrintCreatorElencoInterventi prt = new PrintCreatorElencoInterventi(l);
-			File tmpPdf = prt.printInterventiDaA("20191001", "20191031");
+			// File tmpPdf = prt.printInterventiDaA("20191001", "20191031");
+			File tmpPdf = prt.printInterventiDaA(firstDay, lastDay);
 			System.out.println(tmpPdf.getAbsolutePath());
 
 			ParameterDAO dao = new ParameterDAO();

@@ -29,7 +29,7 @@ public class Login {
 		System.out.println("Seems coming from " + location);
 		Utente u = new Utente();
 		
-		if( !location.startsWith("Italy :")) {
+		if( !location.startsWith("null") && !location.startsWith("Italy :")) {
 			u.setUsername(null);
 			System.out.println("Estero: "+location);
 			return u;
@@ -62,7 +62,7 @@ public class Login {
 				System.out.println(out);
 
 				JSONObject ar = new JSONObject(out);
-				String ip = getJSONField(ar, "ip");
+			//	String ip = getJSONField(ar, "ip");
 				countryName = getJSONField(ar, "country_name");
 				city = getJSONField(ar, "city");
 

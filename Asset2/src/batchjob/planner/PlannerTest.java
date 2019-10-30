@@ -223,7 +223,7 @@ public class PlannerTest {
 		String fmtCal = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		Date fmtDate = TimeUtil.getCurrentStringDate(fmtCal);
 
-		int diff = 10000;
+	//	int diff = 10000;
 		long minDiff = 0;
 		int min = lista.get(0).getNum();
 		String goodDate = lista.get(0).getData();

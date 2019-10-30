@@ -169,10 +169,10 @@ public class PrintCreator {
 
 	public void dump(String fileName) {
 		try {
-			PrintWriter pw = new PrintWriter(fileName);
-			pw.print(buffer.toString());
-			pw.flush();
-			pw.close();
+			try (PrintWriter pw = new PrintWriter(fileName);) {
+				pw.print(buffer.toString());
+				pw.flush();
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -224,6 +224,7 @@ public class PrintCreator {
 
 		prt.dump();
 	}
+
 	public File convertToPDFNEWNoView(InputStream is) throws IOException, FOPException, TransformerException {
 		// the XSL FO file
 
@@ -256,6 +257,7 @@ public class PrintCreator {
 		return tempPdf;
 
 	}
+
 	public File convertToPDFNEW(InputStream is) throws IOException, FOPException, TransformerException {
 		// the XSL FO file
 
@@ -327,7 +329,6 @@ public class PrintCreator {
 		}
 		return lista;
 	}
-
 
 	public List<Pair> caricaCampi(Object bean) {
 		List<Pair> lista = new ArrayList<Pair>();

@@ -85,9 +85,7 @@
 								<h:outputText
 									value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 							</p:column>
-							<p:column headerText="#{msg['FREQUENZA']}" style="width:20%">
-								<h:outputText value="#{c.frequenze}" />
-							</p:column>
+				
 							<p:column headerText="#{msg['ESITO']}">
 								<table>
 									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">

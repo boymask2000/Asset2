@@ -12,14 +12,10 @@ public class FrequenzeAlcaDAO {
 
 	public List<FrequenzaAlca> getFreqForRPIE(FrequenzaAlca u) {
 		List<FrequenzaAlca> list = null;
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-
-		try {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 
 			list = mapper.getFreqForRPIE(u);
-		} finally {
-			session.close();
 		}
 		return list;
 	}
@@ -33,50 +29,43 @@ public class FrequenzeAlcaDAO {
 
 	public List<FrequenzaAlca> getFreqForRPIEandFreq(FrequenzaAlca u) {
 		List<FrequenzaAlca> list = null;
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();)
-		{
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 
 			list = mapper.getFreqForRPIEandFreq(u);
-		} 
+		}
 		return list;
 	}
 
 	public void insert(FrequenzaAlca u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();)
+		{
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 			List<FrequenzaAlca> lista = getFreqForRPIEandFreq(u);
 			if (lista.size() == 0) {
 				mapper.insert(u);
 				session.commit();
 			}
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public void delete(FrequenzaAlca u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();)
+		{
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 			mapper.delete(u);
 			session.commit();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public void update(FrequenzaAlca u) {
-		SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		try {
+		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();)
+		{
 			FrequenzeAlcaMapper mapper = session.getMapper(FrequenzeAlcaMapper.class);
 			mapper.update(u);
 			session.commit();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 }

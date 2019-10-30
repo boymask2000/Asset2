@@ -45,18 +45,30 @@ public class ParameterDAO {
 
 	public static void initDatabase() {
 
+		initFREQUENZA_CONTROLLO_FISICO();
+
+		initDIRECTORY_PDF_INTERVENTI_MENSILI();
+
+		initLAST_ANNO_MESE_PDF_INTERVENTI_MENSILI();
+
+	}
+
+	private static void initLAST_ANNO_MESE_PDF_INTERVENTI_MENSILI() {
 		ParameterDAO dao = new ParameterDAO();
-		Parameter fcf = dao.selectParameter(FREQUENZA_CONTROLLO_FISICO);
+		Parameter fcf = dao.selectParameter(LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
 		if (fcf == null) {
-			AuditDAO.generateSystemMessage("ATTENZIONE: Non trovato parametro di sistema " + FREQUENZA_CONTROLLO_FISICO
-					+ "(FREQUENZA_CONTROLLO_FISICO)" + ". Si definisce valore di default 10", MsgType.WARNING);
 			Parameter p = new Parameter();
-			p.setName(FREQUENZA_CONTROLLO_FISICO);
-			p.setValue("10");
+			p.setName(LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
+			p.setValue("000000");
 			dao.insert(p);
+
 		}
 
-		fcf = dao.selectParameter(DIRECTORY_PDF_INTERVENTI_MENSILI);
+	}
+
+	private static void initDIRECTORY_PDF_INTERVENTI_MENSILI() {
+		ParameterDAO dao = new ParameterDAO();
+		Parameter fcf = dao.selectParameter(DIRECTORY_PDF_INTERVENTI_MENSILI);
 		if (fcf == null) {
 			String lastPos = "c:/temp";
 
@@ -87,13 +99,19 @@ public class ParameterDAO {
 			}
 			dao.insert(p);
 		}
-		fcf = dao.selectParameter(LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
+
+	}
+
+	private static void initFREQUENZA_CONTROLLO_FISICO() {
+		ParameterDAO dao = new ParameterDAO();
+		Parameter fcf = dao.selectParameter(FREQUENZA_CONTROLLO_FISICO);
 		if (fcf == null) {
+			AuditDAO.generateSystemMessage("ATTENZIONE: Non trovato parametro di sistema " + FREQUENZA_CONTROLLO_FISICO
+					+ "(FREQUENZA_CONTROLLO_FISICO)" + ". Si definisce valore di default 10", MsgType.WARNING);
 			Parameter p = new Parameter();
-			p.setName(LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
-			p.setValue("000000");
+			p.setName(FREQUENZA_CONTROLLO_FISICO);
+			p.setValue("10");
 			dao.insert(p);
-			
 		}
 
 	}
@@ -101,11 +119,6 @@ public class ParameterDAO {
 	public static void checkValues() {
 		checkValuesFCF();
 		checkValuesDir();
-	}
-
-	private static void checkLastIntMensili() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static void checkValuesDir() {
@@ -161,7 +174,6 @@ public class ParameterDAO {
 	public void insert(Parameter p) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-	
 			ParameterMapper mapper = session.getMapper(ParameterMapper.class);
 
 			mapper.insertParameter(p);

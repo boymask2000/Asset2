@@ -109,7 +109,7 @@ public class PrintCreatorSchedule extends PrintCommon {
 			if (sData.compareTo(minData) < 0)
 				minData = sData;
 			Calendar cal = TimeUtil.getCalendar(data);
-			int mese = cal.get(Calendar.MONTH);
+	//		int mese = cal.get(Calendar.MONTH);
 //			if (mese != meseCorrente)
 //				continue;
 			// System.out.println(sData+ " "+maxData+" "+minData);

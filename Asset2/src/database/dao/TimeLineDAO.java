@@ -20,10 +20,4 @@ public class TimeLineDAO {
 		}
 		return list;
 	}
-	
-	public static void main(String s[] ) {
-		TimeLineDAO dao = new TimeLineDAO();
-		 List<TimeLineItem> ll = dao.selectAll(118);
-	
-	}
 }

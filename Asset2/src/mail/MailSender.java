@@ -72,7 +72,7 @@ public abstract class MailSender {
 
 		DataSource source = new FileDataSource(fileName);
 		messageBodyPart.setDataHandler(new DataHandler(source));
-		int index = fileName.lastIndexOf("/");
+	//	int index = fileName.lastIndexOf("/");
 		messageBodyPart.setFileName(fileName);
 		multipart.addBodyPart(messageBodyPart);
 	}

@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
+
+					<p:growl id="msgs" showDetail="true" />
+
+					<h:panelGrid columns="1" cellpadding="10">
+
+
+						<p:panel id="basic" header="#{msg['ISPEZIONI']}"
+							style="margin-bottom:20px">
+							<p:dataTable id="radioDT" selectionMode="single"
+								value="#{ispezioniManagedBean.allIspezioni}" var="c"
+								selection="#{ispezioniManagedBean.selectedIspezione}"
+								rowKey="#{c.id}" paginator="true" rows="5"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+
+								<p:ajax event="rowSelect"
+									listener="#{ispezioniManagedBean.onRowSelect}"
+									update=":form:msgs" />
+
+								
+								
+								<p:column headerText="RMPIndividual">
+									<h:outputText value="#{c.rmp}" />
+								</p:column>
+								
+								<p:column headerText="#{msg['DATA_PREVISTA']}">
+									<h:outputText
+												value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
+								</p:column>
+
+								<p:column headerText="#{msg['ESITO']}"
+									styleClass="{'background':'yellow'}">
+
+									<table>
+										<tr
+											bgcolor="#{managedAssetBean.status.getColor(c.esitoOriginale)}">
+											<td></td>
+										</tr>
+									</table>
+								</p:column>
+
+
+
+
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
+
+					<p:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="adminHome" />
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

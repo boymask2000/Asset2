@@ -22,6 +22,18 @@ public class CalendarioDAO {
 		return list;
 
 	}
+	public Calendario getNextWorkingDay(String dat) {
+		Calendario cal = null;
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			CalendarioMapper mapper = session.getMapper(CalendarioMapper.class);
+
+			cal = mapper.getNextWorkingDay(dat);
+		}
+
+		return cal;
+
+	}
 
 	public void update(Calendario u) {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {

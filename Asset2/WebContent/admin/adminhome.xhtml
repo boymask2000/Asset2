@@ -14,7 +14,7 @@
 				<h:form id="form">
 					<p:growl id="growl1" life="2000" />
 					<p:growl id="msgs" showDetail="true" />
-<style type="text/css">
+					<style type="text/css">
 td.col_0 {
 	background-color: #FFFFFF !important;
 }
@@ -55,7 +55,7 @@ td.col_9 {
 	background-color: #FFC1C1 !important;
 }
 </style>
-<p:poll update=":form:OnLine" interval="30" />
+					<p:poll update=":form:OnLine" interval="30" />
 
 					<p:panelGrid columns="4" width="100%" cellpadding="10"
 						styleClass="align">
@@ -82,8 +82,8 @@ td.col_9 {
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['LAVORI_BATCH']}"
 										action="#{navigator.go('adminHome','batchHome')}" />
-										
-										<p:commandButton process="@this" icon="pi pi-search"
+
+									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['PARAMETERS']}"
 										action="#{navigator.go('adminHome','goParameters')}" />
 								</h:panelGrid>
@@ -132,6 +132,10 @@ td.col_9 {
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['USER_HOME']}"
 										action="#{navigator.go('adminHome','home')}" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['ISPEZIONI']}"
+										action="#{navigator.go('adminHome','ispezioniHome')}" />
 								</h:panelGrid>
 							</p:panel>
 						</p:column>
@@ -194,7 +198,7 @@ td.col_9 {
 }
 </style>
 					<p:panel id="basic" header="#{msg['EVENT_LOG']}">
-	
+
 
 						<p:dataTable id="Events" selectionMode="single"
 							value="#{managedAuditBean.all}" var="c"

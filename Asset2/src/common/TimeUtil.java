@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
+import beans.Calendario;
+import database.dao.CalendarioDAO;
 import managed.LanguageBean;
 
 public class TimeUtil {
@@ -39,8 +40,8 @@ public class TimeUtil {
 	public String getTime() {
 		Date date = new Date();
 
-		String time = sdf.format(date.getTime());
-		return time;
+		String t = sdf.format(date.getTime());
+		return t;
 	}
 
 	public static String getCurrentDate() {
@@ -84,6 +85,17 @@ public class TimeUtil {
 		return c.getTime();
 
 	}
+
+
+	public static String getNextDate(String ds, int ndays) {
+		Date d = getCurrentStringDate(ds);
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+		c.add(Calendar.DAY_OF_MONTH, ndays);
+		return getCurrentDate(c.getTime());
+
+	}
+
 
 	public static Calendar getCalendar(Date d) {
 		Calendar c = new GregorianCalendar();
@@ -168,7 +180,7 @@ public class TimeUtil {
 
 	public static String getLastDayInThisMonth() {
 		Date d;
-		String prev="";
+		String prev = "";
 		String dd = getCurrentDate().substring(4, 6);
 		Calendar cal = getCalendar(new Date());
 		String dat = "";

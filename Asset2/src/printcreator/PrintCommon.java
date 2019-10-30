@@ -63,7 +63,7 @@ public class PrintCommon extends PrintCreator {
 		int count = 1;
 		SafetyDAO dao = new SafetyDAO();
 		List<Safety> safList = dao.selectByFamily(fam.getId());
-		prt.addBlock("Checklist", "18pt");
+		prt.addBlock("Safety Checklist", "18pt");
 		for (Safety saf : safList) {
 			prt.addBlock("" + (count++), "16pt");
 			Table t = new Table();

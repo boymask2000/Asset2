@@ -6,9 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 
 public class LanguageBean implements Serializable {
 
@@ -25,14 +28,26 @@ public class LanguageBean implements Serializable {
 	private List<Flag> flags = new ArrayList<Flag>();
 
 	private String activeLocale;
+	
+	private String selectedItem; // +getter +setter
+	private List<SelectItem> availableItems; // +getter (no setter necessary)
 
-	static {
+	@PostConstruct
+	public void init() {
+	    availableItems = new ArrayList<SelectItem>();
+	    availableItems.add(new SelectItem("en", "Us"));
+	    availableItems.add(new SelectItem("it", "It"));
+	   
+
 		countries = new LinkedHashMap<String, Locale>();
 		countries.put("en", Locale.ENGLISH); // label, value
 		countries.put("it", Locale.ITALIAN);
 
 	}
-
+	public void selectRadioItem() {
+	     selectedItem = this.localeCode; 
+	//more...
+	}
 	public LanguageBean() {
 		flags.add(new Flag("us", "flag_us"));
 		flags.add(new Flag("it", "flag_it"));
@@ -45,6 +60,8 @@ public class LanguageBean implements Serializable {
 	public String getLocaleCode() {
 		return localeCode;
 	}
+	
+
 
 	public void setLocaleCode(String localeCode) {
 
@@ -106,6 +123,19 @@ public class LanguageBean implements Serializable {
 	}
 	public boolean isItalian() {
 		return activeLocale.equalsIgnoreCase(ITALIAN);
+	}
+
+	public String getSelectedItem() {
+		return selectedItem;
+	}
+
+	public void setSelectedItem(String selectedItem) {
+		this.selectedItem = selectedItem;
+	}
+
+	public List<SelectItem> getAvailableItems() {
+		System.out.println("get");
+		return availableItems;
 	}
 
 }

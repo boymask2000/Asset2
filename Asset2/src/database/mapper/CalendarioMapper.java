@@ -19,6 +19,10 @@ public interface CalendarioMapper {
 	final String SELECT_ALL = "SELECT * FROM " + TABELLA;
 
 	final String DELETE = "DELETE FROM " + TABELLA + " WHERE data = #{data}";
+	
+	final String SELECT_DATA = "SELECT * FROM " + TABELLA + " WHERE data = #{data}";
+	
+	final String GET_NEXT_WORKING_DAY = "SELECT * FROM " + TABELLA + " WHERE data > #{data} AND lavorativo='Y' LIMIT 1";
 
 	final String UPDATE = "UPDATE " + TABELLA + " SET" + //
 			" interventi = #{interventi}," + //
@@ -52,6 +56,10 @@ public interface CalendarioMapper {
 
 	})
 	public List<Calendario> selectAll();
+	
+	
+	@Select(GET_NEXT_WORKING_DAY)
+	public Calendario getNextWorkingDay(String dat );
 
 	@Update(UPDATE)
 	public void update(Calendario contact);
@@ -62,6 +70,9 @@ public interface CalendarioMapper {
 	@Insert(INSERT)
 	public void insert(Calendario contact);
 
+	@Select(SELECT_DATA)
+	public Calendario selectData(String dat);
+	
 	@Select(SEARCH)
 	public Calendario search(Calendario contact);
 

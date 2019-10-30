@@ -2,7 +2,9 @@ package managed;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -19,7 +21,6 @@ import common.TimeUtil;
 import database.dao.ChecksDAO;
 import database.dao.TimeLineDAO;
 
-
 public class TimeLineManagedBean {
 	private TimelineModel model;
 
@@ -32,7 +33,9 @@ public class TimeLineManagedBean {
 	private boolean showCurrentTime = true;
 	private boolean showNavigation = false;
 	
-private	TimelineEvent selectedTimelineEvent=null;
+	private Map<String, String> ev = new HashMap<String, String>();
+
+	private TimelineEvent selectedTimelineEvent = null;
 
 	@PostConstruct
 	protected void initialize() {
@@ -41,57 +44,74 @@ private	TimelineEvent selectedTimelineEvent=null;
 //		Calendar cal = Calendar.getInstance();
 //		cal.set(2014, Calendar.JUNE, 12, 0, 0, 0);
 //		model.add(new TimelineEvent("PrimeUI 1.1", cal.getTime()));
-		
-		ManagedAssetBean mab=(ManagedAssetBean)	JsfUtil.getBean("managedAssetBean");
-		
+
+		ManagedAssetBean mab = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+
 		TimeLineDAO dao = new TimeLineDAO();
 		List<TimeLineItem> ll = dao.selectAll(mab.getSelectedAsset().getId());
-		
-		for( TimeLineItem item: ll) {
+
+		for (TimeLineItem item : ll) {
 			String sData = item.getData_pianificata();
-			Date d=TimeUtil.getCurrentStringDate(sData);
+			Date d = TimeUtil.getCurrentStringDate(sData);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(d);
-			TimelineEvent evt = new TimelineEvent( item, cal.getTime());
-			
-			model.add(evt);
-		//	model.add(new TimelineEvent(item.getDescription(), cal.getTime()));
-		//	model.add(new TimelineEvent(item.getNormativa()+" "+item.getCodice(), cal.getTime()));
+			if (checkOk(item)) {
+				TimelineEvent evt = new TimelineEvent(item, cal.getTime());
+
+				model.add(evt);
+			}
+			// model.add(new TimelineEvent(item.getDescription(), cal.getTime()));
+			// model.add(new TimelineEvent(item.getNormativa()+" "+item.getCodice(),
+			// cal.getTime()));
 		}
+		ev.clear();
 	}
+
 	
-	 public void onSelect(TimelineSelectEvent e) {  
-		 selectedTimelineEvent = e.getTimelineEvent(); 
-	
-	   
-	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected event:", selectedTimelineEvent.getData().toString());  
-	        FacesContext.getCurrentInstance().addMessage(null, msg);  
-	        
-	        TimeLineItem item=  (TimeLineItem) selectedTimelineEvent.getData();
-	        
-	        ChecksDAO dao = new ChecksDAO();
-	        List<Check> ll = dao.getByCodiceNorm(item.getCodice());
-	        checks=ll;
-	        
-	        item.setChecksList(ll);
-	        
-	        selectedTimelineEvent.setData(null);
-	        selectedTimelineEvent.setData(item);
-	        
-	       
-	     
-	    }
-	 private List<Check> checks;
-	 
-	 public List<Check> getChecks() {
-		 System.out.println("2 ");
-		 if(checks==null)return null;
+
+	private boolean checkOk(TimeLineItem item) {
+		String key = item.getId() + "-" + item.getData_pianificata() + "-" + item.getNormativa() + "-"
+				+ item.getCodice();
+		if (ev.get(key) == null) {
+			ev.put(key, key);
+			return true;
+		}
+		return false;
+	}
+
+	public void onSelect(TimelineSelectEvent e) {
+		selectedTimelineEvent = e.getTimelineEvent();
+
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected event:",
+				selectedTimelineEvent.getData().toString());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+
+		TimeLineItem item = (TimeLineItem) selectedTimelineEvent.getData();
+
+		ChecksDAO dao = new ChecksDAO();
+		List<Check> ll = dao.getByCodiceNorm(item.getCodice());
+		checks = ll;
+
+		item.setChecksList(ll);
+
+		selectedTimelineEvent.setData(null);
+		selectedTimelineEvent.setData(item);
+
+	}
+
+	private List<Check> checks;
+
+	public List<Check> getChecks() {
+
+		if (checks == null)
+			return null;
 //		 System.out.println("2 "+selectedTimelineEvent);
 //		 if( selectedTimelineEvent==null)return null;
 //		  TimeLineItem item  = (TimeLineItem) selectedTimelineEvent.getData();
-		 System.out.println("3 "+checks.size());
-		  return checks;
-	 }
+		System.out.println("3 " + checks.size());
+		return checks;
+	}
+
 	public TimelineModel getModel() {
 		return model;
 	}

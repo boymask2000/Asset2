@@ -43,8 +43,8 @@ public class ManagedSafetyBean implements Serializable {
 	public List<Safety> getAllSafety() {
 
 		SafetyDAO dao = new SafetyDAO();
-		List<Safety> myList = dao.selectAll();
-		return myList;
+		List<Safety> l = dao.selectAll();
+		return l;
 	}
 
 	private List<Integer> images = new ArrayList<Integer>();

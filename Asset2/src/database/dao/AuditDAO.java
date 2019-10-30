@@ -63,6 +63,7 @@ public class AuditDAO {
 	}
 
 	public static void generateSystemMessage(String m, MsgType type) {
+		System.out.println("******** SYSTEM: "+m);
 		Messaggio msg = new Messaggio();
 		msg.setMsgType(type);
 		msg.setText(m);

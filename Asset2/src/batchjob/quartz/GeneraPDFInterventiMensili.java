@@ -10,8 +10,10 @@ import org.quartz.JobExecutionException;
 import beans.Parameter;
 import common.Languages;
 import common.TimeUtil;
+import database.dao.AuditDAO;
 import database.dao.ParameterDAO;
 import printcreator.PrintCreatorElencoInterventi;
+import restservice.beans.MsgType;
 
 public class GeneraPDFInterventiMensili implements Job {
 
@@ -22,7 +24,8 @@ public class GeneraPDFInterventiMensili implements Job {
 			return;
 		}
 
-		System.out.println("***************** Stampa ");
+		AuditDAO.generateSystemMessage("Inizio generazione PDF per interventi mensili", MsgType.INFO);
+		
 		String data = TimeUtil.getCurrentDate();
 		String firstDay = TimeUtil.getCurrentAnnoMese() + "01";
 		String lastDay = TimeUtil.getLastDayInThisMonth();
@@ -32,9 +35,11 @@ public class GeneraPDFInterventiMensili implements Job {
 
 		genera(Languages.LANGUAGE_US, dat, firstDay, lastDay);
 		genera(Languages.LANGUAGE_IT, dat, firstDay, lastDay);
+		
+		AuditDAO.generateSystemMessage("Completata generazione PDF per interventi mensili", MsgType.INFO);
 	}
 
-	private boolean alreadyDone() {
+	private static boolean alreadyDone() {
 		String aaaamm = TimeUtil.getCurrentAnnoMese();
 		ParameterDAO dao = new ParameterDAO();
 		Parameter fcf = dao.selectParameter(ParameterDAO.LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);

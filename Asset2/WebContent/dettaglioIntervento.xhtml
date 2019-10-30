@@ -77,31 +77,30 @@
 								<p:inputTextarea readonly="true" rows="3" cols="50"
 									value="#{managedInterventiBean.selectedIntevento.commento}" />
 								<!-- CHECKLIST INIZIO -->
-								<p:dataTable id="radioDTd" 
-									value="#{managedChecklistBean.getChecksForInterventoId(managedInterventiBean.selectedIntevento.id)}"
-									var="c"
-									
-									rowKey="#{c.id}" paginator="true" rows="5"
-									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-									rowsPerPageTemplate="5,10,15">
-									 <f:facet name="header" >
+								<p:panel>
+									<p:dataTable id="radioDTd"
+										value="#{managedChecklistBean.getChecksForInterventoId(managedInterventiBean.selectedIntevento.id)}"
+										var="c" rowKey="#{c.id}" paginator="true" rows="5"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+										<f:facet name="header">
 									 Checklist
 									 </f:facet>
-									<p:column headerText="#{msg['DESCRIZIONE']}"
-										rendered="#{languageBean.isItalian()}">
-										<h:outputText value="#{c.description}" />
-									</p:column>
-									<p:column headerText="#{msg['DESCRIZIONE']}"
-										rendered="#{! languageBean.isItalian()}">
-										<h:outputText value="#{c.descriptionUS}" />
-									</p:column>
+										<p:column headerText="#{msg['DESCRIZIONE']}"
+											rendered="#{languageBean.isItalian()}">
+											<h:outputText value="#{c.description}" />
+										</p:column>
+										<p:column headerText="#{msg['DESCRIZIONE']}"
+											rendered="#{! languageBean.isItalian()}">
+											<h:outputText value="#{c.descriptionUS}" />
+										</p:column>
 
-								</p:dataTable>
-
+									</p:dataTable>
+								</p:panel>
 								<!-- CHECKLIST FINE -->
 
-<!-- 								<p:panel id="bajsic" header="#{msg['DOCUMENTI']}"> -->
-
+								<!-- 								<p:panel id="bajsic" header="#{msg['DOCUMENTI']}"> -->
+								<p:panel>
 									<p:dataTable id="radioDT" selectionMode="single"
 										value="#{managedDocInterventiBean.getDocsForIntervento(managedInterventiBean.selectedIntevento.id)}"
 										var="c"
@@ -109,7 +108,7 @@
 										rowKey="#{c.id}" paginator="true" rows="5"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate="5,10,15">
-										 <f:facet name="header" >
+										<f:facet name="header">
      #{msg['DOCUMENTI']}
         </f:facet>
 
@@ -138,16 +137,16 @@
 
 										</f:facet>
 									</p:dataTable>
-
-<!-- 								</p:panel> -->
-								<p:panel>
+								</p:panel>
+								<!-- 								</p:panel> -->
+<!-- 								<p:panel> -->
 									<!-- 								<p:galleria -->
 									<!-- 									value="#{managedFotoInterventoBean.fotoPerIntervento}" -->
 									<!-- 									var="image" showCaption="true"> -->
 									<!-- 									<p:graphicImage name="images/#{image.filename}" -->
 									<!-- 										title="#{image.timestamp}" /> -->
 									<!-- 								</p:galleria> -->
-								</p:panel>
+<!-- 								</p:panel> -->
 
 								<table>
 									<tr>
@@ -171,9 +170,9 @@
 							</p:panel>
 
 						</h:panelGrid>
-			>
-							
-							<h:commandButton value="#{msg['STAMPA']}"
+
+
+						<h:commandButton value="#{msg['STAMPA']}"
 							action="#{printCreatorIntervento.printIntervento2}" />
 
 

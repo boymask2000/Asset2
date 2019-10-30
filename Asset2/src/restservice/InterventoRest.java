@@ -11,11 +11,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.AssetAlca;
-import beans.Audit;
 import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
 import beans.Intervento;
 import beans.Safety;
+import common.IspezioniManager;
 import database.dao.AssetAlcaDAO;
 import database.dao.AuditDAO;
 import database.dao.ChecklistInterventiDAO;
@@ -98,6 +98,8 @@ public class InterventoRest {
 
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(inter);
+		
+		IspezioniManager.decideIspezione(inter);
 		
 		sendMessaggioInte(inter);
 

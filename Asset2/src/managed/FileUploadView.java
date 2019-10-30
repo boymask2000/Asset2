@@ -78,9 +78,10 @@ public class FileUploadView {
 	public String upload2() {
 		try {
 			tmpFile = File.createTempFile("ttp", "tmp");
-			FileOutputStream fos = new FileOutputStream(tmpFile);
-			fos.write(file.getContents());
-			fos.close();
+			try(FileOutputStream fos = new FileOutputStream(tmpFile);){
+				fos.write(file.getContents());
+			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

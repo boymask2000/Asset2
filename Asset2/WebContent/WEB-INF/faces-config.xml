@@ -269,8 +269,24 @@
 		<managed-bean-class>managed.ParameterManagedBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>ispezioniManagedBean</managed-bean-name>
+		<managed-bean-class>managed.IspezioniManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>ispezioniHome</from-outcome>
+			<to-view-id>/admin/ispezioniHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

@@ -9,9 +9,17 @@ public class TempFileFactory {
 	private static List<File> lista = new ArrayList<File>();
 
 	public static File getTempFile(String suffix) throws IOException {
-		File f = File.createTempFile("tmp", suffix);
-		lista.add(f);
-		return f;
+	
+		try {
+			File f = File.createTempFile("tmp", suffix);
+
+			lista.add(f);
+			return f;
+		} catch (Throwable e) {
+
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static File createTempFile(String name, String ext, File dir) throws IOException {

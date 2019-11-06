@@ -122,6 +122,14 @@ public class PrintCreator {
 	}
 
 	public InputStream getBufferInputStream() {
+		try {
+			PrintWriter pw = new PrintWriter("c:/out.txt");
+			pw.write(buffer.toString());
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new ByteArrayInputStream(buffer.toString().getBytes());
 	}
 
@@ -235,25 +243,30 @@ public class PrintCreator {
 		// Setup output
 
 		File tempPdf = TempFileFactory.getTempFile(".pdf");
-		try (OutputStream out = new java.io.FileOutputStream(tempPdf);) {
+	
+		try {
+			try (OutputStream out = new java.io.FileOutputStream(tempPdf);) {
 
-			// Construct fop with desired output format
-			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+				// Construct fop with desired output format
+				Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
 
-			// Setup XSLT
-			TransformerFactory factory = TransformerFactory.newInstance();
-			Transformer transformer = factory.newTransformer();
+				// Setup XSLT
+				TransformerFactory factory = TransformerFactory.newInstance();
+				Transformer transformer = factory.newTransformer();
 
-			// Resulting SAX events (the generated FO) must be piped through to FOP
-			Result res = new SAXResult(fop.getDefaultHandler());
+				// Resulting SAX events (the generated FO) must be piped through to FOP
+				Result res = new SAXResult(fop.getDefaultHandler());
 
-			// Start XSLT transformation and FOP processing
-			// That's where the XML is first transformed to XSL-FO and then
-			// PDF is created
-			Source src = new StreamSource(is);
-			transformer.transform(src, res);
+				// Start XSLT transformation and FOP processing
+				// That's where the XML is first transformed to XSL-FO and then
+				// PDF is created
+				Source src = new StreamSource(is);
+				transformer.transform(src, res);
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
-
+	
 		return tempPdf;
 
 	}
@@ -376,4 +389,25 @@ public class PrintCreator {
 		this.withPageNumber = withPageNumber;
 	}
 
+	public static String cleanTextForSpecialChars(String s) {
+		String out = s.replace('&', ' ');
+		out = out.replace("<", "&lt;");
+		out = out.replace(">", "&gt;");
+
+		out = cleanTextContent(out);
+		return out;
+	}
+
+	private static String cleanTextContent(String text) {
+		// strips off all non-ASCII characters
+		text = text.replaceAll("[^\\x00-\\x7F]", "");
+
+		// erases all the ASCII control characters
+		text = text.replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", "");
+
+		// removes non-printable characters from Unicode
+		text = text.replaceAll("\\p{C}", "");
+
+		return text.trim();
+	}
 }

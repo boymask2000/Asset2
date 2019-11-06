@@ -76,9 +76,9 @@ public class ManagedSafetyBean implements Serializable {
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((Safety) event.getObject()).getId());
 		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
 		famiglia=mfab.getSelectedFamiglia();
-		System.out.println("famiglia: "+famiglia.getFamiglia());
+
 		selectedSafety = (Safety) event.getObject();
-		System.out.println("selectedSafety: "+selectedSafety.getId());
+
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}

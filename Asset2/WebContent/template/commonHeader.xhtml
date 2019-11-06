@@ -8,22 +8,41 @@
 	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
+		<h:form>
+			<table width="100%">
+				<tr>
+					<td><p:graphicImage url="/resources/images/alca.gif" /></td>
 
-		<table width="100%">
-			<tr>
-				<td><p:graphicImage url="/resources/images/alca.gif" /></td>
+					<td><p:outputLabel
+							style="font-size:36px;line-height:48px;background-color:navy;color:white"
+							value="Computerized Facility Maintenance System" /></td>
 
-				<td><p:outputLabel
-						style="font-size:36px;line-height:48px;background-color:navy;color:white"
-						value="Computerized Facility Maintenance System" /></td>
+					<td><h:panelGrid columns="2" rendered="#{utente.username!=null}">
+							<h:selectOneRadio layout="pageDirection" styleClass="labelWhite"
+								value="#{language.localeCode}" onchange="submit()"
+								update=":form">
+								<f:selectItem itemLabel="Us" itemValue="en" />
+								<f:selectItem itemLabel="It" itemValue="it" />
+							</h:selectOneRadio>
+							<h:panelGrid columns="1">
+								<h:graphicImage library="default" alt=""
+									name="images/flag_us1.jpg" />
+								<h:graphicImage library="default" alt=""
+									name="images/flag_it1.jpg" />
 
-				<td align="right"><h:outputText
-						style="font-size:26px;line-height:28px;"
-						value="Utente: #{utente.username}"
-						rendered="#{utente.username!=null}" /></td>
+							</h:panelGrid>
+						</h:panelGrid></td>
 
-			</tr>
-		</table>
+					<td align="right"><h:outputText
+							style="font-size:26px;line-height:28px;"
+							value="Utente: #{utente.username}"
+							rendered="#{utente.username!=null}" /></td>
+
+				</tr>
+			</table>
+
+
+		</h:form>
 
 	</ui:composition>
 </body>

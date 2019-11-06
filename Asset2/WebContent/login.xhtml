@@ -24,7 +24,7 @@
 				<h:form id="fm1">
 
 					<p:panel>
-						<h:panelGrid columns="2"
+						<h:panelGrid columns="1"
 							style="border:0px !important; background:none;margin:0 auto">
 
 							<p:panel>
@@ -41,25 +41,12 @@
 
 							</p:panel>
 
-							<h:panelGrid columns="2">
-								<h:selectOneRadio layout="pageDirection" styleClass="labelWhite"
-									value="#{language.localeCode}" onchange="submit()"
-									update=":form">
-									<f:selectItem itemLabel="Us" itemValue="en" />
-									<f:selectItem itemLabel="It" itemValue="it" />
-								</h:selectOneRadio>
-								<h:panelGrid columns="1">
-									<h:graphicImage url="resources/images/flag_us.jpg" alt="" />
-									<h:graphicImage url="resources/images/flag_it.gif" alt="" />
-
-								</h:panelGrid>
-							</h:panelGrid>
-
-
-						</h:panelGrid>
 		
 
+						</h:panelGrid>
+
 					</p:panel>
+					
 				</h:form>
 			</f:view>
 		</ui:define>

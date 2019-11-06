@@ -35,6 +35,10 @@ public class ManagedFamiglieAssetBean extends ABaseBean implements Serializable 
 		FamigliaAsset fam = getSelectedFamiglia() ;
 		fam.setId(0);
 		myList=null;
+		
+		ManagedChecksBean mcb = (ManagedChecksBean)JsfUtil.getBean("managedChecksBean");
+		if( mcb!=null)
+			mcb.resetSelezione();
 	}
 	public FamigliaAsset searchById(long id) {
 		FamigliaAssetDAO dao = new FamigliaAssetDAO();

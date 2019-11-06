@@ -15,6 +15,7 @@ import javax.faces.model.SelectItem;
 
 public class LanguageBean implements Serializable {
 
+
 	private static final long serialVersionUID = 1L;
 
 	private static final String ITALIAN = "it";;
@@ -119,7 +120,7 @@ public class LanguageBean implements Serializable {
 
 	public void setActiveLocale(String activeLocale) {
 		this.activeLocale = activeLocale;
-		System.out.println("activeLocale "+activeLocale);
+
 	}
 	public boolean isItalian() {
 		return activeLocale.equalsIgnoreCase(ITALIAN);
@@ -134,8 +135,9 @@ public class LanguageBean implements Serializable {
 	}
 
 	public List<SelectItem> getAvailableItems() {
-		System.out.println("get");
+
 		return availableItems;
 	}
+
 
 }

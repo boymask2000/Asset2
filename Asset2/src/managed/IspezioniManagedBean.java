@@ -8,8 +8,10 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import beans.Audit;
 import beans.Ispezione;
 import common.Log;
+import database.dao.AuditDAO;
 import database.dao.IspezioniDAO;
 
 public class IspezioniManagedBean extends ABaseBean  implements Serializable {
@@ -28,7 +30,10 @@ public class IspezioniManagedBean extends ABaseBean  implements Serializable {
 		myList = dao.selectAll();
 		return myList;
 	}
-
+	public void setDeleteSelected( Ispezione u ) {
+		IspezioniDAO dao = new IspezioniDAO();
+		dao.delete(u);
+	}
 
 	public void onRowSelect(SelectEvent event) {
 		FacesMessage msg = new FacesMessage(" Selected", ""+((Ispezione) event.getObject()).getId());

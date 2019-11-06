@@ -47,18 +47,19 @@
 										rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
 									<p:dataTable id="checksDT"
 										value="#{managedChecksBean.allChecksForFamily}" var="c"
-										editable="true" editMode="cell" widgetVar="cellCars"
-										rowKey="#{c.id}" paginator="true" rows="5"
+										editable="true" widgetVar="cellCars" rowKey="#{c.id}"
+										paginator="true" rows="5"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate="5,10,15">
 
 
-										<p:ajax event="cellEdit"
-											listener="#{managedChecksBean.onCellEdit}" process="@this"
+										<p:ajax event="rowEdit"
+											listener="#{managedChecksBean.onRowEdit}" 
 											update=":form:msgs" />
 
 
-										<p:column headerText="#{msg['DESCRIZIONE']} IT" style="width:45%">
+										<p:column headerText="#{msg['DESCRIZIONE']} IT"
+											style="width:45%">
 
 
 											<p:cellEditor>
@@ -78,7 +79,8 @@
 										</p:column>
 
 
-										<p:column headerText="#{msg['DESCRIZIONE']} US" style="width:45%">
+										<p:column headerText="#{msg['DESCRIZIONE']} US"
+											style="width:45%">
 
 											<p:cellEditor>
 												<f:facet name="output">
@@ -106,11 +108,15 @@
 												action="#{managedNormativaBean.setupViewFile(c.filename)}"
 												value="View" />
 										</p:column>
+										<p:column style="width:35px">
+											<p:rowEditor />
+										</p:column>
 
 										<f:facet name="footer">
 
-											<p:commandButton action="nuovoCheck" value="#{msg['NEW_CHECK']}"
-											rendered="#{managedFamiglieAssetBean.selectedFamiglia.getId()!=0}"
+											<p:commandButton action="nuovoCheck"
+												value="#{msg['NEW_CHECK']}"
+												rendered="#{managedFamiglieAssetBean.selectedFamiglia.getId()!=0}"
 												process="@this" />
 
 											<p:commandButton action="nuovoCheck" value="Edit"
@@ -135,9 +141,9 @@
 					</h:panelGrid>
 
 
-<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
-<!-- 					<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
-<!-- 						action="adminHome" /> -->
+					<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
+					<!-- 					<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
+					<!-- 						action="adminHome" /> -->
 
 				</h:form>
 				<p:dialog header="Famiglie Asset" widgetVar="setPassDialog0"

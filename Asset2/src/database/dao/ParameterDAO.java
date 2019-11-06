@@ -19,18 +19,22 @@ public class ParameterDAO {
 	public static final String LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI = "DAT_INTER_MENSILI";
 
 	public Parameter selectParameter(String name) {
-		List<Parameter> list = null;
-		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+		try {
+			List<Parameter> list = null;
+			try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
-			ParameterMapper mapper = session.getMapper(ParameterMapper.class);
+				ParameterMapper mapper = session.getMapper(ParameterMapper.class);
 
-			list = mapper.selectParameter(name);
+				list = mapper.selectParameter(name);
+			}
+			if (list == null || list.size() == 0)
+				return null;
+
+			return list.get(0);
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
-		if (list == null || list.size() == 0)
-			return null;
-
-		return list.get(0);
-
+		return null;
 	}
 
 	public void update(Parameter u) {

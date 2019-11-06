@@ -3,11 +3,11 @@ package managed;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.component.datatable.DataTable;
-import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
 import beans.Check;
@@ -26,33 +26,20 @@ public class ManagedChecksBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Check> myList;
+	private List<Check> checksForFamily;
 	//
 	private List<Check> multiSelect;
 
 	private Check selectedCheck = new Check();
-
-	public List<Check> getAllChecks() {
+	
+	@PostConstruct
+	public void init(){
 		ChecksDAO dao = new ChecksDAO();
 		myList = dao.selectAll();
-		return myList;
+		
+		checksForFamily=getAllChecksForFamilyInit();
 	}
-
-	public void onCellEdit(CellEditEvent event) {
-//		String oldValue = (String) event.getOldValue();
-//		Object newValue = event.getNewValue();
-
-		DataTable table = (DataTable) event.getSource();
-		Check saf = (Check) table.getRowData();
-
-		ChecksDAO dao = new ChecksDAO();
-		dao.update(saf);
-//		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
-//				"Old: " + oldValue + ", New:" + newValue);
-//		FacesContext.getCurrentInstance().addMessage(null, msg);
-
-	}
-
-	public List<Check> getAllChecksForFamily() {
+	public List<Check> getAllChecksForFamilyInit() {
 		ManagedFamiglieAssetBean mfb = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
 		FamigliaAsset fam = mfb.getSelectedFamiglia();
 		ChecksDAO dao = new ChecksDAO();
@@ -69,8 +56,26 @@ public class ManagedChecksBean implements Serializable {
 		return myList;
 	}
 
+	public List<Check> getAllChecks() {
+		
+		return myList;
+	}
+	public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Car Edited", ""+((Check) event.getObject()).getId());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        Check saf = (Check) event.getObject();
+        ChecksDAO dao = new ChecksDAO();
+		dao.update(saf);
+    }
+	
+
+	public List<Check> getAllChecksForFamily() {
+		return checksForFamily;
+	}
+
 	public void setFamiglia(FamigliaAsset n) {
-		myList = null;
+		checksForFamily=getAllChecksForFamilyInit();
 
 	}
 
@@ -142,5 +147,9 @@ public class ManagedChecksBean implements Serializable {
 	public void setMultiSelect(List<Check> multiSelect) {
 		this.multiSelect = multiSelect;
 
+	}
+	public void resetSelezione() {
+		init();
+		
 	}
 }

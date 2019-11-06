@@ -20,12 +20,34 @@ public class GeneraPDFInterventiMensili implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		if (alreadyDone()) {
-			System.out.println("********************** già fatto !!!! **************");
 			return;
 		}
 
 		AuditDAO.generateSystemMessage("Inizio generazione PDF per interventi mensili", MsgType.INFO);
-		
+
+		try {
+			go();
+
+			updAlreadyDone();
+
+			AuditDAO.generateSystemMessage("Completata generazione PDF per interventi mensili", MsgType.INFO);
+
+		} catch (Throwable e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String s[]) {
+		GeneraPDFInterventiMensili c = new GeneraPDFInterventiMensili();
+		try {
+			c.go();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void go() throws Throwable {
 		String data = TimeUtil.getCurrentDate();
 		String firstDay = TimeUtil.getCurrentAnnoMese() + "01";
 		String lastDay = TimeUtil.getLastDayInThisMonth();
@@ -35,17 +57,25 @@ public class GeneraPDFInterventiMensili implements Job {
 
 		genera(Languages.LANGUAGE_US, dat, firstDay, lastDay);
 		genera(Languages.LANGUAGE_IT, dat, firstDay, lastDay);
-		
-		AuditDAO.generateSystemMessage("Completata generazione PDF per interventi mensili", MsgType.INFO);
 	}
 
 	private static boolean alreadyDone() {
 		String aaaamm = TimeUtil.getCurrentAnnoMese();
 		ParameterDAO dao = new ParameterDAO();
 		Parameter fcf = dao.selectParameter(ParameterDAO.LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
+		if (fcf == null)
+			return false;
 		String lastVal = fcf.getValue();
 		if (lastVal.compareTo(aaaamm) >= 0)
 			return true;
+
+		return false;
+	}
+
+	private static boolean updAlreadyDone() {
+		String aaaamm = TimeUtil.getCurrentAnnoMese();
+		ParameterDAO dao = new ParameterDAO();
+		Parameter fcf = dao.selectParameter(ParameterDAO.LAST_ANNO_MESE_PDF_INTERVENTI_MENSILI);
 
 		fcf.setValue(aaaamm);
 		dao.update(fcf);
@@ -53,27 +83,24 @@ public class GeneraPDFInterventiMensili implements Job {
 		return false;
 	}
 
-	public void genera(Languages l, String data, String firstDay, String lastDay) {
-		try {
+	public void genera(Languages l, String data, String firstDay, String lastDay) throws Throwable {
 
-			PrintCreatorElencoInterventi prt = new PrintCreatorElencoInterventi(l);
-			// File tmpPdf = prt.printInterventiDaA("20191001", "20191031");
-			File tmpPdf = prt.printInterventiDaA(firstDay, lastDay);
-			System.out.println(tmpPdf.getAbsolutePath());
+		PrintCreatorElencoInterventi prt = new PrintCreatorElencoInterventi(l);
+		// File tmpPdf = prt.printInterventiDaA("20191001", "20191031");
+		File tmpPdf = prt.printInterventiDaA(firstDay, lastDay);
 
-			ParameterDAO dao = new ParameterDAO();
-			Parameter sDir = dao.selectParameter(ParameterDAO.DIRECTORY_PDF_INTERVENTI_MENSILI);
-			if (sDir != null && sDir.getValue() != null) {
 
-				String fileName = sDir.getValue() + File.separator + "Interventi_" + data + "_" + l.getLanguage()
-						+ ".pdf";
-				System.out.println("copy to " + fileName);
+		ParameterDAO dao = new ParameterDAO();
+		Parameter sDir = dao.selectParameter(ParameterDAO.DIRECTORY_PDF_INTERVENTI_MENSILI);
+		if (sDir != null && sDir.getValue() != null) {
 
-				FileUtils.copyFile(tmpPdf, new File(fileName));
-			}
-		} catch (Throwable t) {
-			t.printStackTrace();
+			String fileName = sDir.getValue() + File.separator + "Interventi_" + data + "_" + l.getLanguage() + ".pdf";
+		
+
+			FileUtils.copyFile(tmpPdf, new File(fileName));
+			tmpPdf.delete();
 		}
+
 	}
 
 }

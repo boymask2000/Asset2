@@ -46,8 +46,9 @@ public class PrintCreatorElencoInterventi extends PrintCreator {
 
 		File tempPdf = null;
 		try (InputStream is = prt.getBufferInputStream();) {
+
 			tempPdf = convertToPDFNEWNoView(is);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 
@@ -177,9 +178,9 @@ public class PrintCreatorElencoInterventi extends PrintCreator {
 				t.startRow();
 				t.addDataCol(Util.getLocalizedString("DESCRIZIONE", language.getLocale()) + ":");
 				if (language.getLanguage().equalsIgnoreCase("en"))
-					t.addDataCol(check.getDescriptionUS());
+					t.addDataCol(cleanTextForSpecialChars(check.getDescriptionUS()));
 				else
-					t.addDataCol(check.getDescription());
+					t.addDataCol(cleanTextForSpecialChars(check.getDescription()));
 				prt.addtable(t);
 
 			}
@@ -188,7 +189,7 @@ public class PrintCreatorElencoInterventi extends PrintCreator {
 			PrintCommon.stampaEsiti(prt, inter, language.getLocale());
 			PrintCommon.stampaCommento(prt, inter, language.getLocale());
 		}
-		PrintCommon.stampaFoto(prt, inter.getId());
+	//	PrintCommon.stampaFoto(prt, inter.getId());
 		// prt.addtable(t);
 
 	}

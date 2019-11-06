@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
+	<f:view locale="#{language.locale}">
 		<h:form>
 			<table width="100%">
 				<tr>
@@ -35,7 +36,7 @@
 
 					<td align="right"><h:outputText
 							style="font-size:26px;line-height:28px;"
-							value="Utente: #{utente.username}"
+							value="#{msg['UTENTE']}: #{utente.username}"
 							rendered="#{utente.username!=null}" /></td>
 
 				</tr>
@@ -43,7 +44,7 @@
 
 
 		</h:form>
-
+</f:view>
 	</ui:composition>
 </body>
 </html>

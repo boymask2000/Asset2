@@ -8,13 +8,13 @@
 </style>
 
 
-	<ui:composition template="/template/commonTemplate.xhtml">
-		<ui:define name="content">
-			<f:view locale="#{language.locale}">
-				<h:form id="form">
-					<p:growl id="growl1" life="2000" />
-					<p:growl id="msgs" showDetail="true" />
-					<style type="text/css">
+<ui:composition template="/template/commonTemplate.xhtml">
+	<ui:define name="content">
+		<f:view locale="#{language.locale}">
+			<h:form id="form">
+				<p:growl id="growl1" life="2000" />
+				<p:growl id="msgs" showDetail="true" />
+				<style type="text/css">
 td.col_0 {
 	background-color: #FFFFFF !important;
 }
@@ -55,11 +55,12 @@ td.col_9 {
 	background-color: #FFC1C1 !important;
 }
 </style>
-					<p:poll update=":form:OnLine" interval="30" />
+				<p:poll update=":form:OnLine" interval="30" />
 
-					<p:panelGrid columns="4" width="100%" cellpadding="10"
-						styleClass="align">
-						<p:column style="width:25%">
+				<p:panelGrid width="100%" cellpadding="10"
+					styleClass="align">
+					<p:row>
+						<p:column style="width:15%">
 							<p:panel id="setup" header="#{msg['SYSTEM_SETUP']}"
 								style="margin-bottom:20px">
 								<h:panelGrid columns="1" cellpadding="10">
@@ -90,7 +91,7 @@ td.col_9 {
 
 							</p:panel>
 						</p:column>
-						<p:column style="width:25%">
+						<p:column style="width:15%">
 							<p:panel id="Anagrafiche" header="#{msg['ANAGRAFICHE']}"
 								style="margin-bottom:20px">
 								<h:panelGrid columns="1" cellpadding="10">
@@ -117,7 +118,7 @@ td.col_9 {
 								</h:panelGrid>
 							</p:panel>
 						</p:column>
-						<p:column style="width:25%">
+						<p:column style="width:15%">
 							<p:panel id="Gestione" header="#{msg['GESTIONE']}"
 								style="margin-bottom:20px">
 								<h:panelGrid columns="1" cellpadding="10">
@@ -141,7 +142,7 @@ td.col_9 {
 						</p:column>
 
 
-						<p:column style="width:25%">
+						<p:column style="width:55%">
 							<!-- MONITOR INTERVENTI INIZIO -->
 							<p:panel id="OnLine" header="#{msg['LISTA_ONLINE']}">
 								<p:dataTable id="realtime"
@@ -180,13 +181,13 @@ td.col_9 {
 							</p:panel>
 						</p:column>
 
+					</p:row>
+					<!-- MONITOR INTERVENTI FINE -->
+				</p:panelGrid>
 
-						<!-- MONITOR INTERVENTI FINE -->
-					</p:panelGrid>
 
 
-
-					<style type="text/css">
+				<style type="text/css">
 .old {
 	background-color: #fca752 !important;
 	background-image: none !important;
@@ -197,66 +198,66 @@ td.col_9 {
 	vertical-align: top;
 }
 </style>
-					<p:panel id="basic" header="#{msg['EVENT_LOG']}">
+				<p:panel id="basic" header="#{msg['EVENT_LOG']}">
 
 
-						<p:dataTable id="Events" selectionMode="single"
-							value="#{managedAuditBean.all}" var="c"
-							selection="#{managedAuditBean.selectedAudit}" rowKey="#{c.id}"
-							paginator="true" rows="10"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15"
-							rowStyleClass="#{c.msgtype=='WARNING' ? 'old' : null}">
+					<p:dataTable id="Events" selectionMode="single"
+						value="#{managedAuditBean.all}" var="c"
+						selection="#{managedAuditBean.selectedAudit}" rowKey="#{c.id}"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15"
+						rowStyleClass="#{c.msgtype=='WARNING' ? 'old' : null}">
 
-							<p:ajax event="rowSelect"
-								listener="#{managedAuditBean.onRowSelect}" update=":form:msgs" />
+						<p:ajax event="rowSelect"
+							listener="#{managedAuditBean.onRowSelect}" update=":form:msgs" />
 
-							<p:column headerText="Time" style="width:10%">
-								<h:outputText value="#{c.timestamp}" />
-							</p:column>
+						<p:column headerText="Time" style="width:10%">
+							<h:outputText value="#{c.timestamp}" />
+						</p:column>
 
-							<p:column headerText="User" style="width:10%">
-								<h:outputText value="#{c.username}" />
-							</p:column>
+						<p:column headerText="User" style="width:10%">
+							<h:outputText value="#{c.username}" />
+						</p:column>
 
-							<p:column headerText="Event" style="width:80%">
-								<h:outputText value="#{c.azione}" />
-							</p:column>
+						<p:column headerText="Event" style="width:80%">
+							<h:outputText value="#{c.azione}" />
+						</p:column>
 
-							<p:column style="width:32px;text-align: center">
-								<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
-									title="Delete">
-									<f:setPropertyActionListener value="#{c}"
-										target="#{managedAuditBean.deleteSelected}" />
-								</p:commandButton>
-							</p:column>
-
-
-
-						</p:dataTable>
-						<p:commandButton id="Refresh" value="Refresh" icon="ui-icon-check"
-							update="Events" />
-
-					</p:panel>
-
-					<p:commandButton process="@this" icon="pi pi-search"
-						value="#{msg['ESCI']}" action="#{utente.logout}" />
+						<p:column style="width:32px;text-align: center">
+							<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
+								title="Delete">
+								<f:setPropertyActionListener value="#{c}"
+									target="#{managedAuditBean.deleteSelected}" />
+							</p:commandButton>
+						</p:column>
 
 
 
-							
+					</p:dataTable>
+					<p:commandButton id="Refresh" value="Refresh" icon="ui-icon-check"
+						update="Events" />
 
-				</h:form>
-				<p:dialog header="" widgetVar="panSendMail0" modal="true"
-					showEffect="fade" hideEffect="fade" resizable="false">
+				</p:panel>
 
-					<h:outputText
-						value="Lanciato job pianificazione interventi. Consultare i job" />
+				<p:commandButton process="@this" icon="pi pi-search"
+					value="#{msg['ESCI']}" action="#{utente.logout}" />
 
-				</p:dialog>
-			</f:view>
-		</ui:define>
 
-	</ui:composition>
+
+
+
+			</h:form>
+			<p:dialog header="" widgetVar="panSendMail0" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="false">
+
+				<h:outputText
+					value="Lanciato job pianificazione interventi. Consultare i job" />
+
+			</p:dialog>
+		</f:view>
+	</ui:define>
+
+</ui:composition>
 
 </html>

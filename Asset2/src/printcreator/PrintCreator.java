@@ -122,14 +122,7 @@ public class PrintCreator {
 	}
 
 	public InputStream getBufferInputStream() {
-		try {
-			PrintWriter pw = new PrintWriter("c:/out.txt");
-			pw.write(buffer.toString());
-			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		return new ByteArrayInputStream(buffer.toString().getBytes());
 	}
 

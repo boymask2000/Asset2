@@ -15,42 +15,42 @@
 <!-- <h:outputStylesheet name="css/login.css" /> -->
 <!-- </head> -->
 
-<h:body>
-
-	<ui:composition template="/template/commonTemplate.xhtml">
-		<ui:define name="content">
-			<f:view locale="#{language.locale}">
-
-				<h:form id="fm1">
-
-					<p:panel>
-						<h:panelGrid columns="1"
-							style="border:0px !important; background:none;margin:0 auto">
-
-							<p:panel>
 
 
-								<h:panelGrid columns="2">
-									<h:outputText value="#{msg['UTENTE'] }" />
-									<h:inputText value="#{utente.username}" />
+<ui:composition template="/template/commonTemplate.xhtml">
+	<ui:define name="content">
+		<f:view locale="#{language.locale}">
 
-									<h:outputText value="Password" />
-									<p:password value="#{utente.password}" />
-								</h:panelGrid>
-								<h:commandButton value="Login" action="#{utente.login}" />
+			<h:form id="fm1">
 
-							</p:panel>
+				<p:panel>
+					<h:panelGrid columns="1"
+						style="border:0px !important; background:none;margin:0 auto">
 
-		
+						<p:panel>
 
-						</h:panelGrid>
 
-					</p:panel>
-					
-				</h:form>
-			</f:view>
-		</ui:define>
-	</ui:composition>
-</h:body>
+							<h:panelGrid columns="2">
+								<h:outputText value="#{msg['UTENTE'] }" />
+								<h:inputText value="#{utente.username}" />
+
+								<h:outputText value="Password" />
+								<p:password value="#{utente.password}" />
+							</h:panelGrid>
+							<h:commandButton value="Login" action="#{utente.login}" />
+
+						</p:panel>
+				
+
+
+					</h:panelGrid>
+
+				</p:panel>
+
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition>
+
 
 </html>

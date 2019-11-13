@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -20,7 +19,7 @@ public class LanguageBean implements Serializable {
 
 	private static final String ITALIAN = "it";;
 
-	private String localeCode;
+	private String localeCode="en";
 
 	private static Map<String, Locale> countries;
 

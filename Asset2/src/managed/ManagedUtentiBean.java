@@ -2,7 +2,6 @@ package managed;
 
 import java.io.Serializable;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -20,9 +19,8 @@ public class ManagedUtentiBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Utente> myList;
-	//
-//	@ManagedProperty(value = "selectedUser")
-	private Utente selectedUser = new Utente();
+
+	private Utente selectedUser = null;
 
 	public List<Utente> getAllUtenti() {
 

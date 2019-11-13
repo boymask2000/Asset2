@@ -23,7 +23,7 @@
 							rowsPerPageTemplate="5,10,15">
 
 							<p:ajax event="rowSelect"
-								listener="#{managedUtentiBean.onRowSelect}" update=":form:msgs" />
+								listener="#{managedUtentiBean.onRowSelect}" update="form" />
 
 							<p:column headerText="Username">
 								<h:outputText value="#{c.username}" />
@@ -43,18 +43,17 @@
 
 							<f:facet name="footer">
 
-								<p:commandButton action="nuovoUtente" value="Nuovo Utente"
+								<p:commandButton action="nuovoUtente" value="Nuovo Utente" 
 									process="@this" />
 
-								<p:commandButton action="modificaUtente" value="Modifica Utente"
-
+								<p:commandButton action="modificaUtente" value="Modifica Utente" disabled="#{managedUtentiBean.selectedUser==null}"
 									process="@this" />
 
-								<p:commandButton process="radioDT" update=":form:panSetPass"
+								<p:commandButton process="radioDT" update=":form:panSetPass" disabled="#{managedUtentiBean.selectedUser==null}"
 									icon="pi pi-search" value="Set password"
 									oncomplete="PF('setPassDialog').show()" />
 
-								<p:commandButton process="radioDT" update=":form:panDeleteUser" 
+								<p:commandButton process="radioDT" update=":form:panDeleteUser" disabled="#{managedUtentiBean.selectedUser==null}"
 									icon="pi pi-search" value="Delete"
 									oncomplete="PF('deleteUserDialog').show()" />
 
@@ -82,14 +81,27 @@
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
 					oncomplete="deleteUserDialog.hide();">
 					<p:outputPanel id="panDeleteUser" style="text-align:center;">
-						<p:panelGrid columns="2" columnClasses="label,value">
-							<h:outputText value="Conferma la cancellazione dell'utente " />
-							<h:outputText value="#{managedUtentiBean.selectedUser.username}" />
+						<p:panelGrid>
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText
+										value="#{msg['CONFIRM_DELETE_USER']} #{managedUtentiBean.selectedUser.username}" />
 
-							<p:commandButton value="ok" id="ajasx1"
-								actionListener="#{managedUtentiBean.delete}" update="msgs"
-								styleClass="ui-priority-primary"
-								oncomplete="PF('deleteUserDialog').hide();" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<p:commandButton value="ok" id="ajasx1"
+										actionListener="#{managedUtentiBean.delete}" update="radioDT"
+										styleClass="ui-priority-primary"
+										oncomplete="PF('deleteUserDialog').hide();" />
+								</p:column>
+								<p:column>
+									<p:commandButton value="No" id="ajasx2"
+										styleClass="ui-priority-primary"
+										oncomplete="PF('deleteUserDialog').hide();" />
+								</p:column>
+							</p:row>
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>

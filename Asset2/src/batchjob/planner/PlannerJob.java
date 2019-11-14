@@ -32,16 +32,20 @@ public class PlannerJob extends GenericJob {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
-	//		cleanInterventiCalendario();
+				// cleanInterventiCalendario();
+
+				CalendarioDAO calendarioDao = new CalendarioDAO();
+
+				String maxData = calendarioDao.getMaxData();
 
 				int count = 0;
 				AssetAlcaDAO assetDao = new AssetAlcaDAO();
 				List<AssetAlca> allAssets = assetDao.selectAll();
 				for (AssetAlca as : allAssets) {
-					
+
 					count++;
 					queue.put(count + " / " + allAssets.size());
-					
+
 					String famiglia = as.getFacSystem();
 					FamigliaAssetDAO fad = new FamigliaAssetDAO();
 					FamigliaAsset f = fad.searchByName(famiglia);
@@ -50,9 +54,9 @@ public class PlannerJob extends GenericJob {
 					List<Check> checks = cDao.getChecksByFamilyId(f.getId());
 
 					for (Check check : checks) {
-						makePlan(as.getId(), check);
+						makePlan(as.getId(), check, maxData);
 					}
-					
+
 				}
 				return count;
 			}
@@ -60,7 +64,7 @@ public class PlannerJob extends GenericJob {
 		submit(callable, "Pianificazione interventi");
 	}
 
-	private void makePlan(long assetId, Check check) {
+	private void makePlan(long assetId, Check check, String maxData) {
 
 		TipoSchedulazione tipo = getTipoSchedulazione(check);
 
@@ -68,19 +72,13 @@ public class PlannerJob extends GenericJob {
 		int num = tipo.getNum();
 		int calType = tipo.getCalType();
 
-		CalendarioDAO calendarioDao = new CalendarioDAO();
-
-		String maxData = calendarioDao.getMaxData();
-
 		// Data di partenza
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(new Date());
 
 		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		try {
-			while (data.compareTo(maxData) < 0) {
-
-				data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
+			while (data.compareTo(maxData) <= 0) {
 
 				List<Item> lista = order(cal, range);
 				if (lista.size() == 0)
@@ -99,9 +97,10 @@ public class PlannerJob extends GenericJob {
 					// dump(lista);
 				}
 				cal.add(calType, num);
+				data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 			}
 		} catch (Throwable t) {
-		
+
 			t.printStackTrace();
 		}
 	}
@@ -134,7 +133,6 @@ public class PlannerJob extends GenericJob {
 		u.setAssetId(assetId);
 		u.setData_pianificata(goodDate);
 		u.setData_teorica(dataTeorica);
-		
 
 		InterventiDAO dao = new InterventiDAO();
 
@@ -143,8 +141,7 @@ public class PlannerJob extends GenericJob {
 			dao.insert(u);
 		}
 		List<Intervento> listaInt = dao.getInterventiPerAssetInData(u);
-	//	System.out.println("size listaint: "+listaInt.size());
-		
+
 		Intervento ii = listaInt.get(0);
 
 		ChecklistIntervento cli = new ChecklistIntervento();
@@ -228,7 +225,7 @@ public class PlannerJob extends GenericJob {
 		String fmtCal = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		Date fmtDate = TimeUtil.getCurrentStringDate(fmtCal);
 
-	//	int diff = 10000;
+		// int diff = 10000;
 		long minDiff = 0;
 		int min = lista.get(0).getNum();
 		String goodDate = lista.get(0).getData();
@@ -241,11 +238,11 @@ public class PlannerJob extends GenericJob {
 			if (start) {
 				start = false;
 				minDiff = d;
-				goodDate=item.getData();
+				goodDate = item.getData();
 			}
-			if( d<minDiff) {
-				minDiff=d;
-				goodDate=item.getData();
+			if (d < minDiff) {
+				minDiff = d;
+				goodDate = item.getData();
 			}
 
 //			if (item.getNum() == 0)

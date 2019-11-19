@@ -23,9 +23,9 @@ public class FileUploadView {
 
 	private UploadedFile file;
 	private InputStream inputStream;
-	
-	private int rowTitles=1;
-	private int firstRowData=2;
+
+	private int rowTitles = 1;
+	private int firstRowData = 2;
 
 	public UploadedFile getFile() {
 		return file;
@@ -49,7 +49,7 @@ public class FileUploadView {
 
 	public void upload() {
 
-		if (file != null) {
+		if (file != null && file.getFileName() != null) {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 
@@ -78,32 +78,36 @@ public class FileUploadView {
 	public String upload2() {
 		try {
 			tmpFile = File.createTempFile("ttp", "tmp");
-			try(FileOutputStream fos = new FileOutputStream(tmpFile);){
+			try (FileOutputStream fos = new FileOutputStream(tmpFile);) {
 				fos.write(file.getContents());
 			}
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		if (file != null) {
-			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			if (file.getFileName() != null)
+				JsfUtil.showMessage(file.getFileName() + " is uploaded.");
+			try {
+				Excel excel = new Excel(inputStream, rowTitles);
+				List<String> colonne = excel.getCols();
 
-			Excel excel = new Excel(inputStream, rowTitles);
-			List<String> colonne = excel.getCols();
-
-			ExcelColumnManagedBean b = (ExcelColumnManagedBean) JsfUtil.getBean("excelColumnManagedBean");
-			b.setColonne(colonne);
+				ExcelColumnManagedBean b = (ExcelColumnManagedBean) JsfUtil.getBean("excelColumnManagedBean");
+				b.setColonne(colonne);
+			} catch (org.apache.poi.EmptyFileException e) {
+				return null;
+			}
 		}
 		return "handleExcelColumns";
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		if (event.getFile().getFileName() != null) {
+			FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
 	}
 
 	public int getRowTitles() {

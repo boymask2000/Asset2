@@ -16,8 +16,8 @@
 					<p:panel id="basic" header="#{msg['FAMILY']} Asset">
 					I campi a sinistra
 						<p:dataTable id="familyDT"
-							value="#{excelColumnManagedBean.colItems}" var="c" rowKey="#{c.num}"
-							paginator="true" rows="20"
+							value="#{excelColumnManagedBean.colItems}" var="c"
+							rowKey="#{c.num}" paginator="true" rows="20"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15">
 
@@ -28,8 +28,8 @@
 							</p:column>
 							<p:column headerText="Nome">
 								<h:selectOneMenu id="console" onchange="submit()"
-									value="#{c.num}" >
-								
+									value="#{c.num}">
+
 									<f:selectItem itemLabel=" " itemValue="0" />
 									<f:selectItem itemLabel="FacNum" itemValue="1" />
 									<f:selectItem itemLabel="FacSystem" itemValue="2" />
@@ -45,13 +45,13 @@
 								</h:selectOneMenu>
 							</p:column>
 						</p:dataTable>
-						<p:commandButton process="@this" icon="pi pi-search"
-							value="ok" update=":form"
-							action="#{excelColumnManagedBean.check}" />
-							<h:outputText value="#{excelColumnManagedBean.error}" style="font-weight:bold; color: red" />
-							<p:commandButton process="@this" icon="pi pi-search" value="Home"
-					action="adminHome" />
-							
+						<p:commandButton process="@this" icon="pi pi-search" value="ok"
+							update=":form" action="#{excelColumnManagedBean.check}" />
+						<h:outputText value="#{excelColumnManagedBean.error}"
+							style="font-weight:bold; color: red" />
+						<p:commandButton process="@this" icon="pi pi-search" value="Home"
+							action="adminHome" />
+
 					</p:panel>
 
 				</h:form>>

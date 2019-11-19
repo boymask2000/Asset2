@@ -7,9 +7,12 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-			<h:panelGrid columns="1" cellpadding="100">
-				<p:panel id="basic"  style="margin-bottom:20px">
-					<h:form enctype="multipart/form-data">
+			<h:form enctype="multipart/form-data" id="fm1">
+				<p:growl id="msgs" showDetail="true" />
+				<p:autoUpdate />
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel id="basic" style="margin-bottom:20px">
+
 						<p:growl id="messages" showDetail="true" />
 
 						<p:fileUpload value="#{fileUploadView.file}" mode="simple"
@@ -22,13 +25,14 @@
 						<h:outputText value="Row Data" />
 						<p:inputText value="#{fileUploadView.firstRowData}"></p:inputText>
 
-						<p:commandButton value="Load" ajax="false"
+						<p:commandButton value="Load" ajax="false" 
 							action="#{fileUploadView.upload2}" />
-					</h:form>
-				</p:panel>
-			</h:panelGrid>
-			<p:commandButton process="@this" icon="pi pi-search" value="Home"
-						action="#{navigator.back()}" />
+
+					</p:panel>
+				</h:panelGrid>
+				<p:commandButton process="@this" icon="pi pi-search" value="Home"
+					action="#{navigator.back()}" />
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

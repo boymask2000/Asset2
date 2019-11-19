@@ -57,8 +57,7 @@ td.col_9 {
 </style>
 				<p:poll update=":form:OnLine" interval="30" />
 
-				<p:panelGrid width="100%" cellpadding="10"
-					styleClass="align">
+				<p:panelGrid width="100%" cellpadding="10" styleClass="align">
 					<p:row>
 						<p:column style="width:15%">
 							<p:panel id="setup" header="#{msg['SYSTEM_SETUP']}"
@@ -243,18 +242,29 @@ td.col_9 {
 				<p:commandButton process="@this" icon="pi pi-search"
 					value="#{msg['ESCI']}" action="#{utente.logout}" />
 
-
-
-
-
 			</h:form>
-			<p:dialog header="" widgetVar="panSendMail0" modal="true"
-				showEffect="fade" hideEffect="fade" resizable="false">
-
-				<h:outputText
-					value="Lanciato job pianificazione interventi. Consultare i job" />
-
+			
+			
+			<p:dialog header="" widgetVar="panSendMail0" modal="true" width="25%"
+				id="dlg" style="margin:0 auto" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<h:form>
+					<p:panelGrid>
+						<p:row>
+							<p:column>
+								<h:outputText
+									value="Lanciato job pianificazione interventi. Consultare i job" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:commandButton value="ok" onclick="dlg.hide()" />
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</h:form>
 			</p:dialog>
+			
 		</f:view>
 	</ui:define>
 

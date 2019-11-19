@@ -61,8 +61,9 @@ public class ExcelColumnManagedBean {
 		if (error == null) {
 			FileUploadView fileUploadView = (FileUploadView) JsfUtil.getBean("fileUploadView");
 			fileUploadView.readFile2(colItems);
+			JsfUtil.showMessage("File in caricamento");
 		}
-		return null;
+		return "adminHome";
 	}
 
 	public String getError() {

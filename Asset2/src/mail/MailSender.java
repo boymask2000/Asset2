@@ -16,6 +16,7 @@ import common.ApplicationConfig;
 public abstract class MailSender {
 	protected final static String MAILTYPE_GMAIL = "gmail";
 	protected final static String MAILTYPE_LIBERO = "libero";
+	protected final static String MAILTYPE_HMAIL = "hmail";
 
 
 	protected static final String SMTP_USER = "smtp_user";

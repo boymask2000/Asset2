@@ -137,6 +137,7 @@ public class ManagedChecksBean implements Serializable {
 	}
 
 	public void setSelectedCheck(Check selectedCheck) {
+	
 		this.selectedCheck = selectedCheck;
 	}
 

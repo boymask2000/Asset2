@@ -2,7 +2,9 @@ package beans;
 
 import java.io.Serializable;
 
-public class Check implements Serializable{
+import common.TextUtil;
+
+public class Check implements Serializable {
 	/**
 	 * 
 	 */
@@ -12,11 +14,10 @@ public class Check implements Serializable{
 	private String description;
 	private String descriptionUS;
 	private String codiceNormativa;
-	
-	
+
 	private String frequenza;
 	private int codFrequenza;
-	
+
 	private String filename;
 
 	public int getId() {
@@ -33,6 +34,8 @@ public class Check implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+		if (this.description != null)
+			this.description = TextUtil.cleanTextForSpecialChars(this.description);
 	}
 
 	public String getCodiceNormativa() {
@@ -41,7 +44,8 @@ public class Check implements Serializable{
 
 	public void setCodiceNormativa(String codiceNormativa) {
 		int index = codiceNormativa.lastIndexOf(' ');
-		if( index!=-1) codiceNormativa=codiceNormativa.substring(index+1);
+		if (index != -1)
+			codiceNormativa = codiceNormativa.substring(index + 1);
 		this.codiceNormativa = codiceNormativa;
 	}
 
@@ -51,6 +55,8 @@ public class Check implements Serializable{
 
 	public void setDescriptionUS(String descriptionUS) {
 		this.descriptionUS = descriptionUS;
+		if (this.descriptionUS != null)
+			this.descriptionUS = TextUtil.cleanTextForSpecialChars(this.descriptionUS);
 	}
 
 	public String getFilename() {

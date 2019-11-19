@@ -22,7 +22,7 @@ public class ManagedSafetyBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Safety selectedSafety = new Safety();
+//	private Safety selectedSafety = new Safety();
 
 	private FamigliaAsset famiglia;
 	private int selectedImageNum = 0;
@@ -40,6 +40,9 @@ public class ManagedSafetyBean implements Serializable {
 	private boolean selected11;
 	private boolean selected12;
 
+	private List<Integer> images = new ArrayList<Integer>();
+	private List<Safety> myList = null;
+
 	public List<Safety> getAllSafety() {
 
 		SafetyDAO dao = new SafetyDAO();
@@ -47,103 +50,104 @@ public class ManagedSafetyBean implements Serializable {
 		return l;
 	}
 
-	private List<Integer> images = new ArrayList<Integer>();
-
 	public void setImg(int id) {
 
 	}
 
-	List<Safety> myList = null;
-
 	public List<Safety> getAllSafetyForFamily() {
 		SafetyDAO dao = new SafetyDAO();
 
-	
-			if (famiglia != null)
-				myList = dao.selectByFamily(famiglia.getId());
-			else
-				myList = getAllSafety();
+		if (famiglia != null)
+			myList = dao.selectByFamily(famiglia.getId());
+		else
+			myList = getAllSafety();
 		return myList;
 	}
 
 	public void resetSelezione() {
-		selectedSafety = null;
-		famiglia=null;
+		// selectedSafety = null;
+		famiglia = null;
 	}
 
 //
 	public void onRowSelect(SelectEvent event) {
 		FacesMessage msg = new FacesMessage(" Selected", "" + ((Safety) event.getObject()).getId());
 		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
-		famiglia=mfab.getSelectedFamiglia();
+		famiglia = mfab.getSelectedFamiglia();
 
-		selectedSafety = (Safety) event.getObject();
+		// selectedSafety = (Safety) event.getObject();
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
+
 	public void setDeleteSelected(Safety u) {
 		SafetyDAO dao = new SafetyDAO();
 		dao.delete(u);
 	}
 
-	public void saveSafety() {
-		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
-		getSelectedSafety().setFamilyid(mfab.getSelectedFamiglia().getId());
-		SafetyDAO dao = new SafetyDAO();
-		dao.save(selectedSafety);
-	}
+//	public void saveSafety() {
+//		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
+//		getSelectedSafety().setFamilyid(mfab.getSelectedFamiglia().getId());
+//		SafetyDAO dao = new SafetyDAO();
+//		dao.save(selectedSafety);
+//	}
 
 	public void insertSafety() {
 		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
-		famiglia=mfab.getSelectedFamiglia();
+		famiglia = mfab.getSelectedFamiglia();
+		long famId = famiglia.getId();
 //		SafetyDAO dao = new SafetyDAO();
 
-		selectedSafety.setFamilyid(famiglia.getId());
+		// selectedSafety.setFamilyid(famiglia.getId());
 		if (selected1)
-			insert(1, selectedSafety);
+			insert(1, famId);
+
+		if (selected2)
+			insert(2, famId);
 
 		if (selected3)
-			insert(2, selectedSafety);
-
-		if (selected3)
-			insert(3, selectedSafety);
+			insert(3, famId);
 
 		if (selected4)
-			insert(4, selectedSafety);
+			insert(4, famId);
 
 		if (selected5)
-			insert(5, selectedSafety);
+			insert(5, famId);
 
 		if (selected6)
-			insert(6, selectedSafety);
+			insert(6, famId);
 
 		if (selected7)
-			insert(7, selectedSafety);
+			insert(7, famId);
 
 		if (selected8)
-			insert(8, selectedSafety);
+			insert(8, famId);
 
 		if (selected9)
-			insert(9, selectedSafety);
+			insert(9, famId);
 
 		if (selected10)
-			insert(10, selectedSafety);
+			insert(10, famId);
 
 		if (selected11)
-			insert(11, selectedSafety);
+			insert(11, famId);
 
 		if (selected12)
-			insert(12, selectedSafety);
+			insert(12, famId);
 
 	}
 
-	private void insert(int id, Safety s) {
-		selectedSafety.setImgId(id);
-		selectedSafety.setPpe_en(getPPELabel(id));
-		selectedSafety.setPpe_it(getPPELabel(id));
-		selectedSafety.setRisk_en(getRiskLabel(id));
-		selectedSafety.setRisk_it(getRiskLabel(id));
+	private void insert(int id, long famId) {
+		Safety s = new Safety();
+
+		s.setFamilyid(famId);
+
+		s.setImgId(id);
+		s.setPpe_en(getPPELabel(id));
+		s.setPpe_it(getPPELabel(id));
+		s.setRisk_en(getRiskLabel(id));
+		s.setRisk_it(getRiskLabel(id));
 		SafetyDAO dao = new SafetyDAO();
 		dao.insert(s);
 	}
@@ -161,19 +165,6 @@ public class ManagedSafetyBean implements Serializable {
 //				"Old: " + oldValue + ", New:" + newValue);
 //		FacesContext.getCurrentInstance().addMessage(null, msg);
 
-	}
-
-	public Safety getSelectedSafety() {
-
-		return selectedSafety;
-
-	}
-
-	public void setSelectedSafety(Safety s) {
-		if (s == null)
-			return;
-
-		this.selectedSafety = s;
 	}
 
 	public FamigliaAsset getFamiglia() {
@@ -213,9 +204,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected1(boolean selected1) {
-		if (!selected1)
-			return;
-		cleanSelectedNum();
+
 		this.selected1 = selected1;
 
 	}
@@ -225,9 +214,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected2(boolean selected2) {
-		if (!selected2)
-			return;
-		cleanSelectedNum();
+
 		this.selected2 = selected2;
 
 	}
@@ -296,18 +283,12 @@ public class ManagedSafetyBean implements Serializable {
 		return "";
 	}
 
-	private void cleanSelectedNum() {
-
-	}
-
 	public boolean isSelected3() {
 		return selected3;
 	}
 
 	public void setSelected3(boolean selected3) {
-		if (!selected3)
-			return;
-		cleanSelectedNum();
+
 		this.selected3 = selected3;
 
 	}
@@ -317,9 +298,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected4(boolean selected4) {
-		if (!selected4)
-			return;
-		cleanSelectedNum();
+
 		this.selected4 = selected4;
 
 	}
@@ -329,9 +308,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected5(boolean selected5) {
-		if (!selected5)
-			return;
-		cleanSelectedNum();
+
 		this.selected5 = selected5;
 
 	}
@@ -341,9 +318,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected6(boolean selected6) {
-		if (!selected6)
-			return;
-		cleanSelectedNum();
+
 		this.selected6 = selected6;
 
 	}
@@ -353,9 +328,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected7(boolean selected7) {
-		if (!selected7)
-			return;
-		cleanSelectedNum();
+
 		this.selected7 = selected7;
 
 	}
@@ -365,9 +338,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected8(boolean selected8) {
-		if (!selected8)
-			return;
-		cleanSelectedNum();
+
 		this.selected8 = selected8;
 
 	}
@@ -377,9 +348,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected9(boolean selected9) {
-		if (!selected9)
-			return;
-		cleanSelectedNum();
+
 		this.selected9 = selected9;
 
 	}
@@ -389,9 +358,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected10(boolean selected10) {
-		if (!selected10)
-			return;
-		cleanSelectedNum();
+
 		this.selected10 = selected10;
 
 	}
@@ -401,9 +368,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected11(boolean selected11) {
-		if (!selected11)
-			return;
-		cleanSelectedNum();
+
 		this.selected11 = selected11;
 
 	}
@@ -413,9 +378,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public void setSelected12(boolean selected12) {
-		if (!selected12)
-			return;
-		cleanSelectedNum();
+
 		this.selected12 = selected12;
 
 	}

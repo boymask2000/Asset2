@@ -12,6 +12,7 @@ import beans.Intervento;
 import beans.Safety;
 import common.Languages;
 import common.Pair;
+import common.TextUtil;
 import common.TimeUtil;
 import common.Util;
 import database.dao.AssetAlcaDAO;
@@ -178,9 +179,9 @@ public class PrintCreatorElencoInterventi extends PrintCreator {
 				t.startRow();
 				t.addDataCol(Util.getLocalizedString("DESCRIZIONE", language.getLocale()) + ":");
 				if (language.getLanguage().equalsIgnoreCase("en"))
-					t.addDataCol(cleanTextForSpecialChars(check.getDescriptionUS()));
+					t.addDataCol(TextUtil.cleanTextForSpecialChars(check.getDescriptionUS()));
 				else
-					t.addDataCol(cleanTextForSpecialChars(check.getDescription()));
+					t.addDataCol(TextUtil.cleanTextForSpecialChars(check.getDescription()));
 				prt.addtable(t);
 
 			}

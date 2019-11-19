@@ -54,12 +54,11 @@
 
 
 										<p:ajax event="rowEdit"
-											listener="#{managedChecksBean.onRowEdit}" 
-											update=":form:msgs" />
+											listener="#{managedChecksBean.onRowEdit}" update=":form:msgs" />
 
 
 										<p:column headerText="#{msg['DESCRIZIONE']} IT"
-											style="width:45%">
+											style="width:35%">
 
 
 											<p:cellEditor>
@@ -80,7 +79,7 @@
 
 
 										<p:column headerText="#{msg['DESCRIZIONE']} US"
-											style="width:45%">
+											style="width:35%">
 
 											<p:cellEditor>
 												<f:facet name="output">
@@ -108,8 +107,17 @@
 												action="#{managedNormativaBean.setupViewFile(c.filename)}"
 												value="View" />
 										</p:column>
-										<p:column style="width:35px">
+										<p:column style="width:10%">
 											<p:rowEditor />
+										</p:column>
+
+										<p:column style="width:10%">
+											<p:commandButton process="form" update=":panSetPass0"
+												icon="pi pi-search" value="Copy to Family"
+												oncomplete="PF('setPassDialog0').show()">
+												<f:setPropertyActionListener
+													target="#{managedChecksBean.selectedCheck}" value="#{c}" />
+											</p:commandButton>
 										</p:column>
 
 										<f:facet name="footer">
@@ -123,10 +131,7 @@
 												rendered="#{managedChecksBean.selectedCheck.getId()!=0}"
 												process="@this" />
 
-											<p:commandButton process="form" update=":panSetPass0"
-												rendered="#{managedChecksBean.selectedCheck.getId()!=0}"
-												icon="pi pi-search" value="Copy to Family"
-												oncomplete="PF('setPassDialog0').show()" />
+
 
 											<p:commandButton process="form" update=":panSetConf0"
 												rendered="#{managedChecksBean.selectedCheck.getId()!=0}"
@@ -146,39 +151,45 @@
 					<!-- 						action="adminHome" /> -->
 
 				</h:form>
-				<p:dialog header="Famiglie Asset" widgetVar="setPassDialog0"
-					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+				<p:dialog header="Famiglie Asset" widgetVar="setPassDialog0" width="50%"
+					style="width:20%;margin:0 auto" modal="true" showEffect="fade"
+					hideEffect="fade" resizable="true">
 					<p:outputPanel id="panSetPass0" style="text-align:center;">
-						<p:panelGrid columns="2" columnClasses="label,value">
-							<p:panel id="basic11" style="margin-bottom:20px">
-								<h:form enctype="multipart/form-data">
-									<p:dataTable id="fam" selectionMode="single"
-										value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
-										selection="#{managedFamiglieAssetBean.selectedFamiglia}"
-										rowKey="#{c.id}" paginator="true" rows="5"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="5,10,15">
+						<p:panelGrid >
+							<p:row>
+								<p:column>
+									<p:panel id="basic11" style="margin-bottom:20px">
+										<h:form>
+											<p:dataTable id="fam" selectionMode="single"
+												value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
+												selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+												rowKey="#{c.id}" paginator="true" rows="5"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
 
-										<p:ajax event="rowSelect"
-											listener="#{managedFamiglieAssetBean.onRowSelectDialog}"
-											update="@this" />
+												<p:ajax event="rowSelect"
+													listener="#{managedFamiglieAssetBean.onRowSelectDialog}"
+													update="@this" />
 
 
-										<p:column headerText="Nome">
-											<h:outputText value="#{c.famiglia}" />
-										</p:column>
+												<p:column headerText="Nome">
+													<h:outputText value="#{c.famiglia}" />
+												</p:column>
 
-										<f:facet name="footer">
+												<f:facet name="footer">
 
-											<h:commandButton
-												action="#{managedFamiglieAssetBean.copy(managedChecksBean.selectedCheck)}"
-												value="Ok" process="@this" />
-										</f:facet>
+													<h:commandButton
+														action="#{managedFamiglieAssetBean.copy(managedChecksBean.selectedCheck)}"
+														value="Ok" process="@this" />
+												</f:facet>
 
-									</p:dataTable>
+											</p:dataTable>
 
-								</h:form>
-							</p:panel>
+										</h:form>
+									</p:panel>
+								</p:column>
+							</p:row>
 						</p:panelGrid>
 					</p:outputPanel>
 				</p:dialog>

@@ -56,4 +56,11 @@ public class InterventiRealTimePool {
 		InterventiRealTimePool.interventi = interventi;
 	}
 
+	public static void delete(InterventoRealTime u) {
+		for (InfoInterventoRealTime i : interventi)
+			if (i.getInterventoRealTime().getInterventoid() == u.getInterventoid())
+				interventi.remove(i);
+		
+	}
+
 }

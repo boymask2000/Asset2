@@ -32,7 +32,7 @@ public class PlannerJob extends GenericJob {
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
-				// cleanInterventiCalendario();
+				 cleanInterventiCalendario();
 
 				CalendarioDAO calendarioDao = new CalendarioDAO();
 

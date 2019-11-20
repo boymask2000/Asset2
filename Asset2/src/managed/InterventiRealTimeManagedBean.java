@@ -8,11 +8,12 @@ public class InterventiRealTimeManagedBean {
 
 	public List<InfoInterventoRealTime> getInfoInterventi() {
 		List<InfoInterventoRealTime> ll = InterventiRealTimePool.getInterventi();
-//		int id=1;
-//		for(InfoInterventoRealTime info: ll ) {
-//			info.setId(id++);
-//		}
+
 		return ll;
+	}
+	
+	public void setDeleteSelected( InfoInterventoRealTime u ) {
+		InterventiRealTimePool.delete(u.getInterventoRealTime());
 	}
 
 }

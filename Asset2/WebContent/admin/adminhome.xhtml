@@ -171,6 +171,13 @@ td.col_9 {
 									<p:column headerText="Status">
 										<h:outputText value="#{c.interventoRealTime.stato}" />
 									</p:column>
+									<p:column style="width:32px;text-align: center">
+							<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
+								title="Delete">
+								<f:setPropertyActionListener value="#{c}"
+									target="#{interventiRealTimeManagedBean.deleteSelected}" />
+							</p:commandButton>
+						</p:column>
 
 									<f:facet name="footer">
 										<p:commandButton id="Refreshrt" value="Refresh"

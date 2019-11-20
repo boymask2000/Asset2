@@ -11,10 +11,11 @@
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
 			<f:view locale="#{language.locale}">
-				<p:panel header="#{msg['NUOVA_NORMATIVA']}" style="width:20%;margin:0 auto">
-					<h:form>
+				<p:panel header="#{msg['NUOVA_NORMATIVA']}"
+					style="width:20%;margin:0 auto">
+					<h:form id="fm1">
 						<p:growl id="growl1" life="2000" />
-
+						<p:autoUpdate />
 
 						<p:growl id="msgs" showDetail="true" />
 						<table>
@@ -52,13 +53,13 @@
 
 
 
-						<p:commandButton process="@this" icon="pi pi-search"
+						<h:commandButton process="@this" icon="pi pi-search"
 							value="#{msg['ESCI']}" action="normativeHome" />
 
 						<h:panelGroup id="postPanel2">
-							<p:commandButton value="ok" id="ajasx"
-								actionListener="#{managedNormativaBean.insertNormativa}"
-								update="growl1" styleClass="ui-priority-primary" />
+							<h:commandButton value="ok" id="ajasx"
+								action="#{managedNormativaBean.insertNormativa}"
+								update="fm1" />
 						</h:panelGroup>
 					</h:form>
 				</p:panel>

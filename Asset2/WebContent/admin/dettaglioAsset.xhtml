@@ -11,210 +11,223 @@
 				<h:form id="form">
 					<p:panel>
 						<p:growl id="msgs" showDetail="true" />
-						<h:panelGrid columns="2" cellpadding="1">
-							<p:panel id="baic">
+						<p:panelGrid cellpadding="1">
+							<p:row>
+								<p:column>
+									<p:panel>
+										<h:outputText
+											value="#{managedAssetBean.selectedAsset.facSystem}" />
+									</p:panel>
+									<p:panel id="baic">
 
-								<h:panelGrid columns="2" cellpadding="1">
-									<h:outputText value="ID" />
-									<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
-									<h:outputText value="Fac #" />
-									<h:inputText value="#{managedAssetBean.selectedAsset.facNum}" />
-									<h:outputText value="facSystem" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.facSystem}" />
-									<h:outputText value="facSubsystem" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.facSubsystem}" />
-									<h:outputText value="assemblyCategory" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.assemblyCategory}" />
-									<h:outputText value="nomenclature" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.nomenclature}" />
-									<h:outputText value="procId" />
-									<h:inputText value="#{managedAssetBean.selectedAsset.procId}" />
-									<h:outputText value="pmSchedRecipient" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.pmSchedRecipient}" />
-									<h:outputText value="pmSchedSerial" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
+										<h:panelGrid columns="2" cellpadding="1">
+											<h:outputText value="ID" />
+											<h:outputText value="#{managedAssetBean.selectedAsset.id}" />
+											<h:outputText value="Fac #" />
+											<h:inputText value="#{managedAssetBean.selectedAsset.facNum}" />
+											<h:outputText value="facSystem" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.facSystem}" />
+											<h:outputText value="facSubsystem" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.facSubsystem}" />
+											<h:outputText value="assemblyCategory" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.assemblyCategory}" />
+											<h:outputText value="nomenclature" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.nomenclature}" />
+											<h:outputText value="procId" />
+											<h:inputText value="#{managedAssetBean.selectedAsset.procId}" />
+											<h:outputText value="pmSchedRecipient" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.pmSchedRecipient}" />
+											<h:outputText value="pmSchedSerial" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.pmSchedSerial}" />
 
-									<h:outputText value="rpieIdIndividual" />
-									<h:outputText
-										value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
-									<h:outputText value="schedAssignedOrg" />
-									<h:inputText
-										value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
-
-
-								</h:panelGrid>
-								<p:commandButton action="#{managedAssetBean.updateAsset}"
-									value="update" update=":form" />
-							</p:panel>
-							<p:panel id="bc0">
-								<p:panel id="bc" header="#{msg['STAT']}">
-									<table style="width: 100%">
-										<tr>
-											<td width="100"></td>
-										</tr>
-										<tr>
-											<td height="40px" bgcolor="#{managedAssetBean.color}"></td>
-										</tr>
-										<tr>
-											<td><p:inputTextarea readonly="true" rows="3" cols="50"
-													value="#{managedAssetBean.commento}"
-													rendered="#{managedAssetBean.commento!=null}" /></td>
-										</tr>
-									</table>
-								</p:panel>
-								<p:panel header="#{msg['PERFORMED_TASKS1']}">
-									<p:dataTable id="radiopDT" selectionMode="single"
-										value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
-										var="c" selection="#{managedInterventiBean.selectedIntevento}"
-										rowKey="#{c.id}" paginator="true" rows="5"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="5,10,15">
-										<p:ajax event="rowSelect"
-											listener="#{managedInterventiBean.onRowSelect}"
-											update=":form:msgs" />
-										<p:column headerText="#{msg['DATA_PREVISTA1']}">
+											<h:outputText value="rpieIdIndividual" />
 											<h:outputText
-												value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
-										</p:column>
-										<p:column headerText="#{msg['DATA_EFFETTIVA']}">
-											<h:outputText
-												value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
-										</p:column>
-										<p:column headerText="#{msg['ESITO']}"
-											styleClass="{'background':'yellow'}">
-											<!-- 									<h:outputText value="#{c.esito}" /> -->
-											<table>
-												<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
-													<td></td>
+												value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+											<h:outputText value="schedAssignedOrg" />
+											<h:inputText
+												value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
+
+
+										</h:panelGrid>
+										<p:commandButton action="#{managedAssetBean.updateAsset}"
+											value="update" update=":form" />
+									</p:panel>
+								</p:column>
+								<p:column>
+									<p:panel id="bc0">
+										<p:panel id="bc" header="#{msg['STAT']}">
+											<table style="width: 100%">
+												<tr>
+													<td width="100"></td>
+												</tr>
+												<tr>
+													<td height="40px" bgcolor="#{managedAssetBean.color}"></td>
+												</tr>
+												<tr>
+													<td><p:inputTextarea readonly="true" rows="3"
+															cols="50" value="#{managedAssetBean.commento}"
+															rendered="#{managedAssetBean.commento!=null}" /></td>
 												</tr>
 											</table>
-										</p:column>
-										<f:facet name="footer">
-											<h:commandButton action="dettaglioIntervento" value="Detail">
-											</h:commandButton>
-										</f:facet>
-									</p:dataTable>
-								</p:panel>
-								<p:panel header="#{msg['SCHEDULED_TASKS']}">
-									<p:dataTable id="radio0DT" selectionMode="single"
-										value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,false)}"
-										var="c" selection="#{managedInterventiBean.selectedIntevento}"
-										rowKey="#{c.id}" paginator="true" rows="5"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="5,10,15">
-										<p:ajax event="rowSelect"
-											listener="#{managedInterventiBean.onRowSelect}"
-											update=":form:msgs" />
-										<p:column headerText="#{msg['DATA_PREVISTA']}">
-											<h:outputText
-												value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
-										</p:column>
-										<p:column headerText="#{msg['DATA_EFFETTIVA']}">
+										</p:panel>
+										<p:panel header="#{msg['PERFORMED_TASKS1']}">
+											<p:dataTable id="radiopDT" selectionMode="single"
+												value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
+												var="c"
+												selection="#{managedInterventiBean.selectedIntevento}"
+												rowKey="#{c.id}" paginator="true" rows="5"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+												<p:ajax event="rowSelect"
+													listener="#{managedInterventiBean.onRowSelect}"
+													update=":form:msgs" />
+												<p:column headerText="#{msg['DATA_PREVISTA1']}">
+													<h:outputText
+														value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
+												</p:column>
+												<p:column headerText="#{msg['DATA_EFFETTIVA']}">
+													<h:outputText
+														value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
+												</p:column>
+												<p:column headerText="#{msg['ESITO']}"
+													styleClass="{'background':'yellow'}">
+													<!-- 									<h:outputText value="#{c.esito}" /> -->
+													<table>
+														<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
+															<td></td>
+														</tr>
+													</table>
+												</p:column>
+												<f:facet name="footer">
+													<h:commandButton action="dettaglioIntervento"
+														value="Detail">
+													</h:commandButton>
+												</f:facet>
+											</p:dataTable>
+										</p:panel>
+										<p:panel header="#{msg['SCHEDULED_TASKS']}">
+											<p:dataTable id="radio0DT" selectionMode="single"
+												value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,false)}"
+												var="c"
+												selection="#{managedInterventiBean.selectedIntevento}"
+												rowKey="#{c.id}" paginator="true" rows="5"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
+												<p:ajax event="rowSelect"
+													listener="#{managedInterventiBean.onRowSelect}"
+													update=":form:msgs" />
+												<p:column headerText="#{msg['DATA_PREVISTA']}">
+													<h:outputText
+														value="#{timeUtil.getLocalizedDate(c.data_pianificata)}" />
+												</p:column>
+												<p:column headerText="#{msg['DATA_EFFETTIVA']}">
 
-										</p:column>
-										<p:column headerText="#{msg['ESITO']}"
-											styleClass="{'background':'yellow'}">
+												</p:column>
+												<p:column headerText="#{msg['ESITO']}"
+													styleClass="{'background':'yellow'}">
 
-										</p:column>
-										<f:facet name="footer">
-											<h:commandButton action="goInsertIntervento" value="Detail">
-											</h:commandButton>
-										</f:facet>
-									</p:dataTable>
-								</p:panel>
+												</p:column>
+												<f:facet name="footer">
+													<h:commandButton action="goInsertIntervento" value="Detail">
+													</h:commandButton>
+												</f:facet>
+											</p:dataTable>
+										</p:panel>
 
-								<p:panel id="bajsic" header="#{msg['MANUALI_PER_ASSET']}">
+										<p:panel id="bajsic" header="#{msg['MANUALI_PER_ASSET']}">
 
-									<p:dataTable id="radioDT" selectionMode="single"
-										value="#{managedManualiBean.getManualiForAsset(managedAssetBean.selectedAsset.id)}"
-										var="c" selection="#{managedManualiBean.selectedManuale}"
-										rowKey="#{c.id}" paginator="true" rows="5"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="5,10,15">
+											<p:dataTable id="radioDT" selectionMode="single"
+												value="#{managedManualiBean.getManualiForAsset(managedAssetBean.selectedAsset.id)}"
+												var="c" selection="#{managedManualiBean.selectedManuale}"
+												rowKey="#{c.id}" paginator="true" rows="5"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
 
-										<p:ajax event="rowSelect"
-											listener="#{managedManualiBean.onRowSelect}"
-											update=":form:msgs" />
+												<p:ajax event="rowSelect"
+													listener="#{managedManualiBean.onRowSelect}"
+													update=":form:msgs" />
 
-										<p:column headerText="#{msg['DESCRIZIONE']}">
-											<h:outputText value="#{c.descrizione}" />
-										</p:column>
+												<p:column headerText="#{msg['DESCRIZIONE']}">
+													<h:outputText value="#{c.descrizione}" />
+												</p:column>
 
-										<p:column headerText="File">
-											<h:outputText value="#{c.nomefile}" />
-										</p:column>
-										<p:column>
-											<h:commandButton rendered="#{c.pdf}"
-												action="#{managedManualiBean.setupViewFile(c.nomefile)}"
-												value="View" />
-										</p:column>
+												<p:column headerText="File">
+													<h:outputText value="#{c.nomefile}" />
+												</p:column>
+												<p:column>
+													<h:commandButton rendered="#{c.pdf}"
+														action="#{managedManualiBean.setupViewFile(c.nomefile)}"
+														value="View" />
+												</p:column>
 
-										<f:facet name="footer">
+												<f:facet name="footer">
 
-											<p:commandButton process="radioDT" update=":panSetPass0"
-												icon="pi pi-search" value="New"
-												oncomplete="PF('setPassDialog0').show()" />
+													<p:commandButton process="radioDT" update=":panSetPass0"
+														icon="pi pi-search" value="New"
+														oncomplete="PF('setPassDialog0').show()" />
 
-										</f:facet>
-									</p:dataTable>
+												</f:facet>
+											</p:dataTable>
 
-								</p:panel>
+										</p:panel>
 
-								<p:panel id="baFam" header="#{msg['MANUALI_PER_FAMIGLIA']}">
+										<p:panel id="baFam" header="#{msg['MANUALI_PER_FAMIGLIA']}">
 
-									<p:dataTable id="radioFamDT" selectionMode="single"
-										value="#{managedManualiFamigliaBean.getManualiForFamily(managedAssetBean.familyId)}"
-										var="c"
-										selection="#{managedManualiFamigliaBean.selectedManuale}"
-										rowKey="#{c.id}" paginator="true" rows="5"
-										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="5,10,15">
+											<p:dataTable id="radioFamDT" selectionMode="single"
+												value="#{managedManualiFamigliaBean.getManualiForFamily(managedAssetBean.familyId)}"
+												var="c"
+												selection="#{managedManualiFamigliaBean.selectedManuale}"
+												rowKey="#{c.id}" paginator="true" rows="5"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+												rowsPerPageTemplate="5,10,15">
 
-										<p:ajax event="rowSelect"
-											listener="#{managedManualiFamigliaBean.onRowSelect}"
-											update=":form:msgs" />
+												<p:ajax event="rowSelect"
+													listener="#{managedManualiFamigliaBean.onRowSelect}"
+													update=":form:msgs" />
 
-										<p:column headerText="#{msg['DESCRIZIONE']}">
-											<h:outputText value="#{c.descr}" />
-										</p:column>
-										<p:column headerText="Type">
-											<h:outputText value="#{c.typeManuale.name}" />
-										</p:column>
+												<p:column headerText="#{msg['DESCRIZIONE']}">
+													<h:outputText value="#{c.descr}" />
+												</p:column>
+												<p:column headerText="Type">
+													<h:outputText value="#{c.typeManuale.name}" />
+												</p:column>
 
-										<p:column headerText="File">
-											<h:outputText value="#{c.nomeFile}" />
-										</p:column>
-										<p:column>
-											<h:commandButton
-												action="#{managedManualiFamigliaBean.setupViewFile(c.nomeFile)}"
-												value="View" />
-										</p:column>
-										<p:column style="width:32px;text-align: center">
-											<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
-												title="Delete">
-												<f:setPropertyActionListener value="#{c}"
-													target="#{managedManualiFamigliaBean.deleteSelected}" />
-											</p:commandButton>
-										</p:column>
+												<p:column headerText="File">
+													<h:outputText value="#{c.nomeFile}" />
+												</p:column>
+												<p:column>
+													<h:commandButton
+														action="#{managedManualiFamigliaBean.setupViewFile(c.nomeFile)}"
+														value="View" />
+												</p:column>
+												<p:column style="width:32px;text-align: center">
+													<p:commandButton update=":form"
+														icon="ui-icon ui-icon-trash" title="Delete">
+														<f:setPropertyActionListener value="#{c}"
+															target="#{managedManualiFamigliaBean.deleteSelected}" />
+													</p:commandButton>
+												</p:column>
 
-										<f:facet name="footer">
+												<f:facet name="footer">
 
-											<p:commandButton process="radioFamDT" update=":panSetPassF"
-												icon="pi pi-search" value="New"
-												oncomplete="PF('newManFam0').show()" />
+													<p:commandButton process="radioFamDT" update=":panSetPassF"
+														icon="pi pi-search" value="New"
+														oncomplete="PF('newManFam0').show()" />
 
-										</f:facet>
-									</p:dataTable>
+												</f:facet>
+											</p:dataTable>
 
-								</p:panel>
-							</p:panel>
-						</h:panelGrid>
+										</p:panel>
+									</p:panel>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
 
 						<h:commandButton value="#{msg['STAMPA']}"
 							action="#{printCreatorFullDettaglioAsset.printFullAsset}" />
@@ -222,7 +235,7 @@
 						<h:commandButton value="TimeLine" action="timeline" />
 
 
-<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
+						<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
 
 
 					</p:panel>
@@ -301,7 +314,7 @@
 					</p:outputPanel>
 				</p:dialog>
 
-				
+
 
 			</f:view>
 		</ui:define>

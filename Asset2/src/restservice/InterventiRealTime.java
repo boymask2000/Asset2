@@ -23,9 +23,6 @@ public class InterventiRealTime {
 	@Path("/inizioIntervento")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response inizioIntervento(InterventoRealTime inter) {
-System.out.println("inizioIntervento");
-
-
 
 		InterventiRealTimePool.inizioIntervento(inter);
 
@@ -38,9 +35,6 @@ System.out.println("inizioIntervento");
 	@Path("/fineIntervento")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response fineIntervento(InterventoRealTime inter) {
-		System.out.println("fineIntervento");
-		
-
 
 		InterventiRealTimePool.fineIntervento(inter);
 

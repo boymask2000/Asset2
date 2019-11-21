@@ -19,31 +19,31 @@
 						<h:panelGrid columns="2"
 							style="border:0px !important; background:none;margin:0 auto">
 
-							<h:outputText value="#{msg['DESCRIZIONE'] }" />
-							<h:outputText value="#{msg['VALORE'] }" />
+							<h:outputText style="font-weight:bold" value="#{msg['DESCRIZIONE'] }" />
+							<h:outputText style="font-weight:bold" value="#{msg['VALORE'] }" />
 						
-							<h:outputText
+							<h:outputText style="font-weight:bold"
 								value="#{parameterManagedBean.frequenzaControlloFisico.description_it}"
 								rendered="#{languageBean.isItalian()}" />
-							<h:outputText
+							<h:outputText style="font-weight:bold"
 								value="#{parameterManagedBean.frequenzaControlloFisico.description_us}"
 								rendered="#{! languageBean.isItalian()}" />
 
 
-							<p:inputText
+							<p:inputText style="font-weight:bold"
 								value="#{parameterManagedBean.frequenzaControlloFisico.value}"
 								required="true"
 								validator="#{parameterManagedBean.isPositiveNumber}" />
 
-							<h:outputText
+							<h:outputText style="font-weight:bold"
 								value="#{parameterManagedBean.directoryPDFInterventiMensili.description_it}"
 								rendered="#{languageBean.isItalian()}" />
-							<h:outputText
+							<h:outputText style="font-weight:bold"
 								value="#{parameterManagedBean.directoryPDFInterventiMensili.description_us}"
 								rendered="#{! languageBean.isItalian()}" />
 
 
-							<p:inputText
+							<p:inputText style="font-weight:bold"
 								value="#{parameterManagedBean.directoryPDFInterventiMensili.value}"
 								required="true"
 								validator="#{parameterManagedBean.existDirectory}" />
@@ -53,7 +53,7 @@
 						<h:commandButton value="#{msg['UPDATE']}"
 							action="#{parameterManagedBean.update}" />
 					</p:panel>
-					<h:commandButton icon="pi pi-search" value="Home"
+					<h:commandButton  icon="pi pi-search" value="Home"
 						action="adminHome" />
 
 				</h:form>

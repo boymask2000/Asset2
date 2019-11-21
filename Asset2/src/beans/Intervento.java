@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import common.TipoSchedulazione;
+import database.dao.AssetAlcaDAO;
 
 public class Intervento implements Serializable{
 	/**
@@ -24,6 +25,17 @@ public class Intervento implements Serializable{
 
 	private Set<Integer> codFrequenze = new HashSet<Integer>(); // Non in DataBase
 
+	public String getFamiglia() {
+		AssetAlcaDAO dao = new AssetAlcaDAO();
+		AssetAlca as = dao.searchByRPIE(rpieIdIndividual);
+		return as.getFacSystem();
+	}
+	public AssetAlca getAsset() {
+		AssetAlcaDAO dao = new AssetAlcaDAO();
+		return dao.searchByRPIE(rpieIdIndividual);
+	
+	}
+	
 	public long getId() {
 		return id;
 	}

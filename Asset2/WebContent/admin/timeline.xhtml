@@ -13,11 +13,30 @@
 				<h:form id="form">
 					<p:panel>
 
-						<h:panelGrid columns="2" cellpadding="1">
-							<h:outputText value="rpieIdIndividual" />
-							<h:outputText
-								value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
-						</h:panelGrid>
+						<p:panelGrid cellpadding="1">
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.facSystem}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.facSubsystem}" />
+								</p:column>
+							</p:row>
+							
+							<p:row>
+								<p:column>
+									<h:outputText value="rpieIdIndividual" />
+								</p:column>
+								<p:column>
+									<h:outputText
+										value="#{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
 					</p:panel>
 					<p:growl id="msgs" showDetail="true" />
 

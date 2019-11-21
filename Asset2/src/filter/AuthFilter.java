@@ -47,11 +47,16 @@ public class AuthFilter implements Filter {
 		System.out.println("***************************************************************");
 		doneInfo = true;
 	}
-
-	private void copyDocs() {
+	private static void copyDocs() {
 		if (doneCopyDocs)
 			return;
 		doneCopyDocs = true;
+		copyDocsInt();
+	}
+
+	public static void copyDocsInt() {
+
+		
 		String uploadDir = Faces.HOMEDIR + "resources" + File.separator + "ManualiFamiglia" + File.separator;
 		String backupDir = ApplicationConfig.getDocumentdir();
 		if (backupDir == null) {

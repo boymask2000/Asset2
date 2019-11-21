@@ -58,9 +58,11 @@
 						</table>
 
 
-<p:commandButton action="#{navigator.go('reportInterventiNew','goCalendario')}" value="#{msg['STRATEGIC']}" />
-<!-- 						<p:commandButton process="@this" icon="pi pi-search" -->
-<!-- 							value="#{msg['STRATEGIC']}" action="strategic" /> -->
+						<p:commandButton
+							action="#{navigator.go('reportInterventiNew','goCalendario')}"
+							value="#{msg['STRATEGIC']}" />
+						<!-- 						<p:commandButton process="@this" icon="pi pi-search" -->
+						<!-- 							value="#{msg['STRATEGIC']}" action="strategic" /> -->
 
 
 
@@ -74,8 +76,11 @@
 							<p:ajax event="rowSelect"
 								listener="#{managedInterventiBean.onRowSelect}"
 								update="radi00pDT" />
-							<p:column headerText="rpieIdIndividual" style="width:30%">
+							<p:column headerText="rpieIdIndividual" style="width:20%">
 								<h:outputText value="#{c.rpieIdIndividual}" />
+							</p:column>
+							<p:column headerText="facSystem" style="width:20%">
+								<h:outputText value="#{c.famiglia}" />
 							</p:column>
 							<p:column headerText="#{msg['DATA_PREVISTA']}" style="width:20%">
 								<h:outputText
@@ -85,17 +90,29 @@
 								<h:outputText
 									value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 							</p:column>
-				
-							<p:column headerText="#{msg['ESITO']}">
+
+							<p:column headerText="#{msg['ESITO']}" style="width:20%">
 								<table>
 									<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
 										<td></td>
 									</tr>
 								</table>
 							</p:column>
+
+							<f:facet name="footer">
+
+
+								<h:commandButton
+									action="#{managedReportInterventiBean.gotoDettaglioIntervento}"
+									value="Detail" rendered="#{managedReportInterventiBean.selectedIntevento!=null}"/>
+
+								
+
+							</f:facet>
+
 						</p:dataTable>
 
-						<p:commandButton process="@this" icon="pi pi-search"
+						<h:commandButton process="@this" icon="pi pi-search"
 							value="#{msg['ESCI']}" action="adminHome" />
 
 

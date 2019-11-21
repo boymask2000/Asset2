@@ -16,6 +16,7 @@ import beans.TypeManuale;
 import common.ApplicationConfig;
 import common.JsfUtil;
 import database.dao.ManualiFamigliaDAO;
+import filter.AuthFilter;
 
 public class ManualeFamigliaUpload extends ABaseBean {
 
@@ -34,6 +35,8 @@ public class ManualeFamigliaUpload extends ABaseBean {
 		try (InputStream inputStream = file.getInputstream();) {
 
 			loadFile(fileName, inputStream);
+			
+		
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,6 +60,7 @@ public class ManualeFamigliaUpload extends ABaseBean {
 
 			currentManuale.setNomeFile(tmpFile.getName());
 		
+			AuthFilter.copyDocsInt();
 
 		} catch (Exception e) {
 			e.printStackTrace();

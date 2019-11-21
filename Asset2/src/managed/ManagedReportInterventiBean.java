@@ -9,40 +9,45 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.Intervento;
+import common.JsfUtil;
 import database.dao.InterventiDAO;
 
-public class ManagedReportInterventiBean extends ManagedInterventiBean  {
+public class ManagedReportInterventiBean extends ManagedInterventiBean {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	private Intervento selectedIntevento;
+
 	private String startDate;
 	private String endDate;
-	
+
 	public String getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
-		
+
 	}
+
 	public String getEndDate() {
 		return endDate;
 	}
+
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	public List<Intervento> getInterventi() {
 		InterventiDAO dao = new InterventiDAO();
-		List<Intervento> ll = dao.getInterventiFromTo(startDate,endDate);
-		
+		List<Intervento> ll = dao.getInterventiFromTo(startDate, endDate);
+
 		return ll;
-		
+
 	}
-	
 
 	public void onStartDateSelect(SelectEvent event) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -52,10 +57,12 @@ public class ManagedReportInterventiBean extends ManagedInterventiBean  {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
 		setStartDate(dd);
 	}
-	public void onStartDateSelect1(String s ) {
-		
+
+	public void onStartDateSelect1(String s) {
+
 		setStartDate(s);
 	}
+
 	public void onEndDateSelect(SelectEvent event) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -64,5 +71,23 @@ public class ManagedReportInterventiBean extends ManagedInterventiBean  {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
 		setEndDate(dd);
 	}
+
+	public Intervento getSelectedIntevento() {
+		return selectedIntevento;
+	}
+
+	public void setSelectedIntevento(Intervento selectedIntevento) {
+		this.selectedIntevento = selectedIntevento;
+	}
+
+	public String gotoDettaglioIntervento() {
+	ManagedInterventiBean mib = (ManagedInterventiBean)JsfUtil.getBean("managedInterventiBean");
+	mib.setSelectedIntevento(selectedIntevento);
+	ManagedAssetBean mas=(ManagedAssetBean)JsfUtil.getBean("managedAssetBean");
+	mas.setSelectedAsset(selectedIntevento.getAsset());
 	
+	return "dettaglioIntervento";
+		
+	}
+
 }

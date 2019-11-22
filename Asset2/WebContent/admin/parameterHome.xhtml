@@ -15,7 +15,7 @@
 
 				<h:form id="fm1">
 					<p:growl id="msgs" showDetail="false" life="3000" />
-					<p:panel header="#{msg['SYSTEM_PARAMETERS']}">
+					<p:panel header="#{msg['SYSTEM_PARAMETERS']}" style="width:50%;margin:0 auto">
 						<h:panelGrid columns="2"
 							style="border:0px !important; background:none;margin:0 auto">
 
@@ -52,10 +52,10 @@
 						</h:panelGrid>
 						<h:commandButton value="#{msg['UPDATE']}"
 							action="#{parameterManagedBean.update}" />
-					</p:panel>
+					
 					<h:commandButton  icon="pi pi-search" value="Home"
-						action="adminHome" />
-
+						action="adminHome" style="float:right;"/>
+</p:panel>
 				</h:form>
 			</f:view>
 		</ui:define>

@@ -8,7 +8,7 @@
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
 			<f:view locale="#{language.locale}">
-				<p:panel id="basic" header="Norme di sicurezza">
+				<p:panel id="basic" header="#{msg['NORME_SICUREZZA']}">
 					<h:form id="form">
 
 						<p:growl id="msgs" showDetail="true" />
@@ -16,7 +16,7 @@
 						<h:panelGrid style="width:100%">
 							<p:row>
 								<p:column style="width:40%">
-									<p:panel id="basic" header="Famiglie Asset">
+									
 										<p:dataTable id="familyDT" selectionMode="single"
 											value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
@@ -29,7 +29,7 @@
 												update=":form" />
 
 
-											<p:column headerText="Nome">
+											<p:column headerText="#{msg['FAMILY']}">
 												<h:outputText value="#{c.famiglia}" />
 											</p:column>
 
@@ -39,7 +39,7 @@
 										<p:commandButton process="@this" icon="pi pi-search"
 											value="Reset Selezione" update=":form"
 											action="#{managedSafetyBean.resetSelezione()}" />
-									</p:panel>
+									
 								</p:column>
 								<p:column style="width:60%">
 									<p:panel>

@@ -46,7 +46,7 @@ public interface InterventiMapper {
 			" WHERE id=#{id}";
 
 	final String SELECT_ASSETS_INTERVENTI_PREC = "select distinct a.* from test1.assetalca a,  interventi i  where "
-			+ "i.assetid=a.id and i.data_effettiva is null and i.data_pianificata=#{data}";
+			+ "i.assetid=a.id and i.data_effettiva is null and i.data_pianificata<=#{data} ORDER BY a.facSystem";
 
 	final String SELECT_NUM_INTERVENTI_PREC = "SELECT COUNT(*) FROM " + TABELLA
 			+ " WHERE data_pianificata<#{data} AND data_effettiva IS NULL";

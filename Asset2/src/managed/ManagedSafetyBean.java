@@ -188,7 +188,45 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public int getSelectedImageNum() {
-		return selectedImageNum;
+		int v=0;
+		if (selected1)
+			v++;
+
+		if (selected2)
+			v++;
+
+		if (selected3)
+			v++;
+
+		if (selected4)
+			v++;
+
+		if (selected5)
+			v++;
+
+		if (selected6)
+			v++;
+
+		if (selected7)
+			v++;
+
+		if (selected8)
+			v++;
+
+		if (selected9)
+			v++;
+
+		if (selected10)
+			v++;
+
+		if (selected11)
+			v++;
+
+		if (selected12)
+			v++;
+
+		
+		return v;
 	}
 
 	public void setSelectedImageNum(int selectedImageNum) {

@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import beans.AssetAlca;
 import beans.Intervento;
 import common.JsfUtil;
 import common.TimeUtil;
@@ -32,6 +33,7 @@ public class ManagedInterventiBean implements Serializable {
 	private int esito;
 
 	private String selectedDataForSituation;
+	private AssetAlca asset=null;
 	
 	
 	public List<Intervento> getInterventiInData(String data) {
@@ -96,14 +98,6 @@ public class ManagedInterventiBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
-//	private BasicDocumentViewController getDocController() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Application application = context.getApplication();
-//		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
-//				"#{basicDocumentViewController}", BasicDocumentViewController.class);
-//		return assetBean;
-//	}
 
 	public Intervento getSelectedIntevento() {
 
@@ -190,6 +184,15 @@ public class ManagedInterventiBean implements Serializable {
 	public void setSelectedDataForSituation(String s) {
 
 		this.selectedDataForSituation = s;
+	}
+
+	public AssetAlca getAsset() {
+		ManagedAssetBean managedAssetBean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
+		return managedAssetBean.getSelectedAsset();
+	}
+
+	public void setAsset(AssetAlca asset) {
+		this.asset = asset;
 	}
 
 }

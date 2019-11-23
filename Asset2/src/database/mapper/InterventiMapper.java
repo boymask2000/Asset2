@@ -22,7 +22,7 @@ public interface InterventiMapper {
 			" WHERE ASSETID=#{assetId} AND data_pianificata=#{data_pianificata}";
 
 	final String SELECT_INTERVENTI_PER_ASSET_DONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
-			+ " AND data_effettiva IS NOT NULL ORDER BY DATA_EFFETTIVA DESC, timestamp DESC";
+			+ " AND data_effettiva IS NOT NULL ORDER BY timestamp DESC";
 
 	final String SELECT_INTERVENTI_PER_ASSET_UNDONE = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}"
 			+ " AND data_effettiva IS NULL ORDER BY DATA_PIANIFICATA ASC, timestamp DESC";

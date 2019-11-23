@@ -65,6 +65,10 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 				if (rpm == null || rpm.trim().length() == 0)
 					continue;
 
+				String family = asset.getFacSystem();
+				if (family == null || family.trim().length() == 0)
+					continue;
+
 				FamigliaAssetDAO famDao = new FamigliaAssetDAO();
 				AssetAlcaDAO dao = new AssetAlcaDAO();
 				try {

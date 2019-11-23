@@ -102,17 +102,4 @@ public class Utente implements Serializable {
 		email = "";
 
 	}
-//	public List<Flag> flags;
-//	public List<Flag> getFlags(){
-//		List<Flag> f = new ArrayList<Flag>();
-//		Flag it = new Flag("it", "resources/images/flag_it.jpg");
-//		Flag us = new Flag("en", "resources/images/flag_us.jpg");
-//		f.add(it);
-//		f.add(us);
-//		return f;
-//	}
-//
-//	public void setFlags(List<Flag> flags) {
-//		this.flags = flags;
-//	}
 }

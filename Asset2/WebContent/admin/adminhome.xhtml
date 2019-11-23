@@ -85,11 +85,11 @@ td.col_10 {
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['LAVORI_BATCH']}"
-										action="#{navigator.go('adminHome','batchHome')}" />
+										action="batchHome" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['PARAMETERS']}"
-										action="#{navigator.go('adminHome','goParameters')}" />
+										action="goParameters" />
 								</h:panelGrid>
 
 							</p:panel>
@@ -102,22 +102,22 @@ td.col_10 {
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['GESTIONE_UTENTI']}"
-										action="#{navigator.go('adminHome','utentiHome')}" />
+										action="utentiHome" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['NORMATIVE']}"
-										action="#{navigator.go('adminHome','normativeHome')}" />
+										action="normativeHome" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['HOME_SAFETY']}" action="safetyHome" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['CHECKS']}"
-										action="#{navigator.go('adminHome','checksHome')}" />
+										action="checksHome" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										rendered="true" value="#{msg['LOCATION']}"
-										action="#{navigator.go('adminHome','locationhome')}" />
+										action="locationhome" />
 								</h:panelGrid>
 							</p:panel>
 						</p:column>
@@ -127,7 +127,7 @@ td.col_10 {
 								<h:panelGrid columns="1" cellpadding="10">
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['GESTIONEASSET']}"
-										action="#{navigator.go('adminHome','gestioneAsset')}" />
+										action="gestioneAsset" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['REPORT_INTERVENTI']} "
@@ -135,11 +135,11 @@ td.col_10 {
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['USER_HOME']}"
-										action="#{navigator.go('adminHome','home')}" />
+										action="home" />
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['ISPEZIONI']}"
-										action="#{navigator.go('adminHome','ispezioniHome')}" />
+										action="ispezioniHome" />
 								</h:panelGrid>
 							</p:panel>
 						</p:column>

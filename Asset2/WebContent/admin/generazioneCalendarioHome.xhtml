@@ -7,28 +7,28 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+			<h:form>
+				<h:panelGrid columns="1" cellpadding="100">
+					<p:panel rendered="#{managedCalendarioBean.maxData != null}">
+						<h:outputText
+							value="Calendario già generato dal #{managedCalendarioBean.minData} al #{managedCalendarioBean.maxData}" />
+					</p:panel>
 
-			<h:panelGrid columns="1" cellpadding="100">
-				<p:panel rendered="#{managedCalendarioBean.maxData != null}">
-					<h:outputText
-						value="Calendario già generato dal #{managedCalendarioBean.minData} al #{managedCalendarioBean.maxData}" />
-				</p:panel>
+					<p:panel id="basic" style="margin-bottom:20px">
 
-				<p:panel id="basic" style="margin-bottom:20px"
-					>
-					<h:form enctype="multipart/form-data">
 						<p:growl id="messages" showDetail="true" />
 
 
 
 						<p:commandButton value="Genera Calendario"
 							action="#{generaCalendarioJob.go}" />
-					</h:form>
-				</p:panel>
-			</h:panelGrid>
-			<h:commandButton value="GO BACK!" action="back" />
-<!-- 			<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
-<!-- 				action="adminHome" /> -->
+
+					</p:panel>
+				</h:panelGrid>
+				<h:commandButton value="GO BACK!" action="back" />
+				<!-- 			<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
+				<!-- 				action="adminHome" /> -->
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

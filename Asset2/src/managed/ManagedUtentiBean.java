@@ -20,7 +20,7 @@ public class ManagedUtentiBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Utente> myList;
 
-	private Utente selectedUser = null;
+	private Utente selectedUser ;
 
 	public List<Utente> getAllUtenti() {
 
@@ -86,6 +86,7 @@ public class ManagedUtentiBean implements Serializable {
 	}
 
 	public Utente getSelectedUser() {
+		if( selectedUser==null )selectedUser=new Utente();
 		return selectedUser;
 	}
 

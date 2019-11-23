@@ -46,14 +46,14 @@
 								<p:commandButton action="nuovoUtente" value="Nuovo Utente" 
 									process="@this" />
 
-								<p:commandButton action="modificaUtente" value="Modifica Utente" disabled="#{managedUtentiBean.selectedUser==null}"
+								<p:commandButton action="modificaUtente" value="Modifica Utente" disabled="#{managedUtentiBean.selectedUser.username==null}"
 									process="@this" />
 
-								<p:commandButton process="radioDT" update=":form:panSetPass" disabled="#{managedUtentiBean.selectedUser==null}"
+								<p:commandButton process="radioDT" update=":form:panSetPass" disabled="#{managedUtentiBean.selectedUser.username==null}"
 									icon="pi pi-search" value="Set password"
 									oncomplete="PF('setPassDialog').show()" />
 
-								<p:commandButton process="radioDT" update=":form:panDeleteUser" disabled="#{managedUtentiBean.selectedUser==null}"
+								<p:commandButton process="radioDT" update=":form:panDeleteUser" disabled="#{managedUtentiBean.selectedUser.username==null}"
 									icon="pi pi-search" value="Delete"
 									oncomplete="PF('deleteUserDialog').show()" />
 

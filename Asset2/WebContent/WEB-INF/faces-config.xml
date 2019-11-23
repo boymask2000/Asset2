@@ -5,6 +5,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
 	version="2.1">
 	<application>
+	
+	<navigation-handler>
+    common.HistoryNavigationHandler
+</navigation-handler>
+
 
 		<locale-config>
 			<default-locale>it</default-locale>
@@ -14,6 +19,7 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+
 
 
 
@@ -274,6 +280,22 @@
 		<managed-bean-class>managed.IspezioniManagedBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>batchStarter</managed-bean-name>
+		<managed-bean-class>managed.BatchStarter</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>back</from-outcome>
+			<to-view-id>/admin/ispezioniHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
 
 
 	<navigation-rule>

@@ -14,10 +14,20 @@
 						<p:panelGrid cellpadding="1">
 							<p:row>
 								<p:column>
-									<p:panel>
-										<h:outputText
-											value="#{managedAssetBean.selectedAsset.facSystem}" />
-									</p:panel>
+									<p:panelGrid  style="width:100%">
+										<p:row>
+											<p:column style="padding-top:100px;
+											padding-right:50px;
+											padding-left:50px;
+											padding-bottom:100px
+											">
+												<p:panel header="Family">
+													<h:outputText
+														value="#{managedAssetBean.selectedAsset.facSystem}" />
+												</p:panel>
+											</p:column>
+										</p:row>
+									</p:panelGrid>
 									<p:panel id="baic">
 
 										<h:panelGrid columns="2" cellpadding="1">
@@ -26,7 +36,7 @@
 											<h:outputText value="Fac #" />
 											<h:inputText value="#{managedAssetBean.selectedAsset.facNum}" />
 											<h:outputText value="facSystem" />
-											<h:inputText
+											<h:outputText
 												value="#{managedAssetBean.selectedAsset.facSystem}" />
 											<h:outputText value="facSubsystem" />
 											<h:inputText
@@ -235,7 +245,7 @@
 						<h:commandButton value="TimeLine" action="timeline" />
 
 
-						<p:commandButton value="GO BACK!" action="#{navigator.back()}" />
+						<h:commandButton value="GO BACK!" action="back" />
 
 
 					</p:panel>

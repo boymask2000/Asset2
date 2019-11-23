@@ -67,8 +67,4 @@ public class PrintCreatorFullDettaglioInterventi extends PrintCommon {
 //		prt.endPageSequence();
 		// ********************************
 	}
-
-
-
-
 }

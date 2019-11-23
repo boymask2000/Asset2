@@ -59,7 +59,7 @@ public class Batch implements Serializable{
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+		
 						e.printStackTrace();
 					}
 				}
@@ -76,6 +76,10 @@ public class Batch implements Serializable{
 		if (future.isDone())
 			return "Completed";
 		return "Running";
+	}
+	
+	public boolean isDone() {
+		return future.isDone();
 	}
 
 	public void setStatus(String status) {

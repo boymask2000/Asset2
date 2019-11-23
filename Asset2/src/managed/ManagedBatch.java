@@ -11,16 +11,27 @@ import beans.Batch;
 
 public class ManagedBatch {
 	private List<Batch> elencoBatch = new ArrayList<Batch>();
-	
-	private Batch selectedBatch ;
+
+	private Batch selectedBatch;
 
 	public void addBatch(Batch b) {
-	
+
+		String id = b.getJob().getJobID();
+
+		for (Batch batch : elencoBatch) {
+			String idInElenco = batch.getJob().getJobID();
+
+			if (idInElenco.equals(id) && !batch.isDone()) {
+				System.out.println("job " + id + " gia' in esecuzione");
+				return;
+			}
+		}
+
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 		Callable<Integer> callable = b.getCallable();
 		Future<Integer> future = executor.submit(callable);
 		b.setFuture(future);
-		
+
 		elencoBatch.add(b);
 	}
 

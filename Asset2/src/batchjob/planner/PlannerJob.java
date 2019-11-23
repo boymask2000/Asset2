@@ -26,13 +26,23 @@ import database.dao.InterventiDAO;
 import database.dao.NormativeDAO;
 
 public class PlannerJob extends GenericJob {
+	
+	private SchemaPlan schema = new SchemaPlan();
+	
+	
+	public PlannerJob() {
+		super();
+
+		jobID = "PlannerJob";
+	}
+
 	@Override
 	public void go() {
 
 		Callable<Integer> callable = new Callable<Integer>() {
 
 			public Integer call() throws Exception {
-				 cleanInterventiCalendario();
+				cleanInterventiCalendario();
 
 				CalendarioDAO calendarioDao = new CalendarioDAO();
 
@@ -105,7 +115,7 @@ public class PlannerJob extends GenericJob {
 		}
 	}
 
-	private SchemaPlan schema = new SchemaPlan();
+	
 
 	private boolean placeInSameDay(long assetId, List<Item> lista, String goodDate, String dataTeorica, Check ck) {
 

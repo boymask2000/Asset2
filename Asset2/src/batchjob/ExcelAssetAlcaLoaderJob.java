@@ -24,6 +24,10 @@ public class ExcelAssetAlcaLoaderJob extends GenericJob {
 	private int rowTitles;
 	private int firstRowData;
 
+	public ExcelAssetAlcaLoaderJob() {
+		jobID = "ExcelAssetAlcaLoaderJob";
+	}
+
 	@Override
 	public void go() {
 		Callable<Integer> callable = new Callable<Integer>() {

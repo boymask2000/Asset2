@@ -14,6 +14,7 @@ import database.mapper.CalendarioMapper;
 import database.mapper.ChecklistInterventoMapper;
 import database.mapper.ChecklistMapper;
 import database.mapper.ChecksMapper;
+import database.mapper.ChecksassetMapper;
 import database.mapper.DocInterventiMapper;
 import database.mapper.FamigliaAssetMapper;
 import database.mapper.FotoInterventiMapper;
@@ -54,6 +55,7 @@ public class MyBatisConnectionFactory {
 				sqlSessionFactory.getConfiguration().addMapper(ChecklistInterventoMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecklistMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(ChecksMapper.class);
+				sqlSessionFactory.getConfiguration().addMapper(ChecksassetMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(DocInterventiMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(FamigliaAssetMapper.class);
 				sqlSessionFactory.getConfiguration().addMapper(FotoInterventiMapper.class);

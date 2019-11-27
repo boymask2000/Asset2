@@ -157,7 +157,7 @@ public class InterventoRest {
 //		InterventiDAO dao = new InterventiDAO();
 //		dao.update(intervento);
 
-		return Response.ok().build();
+		return RestUtil.buildOKResponse();
 	}
 
 }

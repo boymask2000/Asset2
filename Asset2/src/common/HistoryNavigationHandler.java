@@ -44,6 +44,7 @@ public class HistoryNavigationHandler extends ConfigurableNavigationHandler {
 			if( outcome.equals("admin")||outcome.equals("adminHome"))outcomes.clear();
 			
 			this.outcomes.push(context.getViewRoot().getViewId());
+			//outcomes.push(outcome);
         }
 		
 		

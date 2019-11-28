@@ -17,6 +17,9 @@ public interface ChecksassetMapper {
 
 	final String SELECT_CHECKS_BY_ASSETID = "SELECT * FROM " + TABELLA + " c, " + NORMATIVE
 			+ " n  where c.codiceNormativa=n.codice AND" + " c.assetId=#{id}";
+	
+	final String SELECT_CHECKS_BY_ASSETID__ = "SELECT * FROM " + TABELLA + " c " 
+			+ "  where c.assetId=#{id}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (description , codiceNormativa ,descriptionUS, assetId)" //

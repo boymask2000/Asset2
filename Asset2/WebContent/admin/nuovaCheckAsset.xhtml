@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<p:panel>
+				<h:form>
+					<p:panel>
+						<p:growl id="growl1" life="2000" />
+
+
+						<p:growl id="msgs" showDetail="true" />
+						<table>
+							<tr>
+								<td><h:outputText value="Descrizione" /></td>
+								<td><h:outputText value="Descrizione US" /></td>
+							</tr>
+							<tr>
+								<td><p:inputTextarea rows="3" cols="50"
+										value="#{checksAssetManagedBean.selectedCheck.description}" /></td>
+
+
+								<td><p:inputTextarea rows="3" cols="50"
+										value="#{checksAssetManagedBean.selectedCheck.descriptionUS}" /></td>
+							</tr>
+							
+
+							<tr>
+								
+								<td><p:outputLabel for="car" value="Codice Normativa: " /> 
+								<p:selectOneMenu
+										id="car" value="#{checksAssetManagedBean.selectedCheck.codiceNormativa}">
+										<f:selectItem itemLabel="Select One" itemValue="" />
+										<f:selectItems value="#{managedNormativaBean.allNormative}" />
+									</p:selectOneMenu></td>
+							</tr>
+
+						</table>
+						<h:panelGroup id="postPanel2">
+							<h:commandButton value="ok" id="ajasx"
+								actionListener="#{checksAssetManagedBean.insertCheck}"
+								update="growl1" styleClass="ui-priority-primary" />
+
+
+							<p:commandButton action="back" value="#{msg['ESCI']}"
+								process="@this" />
+						</h:panelGroup>
+					</p:panel>
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:panel id="basic" header="Elenco normative"
+							style="margin-bottom:20px">
+							<p:dataTable id="radioDT" selectionMode="single"
+								value="#{managedNormativaBean.allNormative}" var="c"
+								selection="#{managedNormativaBean.selectedNormativa}"
+								rowKey="#{c.id}" paginator="true" rows="10"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+
+								<p:ajax event="rowSelect"
+									listener="#{managedNormativeBean.onRowSelect}" />
+
+								<p:column headerText="Normativa">
+									<h:outputText value="#{c.normativa}" />
+								</p:column>
+
+								<p:column headerText="Codice">
+									<h:outputText value="#{c.codice}" />
+								</p:column>
+
+								<p:column headerText="Inizio">
+									<h:outputText value="#{c.dataInizio}" />
+								</p:column>
+
+								<p:column headerText="Frequenza">
+									<h:outputText value="#{c.frequenza}" />
+								</p:column>
+
+
+								<p:column>
+									<h:commandButton rendered="#{c.filename!=null}"
+										action="#{managedNormativaBean.setupViewFile(c.filename)}"
+										value="View" />
+								</p:column>
+
+
+
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
+						<h:commandButton value="GO BACK!" action="back" />
+				</h:form>
+
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -36,8 +36,19 @@ public class ChecklistInterventiDAO {
 			if (mapper.search(u).size() == 0) {
 				mapper.insert(u);
 				session.commit();
-			}
+			}else System.out.println("no");
 		}
+	}
+
+	public void deleteByInterventoId(long id) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			ChecklistInterventoMapper mapper = session.getMapper(ChecklistInterventoMapper.class);
+
+			mapper.deleteByInterventoId(id);
+			session.commit();
+
+		}
+
 	}
 
 }

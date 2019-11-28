@@ -28,7 +28,8 @@ public abstract class GenericJob {
 
 	public String getPartialResult() {
 		if (batch.getFuture().isDone())
-			return lastGood;
+			//return lastGood;
+			return "";
 		String val = "";
 
 		while (true) {

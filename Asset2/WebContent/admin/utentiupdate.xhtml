@@ -6,13 +6,13 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-<p:panel>
+			<p:panel>
 
-			<h:form id="form">
-				<p:growl id="msgs" showDetail="true" />
+				<h:form id="form">
+					<p:growl id="msgs" showDetail="true" />
 
 
-				<h:panelGrid columns="1" cellpadding="100">
+					<h:panelGrid columns="1" cellpadding="100">
 						<p:panel id="basic" style="margin-bottom:20px">
 
 							<table>
@@ -42,15 +42,15 @@
 
 
 
-							<h:commandButton action="back"
-								value="#{msg['ESCI']}" process="@this" />
+							<h:commandButton action="back" value="#{msg['ESCI']}"
+								process="@this" />
 
 							<p:commandButton value="ok" id="ajasx0"
 								actionListener="#{managedUtentiBean.updateUtente}" update="msgs"
 								styleClass="ui-priority-primary" />
 						</p:panel>
 					</h:panelGrid>
-			</h:form>
+				</h:form>
 			</p:panel>
 		</ui:define>
 	</ui:composition>

@@ -215,11 +215,7 @@
 		<managed-bean-class>managed.ManagedRicercaInterventiBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>navigator</managed-bean-name>
-		<managed-bean-class>managed.Navigator</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
+
 	<managed-bean>
 		<managed-bean-name>excelColumnManagedBean</managed-bean-name>
 		<managed-bean-class>excel.ExcelColumnManagedBean</managed-bean-class>
@@ -283,6 +279,11 @@
 	<managed-bean>
 		<managed-bean-name>batchStarter</managed-bean-name>
 		<managed-bean-class>managed.BatchStarter</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>checksAssetManagedBean</managed-bean-name>
+		<managed-bean-class>managed.ChecksAsset</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
@@ -429,26 +430,8 @@
 		</navigation-case>
 
 	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
+	
 
-		<navigation-case>
-
-			<from-outcome>frequenzeAlcaHome</from-outcome>
-			<to-view-id>/admin/frequenzeAlcaHome.xhtml</to-view-id>
-		</navigation-case>
-
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-
-		<navigation-case>
-
-			<from-outcome>checklistHome</from-outcome>
-			<to-view-id>/admin/checklistHome.xhtml</to-view-id>
-		</navigation-case>
-
-	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -689,6 +672,29 @@
 		</navigation-case>
 
 	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>checksAssetHome</from-outcome>
+			<to-view-id>/admin/checksAssetHome.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>nuovaChecksAsset</from-outcome>
+			<to-view-id>/admin/nuovaCheckAsset.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 

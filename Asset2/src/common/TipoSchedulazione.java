@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class TipoSchedulazione {
 
-	public static final TipoSchedulazione OGNI_5_ANNI = new TipoSchedulazione(0, 1, Calendar.YEAR, 750);
+	public static final TipoSchedulazione OGNI_5_ANNI = new TipoSchedulazione(0, 5, Calendar.YEAR, 750);
 	public static final TipoSchedulazione OGNI_2_ANNI = new TipoSchedulazione(1, 2, Calendar.YEAR, 360);
 	public static final TipoSchedulazione ANNUALE = new TipoSchedulazione(2, 1, Calendar.YEAR, 180);
 	public static final TipoSchedulazione OGNI_6_MESI = new TipoSchedulazione(3, 6, Calendar.MONTH, 90);

@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import batchjob.GenericJob;
 import beans.AssetAlca;
 import beans.Calendario;
 import beans.Check;
+import beans.CheckAsset;
 import beans.ChecklistIntervento;
 import beans.FamigliaAsset;
 import beans.Intervento;
@@ -20,16 +23,18 @@ import common.TipoSchedulazione;
 import database.dao.AssetAlcaDAO;
 import database.dao.CalendarioDAO;
 import database.dao.ChecklistInterventiDAO;
+import database.dao.ChecksAssetDAO;
 import database.dao.ChecksDAO;
 import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
 import database.dao.NormativeDAO;
 
 public class PlannerJob extends GenericJob {
-	
+
+	private Map<String, List<Check>> checksMap = new HashMap<String, List<Check>>();
+
 	private SchemaPlan schema = new SchemaPlan();
-	
-	
+
 	public PlannerJob() {
 		super();
 
@@ -56,22 +61,72 @@ public class PlannerJob extends GenericJob {
 					count++;
 					queue.put(count + " / " + allAssets.size());
 
-					String famiglia = as.getFacSystem();
-					FamigliaAssetDAO fad = new FamigliaAssetDAO();
-					FamigliaAsset f = fad.searchByName(famiglia);
-
-					ChecksDAO cDao = new ChecksDAO();
-					List<Check> checks = cDao.getChecksByFamilyId(f.getId());
-
-					for (Check check : checks) {
-						makePlan(as.getId(), check, maxData);
-					}
+					processAsset(maxData, as);
 
 				}
 				return count;
 			}
+
 		};
 		submit(callable, "Pianificazione interventi");
+	}
+
+//	public static void main(String s[]) {
+//		
+//		PlannerJob planner = new PlannerJob();
+//		AssetAlca asset = new AssetAlca();
+//		asset.setRpieIdIndividual("8436010153238");
+//		asset.setFacSystem("D40 FIRE PROTECTION");
+//		asset.setId(154);
+//
+//		PlannerJob.cleanInterventiCalendario();
+//		planner.processAsset("20211010", asset);
+//		
+//		System.out.println("done");
+//	}
+
+	public void processAsset(String maxData, AssetAlca as) {
+
+		processCheck4Family(as, maxData);
+
+		processCheck4Asset(maxData, as);
+	}
+
+	private void processCheck4Family(AssetAlca as, String maxData) {
+
+		String famiglia = as.getFacSystem();
+
+		List<Check> checks = getChecksForFamily(famiglia);
+
+		for (Check check : checks) {
+			makePlan(as.getId(), check, maxData);
+		}
+	}
+
+	private List<Check> getChecksForFamily(String famiglia) {
+		List<Check> ll = null;
+		ll = checksMap.get(famiglia);
+
+		if (ll == null) {
+			System.out.println("famiglia [" + famiglia + "] Non in map, cerco...");
+			FamigliaAssetDAO fad = new FamigliaAssetDAO();
+			FamigliaAsset f = fad.searchByName(famiglia);
+			long famId = f.getId();
+			ChecksDAO cDao = new ChecksDAO();
+			ll = cDao.getChecksByFamilyId(famId);
+			checksMap.put(famiglia, ll);
+		}
+		return ll;
+
+	}
+
+	private void processCheck4Asset(String maxData, AssetAlca as) {
+		ChecksAssetDAO caDao = new ChecksAssetDAO();
+		List<CheckAsset> checkAs = caDao.getChecksByAssetId(as.getId());
+
+		for (CheckAsset check : checkAs) {
+			makePlan(as.getId(), check, maxData);
+		}
 	}
 
 	private void makePlan(long assetId, Check check, String maxData) {
@@ -115,8 +170,6 @@ public class PlannerJob extends GenericJob {
 		}
 	}
 
-	
-
 	private boolean placeInSameDay(long assetId, List<Item> lista, String goodDate, String dataTeorica, Check ck) {
 
 		for (Item item : lista) {
@@ -155,6 +208,7 @@ public class PlannerJob extends GenericJob {
 		Intervento ii = listaInt.get(0);
 
 		ChecklistIntervento cli = new ChecklistIntervento();
+	
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
@@ -204,8 +258,10 @@ public class PlannerJob extends GenericJob {
 
 		InterventiDAO iDao = new InterventiDAO();
 		iDao.cleanInterventi(now);
+		
 
-		// TODO Pulire anche la checklistinterventi
+
+		// la checklistinterventi si cancella per effetto della foreign key
 	}
 
 	private static Integer getNumFromCale(String dat) {

@@ -14,9 +14,10 @@
 						<p:panelGrid cellpadding="1">
 							<p:row>
 								<p:column>
-									<p:panelGrid  style="width:100%">
+									<p:panelGrid style="width:100%">
 										<p:row>
-											<p:column style="padding-top:100px;
+											<p:column
+												style="padding-top:100px;
 											padding-right:50px;
 											padding-left:50px;
 											padding-bottom:100px
@@ -67,6 +68,9 @@
 										</h:panelGrid>
 										<p:commandButton action="#{managedAssetBean.updateAsset}"
 											value="update" update=":form" />
+									</p:panel>
+									<p:panel>
+										<h:commandButton value="Checklist" action="checksAssetHome"/>
 									</p:panel>
 								</p:column>
 								<p:column>
@@ -144,8 +148,10 @@
 
 												</p:column>
 												<f:facet name="footer">
-													<h:commandButton action="goInsertIntervento" value="Detail">
-													</h:commandButton>
+													<h:commandButton action="goInsertIntervento" value="Update"/>
+												
+													<h:commandButton action="dettaglioIntervento"
+														value="Detail"/>
 												</f:facet>
 											</p:dataTable>
 										</p:panel>
@@ -245,7 +251,7 @@
 						<h:commandButton value="TimeLine" action="timeline" />
 
 
-						<h:commandButton value="GO BACK!" action="back" />
+						<h:commandButton value="#{msg['BACK']}" action="back" />
 
 
 					</p:panel>

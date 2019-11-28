@@ -9,6 +9,7 @@ public class TimeLineItem {
 	private String description;
 	private String normativa;
 	private String codice;
+	private int type; // 1=checks 2=checksasset
 	private List<Check> checksList;
 
 	public long getId() {
@@ -71,5 +72,13 @@ public class TimeLineItem {
 
 	public List<Check> getChecksList() {
 		return checksList;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

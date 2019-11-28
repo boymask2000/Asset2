@@ -1,5 +1,6 @@
 package managed;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,9 +16,11 @@ import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
 import beans.Check;
+import beans.CheckAsset;
 import beans.TimeLineItem;
 import common.JsfUtil;
 import common.TimeUtil;
+import database.dao.ChecksAssetDAO;
 import database.dao.ChecksDAO;
 import database.dao.TimeLineDAO;
 
@@ -32,7 +35,7 @@ public class TimeLineManagedBean {
 	private boolean axisOnTop;
 	private boolean showCurrentTime = true;
 	private boolean showNavigation = false;
-	
+
 	private Map<String, String> ev = new HashMap<String, String>();
 
 	private TimelineEvent selectedTimelineEvent = null;
@@ -55,7 +58,8 @@ public class TimeLineManagedBean {
 			Date d = TimeUtil.getCurrentStringDate(sData);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(d);
-			if (checkOk(item)) {
+			// if (checkOk(item))
+			{
 				TimelineEvent evt = new TimelineEvent(item, cal.getTime());
 
 				model.add(evt);
@@ -66,8 +70,6 @@ public class TimeLineManagedBean {
 		}
 		ev.clear();
 	}
-
-	
 
 	private boolean checkOk(TimeLineItem item) {
 		String key = item.getId() + "-" + item.getData_pianificata() + "-" + item.getNormativa() + "-"
@@ -88,8 +90,17 @@ public class TimeLineManagedBean {
 
 		TimeLineItem item = (TimeLineItem) selectedTimelineEvent.getData();
 
-		ChecksDAO dao = new ChecksDAO();
-		List<Check> ll = dao.getByCodiceNorm(item.getCodice());
+		List<Check> ll = new ArrayList<Check>();
+		System.out.println(item.getType());
+		if (item.getType() == 1) {
+			ChecksDAO dao = new ChecksDAO();
+			ll = dao.getByCodiceNorm(item.getCodice());
+		} else {
+			ChecksAssetDAO dao = new ChecksAssetDAO();
+			List<CheckAsset> qq = dao.getByCodiceNorm(item.getCodice());
+			for (CheckAsset a : qq)
+				ll.add(a);
+		}
 		checks = ll;
 
 		item.setChecksList(ll);

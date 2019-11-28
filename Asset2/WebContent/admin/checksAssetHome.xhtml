@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
+
+					<p:growl id="msgs" showDetail="true" />
+
+					<h:panelGrid style="width:100%">
+						<p:row>
+
+							<p:column style="width:60%">
+								<p:panel>
+									<p:outputLabel
+										value="Checklist per asset #{managedAssetBean.selectedAsset.rpieIdIndividual}" />
+									<p:dataTable id="checksDT"
+										value="#{checksAssetManagedBean.allChecksForAsset}" var="c"
+										widgetVar="cellCars" rowKey="#{c.id}" paginator="true"
+										rows="5"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
+
+
+
+										<p:column headerText="#{msg['DESCRIZIONE']} IT"
+											style="width:35%">
+
+
+											<p:cellEditor>
+												<f:facet name="output">
+													<p:inputTextarea readonly="true" rows="4" cols="50"
+														value="#{c.description}" />
+
+												</f:facet>
+												<f:facet name="input">
+													<p:inputTextarea readonly="false" rows="4" cols="50"
+														value="#{c.description}" />
+
+												</f:facet>
+											</p:cellEditor>
+
+
+										</p:column>
+
+
+										<p:column headerText="#{msg['DESCRIZIONE']} US"
+											style="width:35%">
+
+											<p:cellEditor>
+												<f:facet name="output">
+													<p:inputTextarea readonly="true" rows="4" cols="50"
+														value="#{c.descriptionUS}" />
+
+												</f:facet>
+												<f:facet name="input">
+													<p:inputTextarea readonly="false" rows="4" cols="50"
+														value="#{c.descriptionUS}" />
+
+												</f:facet>
+											</p:cellEditor>
+
+
+										</p:column>
+
+										<p:column headerText="#{msg['NORMATIVE']}" style="width:10%">
+											<h:outputText value="#{c.codiceNormativa}" />
+										</p:column>
+
+
+										<p:column style="width:10%">
+											<h:commandButton rendered="#{c.filename!=null}"
+												action="#{managedNormativaBean.setupViewFile(c.filename)}"
+												value="View" />
+										</p:column>
+										<p:column style="width:10%">
+											<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
+												title="Delete" action="#{checksAssetManagedBean.delete}">
+												<f:setPropertyActionListener value="#{c}"
+													target="#{checksAssetManagedBean.toDelete}" />
+
+											</p:commandButton>
+										</p:column>
+										<f:facet name="footer">
+
+											<h:commandButton action="nuovaChecksAsset"
+												value="#{msg['NEW_CHECK']}" update ="checksDT"/>
+
+
+
+											<p:commandButton process="form" update=":panSetConf0"
+												rendered="#{checksAssetManagedBean.selectedCheck.getId()!=0}"
+												icon="pi pi-search" value="Delete"
+												oncomplete="PF('setConfDialog0').show()" />
+
+										</f:facet>
+									</p:dataTable>
+								</p:panel>
+							</p:column>
+						</p:row>
+					</h:panelGrid>
+
+
+					<h:commandButton value="#{msg['BACK']}" action="back" />
+					<!-- 					<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
+					<!-- 						action="adminHome" /> -->
+
+				</h:form>
+
+
+
+				<p:dialog header="Conferma" widgetVar="setConfDialog0" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="panSetConf0" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<p:panel id="basic1jk" style="margin-bottom:20px">
+								<h:outputText value="Conferma la cancellazione ?" />
+								<h:form>
+									<h:commandButton value="No" process="@this" />
+									<h:commandButton action="#{checksAssetManagedBean.delete}"
+										value="Ok" process="@this" />
+
+								</h:form>
+							</p:panel>
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

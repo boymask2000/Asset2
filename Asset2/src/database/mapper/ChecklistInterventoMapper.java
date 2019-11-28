@@ -23,6 +23,8 @@ public interface ChecklistInterventoMapper {
 	final String INSERT = "INSERT INTO " + TABELLA + //
 			" (interventoId , checkId, codFrequenza )" //
 			+ "VALUES (#{interventoId}, #{checkId}, #{codFrequenza})";
+	
+	final String DELETE_BY_ID = "DELETE FROM "+TABELLA+ " ck WHERE ck.interventoId=#{id}";
 
 	@Select(SELECT_FOR_INTERVENTO)
 	public List<ChecklistIntervento> getCheckListForIntervento(Intervento s);
@@ -35,5 +37,8 @@ public interface ChecklistInterventoMapper {
 	
 	@Select(SEARCH)
 	public List<ChecklistIntervento> search(ChecklistIntervento cl);
+
+	@Select(DELETE_BY_ID)
+	public void deleteByInterventoId(long id);
 
 }

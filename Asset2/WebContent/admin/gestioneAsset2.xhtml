@@ -111,7 +111,7 @@
 									<f:facet name="footer">
 
 										<h:commandButton
-											action="#{navigator.go('gestioneAsset','goToDetailAsset')}"
+											action="goToDetailAsset"
 											value="Detail" process="@this">
 											<f:param name="op" value="NEW" />
 										</h:commandButton>
@@ -124,7 +124,7 @@
 						</h:panelGrid>
 					</h:panelGrid>
 
-					<h:commandButton process="@this" icon="pi pi-search" value="Home"
+					<h:commandButton process="@this" icon="pi pi-search" value="#{msg['BACK']}"
 						action="back" />
 
 				</h:form>

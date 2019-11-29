@@ -51,4 +51,48 @@
 			</if> 
 		</where>
 	</select>
+	<select id="searchAssetTS" parameterType="beans.AssetAlca"
+		resultType="beans.AssetAlca">
+		SELECT * FROM test1.assetalca order by timestamp desc
+
+		<where>
+			<if test="id != 0">
+				id = #{id}
+			</if>
+
+			<if test="facNum != null">
+				AND facNum = #{facNum}
+			</if>
+			<if test="facSystem != null">
+				AND facSystem LIKE #{facSystem}
+			</if>
+			<if test="facSubsystem != null">
+				AND facSubsystem LIKE #{facSubsystem}
+			</if>
+			<if test="assemblyCategory != null">
+				AND assemblyCategory = #{assemblyCategory}
+			</if>
+			<if test="nomenclature != null">
+				AND nomenclature LIKE #{nomenclature}
+			</if>
+			<if test="procId != '' and procId != null">
+				AND procId = #{procId}
+			</if>
+			<if test="pmSchedRecipient != '' and pmSchedRecipient != null">
+				AND pmSchedRecipient = #{pmSchedRecipient}
+			</if>
+			<if test="pmSchedSerial != '' and pmSchedSerial != null">
+				AND pmSchedSerial = #{pmSchedSerial}
+			</if>
+			<if test="rpieIdIndividual != '' and rpieIdIndividual != null">
+				AND rpieIdIndividual LIKE #{rpieIdIndividual}
+			</if>
+			<if test="frequency != '' and frequency != null">
+				AND frequency = #{frequency}
+			</if>
+			<if test="schedAssignedOrg != '' and schedAssignedOrg!= null">
+				AND schedAssignedOrg = #{schedAssignedOrg}
+			</if> 
+		</where>
+	</select>
 </mapper>

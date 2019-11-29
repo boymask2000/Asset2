@@ -118,16 +118,11 @@ public class ManagedAssetBean {
 		return comm;
 	}
 
+	
 	public List<AssetAlca> getAllAssets() {
 		ManagedRicercaAssetBean mrab = (ManagedRicercaAssetBean)JsfUtil.getBean("managedRicercaAssetBean");
 		mrab.ricerca();
 		
-//		if (searchResult != null)
-//			return searchResult;
-//		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
-//		List<AssetAlca> ll = assetDAO.selectAll();
-//		if (selectedAsset == null && ll.size() > 0)
-//			selectedAsset = ll.get(0);
 		return searchResult;
 	}
 

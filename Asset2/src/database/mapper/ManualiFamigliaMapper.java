@@ -23,7 +23,7 @@ public interface ManualiFamigliaMapper {
 			+ "VALUES (#{familyId}, #{descr},#{shortDescr}, #{nomeFile}, #{type})";
 
 	final String SELECT_MANUALE_BY_TYPE = "SELECT * FROM " + TABELLA + //
-			" WHERE familyId=#{familyId} AND type=#{type}";
+			" WHERE familyId=#{familyId} AND type=#{type} LIMIT 1";
 
 	@Select(SELECT_ALL)
 	public List<ManualeFamiglia> getAll();

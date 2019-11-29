@@ -69,7 +69,16 @@ public class AuthFilter implements Filter {
 		
 		if (!backupDir.endsWith(File.separator))
 			backupDir += File.separator;
-		String dir = backupDir + "ManualiFamiglia";
+	
+		restore(uploadDir, backupDir + "ManualiFamiglia");
+		
+		restore(uploadDir, backupDir + "Manuali");
+		
+		System.out.println("Eseguito restore manuali");
+		System.out.println("***************************************************************");
+	}
+
+	private static void restore(String uploadDir, String dir) {
 		File fDir = new File(dir);
 
 		String[] lista = fDir.list();
@@ -86,8 +95,6 @@ public class AuthFilter implements Filter {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Eseguito restore manuali");
-		System.out.println("***************************************************************");
 	}
 
 	private static void copyImages() {
@@ -104,21 +111,7 @@ public class AuthFilter implements Filter {
 		if (!backupDir.endsWith(File.separator))
 			backupDir += File.separator;
 		String dir = backupDir + "images";
-		File fDir = new File(dir);
-		String[] lista = fDir.list();
-		if (lista == null)
-			return;
-		for (int i = 0; i < lista.length; i++) {
-			String file = dir + File.separator + lista[i];
-			Path copied = Paths.get(uploadDir + lista[i]);
-			Path originalPath = Paths.get(file);
-
-			try {
-				Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		restore(uploadDir, dir);
 		System.out.println("Eseguito restore immagini");
 		System.out.println("***************************************************************");
 	}

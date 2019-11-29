@@ -10,9 +10,11 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import beans.Manuale;
+import beans.ManualeFamiglia;
 import beans.Utente;
 import common.Log;
 import database.dao.ManualiDAO;
+import database.dao.ManualiFamigliaDAO;
 
 public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	/**
@@ -23,7 +25,11 @@ public class ManagedManualiBean extends ABaseBean  implements Serializable {
 	//
 
 	private Manuale selectedManuale = new Manuale();
-
+	
+	public void setDeleteSelected(Manuale u) {
+		ManualiDAO dao = new ManualiDAO();
+		dao.delete(u);
+	}
 	public List<Manuale> getAllManuali() {
 		ManualiDAO dao = new ManualiDAO();
 		myList = dao.selectAll();

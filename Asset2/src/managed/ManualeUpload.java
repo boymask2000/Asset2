@@ -15,6 +15,7 @@ import beans.Manuale;
 import common.ApplicationConfig;
 import common.JsfUtil;
 import database.dao.ManualiDAO;
+import filter.AuthFilter;
 
 public class ManualeUpload extends ABaseBean {
 
@@ -51,8 +52,10 @@ public class ManualeUpload extends ABaseBean {
 
 			load(is, tmpFile);
 
-			currentManuale.setNomefile(tmpFile.getName());
+			currentManuale.setNomeFile(tmpFile.getName());
 			currentManuale.setExt(ext);
+			
+			AuthFilter.copyDocsInt();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +83,8 @@ public class ManualeUpload extends ABaseBean {
 	public void handleFileUpload(FileUploadEvent event) {
 		if (!PhaseId.INVOKE_APPLICATION.equals(event.getPhaseId())) {
 	        event.setPhaseId(PhaseId.INVOKE_APPLICATION);
-	        event.queue();return;
+	        event.queue();
+	        return;
 	    } 
 		String fileName = event.getFile().getFileName();
 

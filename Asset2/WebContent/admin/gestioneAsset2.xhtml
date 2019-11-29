@@ -84,6 +84,8 @@
 									</f:facet>
 									</p:dataTable>
 							</p:panel>
+							<h:commandButton value="sort" action="#{managedAssetBean.sortByTime}" update="radioDT" rendered="false"/>
+							
 							<p:panel id="basic" header="Asset" style="margin-bottom:20px">
 								<p:dataTable id="radioDT" selectionMode="single"
 									value="#{managedAssetBean.allAssets}" var="c"

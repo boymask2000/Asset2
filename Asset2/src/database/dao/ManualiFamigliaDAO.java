@@ -32,7 +32,7 @@ public class ManualiFamigliaDAO {
 			if (u.getShortDescr() == null || u.getShortDescr().trim().length() == 0)
 				u.setShortDescr(u.getTypeManuale().getShortDescr());
 			
-			u.setType(u.getTypeManuale().getId());
+			u.setTypeManuale(u.getTypeManuale());
 			mapper.insert(u);
 			session.commit();
 		}catch( Throwable t) {

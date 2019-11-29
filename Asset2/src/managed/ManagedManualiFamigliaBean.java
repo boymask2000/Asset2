@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.primefaces.event.SelectEvent;
 
 import beans.ManualeFamiglia;
+import beans.TypeManuale;
 import beans.Utente;
 import common.Log;
 import database.dao.ManualiFamigliaDAO;
@@ -20,6 +22,7 @@ public class ManagedManualiFamigliaBean extends ABaseBean implements Serializabl
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<ManualeFamiglia> myList;
+	private List<SelectItem> manuali;
 	//
 
 	private ManualeFamiglia selectedManuale = new ManualeFamiglia();
@@ -81,6 +84,10 @@ public class ManagedManualiFamigliaBean extends ABaseBean implements Serializabl
 		BasicDocumentViewController c = getDocController();
 		c.setPdf(new File(getFullPath("ManualiFamiglia" + File.separator + nome)));
 		return "viewFile";
+	}
+
+	public List<SelectItem> getManuali() {
+		return TypeManuale.getManuali();
 	}
 
 }

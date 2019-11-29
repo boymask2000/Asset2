@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import beans.Manuale;
+import beans.ManualeFamiglia;
 import database.MyBatisConnectionFactory;
 import database.mapper.ManualiMapper;
 
@@ -25,7 +26,9 @@ public class ManualiDAO {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 
 			ManualiMapper mapper = session.getMapper(ManualiMapper.class);
+
 			mapper.insert(u);
+
 			session.commit();
 		}
 	}
@@ -39,5 +42,27 @@ public class ManualiDAO {
 			list = mapper.selectForAsset(assetId);
 		}
 		return list;
+	}
+	public List<Manuale> selectForAssetAndType(long assetId, int tp) {
+		List<Manuale> list = null;
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ManualiMapper mapper = session.getMapper(ManualiMapper.class);
+
+			list = mapper.selectForAssetAndType(assetId, tp);
+		}
+		return list;
+	}
+
+	public void delete(Manuale u) {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
+			ManualiMapper mapper = session.getMapper(ManualiMapper.class);
+
+			mapper.delete(u);
+
+			session.commit();
+		}
+		
 	}
 }

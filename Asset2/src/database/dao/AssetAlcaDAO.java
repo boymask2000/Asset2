@@ -111,6 +111,17 @@ public class AssetAlcaDAO {
 		}
 		return ll;
 	}
+	public List<AssetAlca> searchTS(AssetAlca s) {
+		AssetAlca ss = copyAssetForSearch(s);
+
+		List<AssetAlca> ll = new ArrayList<AssetAlca>();
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			ll = session.selectList("searchAssetTS", ss);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ll;
+	}
 
 	private AssetAlca copyAssetForSearch(AssetAlca s) {
 		AssetAlca ss=new AssetAlca();
@@ -129,5 +140,7 @@ public class AssetAlcaDAO {
 		}
 		return ll;
 	}
+
+
 
 }

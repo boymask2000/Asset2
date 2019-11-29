@@ -5,20 +5,31 @@ import java.io.Serializable;
 
 import common.ApplicationConfig;
 
-public class Manuale implements Serializable{
+public class Manuale implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String TIPO_SCHEDA_TECNICA = "1";
-	public static final String INFO_RATING_GUIDANCE = "2";
-	public static final String INFO_GENERICO = "0";
+
 	private long id;
 	private long assetId;
-	private String descrizione;
-	private String nomefile;
+	private String nomeFile;
+	private String descr;
+	private String shortDescr;
 	private String ext;
-	private String tipo = INFO_GENERICO;
+	private int tipo = TypeManuale.INFO_GENERICO.getId();
+
+	private TypeManuale typeManuale;
+
+	public TypeManuale getTypeManuale() {
+		typeManuale = TypeManuale.getType(tipo);
+		return typeManuale;
+	}
+
+	public void setTypeManuale(TypeManuale typeManuale) {
+		this.typeManuale = typeManuale;
+		this.tipo = typeManuale.getId();
+	}
 
 	public long getId() {
 		return id;
@@ -36,27 +47,11 @@ public class Manuale implements Serializable{
 		this.assetId = assetId;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
-	public String getNomefile() {
-		return nomefile;
-	}
-
-	public void setNomefile(String nomefile) {
-		this.nomefile = nomefile;
-	}
-
 	public String getFullPath() {
 		String dir = ApplicationConfig.getDocumentdir();
 		if (!dir.endsWith(File.separator))
 			dir += File.separator;
-		return dir + nomefile;
+		return dir + nomeFile;
 	}
 
 	public void setExt(String ext) {
@@ -75,11 +70,37 @@ public class Manuale implements Serializable{
 		return ext.equalsIgnoreCase(".pdf");
 	}
 
-	public String getTipo() {
+
+
+	public String getNomeFile() {
+		return nomeFile;
+	}
+
+	public void setNomeFile(String nomeFile) {
+		this.nomeFile = nomeFile;
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
+
+	public String getShortDescr() {
+		return shortDescr;
+	}
+
+	public void setShortDescr(String shortDescr) {
+		this.shortDescr = shortDescr;
+	}
+
+	public int getType() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setType(int type) {
+		this.tipo = type;
 	}
 }

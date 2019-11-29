@@ -212,7 +212,7 @@ public class PlannerJob extends GenericJob {
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
-
+System.out.println("ckid= "+ck.getId()+"  int= "+ii.getId()+ " data= "+goodDate);
 		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
 		cliDao.insert(cli);
 

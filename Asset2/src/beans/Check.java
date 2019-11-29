@@ -1,6 +1,12 @@
 package beans;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.StringBufferInputStream;
 
 import common.TextUtil;
 
@@ -33,6 +39,7 @@ public class Check implements Serializable {
 	}
 
 	public void setDescription(String description) {
+
 		this.description = description;
 		if (this.description != null)
 			this.description = TextUtil.cleanTextForSpecialChars(this.description);

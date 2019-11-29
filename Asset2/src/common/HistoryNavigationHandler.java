@@ -38,8 +38,9 @@ public class HistoryNavigationHandler extends ConfigurableNavigationHandler {
 				return;
 			}
 			if (outcome.equals("admin") || outcome.equals("adminHome")) {
-				outcomes.clear();this.outcomes.push(context.getViewRoot().getViewId());
-				}
+				outcomes.clear();
+				this.outcomes.push(context.getViewRoot().getViewId());
+			}
 
 			String p = this.outcomes.peek();
 			if (!p.equals(context.getViewRoot().getViewId()))

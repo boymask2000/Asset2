@@ -16,27 +16,30 @@
 						<p:growl id="growl1" life="2000" />
 
 
-						<p:growl id="msgs" showDetail="true" />
+
 						<table>
 							<tr>
 								<td><h:outputText value="Descrizione" /></td>
 								<td><h:outputText value="Descrizione US" /></td>
 							</tr>
 							<tr>
-								<td><p:inputTextarea rows="3" cols="50"
+								<td><p:inputTextarea rows="3" cols="80"
 										value="#{checksAssetManagedBean.selectedCheck.description}" /></td>
 
 
-								<td><p:inputTextarea rows="3" cols="50"
+								<td><p:inputTextarea rows="3" cols="80"
 										value="#{checksAssetManagedBean.selectedCheck.descriptionUS}" /></td>
+								<td><h:commandButton value="Split" rendered="false"
+										actionListener="#{checksAssetManagedBean.split}"
+										styleClass="ui-priority-primary" /></td>
 							</tr>
-							
+
 
 							<tr>
-								
-								<td><p:outputLabel for="car" value="Codice Normativa: " /> 
-								<p:selectOneMenu
-										id="car" value="#{checksAssetManagedBean.selectedCheck.codiceNormativa}">
+
+								<td><p:outputLabel for="car" value="Codice Normativa: " />
+									<p:selectOneMenu id="car"
+										value="#{checksAssetManagedBean.selectedCheck.codiceNormativa}">
 										<f:selectItem itemLabel="Select One" itemValue="" />
 										<f:selectItems value="#{managedNormativaBean.allNormative}" />
 									</p:selectOneMenu></td>
@@ -53,7 +56,7 @@
 								process="@this" />
 						</h:panelGroup>
 					</p:panel>
-					<h:panelGrid columns="1" cellpadding="10">
+					<h:panelGrid columns="1" cellpadding="10" styw="width:50%">
 						<p:panel id="basic" header="Elenco normative"
 							style="margin-bottom:20px">
 							<p:dataTable id="radioDT" selectionMode="single"
@@ -94,7 +97,7 @@
 							</p:dataTable>
 						</p:panel>
 					</h:panelGrid>
-						<h:commandButton value="GO BACK!" action="back" />
+					<h:commandButton value="GO BACK!" action="back" />
 				</h:form>
 
 			</p:panel>

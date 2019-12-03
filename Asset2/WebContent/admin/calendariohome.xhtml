@@ -7,96 +7,98 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
 
-			<h:form id="form">
+					<p:growl id="msgs" showDetail="true" />
 
-				<p:growl id="msgs" showDetail="true" />
+					<h:panelGrid columns="1" cellpadding="100">
+						<p:panel id="basic" header="#{msg['GESTIONE_CALENDARIO']}"
+							style="margin-bottom:20px">
+							<p:dataTable id="radioDT" editable="true"
+								value="#{managedCalendarioBean.allDates}" var="c"
+								selection="#{managedCalendarioBean.selectedData}"
+								paginator="true" rows="10"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
 
-				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel id="basic" header="#{msg['GESTIONE_CALENDARIO']}"
-						style="margin-bottom:20px">
-						<p:dataTable id="radioDT" editable="true"
-							value="#{managedCalendarioBean.allDates}" var="c"
-							selection="#{managedCalendarioBean.selectedData}"
-							paginator="true" rows="10"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+								<p:ajax event="rowEdit"
+									listener="#{managedCalendarioBean.onRowEdit}"
+									update=":form:msgs" />
 
-							<p:ajax event="rowEdit"
-								listener="#{managedCalendarioBean.onRowEdit}"
-								update=":form:msgs" />
+								<p:ajax event="rowEditCancel"
+									listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
 
-							<p:ajax event="rowEditCancel"
-								listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-
-							<p:column headerText="Data">
-								<h:outputText value="#{c.data}" />
-							</p:column>
-							<p:column headerText="Anno">
-								<h:outputText value="#{c.anno}" />
-							</p:column>
-							<p:column headerText="Mese">
-								<h:outputText value="#{c.meseStr}" />
-							</p:column>
-							<p:column headerText="Giorno">
-								<h:outputText value="#{c.giorno}" />
-							</p:column>
-
-
-							<p:column headerText="Lavorativo">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{c.lavorativo}" />
-									</f:facet>
-									<f:facet name="input">
-										<h:selectOneMenu value="#{c.lavorativo}" style="width:100%">
-											<f:selectItems value="#{managedCalendarioBean.lavorativi}"
-												var="lavorativo" itemLabel="#{lavorativo}"
-												itemValue="#{lavorativo}" />
-										</h:selectOneMenu>
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							<p:column style="width:35px">
-								<p:rowEditor />
-							</p:column>
-							<f:facet name="footer">
+								<p:column headerText="Data">
+									<h:outputText value="#{c.data}" />
+								</p:column>
+								<p:column headerText="#{msg['ANNO']}">
+									<h:outputText value="#{c.anno}" />
+								</p:column>
+								<p:column headerText="#{msg['MESE']}">
+									<h:outputText value="#{c.meseStr}" />
+								</p:column>
+								<p:column headerText="#{msg['GIORNO']}">
+									<h:outputText value="#{c.giorno}" />
+								</p:column>
 
 
+								<p:column headerText="#{msg['LAVORATIVO']}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{c.lavorativo}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:selectOneMenu value="#{c.lavorativo}" style="width:100%">
+												<f:selectItems value="#{managedCalendarioBean.lavorativi}"
+													var="lavorativo" itemLabel="#{lavorativo}"
+													itemValue="#{lavorativo}" />
+											</h:selectOneMenu>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column style="width:35px">
+									<p:rowEditor />
+								</p:column>
+								<f:facet name="footer">
 
-							</f:facet>
-						</p:dataTable>
+
+
+								</f:facet>
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
+
+					<p:panel id="basi" header="#{msg['CALENDARIO_DEFINITO']}"
+						rendered="#{managedCalendarioBean.vuoto}">
+
 					</p:panel>
-				</h:panelGrid>
+					<p:panel id="basi1" header="#{msg['CALENDARIO_DEFINITO']}"
+						rendered="#{!managedCalendarioBean.vuoto}">
+						<table>
+							<tr>
+								<td><h:outputText value="#{msg['DATA_INIZIO']}" /></td>
+								<td><h:outputText value="#{managedCalendarioBean.minData}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="#{msg['DATA_FINE']}" /></td>
+								<td><h:outputText value="#{managedCalendarioBean.maxData}" /></td>
+							</tr>
+						</table>
 
-				<p:panel id="basi" header="Calendario definito"
-					rendered="#{managedCalendarioBean.vuoto}">
-
-				</p:panel>
-				<p:panel id="basi1" header="Calendario definito"
-					rendered="#{!managedCalendarioBean.vuoto}">
-					<table>
-						<tr>
-							<td><h:outputText value="Da:" /></td>
-							<td><h:outputText value="#{managedCalendarioBean.minData}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="A:" /></td>
-							<td><h:outputText value="#{managedCalendarioBean.maxData}" /></td>
-						</tr>
-					</table>
-					
-						<p:commandButton process="@this" icon="pi pi-search" rendered="false"
-							value="Gen" actionListener="#{managedCalendarioBean.initCalendario}" update="basi1"/>
-				</p:panel>
+						<p:commandButton process="@this" icon="pi pi-search"
+							rendered="false" value="Gen"
+							actionListener="#{managedCalendarioBean.initCalendario}"
+							update="basi1" />
+					</p:panel>
 
 
 
-				<h:commandButton process="@this" icon="pi pi-search" value="Home"
-					action="back" />
+					<h:commandButton process="@this" icon="pi pi-search" value="Home"
+						action="back" />
 
-			</h:form>
-
+				</h:form>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

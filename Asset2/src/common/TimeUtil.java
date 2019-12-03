@@ -86,7 +86,6 @@ public class TimeUtil {
 
 	}
 
-
 	public static String getNextDate(String ds, int ndays) {
 		Date d = getCurrentStringDate(ds);
 		Calendar c = new GregorianCalendar();
@@ -95,7 +94,6 @@ public class TimeUtil {
 		return getCurrentDate(c.getTime());
 
 	}
-
 
 	public static Calendar getCalendar(Date d) {
 		Calendar c = new GregorianCalendar();
@@ -123,6 +121,22 @@ public class TimeUtil {
 
 	public String getLocalizedDate(String d) {
 		return getFormattedDate(d);
+	}
+
+	public static String getDatePattern() {
+		LanguageBean lb = (LanguageBean) JsfUtil.getBean("language");
+		String loc = lb.getCurrentLocale();
+		switch (loc) {
+		case "en":
+			return "MM/dd/YYYY";
+		case "it":
+			return "dd/MM/YYYY";
+		default:
+			break;
+
+		}
+		return "dd/MM/YYYY";
+
 	}
 
 	public static String getFormattedDate(String d) {

@@ -14,12 +14,12 @@ public class AssetAlcaDAO {
 	public List<AssetAlca> selectAll() {
 		List<AssetAlca> list = null;
 
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-	
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			list = mapper.selectAll();
 
-		} 
+		}
 		return list;
 	}
 
@@ -39,12 +39,12 @@ public class AssetAlcaDAO {
 	}
 
 	public AssetAlca searchByRPIE(AssetAlca s) {
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-		
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			return mapper.searchByRPIE(s);
 
-		} 
+		}
 	}
 
 	public AssetAlca searchByRPIE(String rpie) {
@@ -75,28 +75,28 @@ public class AssetAlcaDAO {
 	}
 
 	public void update(AssetAlca u) {
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-		
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			mapper.update(u);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public List<AssetAlca> selectAssetsWithStatus(int selectedSeverity) {
 		List<AssetAlca> lista = new ArrayList<AssetAlca>();
 
-		try(SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();){
-	
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+
 			AssetAlca alca = new AssetAlca();
 			alca.setLastStatus("" + selectedSeverity);
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			lista = mapper.selectAssetsWithStatus(alca);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return lista;
 	}
 
@@ -106,27 +106,41 @@ public class AssetAlcaDAO {
 		List<AssetAlca> ll = new ArrayList<AssetAlca>();
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			ll = session.selectList("searchAsset", ss);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ll;
 	}
+
 	public List<AssetAlca> searchTS(AssetAlca s) {
 		AssetAlca ss = copyAssetForSearch(s);
 
 		List<AssetAlca> ll = new ArrayList<AssetAlca>();
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			ll = session.selectList("searchAssetTS", ss);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ll;
 	}
 
 	private AssetAlca copyAssetForSearch(AssetAlca s) {
-		AssetAlca ss=new AssetAlca();
-		if( s.getFacSystem()!=null && s.getFacSystem().trim().length()>0 )ss.setFacSystem("%"+s.getFacSystem()+"%");
-		if( s.getRpieIdIndividual()!=null && s.getRpieIdIndividual().trim().length()>0)ss.setRpieIdIndividual("%"+s.getRpieIdIndividual()+"%");
+		AssetAlca ss = new AssetAlca();
+		String facSystem = s.getFacSystem();
+		String facSubSystem = s.getFacSubsystem();
+		String nomenc = s.getNomenclature();
+
+		if (facSystem != null && facSystem.trim().length() > 0)
+			ss.setFacSystem("%" + facSystem + "%");
+
+		if (facSubSystem != null && facSubSystem.trim().length() > 0)
+			ss.setFacSubsystem("%" + facSubSystem + "%");
+
+		if (nomenc != null && nomenc.trim().length() > 0)
+			ss.setNomenclature("%" + nomenc + "%");
+
+//		if (s.getRpieIdIndividual() != null && s.getRpieIdIndividual().trim().length() > 0)
+//			ss.setRpieIdIndividual("%" + s.getRpieIdIndividual() + "%");
 		return ss;
 	}
 
@@ -135,12 +149,10 @@ public class AssetAlcaDAO {
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			AssetAlcaMapper mapper = session.getMapper(AssetAlcaMapper.class);
 			ll = mapper.selectFamilies();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ll;
 	}
-
-
 
 }

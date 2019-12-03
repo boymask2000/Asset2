@@ -26,6 +26,7 @@ public class ManagedSafetyBean implements Serializable {
 
 	private FamigliaAsset famiglia;
 	private int selectedImageNum = 0;
+	private boolean selected = false;
 
 	private boolean selected1;
 	private boolean selected2;
@@ -50,10 +51,6 @@ public class ManagedSafetyBean implements Serializable {
 		return l;
 	}
 
-	public void setImg(int id) {
-
-	}
-
 	public List<Safety> getAllSafetyForFamily() {
 		SafetyDAO dao = new SafetyDAO();
 
@@ -61,7 +58,57 @@ public class ManagedSafetyBean implements Serializable {
 			myList = dao.selectByFamily(famiglia.getId());
 		else
 			myList = getAllSafety();
+
+		
+
+//		for (Safety s : myList)
+//			setSelect(s.getImgId());
+
 		return myList;
+	}
+
+	private void setSelect(int c) {
+		switch (c) {
+		case 1:
+			selected1 = true;
+			break;
+		case 2:
+			selected2 = true;
+			break;
+		case 3:
+			selected3 = true;
+			break;
+		case 4:
+			selected4 = true;
+			break;
+		case 5:
+			selected5 = true;
+			break;
+		case 6:
+			selected6 = true;
+			break;
+		case 7:
+			selected7 = true;
+			break;
+		case 8:
+			selected8 = true;
+			break;
+		case 9:
+			selected9 = true;
+			break;
+		case 10:
+			selected10 = true;
+			break;
+		case 11:
+			selected11 = true;
+			break;
+		case 12:
+			selected12 = true;
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void resetSelezione() {
@@ -85,13 +132,6 @@ public class ManagedSafetyBean implements Serializable {
 		SafetyDAO dao = new SafetyDAO();
 		dao.delete(u);
 	}
-
-//	public void saveSafety() {
-//		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
-//		getSelectedSafety().setFamilyid(mfab.getSelectedFamiglia().getId());
-//		SafetyDAO dao = new SafetyDAO();
-//		dao.save(selectedSafety);
-//	}
 
 	public void insertSafety() {
 		ManagedFamiglieAssetBean mfab = (ManagedFamiglieAssetBean) JsfUtil.getBean("managedFamiglieAssetBean");
@@ -188,7 +228,7 @@ public class ManagedSafetyBean implements Serializable {
 	}
 
 	public int getSelectedImageNum() {
-		int v=0;
+		int v = 0;
 		if (selected1)
 			v++;
 
@@ -225,12 +265,52 @@ public class ManagedSafetyBean implements Serializable {
 		if (selected12)
 			v++;
 
-		
 		return v;
+	}
+
+	public boolean isSelected() {
+		if (selected1)
+			return true;
+
+		if (selected2)
+			return true;
+
+		if (selected3)
+			return true;
+
+		if (selected4)
+			return true;
+
+		if (selected5)
+			return true;
+
+		if (selected6)
+			return true;
+
+		if (selected7)
+			return true;
+
+		if (selected8)
+			return true;
+
+		if (selected9)
+			return true;
+
+		if (selected10)
+			return true;
+
+		if (selected11)
+			return true;
+
+		if (selected12)
+			return true;
+
+		return false;
 	}
 
 	public void setSelectedImageNum(int selectedImageNum) {
 		this.selectedImageNum = selectedImageNum;
+
 	}
 
 	public boolean isSelected(int v) {

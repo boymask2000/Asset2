@@ -22,7 +22,7 @@ public class FrequenzeBean {
 			if (numdays > 1)
 				numdays = 2 * numdays;
 
-			Frequenza f = new Frequenza(desc, numdays, sched.getId());
+			Frequenza f = new Frequenza(desc, numdays, sched.getId(), sched);
 			freq.add(f);
 		}
 

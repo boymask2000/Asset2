@@ -7,28 +7,30 @@
 <h:body>
 	<ui:composition template="/template/commonTemplate.xhtml">
 		<ui:define name="content">
-			<h:form>
-				<h:panelGrid columns="1" cellpadding="100">
-					<p:panel rendered="#{managedCalendarioBean.maxData != null}">
-						<h:outputText
-							value="Calendario già generato dal #{managedCalendarioBean.minData} al #{managedCalendarioBean.maxData}" />
-					</p:panel>
+			<f:view locale="#{language.locale}">
+				<h:form>
+					<h:panelGrid columns="1" cellpadding="100">
+						<p:panel rendered="#{managedCalendarioBean.maxData != null}">
+							<h:outputText
+								value="#{msg['CALENDAR_ALREADY_BUILT']}  #{managedCalendarioBean.minData} - #{managedCalendarioBean.maxData}" />
+						</p:panel>
 
-					<p:panel id="basic" style="margin-bottom:20px">
+						<p:panel id="basic" style="margin-bottom:20px">
 
-						<p:growl id="messages" showDetail="true" />
+							<p:growl id="messages" showDetail="true" />
 
 
 
-						<p:commandButton value="Genera Calendario"
-							action="#{generaCalendarioJob.go}" />
+							<p:commandButton value="#{msg['GENERA_CALENDARO']}"
+								action="#{generaCalendarioJob.go}" />
 
-					</p:panel>
-				</h:panelGrid>
-				<h:commandButton value="GO BACK!" action="back" />
-				<!-- 			<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
-				<!-- 				action="adminHome" /> -->
-			</h:form>
+						</p:panel>
+					</h:panelGrid>
+					<h:commandButton value="#{msg['ESCI']}" action="back" />
+					<!-- 			<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
+					<!-- 				action="adminHome" /> -->
+				</h:form>
+			</f:view>
 		</ui:define>
 	</ui:composition>
 </h:body>

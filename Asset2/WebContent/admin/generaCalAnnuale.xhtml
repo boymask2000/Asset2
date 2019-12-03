@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+
+<h:outputStylesheet name="styles.css" link="css" />
+</head>
+
+<h:body>
+
+
+
+	<ui:composition template="/template/commonTemplate.xhtml">
+		<ui:define name="content">
+			<f:view locale="#{language.locale}">
+				<h:form id="form">
+
+
+					<p:growl id="msgs" showDetail="true" />
+
+					<p:panel header="#{msg['GENERA_CAL_ANNUALE']}">
+
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<h:outputText value="#{msg['DATA_INIZIO']}" />
+								</p:column>
+								<p:column>
+
+									<p:calendar id="popup1" onSelectUpdate=":form"
+										
+										value="#{generaCalAnnualeManagedBean.dataInizio}"
+										pattern="#{generaCalAnnualeManagedBean.datePattern}">
+
+									</p:calendar>
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<h:outputText value="#{msg['DATA_FINE']}" />
+								</p:column>
+								<p:column>
+									<p:calendar id="popup3" onSelectUpdate=":form"
+									
+										value="#{generaCalAnnualeManagedBean.dataFine}"
+										pattern="#{generaCalAnnualeManagedBean.datePattern}">
+
+									</p:calendar>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+
+						<h:commandButton value="#{msg['GENERA']}"
+							action="#{generaCalAnnualeManagedBean.build}" update="plan"/>
+
+					</p:panel>
+
+					<p:dataTable id="plan" rowKey="#{c.id}"
+						value="#{generaCalAnnualeManagedBean.calAssets}" var="c"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column headerText="Bldg No.">
+							<h:outputText value="#{c.building}" />
+						</p:column>
+
+						<p:column headerText="Main Tenant / Facility Description">
+							<h:outputText value="#{c.mainTenant}" />
+						</p:column>
+
+						<p:column headerText="Equipment Description">
+							<h:outputText value="#{c.equipmentDescription}" />
+						</p:column>
+
+						<p:column headerText="Manifacturer">
+							<h:outputText value="#{c.manifacturer}" />
+						</p:column>
+
+						<p:column headerText="Room">
+							<h:outputText value="#{c.room}" />
+						</p:column>
+
+						<p:column headerText="Technical Specification">
+							<h:outputText value="#{c.technicalSpecification}" />
+						</p:column>
+
+						<p:column headerText="Qty">
+							<h:outputText value="#{c.qta}" />
+						</p:column>
+
+						<p:column headerText="Frequency">
+							<h:outputText value="#{c.frequency}" />
+						</p:column>
+
+						<p:column headerText="Time">
+							<h:outputText value="#{c.time}" />
+						</p:column>
+
+						<p:column headerText="October">
+							<h:outputText value="#{c.ottobre}" />
+						</p:column>
+
+						<p:column headerText="November">
+							<h:outputText value="#{c.novembre}" />
+						</p:column>
+
+						<p:column headerText="Decembre">
+							<h:outputText value="#{c.dicembre}" />
+						</p:column>
+
+						<p:column headerText="January">
+							<h:outputText value="#{c.gennaio}" />
+						</p:column>
+
+						<p:column headerText="February">
+							<h:outputText value="#{c.febbraio}" />
+						</p:column>
+
+						<p:column headerText="March">
+							<h:outputText value="#{c.marzo}" />
+						</p:column>
+
+						<p:column headerText="April">
+							<h:outputText value="#{c.aprile}" />
+						</p:column>
+
+						<p:column headerText="May">
+							<h:outputText value="#{c.maggio}" />
+						</p:column>
+
+						<p:column headerText="June">
+							<h:outputText value="#{c.giugno}" />
+						</p:column>
+
+						<p:column headerText="July">
+							<h:outputText value="#{c.luglio}" />
+						</p:column>
+
+						<p:column headerText="August">
+							<h:outputText value="#{c.agosto}" />
+						</p:column>
+
+						<p:column headerText="September">
+							<h:outputText value="#{c.settembre}" />
+						</p:column>
+
+					</p:dataTable>
+
+					<h:commandLink id="excel">
+						<p:graphicImage url="/resources/images/excel.png" />
+						<p:dataExporter type="xls" target="plan" fileName="plan" />
+					</h:commandLink>
+
+					
+
+					<p:commandButton process="@this" icon="pi pi-search"
+						value="#{msg['BACK']}" action="adminHome" />
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

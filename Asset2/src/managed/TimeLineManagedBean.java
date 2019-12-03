@@ -58,6 +58,7 @@ public class TimeLineManagedBean {
 			Date d = TimeUtil.getCurrentStringDate(sData);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(d);
+			cal.set(Calendar.HOUR_OF_DAY, 11); // Ora convenzionale, messa solo per non avere ora 00.00
 			// if (checkOk(item))
 			{
 				TimelineEvent evt = new TimelineEvent(item, cal.getTime());

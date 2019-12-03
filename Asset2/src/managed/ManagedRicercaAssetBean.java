@@ -17,6 +17,8 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 
 	private AssetAlca selectedAsset = new AssetAlca();
 
+	private int count;
+
 	public AssetAlca getSelectedAsset() {
 		if (selectedAsset == null)
 			selectedAsset = new AssetAlca();
@@ -36,6 +38,8 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 
 		ManagedAssetBean bean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
 		bean.setSearchResult(ll);
+		
+		count = ll.size();
 	}
 
 	public void resetSelectedAsset() {
@@ -50,6 +54,10 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 
 	public void setFamilies(List<String> families) {
 		this.families = families;
+	}
+
+	public int getCount() {
+		return count;
 	}
 
 }

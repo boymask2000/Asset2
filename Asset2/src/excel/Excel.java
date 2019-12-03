@@ -63,9 +63,7 @@ public class Excel {
 			e.printStackTrace();
 		} catch (EncryptedDocumentException e1) {
 			e1.printStackTrace();
-		} catch (InvalidFormatException e1) {
-			e1.printStackTrace();
-		}
+		} 
 	}
 
 	public List<String> getCols() {

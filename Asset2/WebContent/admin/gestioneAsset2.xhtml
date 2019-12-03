@@ -20,16 +20,16 @@
 									value="#{managedRicercaAssetBean.selectedAsset.facNum}" />
 
 
-								<h:outputText value="facSystem" />
+								<h:outputText value="* facSystem" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.facSystem}" />
-								<h:outputText value="facSubsystem" />
+								<h:outputText value="* facSubsystem" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.facSubsystem}" />
 								<h:outputText value="assemblyCategory" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.assemblyCategory}" />
-								<h:outputText value="nomenclature" />
+								<h:outputText value="* nomenclature" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.nomenclature}" />
 								<h:outputText value="procId" />
@@ -85,7 +85,7 @@
 									</p:dataTable>
 							</p:panel>
 							<h:commandButton value="sort" action="#{managedAssetBean.sortByTime}" update="radioDT" rendered="false"/>
-							
+				
 							<p:panel id="basic" header="Asset" style="margin-bottom:20px">
 								<p:dataTable id="radioDT" selectionMode="single"
 									value="#{managedAssetBean.allAssets}" var="c"

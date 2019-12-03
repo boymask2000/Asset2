@@ -71,19 +71,19 @@ public class PlannerJob extends GenericJob {
 		submit(callable, "Pianificazione interventi");
 	}
 
-//	public static void main(String s[]) {
-//		
-//		PlannerJob planner = new PlannerJob();
-//		AssetAlca asset = new AssetAlca();
-//		asset.setRpieIdIndividual("8436010153238");
-//		asset.setFacSystem("D40 FIRE PROTECTION");
-//		asset.setId(154);
-//
-//		PlannerJob.cleanInterventiCalendario();
-//		planner.processAsset("20211010", asset);
-//		
-//		System.out.println("done");
-//	}
+	public static void main(String s[]) {
+
+		PlannerJob planner = new PlannerJob();
+		AssetAlca asset = new AssetAlca();
+		asset.setRpieIdIndividual("8436010153238");
+		asset.setFacSystem("D40 FIRE PROTECTION");
+		asset.setId(154);
+
+		PlannerJob.cleanInterventiCalendario();
+		planner.processAsset("20211010", asset);
+
+		System.out.println("done");
+	}
 
 	public void processAsset(String maxData, AssetAlca as) {
 
@@ -144,22 +144,22 @@ public class PlannerJob extends GenericJob {
 		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		try {
 			while (data.compareTo(maxData) <= 0) {
+				
+				List<Item> lista = order(cal, range, tipo);
+				if (lista.size() > 0) {
 
-				List<Item> lista = order(cal, range);
-				if (lista.size() == 0)
-					break;
+					String goodDate = getMin(cal, lista);
+					System.out.println(tipo.getSiglaLegenda()+" ckid= " + check.getId() + " data= " + goodDate);
+					boolean done = placeInSameDay(assetId, lista, goodDate, data, check);
 
-				String goodDate = getMin(cal, lista);
+					if (!done) {
 
-				boolean done = placeInSameDay(assetId, lista, goodDate, data, check);
+						incInter(goodDate);
 
-				if (!done) {
+						createIntervento(assetId, data, goodDate, check);
 
-					incInter(goodDate);
-
-					createIntervento(assetId, data, goodDate, check);
-
-					// dump(lista);
+						// dump(lista);
+					}
 				}
 				cal.add(calType, num);
 				data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
@@ -208,11 +208,11 @@ public class PlannerJob extends GenericJob {
 		Intervento ii = listaInt.get(0);
 
 		ChecklistIntervento cli = new ChecklistIntervento();
-	
+
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
-System.out.println("ckid= "+ck.getId()+"  int= "+ii.getId()+ " data= "+goodDate);
+	
 		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
 		cliDao.insert(cli);
 
@@ -225,20 +225,20 @@ System.out.println("ckid= "+ck.getId()+"  int= "+ii.getId()+ " data= "+goodDate)
 		return TipoSchedulazione.getTipoFrequenza(codFreq);
 	}
 
-	private List<Item> order(Calendar cal, int r) {
+	private List<Item> order(Calendar cal, int r, TipoSchedulazione tipo) {
 
 		List<Item> out = new ArrayList<Item>();
 
 		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 
-		Integer start = getNumFromCale(data);
+		Integer start = getNumFromCale(data, tipo);
 		if (start != null)
 			out.add(new Item(data, start));
 		for (int i = 1; i <= r; i++) {
 			String min = getMinRange(cal, i);
 			String max = getMaxRange(cal, i);
-			Integer numMin = getNumFromCale(min);
-			Integer numMax = getNumFromCale(max);
+			Integer numMin = getNumFromCale(min, tipo);
+			Integer numMax = getNumFromCale(max, tipo);
 
 			if (numMin != null)
 				out.add(new Item(min, numMin));
@@ -258,18 +258,16 @@ System.out.println("ckid= "+ck.getId()+"  int= "+ii.getId()+ " data= "+goodDate)
 
 		InterventiDAO iDao = new InterventiDAO();
 		iDao.cleanInterventi(now);
-		
-
 
 		// la checklistinterventi si cancella per effetto della foreign key
 	}
 
-	private static Integer getNumFromCale(String dat) {
+	private static Integer getNumFromCale(String dat, TipoSchedulazione tipo) {
 		CalendarioDAO dao = new CalendarioDAO();
 		Calendario c = new Calendario();
 		c.setData(dat);
 		Calendario cc = dao.search(c);
-		if (cc == null || cc.getLavorativo().equalsIgnoreCase("N"))
+		if (cc == null || (!tipo.isWorkingInWeekEnds() && cc.getLavorativo().equalsIgnoreCase("N")))
 			return null;
 		return cc.getInterventi();
 	}

@@ -64,19 +64,8 @@ public enum TypeManuale {
 	}
 
 	public TypeManuale getType() {
-		switch (id) {
-		case 0:
-			return INFO_GENERICO;
-		case 1:
-			return SCHEDA_TECNICA;
-		case 2:
-			return INFO_RATING_GUIDANCE;
-		case 3:
-			return SHORT_REFERENCE_FOR_MOBILE;
-		default:
-			break;
-		}
-		return INFO_GENERICO;
+		return getType(id);
+	
 	}
 
 }

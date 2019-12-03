@@ -17,51 +17,172 @@
 						<p:growl id="growl1" life="2000" />
 						<p:autoUpdate />
 
-						<p:growl id="msgs" showDetail="true" />
-						<table>
-							<tr>
-								<td><h:outputText value="#{msg['NORMATIVA']}" /></td>
-								<td><h:inputText required="true"
-										value="#{managedNormativaBean.selectedNormativa.normativa}" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg['CODICE']}" /></td>
-								<td><h:inputText required="true"
-										value="#{managedNormativaBean.selectedNormativa.codice}" /></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="#{msg['FREQUENZA']}" /></td>
-								<td><h:selectOneMenu
-										value="#{managedNormativaBean.selectedNormativa.codFrequenza}">
-										<f:selectItems value="#{frequenzeBean.frequenze}" var="user"
-											itemValue="#{user.codFrequenza}" itemLabel="#{user}" />
-									</h:selectOneMenu></td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Data Inizio" /></td>
-								<td><p:calendar id="popup" update=":form"
-										onSelectUpdate="@this" pattern="yyyyMMdd">
-										<f:ajax event="dateSelect"
-											listener="#{managedNormativaBean.onDateSelect}"
-											update="growl1" />
-									</p:calendar></td>
-							</tr>
-						</table>
 
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+
+									<p:panelGrid>
+										<p:row>
+											<p:column>
+												<h:outputText value="#{msg['NORMATIVA']}" />
+											</p:column>
+											<p:column>
+												<h:inputText required="true"
+													value="#{managedNormativaBean.selectedNormativa.normativa}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="#{msg['CODICE']}" />
+											</p:column>
+											<p:column>
+												<h:inputText required="true"
+													value="#{managedNormativaBean.selectedNormativa.codice}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA']}" />
+											</p:column>
+											<p:column>
+												<h:selectOneMenu
+													value="#{managedNormativaBean.selectedNormativa.codFrequenza}">
+													<f:selectItems value="#{frequenzeBean.frequenze}"
+														var="freq" itemValue="#{freq.codFrequenza}"
+														itemLabel="#{freq}" />
+												</h:selectOneMenu>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="Data Inizio" />
+											</p:column>
+											<p:column>
+												<p:calendar id="popup" update=":form" onSelectUpdate="@this"
+													pattern="yyyyMMdd">
+													<f:ajax event="dateSelect"
+														listener="#{managedNormativaBean.onDateSelect}"
+														update="growl1" />
+												</p:calendar>
+											</p:column>
+										</p:row>
+									</p:panelGrid>
+								</p:column>
+
+								<p:column>
+
+
+
+									<p:panelGrid>
+										<p:row>
+											<p:column>
+												<h:outputText value="A4" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_A4']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="A2" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_A2']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="A" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_A']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="SA" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_SA']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="M3" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_M3']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="Q" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_Q']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="M" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_M']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="W" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_W']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="D5" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_D5']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="D7" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_D7']}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column>
+												<h:outputText value="24/7" />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{msg['FREQUENZA_247']}" />
+											</p:column>
+										</p:row>
+									</p:panelGrid>
+
+
+								</p:column>
+							</p:row>
+						</p:panelGrid>
 						<p:commandButton update=":panSetPass0" icon="pi pi-search"
 							value="Carica file" oncomplete="PF('setPassDialog0').show()" />
 
 
 
 						<h:commandButton process="@this" icon="pi pi-search"
-							value="#{msg['BACK']}" action="back" />
+							value="#{msg['BACK']}" action="back" immediate="true"/>
 
 						<h:panelGroup id="postPanel2">
 							<h:commandButton value="ok" id="ajasx"
-								action="#{managedNormativaBean.insertNormativa}"
-								update="fm1" />
+								action="#{managedNormativaBean.insertNormativa}" update="fm1" />
 						</h:panelGroup>
 					</h:form>
+
 				</p:panel>
 				<p:dialog header="Nuovo manuale" widgetVar="setPassDialog0"
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false">

@@ -31,31 +31,35 @@ public class ManagedDocInterventiBean implements Serializable {
 		myList = dao.selectAll();
 		return myList;
 	}
-	
-	public void update(DocIntervento u ) {
+
+	public void update(DocIntervento u) {
 		DocInterventiDAO dao = new DocInterventiDAO();
 		dao.update(u);
 	}
 
 	public List<DocIntervento> getDocsForIntervento(int interId) {
-	
+
 		DocInterventiDAO dao = new DocInterventiDAO();
 		myList = dao.getDocForIntervento(interId);
 		return myList;
 	}
+
 	public String setupViewFile(String nome) {
-	
+
 		BasicDocumentViewController c = getDocController();
 		c.setPdf(new File(getFullPath(nome)));
 		return "viewFile";
 	}
-	private String getFullPath(String nome) {
+
+	private static String getFullPath(String nome) {
 		String dir = ApplicationConfig.getDocumentdir();
-		if( !dir.endsWith(File.separator))dir+=File.separator;
-		return dir+nome;
+		if (!dir.endsWith(File.separator))
+			dir += File.separator;
+		return dir + nome;
 	}
+
 	public void onRowSelect(SelectEvent event) {
-		FacesMessage msg = new FacesMessage(" Selected", ""+((Intervento) event.getObject()).getId());
+		FacesMessage msg = new FacesMessage(" Selected", "" + ((Intervento) event.getObject()).getId());
 		selectedDocIntervento = (DocIntervento) event.getObject();
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Log.getLogger().debug("select");
@@ -63,7 +67,6 @@ public class ManagedDocInterventiBean implements Serializable {
 	}
 
 	public void insert(DocIntervento manuale) {
-	
 
 		DocInterventiDAO dao = new DocInterventiDAO();
 
@@ -74,11 +77,7 @@ public class ManagedDocInterventiBean implements Serializable {
 		}
 	}
 
-	
-
-
-
-	private BasicDocumentViewController getDocController() {
+	private static BasicDocumentViewController getDocController() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application application = context.getApplication();
 		BasicDocumentViewController assetBean = application.evaluateExpressionGet(context,
@@ -93,6 +92,5 @@ public class ManagedDocInterventiBean implements Serializable {
 	public void setSelectedDocIntervento(DocIntervento selectedDocIntervento) {
 		this.selectedDocIntervento = selectedDocIntervento;
 	}
-
 
 }

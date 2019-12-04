@@ -11,18 +11,18 @@ public class InfoCalAsset {
 	private String qta;
 	private String frequency;
 	private String time;
-	private String gennaio;
-	private String febbraio;
-	private String marzo;
-	private String aprile;
-	private String maggio;
-	private String giugno;
-	private String luglio;
-	private String agosto;
-	private String settembre;
-	private String ottobre;
-	private String novembre;
-	private String dicembre;
+	private String gennaio = "";
+	private String febbraio = "";
+	private String marzo = "";
+	private String aprile = "";
+	private String maggio = "";
+	private String giugno = "";
+	private String luglio = "";
+	private String agosto = "";
+	private String settembre = "";
+	private String ottobre = "";
+	private String novembre = "";
+	private String dicembre = "";
 
 	public int getId() {
 		return id;

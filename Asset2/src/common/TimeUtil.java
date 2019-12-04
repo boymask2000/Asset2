@@ -191,6 +191,9 @@ public class TimeUtil {
 		String time = annoMese.format(date.getTime());
 		return time;
 	}
+	public static String getMese(String data) {
+		return data.substring(4,6);
+	}
 
 	public static String getLastDayInThisMonth() {
 		Date d;

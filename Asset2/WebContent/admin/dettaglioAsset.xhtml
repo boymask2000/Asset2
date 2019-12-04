@@ -64,6 +64,36 @@
 											<h:inputText
 												value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
 
+			
+								<h:outputText value="Building" />
+								<h:inputText value="#{managedAssetBean.moreInfo.building}" />
+
+								<h:outputText value="Room" />
+								<h:inputText value="#{managedAssetBean.moreInfo.room}" />
+
+								<h:outputText value="Tenant" />
+								<h:inputText value="#{managedAssetBean.moreInfo.tenant}" />
+
+								<h:outputText value="Equipment description" />
+								<h:inputText value="#{managedAssetBean.moreInfo.equipdescr}" />
+
+								<h:outputText value="Manifacturer" />
+								<h:inputText value="#{managedAssetBean.moreInfo.manifacturer}" />
+
+								<h:outputText value="Technical Specifications" />
+								<h:inputText value="#{managedAssetBean.moreInfo.techspec}" />
+
+								<h:outputText value="Qta" />
+								<h:inputText value="#{managedAssetBean.moreInfo.qta}" />
+
+								<h:outputText value="Frequency" />
+								<h:inputText value="#{managedAssetBean.moreInfo.frequency}" />
+
+								<h:outputText value="Time" />
+								<h:inputText value="#{managedAssetBean.moreInfo.time}" />
+
+
+								
 
 										</h:panelGrid>
 										<p:commandButton action="#{managedAssetBean.updateAsset}"
@@ -274,7 +304,7 @@
 						<p:panelGrid columns="2" columnClasses="label,value">
 							<p:panel id="basiF" style="margin-bottom:20px">
 								<h:form enctype="multipart/form-data">
-		
+
 
 									<p:panelGrid columns="2">
 										<h:outputText value="Tipo" for="tip" />

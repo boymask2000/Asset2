@@ -11,11 +11,13 @@ import org.primefaces.event.SelectEvent;
 import beans.AssetAlca;
 import beans.FamigliaAsset;
 import beans.Intervento;
+import beans.MoreInfoAsset;
 import beans.Status;
 import common.JsfUtil;
 import database.dao.AssetAlcaDAO;
 import database.dao.FamigliaAssetDAO;
 import database.dao.InterventiDAO;
+import database.dao.MoreInfoAssetDAO;
 
 public class ManagedAssetBean {
 
@@ -24,6 +26,7 @@ public class ManagedAssetBean {
 	private List<Status> allStatus = new ArrayList<Status>();
 	private Status status = new Status(0);
 	private AssetAlca selectedAsset;
+	private MoreInfoAsset moreInfo;
 
 	private List<AssetAlca> searchResult = null;
 
@@ -33,9 +36,10 @@ public class ManagedAssetBean {
 
 		return d;
 	}
-	
+
 	public long getFamilyId() {
-		if( selectedAsset==null)return -1;
+		if (selectedAsset == null)
+			return -1;
 		FamigliaAssetDAO fmaDao = new FamigliaAssetDAO();
 
 		FamigliaAsset fam = fmaDao.searchByName(selectedAsset.getFacSystem());
@@ -61,7 +65,6 @@ public class ManagedAssetBean {
 	}
 
 	public void setSelectedAssetId(long id) {
-	
 
 	}
 
@@ -118,17 +121,19 @@ public class ManagedAssetBean {
 		return comm;
 	}
 
-	
 	public List<AssetAlca> getAllAssets() {
-		ManagedRicercaAssetBean mrab = (ManagedRicercaAssetBean)JsfUtil.getBean("managedRicercaAssetBean");
+		ManagedRicercaAssetBean mrab = (ManagedRicercaAssetBean) JsfUtil.getBean("managedRicercaAssetBean");
 		mrab.ricerca();
-		
+
 		return searchResult;
 	}
 
 	public void updateAsset() {
 		AssetAlcaDAO assetDAO = new AssetAlcaDAO();
 		assetDAO.update(selectedAsset);
+		
+		MoreInfoAssetDAO dao = new MoreInfoAssetDAO();
+		dao.update(moreInfo);
 	}
 
 	public List<AssetAlca> getAssetsWithStatus(int s) {
@@ -142,6 +147,21 @@ public class ManagedAssetBean {
 
 	public void setSelectedAsset(AssetAlca selectedAsset) {
 		this.selectedAsset = selectedAsset;
+
+		recuperaMoreInfo(selectedAsset);
+	}
+
+	private void recuperaMoreInfo(AssetAlca s) {
+		if(s==null)return;
+		MoreInfoAssetDAO dao = new MoreInfoAssetDAO();
+		moreInfo = dao.getMoreInfoByAssetId(s.getId());
+		if (moreInfo == null) {
+			moreInfo = new MoreInfoAsset();
+			moreInfo.setAssetId(s.getId());
+			dao.insert(moreInfo);
+			moreInfo = dao.getMoreInfoByAssetId(s.getId());
+		}
+
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -194,5 +214,13 @@ public class ManagedAssetBean {
 
 	public void setSearchResult(List<AssetAlca> searchResult) {
 		this.searchResult = searchResult;
+	}
+
+	public MoreInfoAsset getMoreInfo() {
+		return moreInfo;
+	}
+
+	public void setMoreInfo(MoreInfoAsset moreInfo) {
+		this.moreInfo = moreInfo;
 	}
 }

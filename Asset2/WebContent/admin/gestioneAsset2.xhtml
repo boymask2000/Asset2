@@ -42,50 +42,53 @@
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.pmSchedSerial}" />
 
-								<h:outputText value="rpieIdIndividual" />
+								<h:outputText value="rpie Id Individual" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.rpieIdIndividual}" />
 								<h:outputText value="schedAssignedOrg" />
 								<h:inputText
 									value="#{managedRicercaAssetBean.selectedAsset.schedAssignedOrg}" />
 
+				
 
 							</h:panelGrid>
 							<p:commandButton action="#{managedRicercaAssetBean.ricerca}"
 								value="#{msg['SEARCH']}" update="radioDT" />
 						</p:panel>
 
-						<h:panelGrid columns="1" >
+						<h:panelGrid columns="1">
 							<p:panel id="pFam" header="Families" style="margin-bottom:20px">
-							<p:dataTable id="dtFam" selectionMode="single"
+								<p:dataTable id="dtFam" selectionMode="single"
 									value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
-									selection="#{managedFamiglieAssetBean.selectedFamiglia}" rowKey="#{c.id}"
-									paginator="true" rows="10"
+									selection="#{managedFamiglieAssetBean.selectedFamiglia}"
+									rowKey="#{c.id}" paginator="true" rows="10"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									rowsPerPageTemplate="5,10,15">
-									
-										<p:ajax event="rowSelect"
-										listener="#{managedFamiglieAssetBean.onRowSelect4GestioneAset}" update=":form" />
-									
+
+									<p:ajax event="rowSelect"
+										listener="#{managedFamiglieAssetBean.onRowSelect4GestioneAset}"
+										update=":form" />
+
 									<p:column headerText="#{msg['FAMILY']}">
 										<h:outputText value="#{c.famiglia}" />
 									</p:column>
-									
+
 									<f:facet name="footer">
 
-										<h:commandButton
-											action="#{managedFamiglieAssetBean.reset}"
+										<h:commandButton action="#{managedFamiglieAssetBean.reset}"
 											value="Reset" process="@this">
-											
+
 										</h:commandButton>
 
 
 
 									</f:facet>
-									</p:dataTable>
+								</p:dataTable>
 							</p:panel>
-							<h:commandButton value="sort" action="#{managedAssetBean.sortByTime}" update="radioDT" rendered="false"/>
-				
+							<h:commandButton value="sort"
+								action="#{managedAssetBean.sortByTime}" update="radioDT"
+								rendered="false" />
+
 							<p:panel id="basic" header="Asset" style="margin-bottom:20px">
 								<p:dataTable id="radioDT" selectionMode="single"
 									value="#{managedAssetBean.allAssets}" var="c"
@@ -112,9 +115,8 @@
 
 									<f:facet name="footer">
 
-										<h:commandButton
-											action="goToDetailAsset"
-											value="Detail" process="@this">
+										<h:commandButton action="goToDetailAsset" value="Detail"
+											process="@this">
 											<f:param name="op" value="NEW" />
 										</h:commandButton>
 
@@ -126,8 +128,8 @@
 						</h:panelGrid>
 					</h:panelGrid>
 
-					<h:commandButton process="@this" icon="pi pi-search" value="#{msg['BACK']}"
-						action="back" />
+					<h:commandButton process="@this" icon="pi pi-search"
+						value="#{msg['BACK']}" action="back" />
 
 				</h:form>
 			</f:view>

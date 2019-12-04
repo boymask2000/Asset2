@@ -117,10 +117,7 @@ public class TimeLineManagedBean {
 
 		if (checks == null)
 			return null;
-//		 System.out.println("2 "+selectedTimelineEvent);
-//		 if( selectedTimelineEvent==null)return null;
-//		  TimeLineItem item  = (TimeLineItem) selectedTimelineEvent.getData();
-		System.out.println("3 " + checks.size());
+
 		return checks;
 	}
 

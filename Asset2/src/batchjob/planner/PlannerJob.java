@@ -80,7 +80,7 @@ public class PlannerJob extends GenericJob {
 		asset.setId(154);
 
 		PlannerJob.cleanInterventiCalendario();
-		planner.processAsset("20211010", asset);
+		planner.processAsset("20200110", asset);
 
 		System.out.println("done");
 	}
@@ -209,6 +209,7 @@ public class PlannerJob extends GenericJob {
 
 		ChecklistIntervento cli = new ChecklistIntervento();
 
+		System.out.println(ii.getId());
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
@@ -218,7 +219,7 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private static TipoSchedulazione getTipoSchedulazione(Check check) {
+	public static TipoSchedulazione getTipoSchedulazione(Check check) {
 		NormativeDAO normDao = new NormativeDAO();
 		Normativa normativa = normDao.getNormativaPerCodice(check.getCodiceNormativa());
 		int codFreq = normativa.getCodFrequenza();

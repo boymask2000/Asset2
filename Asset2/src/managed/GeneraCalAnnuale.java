@@ -49,6 +49,7 @@ public class GeneraCalAnnuale {
 	}
 
 	public String build() {
+		calAssets.clear();
 
 		MoreInfoAssetDAO dao = new MoreInfoAssetDAO();
 		List<MoreInfoAsset> lista = dao.getCalendarioAnnuale();
@@ -83,22 +84,22 @@ public class GeneraCalAnnuale {
 		for (Intervento inter : ints) {
 
 			String mese = TimeUtil.getMese(inter.getData_pianificata());
+
 			Set<String> s = mesi.get(mese);
 			if (s == null)
 				s = new HashSet<String>();
 
-			List<ChecklistIntervento> clis = cliDao.getChecksForInterventoId(inter.getId());
+			List<ChecklistIntervento> clis = cliDao.getCheckListForIntervento(inter);
 			for (ChecklistIntervento cli : clis) {
 				int codFreq = cli.getCodFrequenza();
 				TipoSchedulazione tipo = TipoSchedulazione.getTipoFrequenza(codFreq);
 				String sigla = tipo.getSiglaLegenda();
 				s.add(sigla);
-				mesi.put(mese, s);
 
+				mesi.put(mese, s);
 			}
 		}
 
-		String out = "";
 		for (Map.Entry<String, Set<String>> e : mesi.entrySet()) {
 			String val = "";
 			for (String d : e.getValue())
@@ -173,9 +174,11 @@ public class GeneraCalAnnuale {
 
 		String out = "";
 		for (String s : freqs) {
+			TipoSchedulazione tipo = TipoSchedulazione.getBySigla(s);
+
 			if (out.length() > 0)
 				out += ", ";
-			out += s;
+			out += tipo.getDescription();
 		}
 		return out;
 	}

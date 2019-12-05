@@ -64,6 +64,7 @@ public interface InterventiMapper {
 			+ "( i.data_effettiva >=#{param1} AND i.data_effettiva <=#{param2} )) ORDER BY i.data_pianificata,i.data_effettiva";
 
 	final String CLEAN_INTERVENTI = "DELETE FROM " + TABELLA + " WHERE data_pianificata> #{data}";
+	final String CLEAN_INTERVENTI_PENDING= "DELETE FROM " + TABELLA + " WHERE data_effettiva IS NULL";
 
 	final String GET_BY_ID = "SELECT * FROM " + TABELLA + " WHERE id=#{id}";
 
@@ -112,4 +113,7 @@ public interface InterventiMapper {
 
 	@Select(SELECT_ASSETS_INTERVENTI_PREC)
 	public List<AssetAlca> getPreviousInteAssets(String date);
+
+	@Select(CLEAN_INTERVENTI_PENDING)
+	public void cleanInterventiPending();
 }

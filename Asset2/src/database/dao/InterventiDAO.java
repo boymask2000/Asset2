@@ -226,4 +226,12 @@ public class InterventiDAO {
 			return mapper.getPreviousInteAssets(date);
 		}
 	}
+
+	public void cleanInterventiPending() {
+		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+			InterventiMapper mapper = session.getMapper(InterventiMapper.class);
+			mapper.cleanInterventiPending();
+			session.commit();
+		}		
+	}
 }

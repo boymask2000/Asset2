@@ -12,7 +12,7 @@
 	<ui:define name="content">
 		<f:view locale="#{language.locale}">
 			<h:form id="form">
-				<p:growl id="growl1" life="2000" />
+
 				<p:growl id="msgs" showDetail="true" />
 				<style type="text/css">
 td.col_0 {
@@ -83,6 +83,11 @@ td.col_10 {
 										value="#{msg['PLANNER']}"
 										action="#{batchStarter.exec('batchjob.planner.PlannerJob')}"
 										oncomplete="PF('panSendMail0').show()" />
+
+									<p:commandButton process="@this" icon="pi pi-search"
+										value="#{msg['PLANNER']} QQQQ"
+										oncomplete="PF('Confirm').show()" />
+
 
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['LAVORI_BATCH']}" action="batchHome" />
@@ -278,6 +283,31 @@ td.col_10 {
 					</p:panelGrid>
 				</h:form>
 			</p:dialog>
+
+
+
+
+			<p:confirmDialog header="Confirm" severity="alert"
+				closeOnEscape="true" widgetVar="confirmationDialog"
+				showEffect="fold">
+				<f:facet name="message">
+					<h:outputText
+						value="Are you sure all details 
+                           are correct and proceed in creating the Account?" />
+				</f:facet>
+				<p:commandButton value="Yes"
+					action="#{batchStarter.exec('batchjob.planner.PlannerJob')}"
+					oncomplete="confirmationDialog.hide()" icon="ui-icon-check">
+
+				</p:commandButton>
+
+				<p:commandButton value="No" onclick="confirmationDialog.hide()"
+					type="button" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+
+
+
 
 		</f:view>
 	</ui:define>

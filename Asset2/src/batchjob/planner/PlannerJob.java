@@ -80,7 +80,7 @@ public class PlannerJob extends GenericJob {
 		asset.setId(154);
 
 		PlannerJob.cleanInterventiCalendario();
-		planner.processAsset("20200110", asset);
+		planner.processAsset("20220110", asset);
 
 		System.out.println("done");
 	}
@@ -149,7 +149,7 @@ public class PlannerJob extends GenericJob {
 				if (lista.size() > 0) {
 
 					String goodDate = getMin(cal, lista);
-					System.out.println(tipo.getSiglaLegenda()+" ckid= " + check.getId() + " data= " + goodDate);
+			//		System.out.println(tipo.getSiglaLegenda()+" ckid= " + check.getId() + " data= " + goodDate);
 					boolean done = placeInSameDay(assetId, lista, goodDate, data, check);
 
 					if (!done) {
@@ -209,7 +209,7 @@ public class PlannerJob extends GenericJob {
 
 		ChecklistIntervento cli = new ChecklistIntervento();
 
-		System.out.println(ii.getId());
+	//	System.out.println(ii.getId());
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
@@ -256,9 +256,11 @@ public class PlannerJob extends GenericJob {
 
 		CalendarioDAO dao = new CalendarioDAO();
 		dao.cleanInterventi(now);
-
+		
 		InterventiDAO iDao = new InterventiDAO();
 		iDao.cleanInterventi(now);
+		iDao.cleanInterventiPending();
+
 
 		// la checklistinterventi si cancella per effetto della foreign key
 	}

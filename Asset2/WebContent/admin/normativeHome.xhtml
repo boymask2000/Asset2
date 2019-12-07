@@ -16,6 +16,7 @@
 					<p:panel id="basic" header="#{msg['GESTIONE_NORMATIVE']}"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" selectionMode="single"
+						paginatorPosition="bottom"
 							value="#{managedNormativaBean.allNormative}" var="c"
 							selection="#{managedNormativaBean.selectedNormativa}"
 							rowKey="#{c.id}" paginator="true" rows="5"
@@ -71,7 +72,7 @@
 				</h:panelGrid>
 
 
-				<h:commandButton value="GO BACK!" action="back" />
+				<h:commandButton value="#{msg['BACK']}" action="back" />
 				<!-- 				<p:commandButton process="@this" icon="pi pi-search" value="Home" -->
 				<!-- 					action="adminHome" /> -->
 

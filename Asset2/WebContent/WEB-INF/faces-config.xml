@@ -296,6 +296,16 @@
 		<managed-bean-class>managed.GeneraCalAnnuale</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>theme</managed-bean-name>
+		<managed-bean-class>common.Theme</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>themeSwitcherView</managed-bean-name>
+		<managed-bean-class>managed.ThemeSwitcherView</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

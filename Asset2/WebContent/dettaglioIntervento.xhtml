@@ -71,14 +71,121 @@
 								</h:panelGrid>
 
 
-								<ui:include src="tabellaEsitiOutput.xhtml"></ui:include>
+								<p:panel id="basic" header="#{msg['SELEZIONARE_ESITO']}">
+									<table style="width: 100%">
+										<tr>
+											<td width="100"></td>
+											<td width="100"></td>
+											<td width="100"></td>
+											<td width="100"></td>
+											<td width="100"></td>
+											<td width="100"></td>
+
+											<td width="100"></td>
+											<td width="100"></td>
+											<td width="100"></td>
+										</tr>
+										<tr>
+											<td height="40px" bgcolor="#548235"></td>
+											<td height="40px" bgcolor="#A9D08E"></td>
+											<td height="40px" bgcolor="#E2EFDA"></td>
+											<td height="40px" bgcolor="#BF8F00"></td>
+											<td height="40px" bgcolor="#FFD966"></td>
+											<td height="40px" bgcolor="#FFF2CC"></td>
+											<td height="40px" bgcolor="#EB0000"></td>
+											<td height="40px" bgcolor="#FF4F4F"></td>
+											<td height="40px" bgcolor="#FFC1C1"></td>
+
+										</tr>
+
+										<tr>
+											<td height="70px" align="center"><p:commandButton
+													title="Select" update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="1"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="2"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="3"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="4"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="5"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="6"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="7"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="8"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+											<td align="center"><p:commandButton title="Select"
+													update=":form">
+													<h:outputText styleClass="pi pi-search"
+														style="margin:0 auto;" />
+													<f:setPropertyActionListener value="9"
+														target="#{managedInterventiBean.esito}" />
+												</p:commandButton></td>
+
+										</tr>
+
+									</table>
+									<table style="width: 100%">
+										<tr>
+											<td width="100"></td>
+										</tr>
+										<tr>
+											<td height="40px"
+												bgcolor="#{managedAssetBean.status.getColor(managedInterventiBean.esito)}"></td>
+										</tr>
+
+
+									</table>
+								</p:panel>
 
 								<h:outputText value="#{msg['NOTE']}" />
 								<p:inputTextarea readonly="true" rows="3" cols="50"
 									value="#{managedInterventiBean.selectedIntevento.commento}" />
 								<!-- CHECKLIST INIZIO -->
 								<p:panel>
-									<p:dataTable id="radioDTd"
+									<p:dataTable id="radioDTd" paginatorPosition="bottom" 
 										value="#{managedChecklistBean.getChecksForInterventoId(managedInterventiBean.selectedIntevento.id)}"
 										var="c" rowKey="#{c.id}" paginator="true" rows="5"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -102,6 +209,7 @@
 								<!-- 								<p:panel id="bajsic" header="#{msg['DOCUMENTI']}"> -->
 								<p:panel>
 									<p:dataTable id="radioDT" selectionMode="single"
+										paginatorPosition="bottom"
 										value="#{managedDocInterventiBean.getDocsForIntervento(managedInterventiBean.selectedIntevento.id)}"
 										var="c"
 										selection="#{managedDocInterventiBean.selectedDocIntervento}"
@@ -138,15 +246,6 @@
 										</f:facet>
 									</p:dataTable>
 								</p:panel>
-								<!-- 								</p:panel> -->
-<!-- 								<p:panel> -->
-									<!-- 								<p:galleria -->
-									<!-- 									value="#{managedFotoInterventoBean.fotoPerIntervento}" -->
-									<!-- 									var="image" showCaption="true"> -->
-									<!-- 									<p:graphicImage name="images/#{image.filename}" -->
-									<!-- 										title="#{image.timestamp}" /> -->
-									<!-- 								</p:galleria> -->
-<!-- 								</p:panel> -->
 
 								<table>
 									<tr>
@@ -157,11 +256,6 @@
 										</ui:repeat>
 									</tr>
 								</table>
-								<!-- 							<p:contentFlow value="#{managedFotoInterventoBean.fotoPerIntervento}" var="image"> -->
-								<!-- 								<p:graphicImage name="images/#{image.filename}" -->
-								<!-- 									styleClass="content" width="100" height="100"/> -->
-								<!-- 								<div class="caption">#{image}</div> -->
-								<!-- 							</p:contentFlow> -->
 
 								<p:commandButton process="radioDT" update="panIntPass0"
 									icon="pi pi-search" value="#{msg['ADD_TASK']}"
@@ -176,7 +270,8 @@
 							action="#{printCreatorIntervento.printIntervento2}" />
 
 
-						<p:commandButton value="GO BACK!" onclick="window.history.back();" />
+<h:commandButton value="#{msg['BACK']}" action="back"/>
+>
 					</p:panel>
 				</h:form>
 

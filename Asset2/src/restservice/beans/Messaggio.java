@@ -1,33 +1,57 @@
 package restservice.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Messaggio {
-    private String username;
-    private String text;
-    private MsgType msgType;
+	private String username;
+	private String text;
+	private MsgType msgType;
 
-    public String getUsername() {
-        return username;
-    }
+	private String msgCode;
+	private List<String> parameters = new ArrayList<>();
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public String getTextParam() {
+		String out = msgCode;
+		for (String s : parameters)
+			out += "|" + s;
+		return out;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void addParameter(String p) {
+		parameters.add(p);
+	}
 
-    public MsgType getMsgType() {
-        return msgType;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setMsgType(MsgType msgType) {
-        this.msgType = msgType;
-    }
+	public String getText() {
+		return text;
+	}
 
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public MsgType getMsgType() {
+		return msgType;
+	}
+
+	public void setMsgType(MsgType msgType) {
+		this.msgType = msgType;
+	}
+
+	public String getMsgCode() {
+		return msgCode;
+	}
+
+	public void setMsgCode(String msgCode) {
+		this.msgCode = msgCode;
+	}
 
 }

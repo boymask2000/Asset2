@@ -14,12 +14,11 @@ import javax.faces.model.SelectItem;
 
 public class LanguageBean implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private static final String ITALIAN = "it";;
 
-	private String localeCode="en";
+	private String localeCode = "en";
 
 	private static Map<String, Locale> countries;
 
@@ -28,26 +27,27 @@ public class LanguageBean implements Serializable {
 	private List<Flag> flags = new ArrayList<Flag>();
 
 	private String activeLocale;
-	
+
 	private String selectedItem; // +getter +setter
 	private List<SelectItem> availableItems; // +getter (no setter necessary)
 
 	@PostConstruct
 	public void init() {
-	    availableItems = new ArrayList<SelectItem>();
-	    availableItems.add(new SelectItem("en", "Us"));
-	    availableItems.add(new SelectItem("it", "It"));
-	   
+		availableItems = new ArrayList<SelectItem>();
+		availableItems.add(new SelectItem("en", "Us"));
+		availableItems.add(new SelectItem("it", "It"));
 
 		countries = new LinkedHashMap<String, Locale>();
 		countries.put("en", Locale.ENGLISH); // label, value
 		countries.put("it", Locale.ITALIAN);
 
 	}
+
 	public void selectRadioItem() {
-	     selectedItem = this.localeCode; 
-	//more...
+		selectedItem = this.localeCode;
+		// more...
 	}
+
 	public LanguageBean() {
 		flags.add(new Flag("us", "flag_us"));
 		flags.add(new Flag("it", "flag_it"));
@@ -60,10 +60,12 @@ public class LanguageBean implements Serializable {
 	public String getLocaleCode() {
 		return localeCode;
 	}
-	
-
 
 	public void setLocaleCode(String localeCode) {
+
+		Locale.setDefault(Locale.ITALY);
+		if (localeCode.equals("en"))
+			Locale.setDefault(Locale.US);
 
 		this.localeCode = localeCode;
 		setLocale(localeCode);
@@ -121,6 +123,7 @@ public class LanguageBean implements Serializable {
 		this.activeLocale = activeLocale;
 
 	}
+
 	public boolean isItalian() {
 		return activeLocale.equalsIgnoreCase(ITALIAN);
 	}
@@ -137,6 +140,5 @@ public class LanguageBean implements Serializable {
 
 		return availableItems;
 	}
-
 
 }

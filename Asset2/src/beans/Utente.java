@@ -1,11 +1,8 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import database.dao.UtenteDAO;
-import managed.Flag;
 
 public class Utente implements Serializable {
 	/**
@@ -17,6 +14,8 @@ public class Utente implements Serializable {
 	private String tipo = "U";
 	private String descrizione;
 	private String email;
+	
+	
 
 	public String getUsername() {
 		return username;

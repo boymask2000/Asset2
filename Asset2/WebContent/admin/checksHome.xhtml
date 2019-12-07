@@ -17,6 +17,7 @@
 							<p:column style="width:40%">
 								<p:panel id="basic" header="#{msg['FAMILY']} Asset">
 									<p:dataTable id="familyDT" selectionMode="single"
+									paginatorPosition="bottom"
 										value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 										selection="#{managedFamiglieAssetBean.selectedFamiglia}"
 										rowKey="#{c.id}" paginator="true" rows="5"
@@ -46,6 +47,7 @@
 										value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
 										rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
 									<p:dataTable id="checksDT"
+									paginatorPosition="bottom"
 										value="#{managedChecksBean.allChecksForFamily}" var="c"
 										editable="true" widgetVar="cellCars" rowKey="#{c.id}"
 										paginator="true" rows="5"
@@ -162,6 +164,7 @@
 									<p:panel id="basic11" style="margin-bottom:20px">
 										<h:form>
 											<p:dataTable id="fam" selectionMode="single"
+											paginatorPosition="bottom"
 												value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 												selection="#{managedFamiglieAssetBean.selectedFamiglia}"
 												rowKey="#{c.id}" paginator="true" rows="5"

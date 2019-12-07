@@ -1,5 +1,3 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -39,23 +37,22 @@
 			<h:outputText value="#{c.currentRitardo}" />
 		</p:column>
 		<p:column headerText="Cod Normativa">
-	
-			<h:commandButton value="#{c.codNormativa}" 
-											action="#{managedNormativaBean.setupViewFile(c.nomefile)}"/>
+
+			<h:commandButton value="#{c.codNormativa}"
+				action="#{managedNormativaBean.setupViewFile(c.nomefile)}" />
 		</p:column>
 		<p:column headerText="#{msg['DESCRIZIONE_OPERAZIONE']}">
 			<h:outputText value="#{c.descCheck}" />
 		</p:column>
 
 	</p:dataTable>
-	<p:dialog header="#{msg['DETTAGLIO_ASSET']}" widgetVar="assDialog" modal="true"
-		showEffect="fade" hideEffect="fade" resizable="false">
-		<p:outputPanel id="assDetail" >
+	<p:dialog header="#{msg['DETTAGLIO_ASSET']}" widgetVar="assDialog"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:outputPanel id="assDetail">
 
-			<p:panel id="basi1c"
-				style="margin-bottom:10px">
+			<p:panel id="basi1c" style="margin-bottom:10px">
 
-				<h:panelGrid columns="2" >
+				<h:panelGrid columns="2">
 					<h:outputText value="ID" />
 					<h:outputText value="#{managedAssetViewBean.selectedAsset.id}" />
 					<h:outputText value="Fac #" />

@@ -52,6 +52,15 @@ public class AuditDAO {
 		}
 
 	}
+	public static void sendMessaggioRest(Messaggio msg) {
+		AuditDAO dao = new AuditDAO();
+		Audit audit = new Audit();
+		audit.setAzione(msg.getText());
+		audit.setMsgtype(msg.getMsgType().name());
+		audit.setUsername(msg.getUsername());
+	
+		dao.insert(audit);
+	}
 
 	public static void sendMessaggio(Messaggio msg) {
 		AuditDAO dao = new AuditDAO();
@@ -59,6 +68,7 @@ public class AuditDAO {
 		audit.setAzione(msg.getText());
 		audit.setMsgtype(msg.getMsgType().name());
 		audit.setUsername(msg.getUsername());
+		audit.setAzione(msg.getTextParam());
 		dao.insert(audit);
 	}
 

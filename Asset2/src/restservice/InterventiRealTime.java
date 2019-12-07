@@ -54,6 +54,11 @@ public class InterventiRealTime {
 		msg.setMsgType(MsgType.INFO);
 		msg.setUsername(inter.getUser());
 		msg.setText("Completato intervento su asset " + asset.getRpieIdIndividual());
+		
+		msg.setMsgCode("INTERVENTO_COMPLETATO");
+		msg.addParameter(asset.getRpieIdIndividual());
+
+		
 		sendMessaggio(msg);
 	}
 
@@ -61,6 +66,7 @@ public class InterventiRealTime {
 		AuditDAO dao = new AuditDAO();
 		Audit audit = new Audit();
 		audit.setAzione(msg.getText());
+		audit.setAzione(msg.getTextParam());
 		audit.setMsgtype(msg.getMsgType().name());
 		audit.setUsername(msg.getUsername());
 		dao.insert(audit);

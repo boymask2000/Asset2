@@ -16,6 +16,7 @@
 					<p:panel id="basic" header="Gestione utenti"
 						style="margin-bottom:20px">
 						<p:dataTable id="radioDT" selectionMode="single"
+						paginatorPosition="bottom"
 							value="#{managedUtentiBean.allUtenti}" var="c"
 							selection="#{managedUtentiBean.selectedUser}"
 							rowKey="#{c.username}" paginator="true" rows="5"

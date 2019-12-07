@@ -23,7 +23,7 @@
 					<td><h:panelGrid columns="2" rendered="#{utente.username!=null}">
 							<h:selectOneRadio layout="pageDirection" styleClass="labelWhite"
 								value="#{language.localeCode}" onchange="submit()"
-								update=":form">
+								update="@All">
 								<f:selectItem itemLabel="US" itemValue="en" />
 								<f:selectItem itemLabel="IT" itemValue="it" />
 							</h:selectOneRadio>

@@ -117,6 +117,8 @@ public class InterventoRest {
 		msg.setMsgType(MsgType.INFO);
 		msg.setUsername(inter.getUser());
 		msg.setText("Completato intervento su asset "+asset.getRpieIdIndividual());
+		msg.setMsgCode("INTERVENTO_COMPLETATO");
+		msg.addParameter(asset.getRpieIdIndividual());
 		AuditDAO.sendMessaggio(msg);
 	}
 	
@@ -126,7 +128,7 @@ public class InterventoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cancelOnSafety(Messaggio msg) {
 
-		AuditDAO.sendMessaggio( msg); 
+		AuditDAO.sendMessaggioRest( msg); 
 
 		return RestUtil.buildOKResponse();
 	}

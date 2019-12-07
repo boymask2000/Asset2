@@ -47,6 +47,9 @@ public class ManualeUpload extends ABaseBean {
 		String ext = getExt(fileName);
 
 		String dir = ApplicationConfig.getDocumentdir()+File.separator+"Manuali";
+		File fDir = new File(dir);
+		if( !fDir.exists())fDir.mkdirs();
+		
 		try {
 			File tmpFile = createTempFile("man_" + assetId + "_", ext, new File(dir));
 

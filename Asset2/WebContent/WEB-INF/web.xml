@@ -58,10 +58,20 @@
       </context-param>
   
 	
-<context-param>
-	<param-name>primefaces.THEME</param-name>
-	<param-value>afterdark</param-value>
-</context-param>
+<!-- <context-param> -->
+<!-- 	<param-name>primefaces.THEME</param-name> -->
+<!-- 	<param-value>afterdark</param-value> -->
+<!-- </context-param> -->
+<!-- <context-param> -->
+<!--         <param-name>primefaces.THEME</param-name> -->
+<!--         <param-value>#{themeSwitcherView.service}</param-value> -->
+<!--     </context-param> -->
+
+
+
+
+
+
   <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>filter.AuthFilter</filter-class>

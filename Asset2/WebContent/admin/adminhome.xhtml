@@ -61,6 +61,27 @@ td.col_10 {
 </style>
 				<p:poll update=":form:OnLine" interval="30" />
 
+				<ui:remove>
+
+					<p:themeSwitcher id="advanced" style="width:165px" effect="fade"
+						var="t">
+						<f:selectItem itemLabel="Choose Theme" itemValue="#{null}" />
+						<f:selectItems value="#{themeSwitcherView.themes}" var="theme"
+							itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+
+
+						<p:column>
+                #{t.displayName}
+            </p:column>
+					</p:themeSwitcher>
+				</ui:remove>
+
+
+
+
+
+
+
 				<p:panelGrid width="100%" cellpadding="10" styleClass="align">
 					<p:row>
 						<p:column style="width:15%">
@@ -79,14 +100,25 @@ td.col_10 {
 										action="generazioneCalendario" />
 
 
-									<p:commandButton process="@this" icon="pi pi-search"
-										value="#{msg['PLANNER']}"
-										action="#{batchStarter.exec('batchjob.planner.PlannerJob')}"
-										oncomplete="PF('panSendMail0').show()" />
 
-									<p:commandButton process="@this" icon="pi pi-search"
-										value="#{msg['PLANNER']} QQQQ"
-										oncomplete="PF('Confirm').show()" />
+
+
+
+									<p:commandButton value="#{msg['PLANNER']}"
+										actionListener="#{batchStarter.exec('batchjob.planner.PlannerJob')}">
+										<p:confirm header="Confirmation"
+											message="#{msg['PLANNER_WARNING']}" icon="ui-icon-alert" />
+									</p:commandButton>
+
+									<p:confirmDialog global="true">
+										<p:commandButton value="Yes" type="button"
+											styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+										<p:commandButton value="No" type="button"
+											styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+									</p:confirmDialog>
+
+
+
 
 
 									<p:commandButton process="@this" icon="pi pi-search"
@@ -133,9 +165,10 @@ td.col_10 {
 										value="#{msg['REPORT_INTERVENTI']} "
 										action="reportInterventiNew" />
 
-									<p:commandButton process="@this" icon="pi pi-search"
-										value="#{msg['USER_HOME']}" action="home" />
-
+									<ui:remove>
+										<p:commandButton process="@this" icon="pi pi-search"
+											value="#{msg['USER_HOME']}" action="home" />
+									</ui:remove>
 									<p:commandButton process="@this" icon="pi pi-search"
 										value="#{msg['ISPEZIONI']}" action="ispezioniHome" />
 
@@ -151,6 +184,7 @@ td.col_10 {
 							<!-- MONITOR INTERVENTI INIZIO -->
 							<p:panel id="OnLine" header="#{msg['LISTA_ONLINE']}">
 								<p:dataTable id="realtime" selectionMode="single"
+									paginatorPosition="bottom"
 									selection="#{adminHomeManagedBean.selectedInfo}"
 									rowKey="#{c.interventoRealTime.interventoid}"
 									value="#{interventiRealTimeManagedBean.infoInterventi}" var="c"
@@ -220,7 +254,7 @@ td.col_10 {
 
 
 					<p:dataTable id="Events" selectionMode="single"
-						value="#{managedAuditBean.all}" var="c"
+						paginatorPosition="bottom" value="#{managedAuditBean.all}" var="c"
 						selection="#{managedAuditBean.selectedAudit}" rowKey="#{c.id}"
 						paginator="true" rows="10"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -261,7 +295,7 @@ td.col_10 {
 				<p:commandButton process="@this" icon="pi pi-search"
 					value="#{msg['ESCI']}" action="#{utente.logout}" />
 
-			</h:form>
+			
 
 
 			<p:dialog header="" widgetVar="panSendMail0" modal="true" width="25%"
@@ -287,7 +321,7 @@ td.col_10 {
 
 
 
-			<p:confirmDialog header="Confirm" severity="alert"
+			<p:confirmDialog header="Confirm" severity="alert" id="confirm"
 				closeOnEscape="true" widgetVar="confirmationDialog"
 				showEffect="fold">
 				<f:facet name="message">
@@ -297,15 +331,15 @@ td.col_10 {
 				</f:facet>
 				<p:commandButton value="Yes"
 					action="#{batchStarter.exec('batchjob.planner.PlannerJob')}"
-					oncomplete="confirmationDialog.hide()" icon="ui-icon-check">
+					oncomplete="confirm.hide()" icon="ui-icon-check">
 
 				</p:commandButton>
 
-				<p:commandButton value="No" onclick="confirmationDialog.hide()"
-					type="button" icon="ui-icon-close" />
+				<p:commandButton value="No" onclick="confirm.hide()" type="button"
+					icon="ui-icon-close" />
 			</p:confirmDialog>
 
-
+</h:form>
 
 
 

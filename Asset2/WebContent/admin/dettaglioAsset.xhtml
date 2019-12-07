@@ -64,36 +64,37 @@
 											<h:inputText
 												value="#{managedAssetBean.selectedAsset.schedAssignedOrg}" />
 
-			
-								<h:outputText value="Building" />
-								<h:inputText value="#{managedAssetBean.moreInfo.building}" />
 
-								<h:outputText value="Room" />
-								<h:inputText value="#{managedAssetBean.moreInfo.room}" />
+											<h:outputText value="Building" />
+											<h:inputText value="#{managedAssetBean.moreInfo.building}" />
 
-								<h:outputText value="Tenant" />
-								<h:inputText value="#{managedAssetBean.moreInfo.tenant}" />
+											<h:outputText value="Room" />
+											<h:inputText value="#{managedAssetBean.moreInfo.room}" />
 
-								<h:outputText value="Equipment description" />
-								<h:inputText value="#{managedAssetBean.moreInfo.equipdescr}" />
+											<h:outputText value="Tenant" />
+											<h:inputText value="#{managedAssetBean.moreInfo.tenant}" />
 
-								<h:outputText value="Manifacturer" />
-								<h:inputText value="#{managedAssetBean.moreInfo.manifacturer}" />
+											<h:outputText value="Equipment description" />
+											<h:inputText value="#{managedAssetBean.moreInfo.equipdescr}" />
 
-								<h:outputText value="Technical Specifications" />
-								<h:inputText value="#{managedAssetBean.moreInfo.techspec}" />
+											<h:outputText value="Manifacturer" />
+											<h:inputText
+												value="#{managedAssetBean.moreInfo.manifacturer}" />
 
-								<h:outputText value="Qta" />
-								<h:inputText value="#{managedAssetBean.moreInfo.qta}" />
+											<h:outputText value="Technical Specifications" />
+											<h:inputText value="#{managedAssetBean.moreInfo.techspec}" />
 
-								<h:outputText value="Frequency" />
-								<h:inputText value="#{managedAssetBean.moreInfo.frequency}" />
+											<h:outputText value="Qta" />
+											<h:inputText value="#{managedAssetBean.moreInfo.qta}" />
 
-								<h:outputText value="Time" />
-								<h:inputText value="#{managedAssetBean.moreInfo.time}" />
+											<h:outputText value="Frequency" />
+											<h:inputText value="#{managedAssetBean.moreInfo.frequency}" />
+
+											<h:outputText value="Time" />
+											<h:inputText value="#{managedAssetBean.moreInfo.time}" />
 
 
-								
+
 
 										</h:panelGrid>
 										<p:commandButton action="#{managedAssetBean.updateAsset}"
@@ -122,6 +123,7 @@
 										</p:panel>
 										<p:panel header="#{msg['PERFORMED_TASKS1']}">
 											<p:dataTable id="radiopDT" selectionMode="single"
+												paginatorPosition="bottom"
 												value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,true)}"
 												var="c"
 												selection="#{managedInterventiBean.selectedIntevento}"
@@ -157,6 +159,7 @@
 										</p:panel>
 										<p:panel header="#{msg['SCHEDULED_TASKS']}">
 											<p:dataTable id="radio0DT" selectionMode="single"
+												paginatorPosition="bottom"
 												value="#{managedInterventiBean.getInterventiForAsset(managedAssetBean.selectedAsset.id,false)}"
 												var="c"
 												selection="#{managedInterventiBean.selectedIntevento}"
@@ -189,6 +192,7 @@
 										<p:panel id="bajsic" header="#{msg['MANUALI_PER_ASSET']}">
 
 											<p:dataTable id="radioDT" selectionMode="single"
+												paginatorPosition="bottom"
 												value="#{managedManualiBean.getManualiForAsset(managedAssetBean.selectedAsset.id)}"
 												var="c" selection="#{managedManualiBean.selectedManuale}"
 												rowKey="#{c.id}" paginator="true" rows="5"
@@ -235,6 +239,7 @@
 										<p:panel id="baFam" header="#{msg['MANUALI_PER_FAMIGLIA']}">
 
 											<p:dataTable id="radioFamDT" selectionMode="single"
+												paginatorPosition="bottom"
 												value="#{managedManualiFamigliaBean.getManualiForFamily(managedAssetBean.familyId)}"
 												var="c"
 												selection="#{managedManualiFamigliaBean.selectedManuale}"

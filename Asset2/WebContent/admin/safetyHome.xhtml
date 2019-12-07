@@ -18,6 +18,7 @@
 								<p:column style="width:40%">
 									
 										<p:dataTable id="familyDT" selectionMode="single"
+										paginatorPosition="bottom"
 											value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 											selection="#{managedFamiglieAssetBean.selectedFamiglia}"
 											rowKey="#{c.id}" paginator="true" rows="5"
@@ -49,6 +50,7 @@
 											value="Checklist per famiglia #{managedFamiglieAssetBean.selectedFamiglia.famiglia}"
 											rendered="#{managedFamiglieAssetBean.selectedFamiglia.id !=0}" />
 										<p:dataTable id="checksDT" editable="true" editMode="cell"
+										paginatorPosition="bottom"
 											widgetVar="cellCars"
 											value="#{managedSafetyBean.allSafetyForFamily}" var="c"
 											rowKey="#{c.id}" paginator="true" rows="5"

@@ -54,11 +54,14 @@
 							</h:panelGrid>
 							<p:commandButton action="#{managedRicercaAssetBean.ricerca}"
 								value="#{msg['SEARCH']}" update="radioDT" />
+								<p:commandButton action="#{managedRicercaAssetBean.resetRicerca}"
+								value="Reset" update="radioDT baic"/>
 						</p:panel>
 
 						<h:panelGrid columns="1">
-							<p:panel id="pFam" header="Families" style="margin-bottom:20px">
+							<p:panel id="pFam"  style="margin-bottom:20px">
 								<p:dataTable id="dtFam" selectionMode="single"
+								 paginatorPosition="bottom"
 									value="#{managedFamiglieAssetBean.allFamiglie}" var="c"
 									selection="#{managedFamiglieAssetBean.selectedFamiglia}"
 									rowKey="#{c.id}" paginator="true" rows="10"
@@ -91,6 +94,7 @@
 
 							<p:panel id="basic" header="Asset" style="margin-bottom:20px">
 								<p:dataTable id="radioDT" selectionMode="single"
+								 paginatorPosition="bottom"
 									value="#{managedAssetBean.allAssets}" var="c"
 									selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
 									paginator="true" rows="10"

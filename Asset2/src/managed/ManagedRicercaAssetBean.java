@@ -42,6 +42,11 @@ public class ManagedRicercaAssetBean extends ABaseBean implements Serializable {
 		count = ll.size();
 	}
 
+	public void resetRicerca() {
+		selectedAsset.clean();
+		ricerca();
+		
+	}
 	public void resetSelectedAsset() {
 		selectedAsset = new AssetAlca();
 	}

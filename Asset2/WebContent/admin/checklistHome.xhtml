@@ -20,6 +20,7 @@
 						<p:panel id="basic" header="Gestione checklist"
 							style="margin-bottom:20px">
 							<p:dataTable id="radioDT" selectionMode="single"
+							paginatorPosition="bottom"
 								value="#{managedChecklistBean.checklistForFrequenza}" var="c"
 								selection="#{managedChecklistBean.selectedChecklist}"
 								rowKey="#{c.id}" paginator="true" rows="5"

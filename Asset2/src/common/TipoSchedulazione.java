@@ -66,14 +66,14 @@ public class TipoSchedulazione {
 		map.put("A", ANNUALE);
 		map.put("SA", OGNI_6_MESI);
 		// map.put("BIMESTRALE", BIMESTRALE);
-		map.put("M3", TRIMESTRALE);
+	//	map.put("M3", TRIMESTRALE);
 		map.put("Q", QUADRIMESTRALE);
 		map.put("M", MENSILE);
 		// map.put("BISETTIMANALE", BISETTIMANALE);
 		map.put("W", SETTIMANALE);
 		map.put("D5", GIORNALIERO_D5);
 		map.put("D7", GIORNALIERO_D7);
-		map.put("24/4", GIORNALIERO_24_7);
+	//	map.put("24/4", GIORNALIERO_24_7);
 	}
 
 	public TipoSchedulazione(int id, String sigla, int num, int type, int range, String descIt, String descEn) {

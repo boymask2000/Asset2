@@ -104,18 +104,25 @@ td.col_10 {
 
 
 
-									<p:commandButton value="#{msg['PLANNER']}"
-										actionListener="#{batchStarter.exec('batchjob.planner.PlannerJob')}">
+
+									<p:commandButton value="#{msg['PLANNER']}" process="@this"
+										action="#{batchStarter.exec('batchjob.planner.PlannerJob')}">
 										<p:confirm header="Confirmation"
 											message="#{msg['PLANNER_WARNING']}" icon="ui-icon-alert" />
 									</p:commandButton>
 
-									<p:confirmDialog global="true">
-										<p:commandButton value="Yes" type="button"
-											styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-										<p:commandButton value="No" type="button"
-											styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+									<p:confirmDialog global="true" showEffect="fade"
+										hideEffect="explode">
+
+										<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes"
+											icon="ui-icon-check" />
+
+										<p:commandButton value="No" styleClass="ui-confirmdialog-no"
+											icon="ui-icon-close" />
+
 									</p:confirmDialog>
+
+
 
 
 
@@ -182,7 +189,9 @@ td.col_10 {
 
 						<p:column style="width:55%">
 							<!-- MONITOR INTERVENTI INIZIO -->
-							<p:panel id="OnLine" header="#{msg['LISTA_ONLINE']}">
+							<p:panel id="OnLine"
+								header="#{msg['LISTA_ONLINE']} #{adminHomeManagedBean.time}">
+								
 								<p:dataTable id="realtime" selectionMode="single"
 									paginatorPosition="bottom"
 									selection="#{adminHomeManagedBean.selectedInfo}"
@@ -192,7 +201,14 @@ td.col_10 {
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									rowsPerPageTemplate="5,10,15">
 
-
+<p:column style="width:32px;text-align: center">
+										<p:commandButton update=":form" icon="ui-icon ui-icon-search"
+										action="#{adminHomeManagedBean.goToDettaglioIntervento}"
+											title="View" process="@this">
+											<f:setPropertyActionListener value="#{c}"
+												target="#{adminHomeManagedBean.selectedInfo}" />
+										</p:commandButton>
+									</p:column>
 
 									<p:column headerText="User">
 										<h:outputText value="#{c.interventoRealTime.user}" />
@@ -215,19 +231,19 @@ td.col_10 {
 									</p:column>
 									<p:column style="width:32px;text-align: center">
 										<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
-											title="Delete">
+											title="Delete" process="@this">
 											<f:setPropertyActionListener value="#{c}"
 												target="#{interventiRealTimeManagedBean.deleteSelected}" />
 										</p:commandButton>
 									</p:column>
+									
 
 									<f:facet name="footer">
 										<h:commandButton id="Refreshrt" value="Refresh"
 											icon="ui-icon-check" update="realtime" />
 
-										<h:commandButton value="Details"
-											action="#{adminHomeManagedBean.goToDettaglioIntervento}"
-											icon="ui-icon-check" />
+										
+										
 									</f:facet>
 								</p:dataTable>
 							</p:panel>
@@ -278,7 +294,7 @@ td.col_10 {
 
 						<p:column style="width:32px;text-align: center">
 							<p:commandButton update=":form" icon="ui-icon ui-icon-trash"
-								title="Delete">
+								title="Delete" process="@this">
 								<f:setPropertyActionListener value="#{c}"
 									target="#{managedAuditBean.deleteSelected}" />
 							</p:commandButton>
@@ -295,51 +311,34 @@ td.col_10 {
 				<p:commandButton process="@this" icon="pi pi-search"
 					value="#{msg['ESCI']}" action="#{utente.logout}" />
 
-			
-
-
-			<p:dialog header="" widgetVar="panSendMail0" modal="true" width="25%"
-				id="dlg" style="margin:0 auto" showEffect="fade" hideEffect="fade"
-				resizable="false">
-				<h:form>
-					<p:panelGrid>
-						<p:row>
-							<p:column>
-								<h:outputText
-									value="Lanciato job pianificazione interventi. Consultare i job" />
-							</p:column>
-						</p:row>
-						<p:row>
-							<p:column>
-								<p:commandButton value="ok" onclick="dlg.hide()" />
-							</p:column>
-						</p:row>
-					</p:panelGrid>
-				</h:form>
-			</p:dialog>
 
 
 
+				<p:dialog header="" widgetVar="panSendMail0" modal="true"
+					width="25%" id="dlg" style="margin:0 auto" showEffect="fade"
+					hideEffect="fade" resizable="false">
+					<h:form>
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<h:outputText
+										value="Lanciato job pianificazione interventi. Consultare i job" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<p:commandButton value="ok" onclick="dlg.hide()" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</h:form>
+				</p:dialog>
 
-			<p:confirmDialog header="Confirm" severity="alert" id="confirm"
-				closeOnEscape="true" widgetVar="confirmationDialog"
-				showEffect="fold">
-				<f:facet name="message">
-					<h:outputText
-						value="Are you sure all details 
-                           are correct and proceed in creating the Account?" />
-				</f:facet>
-				<p:commandButton value="Yes"
-					action="#{batchStarter.exec('batchjob.planner.PlannerJob')}"
-					oncomplete="confirm.hide()" icon="ui-icon-check">
 
-				</p:commandButton>
 
-				<p:commandButton value="No" onclick="confirm.hide()" type="button"
-					icon="ui-icon-close" />
-			</p:confirmDialog>
 
-</h:form>
+
+			</h:form>
 
 
 

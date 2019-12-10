@@ -58,6 +58,13 @@ public class TimeUtil {
 		String time = df.format(date.getTime());
 		return time;
 	}
+	public static String getCurrentTimeShort2() {
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+
+		String time = df.format(date.getTime());
+		return time;
+	}
 
 	public static String getCurrentDate(Date date) {
 

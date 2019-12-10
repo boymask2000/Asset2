@@ -1,5 +1,6 @@
 package restservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -33,7 +34,23 @@ public class InterventoRest {
 	@Path("/getpreviousassets/{date}")
 	public List<AssetAlca> getPreviousInteAssets(@PathParam("date") String date) {
 		InterventiDAO dao = new InterventiDAO();
-		return dao.getPreviousInteAssets(date);
+		// DEMO inizio
+		List<AssetAlca> ll = dao.getPreviousInteAssets(date);
+
+		ll = filterForDemo(ll);
+// DEMO fine
+		// return dao.getPreviousInteAssets(date);
+		return ll;
+	}
+
+	private List<AssetAlca> filterForDemo(List<AssetAlca> ll) {
+		List<AssetAlca> out = new ArrayList<AssetAlca>();
+
+		for (AssetAlca as : ll) {
+			if (as.getFacSystem().toUpperCase().indexOf("D20 PLUMBING") != -1)
+				out.add(as);
+		}
+		return out;
 	}
 
 	@GET
@@ -42,6 +59,7 @@ public class InterventoRest {
 		InterventiDAO dao = new InterventiDAO();
 
 		return dao.getPreviousInte(date);
+
 	}
 
 	@GET
@@ -98,37 +116,36 @@ public class InterventoRest {
 
 		InterventiDAO dao = new InterventiDAO();
 		dao.update(inter);
-		
+
 		IspezioniManager.decideIspezione(inter);
-		
+
 		sendMessaggioInte(inter);
 
 		return RestUtil.buildOKResponse();
 	}
 
 	private static void sendMessaggioInte(InterventoRestBean inter) {
-		
-		AssetAlca ass=new AssetAlca();
+
+		AssetAlca ass = new AssetAlca();
 		ass.setId(inter.getAssetId());
 		AssetAlcaDAO assDao = new AssetAlcaDAO();
-		AssetAlca asset =assDao.searchById(ass);
-		
-		Messaggio msg=new Messaggio();
+		AssetAlca asset = assDao.searchById(ass);
+
+		Messaggio msg = new Messaggio();
 		msg.setMsgType(MsgType.INFO);
 		msg.setUsername(inter.getUser());
-		msg.setText("Completato intervento su asset "+asset.getRpieIdIndividual());
+		msg.setText("Completato intervento su asset " + asset.getRpieIdIndividual());
 		msg.setMsgCode("INTERVENTO_COMPLETATO");
 		msg.addParameter(asset.getRpieIdIndividual());
 		AuditDAO.sendMessaggio(msg);
 	}
-	
 
 	@POST
 	@Path("/cancelOnSafety")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response cancelOnSafety(Messaggio msg) {
 
-		AuditDAO.sendMessaggioRest( msg); 
+		AuditDAO.sendMessaggioRest(msg);
 
 		return RestUtil.buildOKResponse();
 	}

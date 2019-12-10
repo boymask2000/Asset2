@@ -92,10 +92,10 @@
 											<td height="40px" bgcolor="#BF8F00"></td>
 											<td height="40px" bgcolor="#FFD966"></td>
 											<td height="40px" bgcolor="#FFF2CC"></td>
-											<td height="40px" bgcolor="#EB0000"></td>
-											<td height="40px" bgcolor="#FF4F4F"></td>
 											<td height="40px" bgcolor="#FFC1C1"></td>
-
+											<td height="40px" bgcolor="#FF4F4F"></td>
+											
+<td height="40px" bgcolor="#EB0000"></td>
 										</tr>
 
 										<tr>
@@ -271,7 +271,7 @@
 
 
 <h:commandButton value="#{msg['BACK']}" action="back"/>
->
+
 					</p:panel>
 				</h:form>
 
@@ -279,7 +279,7 @@
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 					<p:outputPanel id="panIntPass0" style="text-align:center;">
 
-						<h:form>
+						
 
 							<p:calendar id="popup"
 								value="#{managedInterventiBean.dataNuovoIntervento}"
@@ -289,7 +289,7 @@
 								value="#{msg['ADD_TASK']}"
 								action="#{managedInterventiBean.nuovoIntervento}"
 								oncomplete="PF('setIntDialog0').hide();" />
-						</h:form>
+						
 					</p:outputPanel>
 				</p:dialog>
 

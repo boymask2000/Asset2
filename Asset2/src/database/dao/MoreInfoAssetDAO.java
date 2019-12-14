@@ -9,17 +9,19 @@ import database.MyBatisConnectionFactory;
 import database.mapper.MoreInfoAssetMapper;
 
 public class MoreInfoAssetDAO {
-	
-	public List<MoreInfoAsset>  getCalendarioAnnuale() {
 
-		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
-			MoreInfoAssetMapper mapper = session.getMapper(MoreInfoAssetMapper.class);
-			List<MoreInfoAsset> ll = mapper.getCalendarioAnnuale();
-			return ll;
+	public List<MoreInfoAsset> getCalendarioAnnuale() {
+		try {
+			try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
+				MoreInfoAssetMapper mapper = session.getMapper(MoreInfoAssetMapper.class);
+				List<MoreInfoAsset> ll = mapper.getCalendarioAnnuale();
+				return ll;
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
+		return null;
 	}
-	
-	
 
 	public void insert(MoreInfoAsset u) {
 

@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import beans.Calendario;
-import database.dao.CalendarioDAO;
 import managed.LanguageBean;
 
 public class TimeUtil {

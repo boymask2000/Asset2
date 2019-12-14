@@ -32,8 +32,10 @@ import database.dao.NormativeDAO;
 public class PlannerJob extends GenericJob {
 
 	private Map<String, List<Check>> checksMap = new HashMap<String, List<Check>>();
-
+	private int numInterventi = 0;
 	private SchemaPlan schema = new SchemaPlan();
+	private String notifyAsset="";
+	private String notifyNumInt="";
 
 	public PlannerJob() {
 		super();
@@ -59,7 +61,10 @@ public class PlannerJob extends GenericJob {
 				for (AssetAlca as : allAssets) {
 
 					count++;
-					queue.put(count + " / " + allAssets.size());
+					
+					notifyAsset= "Asset " + count + " / " + allAssets.size();
+					notifyBatch();
+				//	queue.put("Asset " + count + " / " + allAssets.size() + ".  Int: " + numInterventi);
 
 					processAsset(maxData, as);
 
@@ -69,6 +74,15 @@ public class PlannerJob extends GenericJob {
 
 		};
 		submit(callable, "Pianificazione interventi");
+	}
+
+	private void notifyBatch() {
+		try {
+			queue.put(notifyAsset + notifyNumInt);
+		} catch (InterruptedException e) {
+		
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String s[]) {
@@ -86,10 +100,20 @@ public class PlannerJob extends GenericJob {
 	}
 
 	public void processAsset(String maxData, AssetAlca as) {
+		System.out.println("Rpie: " + as.getRpieIdIndividual());
 
 		processCheck4Family(as, maxData);
 
 		processCheck4Asset(maxData, as);
+	}
+
+	private void processCheck4Asset(String maxData, AssetAlca as) {
+		ChecksAssetDAO caDao = new ChecksAssetDAO();
+		List<CheckAsset> checkAs = caDao.getChecksByAssetId(as.getId());
+
+		for (CheckAsset check : checkAs) {
+			makePlan(as.getId(), check, maxData);
+		}
 	}
 
 	private void processCheck4Family(AssetAlca as, String maxData) {
@@ -120,15 +144,6 @@ public class PlannerJob extends GenericJob {
 
 	}
 
-	private void processCheck4Asset(String maxData, AssetAlca as) {
-		ChecksAssetDAO caDao = new ChecksAssetDAO();
-		List<CheckAsset> checkAs = caDao.getChecksByAssetId(as.getId());
-
-		for (CheckAsset check : checkAs) {
-			makePlan(as.getId(), check, maxData);
-		}
-	}
-
 	private void makePlan(long assetId, Check check, String maxData) {
 
 		TipoSchedulazione tipo = getTipoSchedulazione(check);
@@ -144,12 +159,13 @@ public class PlannerJob extends GenericJob {
 		String data = TimeUtil.formatDate(cal, TimeUtil.FORMAT_CANONICAL);
 		try {
 			while (data.compareTo(maxData) <= 0) {
-				
+
 				List<Item> lista = order(cal, range, tipo);
 				if (lista.size() > 0) {
 
 					String goodDate = getMin(cal, lista);
-			//		System.out.println(tipo.getSiglaLegenda()+" ckid= " + check.getId() + " data= " + goodDate);
+					// System.out.println(tipo.getSiglaLegenda()+" ckid= " + check.getId() + " data=
+					// " + goodDate);
 					boolean done = placeInSameDay(assetId, lista, goodDate, data, check);
 
 					if (!done) {
@@ -190,7 +206,7 @@ public class PlannerJob extends GenericJob {
 		return false;
 	}
 
-	private static void createIntervento(long assetId, String dataTeorica, String goodDate, Check ck) {
+	private void createIntervento(long assetId, String dataTeorica, String goodDate, Check ck) {
 
 		Intervento u = new Intervento();
 		u.setAssetId(assetId);
@@ -202,6 +218,9 @@ public class PlannerJob extends GenericJob {
 		int num = dao.getInterventiPerAssetInData(u).size();
 		if (num == 0) {
 			dao.insert(u);
+			numInterventi++;
+			notifyNumInt=".  Int: " + numInterventi;
+			notifyBatch();
 		}
 		List<Intervento> listaInt = dao.getInterventiPerAssetInData(u);
 
@@ -209,11 +228,11 @@ public class PlannerJob extends GenericJob {
 
 		ChecklistIntervento cli = new ChecklistIntervento();
 
-	//	System.out.println(ii.getId());
+		// System.out.println(ii.getId());
 		cli.setCheckId(ck.getId());
 		cli.setInterventoId(ii.getId());
 		cli.setCodFrequenza(ck.getCodFrequenza());
-	
+
 		ChecklistInterventiDAO cliDao = new ChecklistInterventiDAO();
 		cliDao.insert(cli);
 
@@ -256,11 +275,10 @@ public class PlannerJob extends GenericJob {
 
 		CalendarioDAO dao = new CalendarioDAO();
 		dao.cleanInterventi(now);
-		
+
 		InterventiDAO iDao = new InterventiDAO();
 		iDao.cleanInterventi(now);
 		iDao.cleanInterventiPending();
-
 
 		// la checklistinterventi si cancella per effetto della foreign key
 	}

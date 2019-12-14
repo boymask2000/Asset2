@@ -35,20 +35,32 @@ public class GeneraCalAnnuale {
 	private String datePattern;
 
 	private List<InfoCalAsset> calAssets = new ArrayList<InfoCalAsset>();
+	private String sDataInizio;
+	private String sDataFine;
 
 	@PostConstruct
 	public void init() {
 		Calendar cal = TimeUtil.getCalendar(new Date());
 
-		cal.set(Calendar.DAY_OF_YEAR, 1);
+		int anno = cal.get(Calendar.YEAR);
+
+		//
+		// Il calendario considera gli interventi dal 1/10 al 30/9
+		//
+		cal.set(Calendar.MONTH, 9); // Ottobre;
+		cal.set(Calendar.DAY_OF_MONTH, 1); // Primo;
 		dataInizio = cal.getTime();
 
-		cal.set(Calendar.DAY_OF_YEAR, 365);
+		cal.set(Calendar.YEAR, anno + 1);
+		cal.set(Calendar.MONTH, 8); // Settembre;
+		cal.set(Calendar.DAY_OF_MONTH, 30); // 30;
 		dataFine = cal.getTime();
-
 	}
 
 	public String build() {
+		sDataInizio = TimeUtil.getCurrentDate(dataInizio);
+		sDataFine = TimeUtil.getCurrentDate(dataFine);
+
 		calAssets.clear();
 
 		MoreInfoAssetDAO dao = new MoreInfoAssetDAO();
@@ -82,8 +94,12 @@ public class GeneraCalAnnuale {
 		Map<String, Set<String>> mesi = new HashMap<String, Set<String>>();
 
 		for (Intervento inter : ints) {
+			String dataPianificata = inter.getData_pianificata();
 
-			String mese = TimeUtil.getMese(inter.getData_pianificata());
+			if (dataPianificata.compareTo(sDataInizio) < 0 || dataPianificata.compareTo(sDataFine) > 0)
+				continue;
+
+			String mese = TimeUtil.getMese(dataPianificata);
 
 			Set<String> s = mesi.get(mese);
 			if (s == null)

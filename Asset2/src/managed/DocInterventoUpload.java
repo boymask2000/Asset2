@@ -19,6 +19,7 @@ public class DocInterventoUpload {
 
 	private UploadedFile file;
 	private DocIntervento currentDoc;
+	private String desc;
 
 	public UploadedFile getFile() {
 		return file;
@@ -81,6 +82,7 @@ public class DocInterventoUpload {
 
 
 	public void handleFileUpload(FileUploadEvent event) {
+		currentDoc=new DocIntervento();
 	
 		long interventoId = (long) event.getComponent().getAttributes().get("intId");
 	
@@ -90,7 +92,7 @@ public class DocInterventoUpload {
 
 			loadFile(fileName, inputStream, interventoId);
 
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 
@@ -104,7 +106,7 @@ public class DocInterventoUpload {
 		dao.insert(currentDoc);
 
 	}
-	private String desc;
+
 
 
 	public DocIntervento getCurrentDoc() {

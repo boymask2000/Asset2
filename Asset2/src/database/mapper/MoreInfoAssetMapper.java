@@ -42,7 +42,8 @@ public interface MoreInfoAssetMapper {
 			+ "i.room "//
 			+ "from assetalca a "//
 			+ "left join moreinfoasset i "//
-			+ "on a.id=i.assetid";
+			+ "on a.id=i.assetid"
+			+ " order by a.facSystem";
 	
 	@Select(CAL_ANNUALE)
 	public List<MoreInfoAsset> getCalendarioAnnuale();

@@ -12,266 +12,160 @@
 
 					<p:growl id="msgs" showDetail="true" />
 
+					<p:panelGrid>
+						<p:row>
+							<p:column>
 
+								<p:panelGrid>
+									<p:row>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v1}"
+												style="background-color:#548235" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="1"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v2}"
+												style="background-color:#A9D08E" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="2"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v3}"
+												style="background-color:#E2EFDA" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="3"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v4}"
+												style="background-color:#BF8F00" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="4"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v5}"
+												style="background-color:#FFD966" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="5"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v6}"
+												style="background-color:#FFF2CC" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="6"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v7}"
+												style="background-color:#EB0000" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="7"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v8}"
+												style="background-color:#FF4F4F" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="8"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v9}"
+												style="background-color:#FFC1C1" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="9"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<p:commandButton value="#{generalPanelManagedBean.v0}"
+												style="background-color:#FFFFFF" update=":form:carDetail"
+												oncomplete="PF('carDialog').show()" title="View Detail">
+												<f:setPropertyActionListener value="0"
+													target="#{managedAssetBean.selectedSeverity}" />
+											</p:commandButton>
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+
+							</p:column>
+							<p:column>
+								<p:chart type="pie" model="#{generalPanelManagedBean.pieModel2}"
+									style="width:400px;height:300px" />
+
+							</p:column>
+						</p:row>
+					</p:panelGrid>
 					<h:panelGrid columns="1" cellpadding="0">
-						<p:panel id="basic" header="#{msg['GESTIONEASSET']}">
 
-							<table>
-								<tr>
-									<td><p:panel>
-											<table style="width: 100%">
-												<tr>
-													<td width="100"></td>
-													<td width="100"></td>
-													<td width="100"></td>
-												</tr>
-												<tr>
-													<td height="40px" bgcolor="#548235"></td>
-													<td height="40px" bgcolor="#A9D08E"></td>
-													<td height="40px" bgcolor="#E2EFDA"></td>
-												</tr>
-												<tr>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(1)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(2)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(3)}" /></td>
-
-												</tr>
-												<tr>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(1)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="1"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(2)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="2"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(3)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="3"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-
-												</tr>
-
-											</table>
-										</p:panel></td>
-									<td><p:panel>
-											<table style="width: 100%">
-												<tr>
-													<td width="100"></td>
-													<td width="100"></td>
-													<td width="100"></td>
-
-												</tr>
-												<tr>
-
-													<td height="40px" bgcolor="#BF8F00"></td>
-													<td height="40px" bgcolor="#FFD966"></td>
-													<td height="40px" bgcolor="#FFF2CC"></td>
-
-												</tr>
-												<tr>
-
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(4)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(5)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(6)}" /></td>
-
-												</tr>
-												<tr>
-
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(4)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="4"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(5)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="5"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(6)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="6"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-
-												</tr>
-
-											</table>
-
-										</p:panel></td>
-									<td><p:panel>
-											<table style="width: 100%">
-												<tr>
-													<td width="100"></td>
-													<td width="100"></td>
-													<td width="100"></td>
-
-												</tr>
-												<tr>
-
-													<td height="40px" bgcolor="#EB0000"></td>
-													<td height="40px" bgcolor="#FF4F4F"></td>
-													<td height="40px" bgcolor="#FFC1C1"></td>
-
-												</tr>
-												<tr>
-
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(7)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(8)}" /></td>
-													<td align="center"><h:outputText
-															value="#{managedAssetBean.getAssetsInStatus(9)}" /></td>
-
-												</tr>
-												<tr>
-
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(7)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="7"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(8)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="8"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-													<td align="center"><p:commandButton
-															rendered="#{managedAssetBean.stat(9)>0}"
-															update=":form:carDetail"
-															oncomplete="PF('carDialog').show()" title="View Detail">
-															<h:outputText styleClass="pi pi-search"
-																style="margin:0 auto;" />
-															<f:setPropertyActionListener value="9"
-																target="#{managedAssetBean.selectedSeverity}" />
-														</p:commandButton></td>
-
-												</tr>
-
-											</table>
-										</p:panel></td>
-									<td>
-										<table style="width: 100%">
-											<tr>
-												<td width="100"></td>
-											</tr>
-											<tr>
-												<td height="40px" bgcolor="#FFFFFF"></td>
-											</tr>
-											<tr>
-												<td align="center"><h:outputText
-														value="#{managedAssetBean.getAssetsInStatus(0)}" /></td>
-											</tr>
-											<tr>
-												<td align="center"><p:commandButton
-														rendered="#{managedAssetBean.getAssetsWithStatus(0).size()>0}"
-														update=":form:carDetail"
-														oncomplete="PF('carDialog').show()" title="View Detail">
-														<h:outputText styleClass="pi pi-search"
-															style="margin:0 auto;" />
-														<f:setPropertyActionListener value="0"
-															target="#{managedAssetBean.selectedSeverity}" />
-													</p:commandButton></td>
-											</tr>
-
-										</table>
-									</td>
-								</tr>
-							</table>
-
-
-
-						</p:panel>
 
 						<ui:include src="homeSituation.xhtml" />
+
 						<ui:include src="ritardi.xhtml" />
 
-		</h:panelGrid>
-						<p:dialog header="Info" widgetVar="carDialog" modal="true"
-							showEffect="fade" hideEffect="fade" resizable="false">
-							<p:outputPanel id="carDetail" style="text-align:center;">
-								<h:panelGrid columns="1" cellpadding="10">
-									<p:panel id="basi0c" style="margin-bottom:10px">
-										<p:dataTable id="radioDT" selectionMode="single"
-											value="#{managedAssetBean.allAssetsWithSeverity}" var="c"
-											selection="#{managedAssetBean.selectedAsset}"
-											rowKey="#{c.id}" paginator="true" rows="10"
-											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-											rowsPerPageTemplate="5,10,15">
+					</h:panelGrid>
+					<p:dialog header="Info" widgetVar="carDialog" modal="true" 
+						showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="carDetail" style="text-align:center;">
+							<h:panelGrid columns="1" cellpadding="10">
+								<p:panel id="basi0c" style="margin-bottom:10px">
+									<p:dataTable id="radioDT" selectionMode="single"
+										value="#{managedAssetBean.allAssetsWithSeverity}" var="c"
+										selection="#{managedAssetBean.selectedAsset}" rowKey="#{c.id}"
+										paginator="true" rows="10"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,15">
 
-											<p:ajax event="rowSelect"
-												listener="#{managedAssetBean.onRowSelect}"
-												update=":form:msgs,@this" />
+										<p:ajax event="rowSelect"
+											listener="#{managedAssetBean.onRowSelect}"
+											update=":form:msgs,@this" />
 
-											<p:column headerText="Fac #">
-												<h:outputText value="#{c.facNum}" />
-											</p:column>
+										<p:column headerText="Fac #">
+											<h:outputText value="#{c.facNum}" />
+										</p:column>
 
-											<p:column headerText="#{msg['FAMILY']}">
-												<h:outputText value="#{c.facSystem}" />
-											</p:column>
+										<p:column headerText="#{msg['FAMILY']}">
+											<h:outputText value="#{c.facSystem}" />
+										</p:column>
 
-											<p:column headerText="Nomenclature">
-												<h:outputText value="#{c.nomenclature}" />
-											</p:column>
+										<p:column headerText="Nomenclature">
+											<h:outputText value="#{c.nomenclature}" />
+										</p:column>
 
 
-											<f:facet name="footer">
-												<h:commandButton action="goToDetailAsset" value="Detail"
-													disabled="#{managedAssetBean.selectedAsset==null}"
-													process="@this">
-												</h:commandButton>
-											</f:facet>
-										</p:dataTable>
-									</p:panel>
+										<f:facet name="footer">
+											<h:commandButton action="goToDetailAsset" value="Detail"
+												disabled="#{managedAssetBean.selectedAsset==null}"
+												process="@this">
+											</h:commandButton>
+										</f:facet>
+									</p:dataTable>
+								</p:panel>
 
-								</h:panelGrid>
+							</h:panelGrid>
 
-							</p:outputPanel>
-						</p:dialog>
-			
+						</p:outputPanel>
+					</p:dialog>
+
 					<h:commandButton value="#{msg['BACK']}" action="back" />
 				</h:form>
 			</f:view>

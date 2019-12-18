@@ -8,16 +8,7 @@ import common.JsfUtil;
 
 public class GeneralPanel extends ABaseBean {
 
-	@PostConstruct
-	public void init() {
-		getData();
-
-
-		createPieModel2();
-	}
-
 	private PieChartModel pieModel2;
-
 
 	private int v0;
 	private int v1;
@@ -30,8 +21,12 @@ public class GeneralPanel extends ABaseBean {
 	private int v3;
 	private int v2;
 
+	@PostConstruct
+	public void init() {
+		getData();
 
-
+		createPieModel2();
+	}
 
 	private void getData() {
 		ManagedAssetBean bean = (ManagedAssetBean) JsfUtil.getBean("managedAssetBean");
@@ -45,9 +40,7 @@ public class GeneralPanel extends ABaseBean {
 		v7 = bean.getAssetsInStatus(7);
 		v8 = bean.getAssetsInStatus(8);
 		v9 = bean.getAssetsInStatus(9);
-		v1 = 10;
-		v2 = 20;
-		v8 = 55;
+
 	}
 
 	private void createPieModel2() {
@@ -77,14 +70,9 @@ public class GeneralPanel extends ABaseBean {
 		return pieModel2;
 	}
 
-	
-
-
 	public void setPieModel2(PieChartModel pieModel2) {
 		this.pieModel2 = pieModel2;
 	}
-
-	
 
 	public int getV0() {
 		return v0;
@@ -166,5 +154,4 @@ public class GeneralPanel extends ABaseBean {
 		this.v2 = v2;
 	}
 
-	
 }

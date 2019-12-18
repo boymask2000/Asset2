@@ -35,6 +35,18 @@ public class ManagedInterventiBean implements Serializable {
 	private String selectedDataForSituation;
 	private AssetAlca asset=null;
 	
+	public List<Intervento> getInterventiFromTo(String dateFrom, String dateTo){
+
+		if (dateFrom == null || dateFrom.trim().equalsIgnoreCase(""))
+			dateFrom = TimeUtil.getCurrentDate(new Date());
+		if (dateTo == null || dateTo.trim().equalsIgnoreCase(""))
+			dateTo = TimeUtil.getCurrentDate(new Date());
+		
+		InterventiDAO dao = new InterventiDAO();
+		List<Intervento> ll = dao.getInterventiFromTo(dateFrom,dateTo);
+		return ll;
+	}
+	
 	
 	public List<Intervento> getInterventiInData(String data) {
 

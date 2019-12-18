@@ -5,20 +5,84 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+		<style type="text/css">
+		
 
+td.col_0 {
+	background-color: #FFFFFF !important;
+	font-size: 12px;
+}
+
+td.col_1 {
+	background-color: #548235 !important;
+	font-size: 12px;
+}
+
+td.col_2 {
+	background-color: #A9D08E !important;
+	font-size: 12px;
+}
+
+td.col_3 {
+	background-color: #E2EFDA !important;
+	font-size: 12px;
+}
+
+td.col_4 {
+	background-color: #BF8F00 !important;
+	font-size: 12px;
+}
+
+td.col_5 {
+	background-color: #FFD966 !important;
+	font-size: 12px;
+}
+
+td.col_6 {
+	background-color: #FFF2CC !important;
+	font-size: 12px;
+}
+
+td.col_7 {
+	background-color: #EB0000 !important;
+	font-size: 12px;
+}
+
+td.col_8 {
+	background-color: #FF4F4F !important;
+	font-size: 12px;
+}
+
+td.col_9 {
+	background-color: #FFC1C1 !important;
+	font-size: 12px;
+}
+  .ui-button{
+            width:60px;
+            height:50px;
+        }
+</style>
 
 <p:panel id="bahsic" header="#{msg['INTERVENTI']}">
 	<p:growl id="msgs0" showDetail="true" />
-	<p:calendar id="popup"
-		value="#{managedInterventiBean.selectedDataForSituation}"
+	
+	<p:calendar id="popupFrom" value="#{homeSituationManagedBean.dateFrom}"
 		update=":form" onSelectUpdate="radi00DT" pattern="yyyyMMdd">
 		<f:ajax event="dateSelect"
-			listener="#{managedInterventiBean.onDateSelect}" update="msgs0"
-			render="radi00DT" />
+			listener="#{homeSituationManagedBean.onDateFromSelect}"
+			update="radi00DT" render="radi00DT" />
 	</p:calendar>
+	
+	<p:calendar id="popupTo" value="#{homeSituationManagedBean.dateTo}"
+		update=":form" onSelectUpdate="radi00DT" pattern="yyyyMMdd">
+		<f:ajax event="dateSelect"
+			listener="#{homeSituationManagedBean.onDateToSelect}"
+			update="radi00DT" render="radi00DT" />
+	</p:calendar>
+	
 	<p:commandButton value="Calendario" action="goCalendario" />
 	<p:dataTable id="radi00DT" selectionMode="single"
-		value="#{managedInterventiBean.getInterventiInData(managedInterventiBean.selectedDataForSituation)}"
+		value="#{managedInterventiBean.getInterventiFromTo(homeSituationManagedBean.dateSFrom,homeSituationManagedBean.dateSTo )}"
 		var="c" selection="#{managedInterventiBean.selectedIntevento}"
 		rowKey="#{c.id}" paginator="true" rows="10"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -35,16 +99,16 @@
 		<p:column headerText="#{msg['DATA_EFFETTIVA']}" style="width:20%">
 			<h:outputText value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 		</p:column>
-		<p:column headerText="Esito">
-		
-				<table>
-					<tr bgcolor="#{managedAssetBean.status.getColor(c.esito)}">
-						<td></td>
-					</tr>
-				</table>
-			
+		<p:column headerText="Esito" styleClass="#{homeSituationManagedBean.createStyle(c)}">
+
+	
+
 		</p:column>
 	</p:dataTable>
+	<h:commandLink id="excel">
+		<p:graphicImage url="/resources/images/excel.png" />
+		<p:dataExporter type="xls" target="radi00DT" fileName="plan" />
+	</h:commandLink>
 
 </p:panel>
 

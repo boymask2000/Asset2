@@ -122,15 +122,16 @@ public class CalendarioDaTavolo {
 	public void setsMese(String sMese) {
 		this.sMese = sMese;
 	}
+
 	public String getEsito(Intervento c) {
-int cc=0;
-if( c!=null)
-		cc = c.getEsito();
-		return "col_"+cc;
+		int cc = 0;
+		if (c != null)
+			cc = c.getEsito();
+		return "col_" + cc;
 	}
+
 	public String createStyle(Intervento c) {
 
-
-		return getEsito(c) ;
+		return getEsito(c);
 	}
 }

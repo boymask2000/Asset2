@@ -82,7 +82,7 @@ td.col_9 {
 	
 	<p:commandButton value="Calendario" action="goCalendario" />
 	<p:dataTable id="radi00DT" selectionMode="single"
-		value="#{managedInterventiBean.getInterventiFromTo(homeSituationManagedBean.dateSFrom,homeSituationManagedBean.dateSTo )}"
+		value="#{homeSituationManagedBean.getInterventiFromTo(homeSituationManagedBean.dateSFrom,homeSituationManagedBean.dateSTo )}"
 		var="c" selection="#{managedInterventiBean.selectedIntevento}"
 		rowKey="#{c.id}" paginator="true" rows="10"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -99,15 +99,12 @@ td.col_9 {
 		<p:column headerText="#{msg['DATA_EFFETTIVA']}" style="width:20%">
 			<h:outputText value="#{timeUtil.getLocalizedDate(c.data_effettiva)}" />
 		</p:column>
-		<p:column headerText="Esito" styleClass="#{homeSituationManagedBean.createStyle(c)}">
+		<p:column headerText="Esito" styleClass="#{homeSituationManagedBean.createStyle(c)}"/>
 
-	
-
-		</p:column>
 	</p:dataTable>
 	<h:commandLink id="excel">
 		<p:graphicImage url="/resources/images/excel.png" />
-		<p:dataExporter type="xls" target="radi00DT" fileName="plan" />
+		<p:dataExporter type="xls" target="radi00DT" fileName="plan" postProcessor="#{homeSituationManagedBean.postProcessXLS}"/>
 	</h:commandLink>
 
 </p:panel>

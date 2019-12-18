@@ -43,7 +43,7 @@ public interface MoreInfoAssetMapper {
 			+ "from assetalca a "//
 			+ "left join moreinfoasset i "//
 			+ "on a.id=i.assetid"
-			+ " order by a.facSystem";
+			+ " order by a.facSystem, i.building,i.tenant,i.equipdescr,i.manifacturer,i.techspec,i.frequency,i.time";
 	
 	@Select(CAL_ANNUALE)
 	public List<MoreInfoAsset> getCalendarioAnnuale();

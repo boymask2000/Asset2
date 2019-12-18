@@ -11,4 +11,19 @@ public class Colors {
 	private String col_7 = "#EB0000";
 	private String col_8 = "#FF4F4F";
 	private String col_9 = "#FFC1C1";
+
+	public static int getRed(String color) {
+		String c = color.substring(0, 2);
+		return Integer.parseInt(c, 16);
+	}
+
+	public static int getGreen(String color) {
+		String c = color.substring(2, 4);
+		return Integer.parseInt(c, 16);
+	}
+
+	public static int getBlue(String color) {
+		String c = color.substring(4, 6);
+		return Integer.parseInt(c, 16);
+	}
 }

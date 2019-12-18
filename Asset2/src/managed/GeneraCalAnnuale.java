@@ -78,9 +78,11 @@ public class GeneraCalAnnuale {
 			calculateMesi(info, infoAs.getId());
 			calAssets.add(info);
 		}
+		ListSplitter splitter = new ListSplitter(calAssets);
 
 		return null;
 	}
+
 
 	private void calculateMesi(InfoCalAsset info, long assetId) {
 		AssetAlcaDAO daoA = new AssetAlcaDAO();

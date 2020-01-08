@@ -34,8 +34,8 @@ public class PlannerJob extends GenericJob {
 	private Map<String, List<Check>> checksMap = new HashMap<String, List<Check>>();
 	private int numInterventi = 0;
 	private SchemaPlan schema = new SchemaPlan();
-	private String notifyAsset="";
-	private String notifyNumInt="";
+	private String notifyAsset = "";
+	private String notifyNumInt = "";
 
 	public PlannerJob() {
 		super();
@@ -61,10 +61,11 @@ public class PlannerJob extends GenericJob {
 				for (AssetAlca as : allAssets) {
 
 					count++;
-					
-					notifyAsset= "Asset " + count + " / " + allAssets.size();
+
+					notifyAsset = "Asset " + count + " / " + allAssets.size();
 					notifyBatch();
-				//	queue.put("Asset " + count + " / " + allAssets.size() + ".  Int: " + numInterventi);
+					// queue.put("Asset " + count + " / " + allAssets.size() + ". Int: " +
+					// numInterventi);
 
 					processAsset(maxData, as);
 
@@ -80,7 +81,7 @@ public class PlannerJob extends GenericJob {
 		try {
 			queue.put(notifyAsset + notifyNumInt);
 		} catch (InterruptedException e) {
-		
+
 			e.printStackTrace();
 		}
 	}
@@ -219,7 +220,7 @@ public class PlannerJob extends GenericJob {
 		if (num == 0) {
 			dao.insert(u);
 			numInterventi++;
-			notifyNumInt=".  Int: " + numInterventi;
+			notifyNumInt = ".  Int: " + numInterventi;
 			notifyBatch();
 		}
 		List<Intervento> listaInt = dao.getInterventiPerAssetInData(u);

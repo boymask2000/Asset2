@@ -13,6 +13,7 @@ import common.TimeUtil;
 import database.dao.AuditDAO;
 import database.dao.ParameterDAO;
 import printcreator.PrintCreatorElencoInterventi;
+import restservice.beans.Messaggio;
 import restservice.beans.MsgType;
 
 public class GeneraPDFInterventiMensili implements Job {
@@ -22,16 +23,30 @@ public class GeneraPDFInterventiMensili implements Job {
 		if (alreadyDone()) {
 			return;
 		}
-
-		AuditDAO.generateSystemMessage("Inizio generazione PDF per interventi mensili", MsgType.INFO);
+		Messaggio msg = new Messaggio();
+		msg.setMsgType(MsgType.INFO);
+		msg.setUsername("*SYSTEM*");
+		// msg.setText("Completato intervento su asset " + asset.getRpieIdIndividual());
+		msg.setMsgCode("BEGIN_BUILD_PDF");
+		// msg.addParameter(asset.getRpieIdIndividual());
+		AuditDAO.sendMessaggio(msg);
+		// AuditDAO.generateSystemMessage("Inizio generazione PDF per interventi
+		// mensili", MsgType.INFO);
 
 		try {
 			go();
 
 			updAlreadyDone();
 
-			AuditDAO.generateSystemMessage("Completata generazione PDF per interventi mensili", MsgType.INFO);
-
+			// AuditDAO.generateSystemMessage("Completata generazione PDF per interventi
+			// mensili", MsgType.INFO);
+			msg = new Messaggio();
+			msg.setMsgType(MsgType.INFO);
+			msg.setUsername("*SYSTEM*");
+			// msg.setText("Completato intervento su asset " + asset.getRpieIdIndividual());
+			msg.setMsgCode("END_BUILD_PDF");
+			// msg.addParameter(asset.getRpieIdIndividual());
+			AuditDAO.sendMessaggio(msg);
 		} catch (Throwable e) {
 
 			e.printStackTrace();
@@ -89,13 +104,11 @@ public class GeneraPDFInterventiMensili implements Job {
 		// File tmpPdf = prt.printInterventiDaA("20191001", "20191031");
 		File tmpPdf = prt.printInterventiDaA(firstDay, lastDay);
 
-
 		ParameterDAO dao = new ParameterDAO();
 		Parameter sDir = dao.selectParameter(ParameterDAO.DIRECTORY_PDF_INTERVENTI_MENSILI);
 		if (sDir != null && sDir.getValue() != null) {
 
 			String fileName = sDir.getValue() + File.separator + "Interventi_" + data + "_" + l.getLanguage() + ".pdf";
-		
 
 			FileUtils.copyFile(tmpPdf, new File(fileName));
 			tmpPdf.delete();

@@ -16,11 +16,12 @@ public interface MoreInfoAssetMapper {
 	final String SELECT_INFO_PER_ASSET = "SELECT * FROM " + TABELLA + " WHERE ASSETID=#{assetId}";
 
 	final String INSERT = "INSERT INTO " + TABELLA + //
-			" (assetId,building,room,manifacturer, techspec,qta,frequency,time)" //
-			+ "VALUES (#{assetId},#{building},#{room},#{manifacturer}, #{techspec},#{qta},#{frequency},#{time})";
+			" (assetId,tenant,building,room,manifacturer, techspec,qta,frequency,time)" //
+			+ "VALUES (#{assetId},#{tenant},#{building},#{room},#{manifacturer}, #{techspec},#{qta},#{frequency},#{time})";
 
 	final String UPDATE = "UPDATE " + TABELLA + "  SET " + //
 			"assetId = #{assetId}," + //
+			"tenant = #{tenant}," + //
 			"building = #{building}," + //
 			"room = #{room}," + //
 			"manifacturer = #{manifacturer}," + //

@@ -27,7 +27,12 @@ public class MoreInfoAssetDAO {
 
 		try (SqlSession session = MyBatisConnectionFactory.getSqlSessionFactory().openSession();) {
 			MoreInfoAssetMapper mapper = session.getMapper(MoreInfoAssetMapper.class);
-			mapper.insert(u);
+
+			if (getMoreInfoByAssetId(u.getAssetId()) == null)
+				mapper.insert(u);
+			else
+				mapper.update(u);
+			
 			session.commit();
 		}
 	}
